@@ -1,0 +1,4747 @@
+{
+  "id": "first-grade",
+  "title": "First Grade Tutor",
+  "version": 1,
+  "stages": [
+    {
+      "id": "q1",
+      "title": "Days 1–28",
+      "order": 1,
+      "level": "Grade 1",
+      "description": "First quarter"
+    },
+    {
+      "id": "q2",
+      "title": "Days 29–55",
+      "order": 2,
+      "level": "Grade 1",
+      "description": "Second quarter"
+    },
+    {
+      "id": "q3",
+      "title": "Days 56–83",
+      "order": 3,
+      "level": "Grade 1",
+      "description": "Third quarter"
+    },
+    {
+      "id": "q4",
+      "title": "Days 84–110",
+      "order": 4,
+      "level": "Grade 1",
+      "description": "Fourth quarter"
+    }
+  ],
+  "skills": [
+    {
+      "id": "m-count-20",
+      "stage": "q1",
+      "title": "Count objects to 20",
+      "summary": "Count a group by touching each object once.",
+      "prerequisites": [],
+      "lesson": {
+        "explanation": "Each object gets exactly one number. The last number you say tells how many.",
+        "example": "● ● ● ● ● ● ● = 7",
+        "tutorSteps": [
+          "Lay out 5–20 small objects in a row.",
+          "Touch and count each one aloud.",
+          "Ask: how many in all? (the last number said)"
+        ]
+      },
+      "practice": {
+        "generator": "count",
+        "params": {
+          "max": 20
+        }
+      },
+      "reinforcement": "Used every day when counting dots, coins and tallies.",
+      "day": 1,
+      "subject": "Math",
+      "sightPaceSeconds": 6
+    },
+    {
+      "id": "r-letter-sounds",
+      "stage": "q1",
+      "title": "Letter sounds review",
+      "summary": "Say the sound of every letter quickly.",
+      "prerequisites": [],
+      "lesson": {
+        "explanation": "Each letter stands for a sound. Knowing them by sight makes reading fast.",
+        "example": "b says /b/ as in bat",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: m, s, t, b, f",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: p, n, d, g, l",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: c, h, j, k, r",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: v, w, x, y, z",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "What sound does 'm' start?",
+            "choices": [
+              "moon",
+              "sun",
+              "top"
+            ],
+            "answer": "moon"
+          }
+        ]
+      },
+      "reinforcement": "Every later reading skill uses these sounds.",
+      "day": 2,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "w-letters",
+      "stage": "q1",
+      "title": "Letter formation",
+      "summary": "Write every lowercase and capital letter correctly.",
+      "prerequisites": [],
+      "lesson": {
+        "explanation": "Start letters at the top. Tall letters touch the top line; tails go below.",
+        "example": "b d p q are different!",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Write the lowercase alphabet. Tutor checks b/d/p/q.",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Write the capital alphabet.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Neat letters are needed for all writing.",
+      "day": 3,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "m-count-120",
+      "stage": "q1",
+      "title": "Count to 120",
+      "summary": "Say the number before and after any number up to 120.",
+      "prerequisites": [
+        "m-count-20"
+      ],
+      "lesson": {
+        "explanation": "Numbers follow a pattern: after 9 comes a new ten. 29 → 30, 99 → 100, 109 → 110.",
+        "example": "Just after 59 is 60. Just before 100 is 99.",
+        "tutorSteps": [
+          "Count aloud from a starting number other than 1 (e.g. 47).",
+          "Use a 120 chart and point.",
+          "Quiz: just before / just after."
+        ]
+      },
+      "practice": {
+        "generator": "numberAfter",
+        "params": {
+          "max": 120
+        }
+      },
+      "reinforcement": "Comes back in place value and adding 10.",
+      "day": 4,
+      "subject": "Math",
+      "sightPaceSeconds": 4
+    },
+    {
+      "id": "r-short-a",
+      "stage": "q1",
+      "title": "Short a",
+      "summary": "Read words with the short a sound.",
+      "prerequisites": [
+        "r-letter-sounds"
+      ],
+      "lesson": {
+        "explanation": "Short a sounds like /a/ in apple.",
+        "example": "cat, map, ham",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: cat, map, sad, ham",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: bag, fan, tap, jam",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has short a?",
+            "choices": [
+              "hat",
+              "hot",
+              "hit"
+            ],
+            "answer": "hat"
+          }
+        ]
+      },
+      "reinforcement": "Short vowels return in every word family.",
+      "day": 5,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "s-senses",
+      "stage": "q1",
+      "title": "Five senses",
+      "summary": "Learn sight, hearing, smell, taste and touch.",
+      "prerequisites": [],
+      "lesson": {
+        "explanation": "We learn about the world with 5 senses: eyes see, ears hear, nose smells, tongue tastes, skin feels.",
+        "example": "We hear thunder with our ears.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which sense uses your nose?",
+            "choices": [
+              "Smell",
+              "Taste",
+              "Touch"
+            ],
+            "answer": "Smell"
+          },
+          {
+            "prompt": "How many senses do we have?",
+            "answer": "5"
+          },
+          {
+            "prompt": "You feel a soft blanket with your sense of…",
+            "choices": [
+              "Touch",
+              "Sight",
+              "Hearing"
+            ],
+            "answer": "Touch"
+          }
+        ]
+      },
+      "reinforcement": "Used for observing in every experiment.",
+      "day": 6,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-rules",
+      "stage": "q1",
+      "title": "Rules and why we have them",
+      "summary": "Rules keep us safe and fair.",
+      "prerequisites": [],
+      "lesson": {
+        "explanation": "Rules tell us how to act. They keep people safe and treat everyone fairly.",
+        "example": "We walk in the hallway so no one gets hurt.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Why do we have rules?",
+            "choices": [
+              "To stay safe and be fair",
+              "To make people sad"
+            ],
+            "answer": "To stay safe and be fair"
+          },
+          {
+            "prompt": "Name two rules at home.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Laws and government later.",
+      "day": 7,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "m-skip-10",
+      "stage": "q1",
+      "title": "Count by 10s",
+      "summary": "Skip count by tens to 120.",
+      "prerequisites": [
+        "m-count-120"
+      ],
+      "lesson": {
+        "explanation": "Counting by 10s jumps one whole row on the 120 chart: 10, 20, 30…",
+        "example": "40, 50, 60, 70",
+        "tutorSteps": [
+          "Count bundles of 10 straws.",
+          "Chant 10 to 120.",
+          "Start at a ten other than 10."
+        ]
+      },
+      "practice": {
+        "generator": "countBy",
+        "params": {
+          "step": 10,
+          "max": 120
+        }
+      },
+      "reinforcement": "Used for 10 more / 10 less and adding tens.",
+      "day": 8,
+      "subject": "Math",
+      "sightPaceSeconds": 4
+    },
+    {
+      "id": "r-short-i",
+      "stage": "q1",
+      "title": "Short i",
+      "summary": "Read words with the short i sound.",
+      "prerequisites": [
+        "r-short-a"
+      ],
+      "lesson": {
+        "explanation": "Short i sounds like /i/ in itch.",
+        "example": "pig, sit, win",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: pig, sit, win, lip",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: big, fix, hid, mix",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has short i?",
+            "choices": [
+              "pin",
+              "pan",
+              "pen"
+            ],
+            "answer": "pin"
+          }
+        ]
+      },
+      "reinforcement": "Compare with short e later.",
+      "day": 9,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-skip-5",
+      "stage": "q1",
+      "title": "Count by 5s",
+      "summary": "Skip count by fives to 100.",
+      "prerequisites": [
+        "m-skip-10"
+      ],
+      "lesson": {
+        "explanation": "Counting by 5s: every number ends in 5 or 0.",
+        "example": "15, 20, 25, 30",
+        "tutorSteps": [
+          "Count fingers on hands by 5s.",
+          "Count nickels by 5s.",
+          "Chant to 100."
+        ]
+      },
+      "practice": {
+        "generator": "countBy",
+        "params": {
+          "step": 5,
+          "max": 100
+        }
+      },
+      "reinforcement": "Used for nickels, clocks and multiplying by 5.",
+      "day": 10,
+      "subject": "Math",
+      "sightPaceSeconds": 4
+    },
+    {
+      "id": "r-short-o",
+      "stage": "q1",
+      "title": "Short o",
+      "summary": "Read words with the short o sound.",
+      "prerequisites": [
+        "r-short-i"
+      ],
+      "lesson": {
+        "explanation": "Short o sounds like /o/ in octopus.",
+        "example": "hot, dog, mop",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: hot, dog, mop, fox",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: log, pot, rod, top",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has short o?",
+            "choices": [
+              "cot",
+              "cut",
+              "cat"
+            ],
+            "answer": "cot"
+          }
+        ]
+      },
+      "reinforcement": "Returns in blends and endings.",
+      "day": 11,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "w-name-sentence",
+      "stage": "q1",
+      "title": "Capital and period",
+      "summary": "A sentence starts with a capital and ends with a period.",
+      "prerequisites": [
+        "w-letters"
+      ],
+      "lesson": {
+        "explanation": "Every sentence begins with a capital letter and ends with a period (.), question mark (?) or exclamation mark (!).",
+        "example": "The dog runs.",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which is a correct sentence?",
+            "choices": [
+              "The cat sat.",
+              "the cat sat",
+              "The cat sat"
+            ],
+            "answer": "The cat sat."
+          },
+          {
+            "prompt": "Copy and fix: my dog is big",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Used in every sentence written after this.",
+      "day": 12,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "m-skip-2",
+      "stage": "q1",
+      "title": "Count by 2s",
+      "summary": "Skip count by twos to 50.",
+      "prerequisites": [
+        "m-count-120"
+      ],
+      "lesson": {
+        "explanation": "Counting by 2s skips every other number: 2, 4, 6, 8…",
+        "example": "12, 14, 16, 18",
+        "tutorSteps": [
+          "Count pairs of socks or shoes.",
+          "Chant by 2s.",
+          "Connect to even numbers."
+        ]
+      },
+      "practice": {
+        "generator": "countBy",
+        "params": {
+          "step": 2,
+          "max": 50
+        }
+      },
+      "reinforcement": "Used for even/odd and doubles.",
+      "day": 13,
+      "subject": "Math",
+      "sightPaceSeconds": 4
+    },
+    {
+      "id": "r-short-u",
+      "stage": "q1",
+      "title": "Short u",
+      "summary": "Read words with the short u sound.",
+      "prerequisites": [
+        "r-short-o"
+      ],
+      "lesson": {
+        "explanation": "Short u sounds like /u/ in up.",
+        "example": "sun, cup, bug",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: sun, cup, bug, run",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: mud, hut, tub, gum",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has short u?",
+            "choices": [
+              "bus",
+              "bis",
+              "bas"
+            ],
+            "answer": "bus"
+          }
+        ]
+      },
+      "reinforcement": "Returns in blends and endings.",
+      "day": 14,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "s-living",
+      "stage": "q1",
+      "title": "Living and nonliving",
+      "summary": "Tell living things from nonliving things.",
+      "prerequisites": [
+        "s-senses"
+      ],
+      "lesson": {
+        "explanation": "Living things grow, need food and water, and make more of their kind. Rocks and toys do not.",
+        "example": "A tree is living; a rock is not.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Is a dog living?",
+            "choices": [
+              "Yes",
+              "No"
+            ],
+            "answer": "Yes"
+          },
+          {
+            "prompt": "Is a rock living?",
+            "choices": [
+              "Yes",
+              "No"
+            ],
+            "answer": "No"
+          },
+          {
+            "prompt": "Which is living?",
+            "choices": [
+              "Flower",
+              "Car",
+              "Chair"
+            ],
+            "answer": "Flower"
+          }
+        ]
+      },
+      "reinforcement": "Basis of life science.",
+      "day": 15,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-family",
+      "stage": "q1",
+      "title": "Families",
+      "summary": "Families are different and work together.",
+      "prerequisites": [
+        "ss-rules"
+      ],
+      "lesson": {
+        "explanation": "Families come in many sizes. Family members help each other and share jobs.",
+        "example": "Our family shares chores like setting the table.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Name the people in your family and one job each does.",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Are all families the same?",
+            "choices": [
+              "No",
+              "Yes"
+            ],
+            "answer": "No"
+          }
+        ]
+      },
+      "reinforcement": "Community and culture next.",
+      "day": 16,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "m-compare-20",
+      "stage": "q1",
+      "title": "Compare numbers to 20",
+      "summary": "Use >, < and = to compare.",
+      "prerequisites": [
+        "m-count-20"
+      ],
+      "lesson": {
+        "explanation": "The open side of > or < faces the bigger number (the alligator eats the bigger one).",
+        "example": "14 > 9,  6 < 11,  8 = 8",
+        "tutorSteps": [
+          "Build both numbers with cubes.",
+          "Line them up to see which is longer.",
+          "Write the sign."
+        ]
+      },
+      "practice": {
+        "generator": "compare",
+        "params": {
+          "max": 20
+        }
+      },
+      "reinforcement": "Used again with two-digit numbers and fractions later.",
+      "day": 17,
+      "subject": "Math",
+      "sightPaceSeconds": 5
+    },
+    {
+      "id": "r-short-e",
+      "stage": "q1",
+      "title": "Short e",
+      "summary": "Read words with the short e sound.",
+      "prerequisites": [
+        "r-short-u"
+      ],
+      "lesson": {
+        "explanation": "Short e sounds like /e/ in egg. It is easy to mix up with short i.",
+        "example": "bed, pen, wet",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: bed, pen, wet, leg",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: hen, jet, ten, web",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has short e?",
+            "choices": [
+              "net",
+              "nut",
+              "not"
+            ],
+            "answer": "net"
+          },
+          {
+            "prompt": "Which word has short e?",
+            "choices": [
+              "pit",
+              "pet"
+            ],
+            "answer": "pet"
+          }
+        ]
+      },
+      "reinforcement": "Returns in every two-syllable word.",
+      "day": 18,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-even-odd",
+      "stage": "q1",
+      "title": "Even and odd",
+      "summary": "Tell if a number is even or odd.",
+      "prerequisites": [
+        "m-skip-2"
+      ],
+      "lesson": {
+        "explanation": "Even numbers can be split into pairs with none left over. They end in 0, 2, 4, 6, 8.",
+        "example": "8 is even (4 pairs). 7 is odd (3 pairs + 1).",
+        "tutorSteps": [
+          "Pair up cubes.",
+          "Look at the ones digit.",
+          "Sort numbers into even/odd."
+        ]
+      },
+      "practice": {
+        "generator": "evenOdd",
+        "params": {
+          "max": 50
+        }
+      },
+      "reinforcement": "Comes back in doubles and division.",
+      "day": 19,
+      "subject": "Math",
+      "sightPaceSeconds": 4
+    },
+    {
+      "id": "w-spaces",
+      "stage": "q1",
+      "title": "Finger spaces",
+      "summary": "Leave a space between words.",
+      "prerequisites": [
+        "w-letters"
+      ],
+      "lesson": {
+        "explanation": "Put a finger-width space between words so readers can tell where each word ends.",
+        "example": "I like cats.",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Write: I see a red bird. Tutor checks spaces.",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which has spaces?",
+            "choices": [
+              "We can run.",
+              "Wecanrun."
+            ],
+            "answer": "We can run."
+          }
+        ]
+      },
+      "reinforcement": "Readable writing.",
+      "day": 20,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "r-cvc",
+      "stage": "q1",
+      "title": "Blend CVC words fast",
+      "summary": "Blend consonant-vowel-consonant words smoothly.",
+      "prerequisites": [
+        "r-short-e"
+      ],
+      "lesson": {
+        "explanation": "Say each sound, then slide them together without stopping.",
+        "example": "/s/ /u/ /n/ → sun",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: sat, pin, hop, rug, wet",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: mad, fit, jog, hum, beg",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Blend /d/ /o/ /g/:",
+            "choices": [
+              "dog",
+              "dig",
+              "dug"
+            ],
+            "answer": "dog"
+          }
+        ]
+      },
+      "reinforcement": "The base of all decoding.",
+      "day": 21,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-make-ten",
+      "stage": "q1",
+      "title": "Make ten",
+      "summary": "Know the pairs that make 10 by sight.",
+      "prerequisites": [
+        "m-count-20"
+      ],
+      "lesson": {
+        "explanation": "Pairs that make ten: 0+10, 1+9, 2+8, 3+7, 4+6, 5+5. Learn them like sight words.",
+        "example": "7 + 3 = 10",
+        "tutorSteps": [
+          "Use a ten frame with counters.",
+          "Flash a number, child says its partner.",
+          "Race for sight pace (under 3 seconds)."
+        ]
+      },
+      "practice": {
+        "generator": "makeTen"
+      },
+      "reinforcement": "The key to adding and subtracting within 20.",
+      "day": 22,
+      "subject": "Math",
+      "sightPaceSeconds": 3
+    },
+    {
+      "id": "r-digraphs",
+      "stage": "q1",
+      "title": "sh, ch, th, wh",
+      "summary": "Read the four main consonant digraphs.",
+      "prerequisites": [
+        "r-cvc"
+      ],
+      "lesson": {
+        "explanation": "Two letters can make one sound: sh (ship), ch (chin), th (thin, this), wh (when).",
+        "example": "shop, chat, thin, when",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: ship, shop, fish",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: chin, chop, much",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: thin, this, bath",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: when, whip, which",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word starts with sh?",
+            "choices": [
+              "shell",
+              "chell",
+              "tell"
+            ],
+            "answer": "shell"
+          }
+        ]
+      },
+      "reinforcement": "Returns in spelling and long-vowel words.",
+      "day": 23,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-add-10",
+      "stage": "q1",
+      "title": "Addition facts to 10",
+      "summary": "Add two numbers with a sum up to 10 at sight pace.",
+      "prerequisites": [
+        "m-make-ten"
+      ],
+      "lesson": {
+        "explanation": "Adding means putting groups together. Start from the bigger number and count on.",
+        "example": "6 + 3: start at 6 → 7, 8, 9",
+        "tutorSteps": [
+          "Model with fingers or cubes.",
+          "Teach counting on from the bigger number.",
+          "Daily flash practice until instant."
+        ]
+      },
+      "practice": {
+        "generator": "add",
+        "params": {
+          "max": 5
+        }
+      },
+      "reinforcement": "Every later addition fact is built from these.",
+      "day": 24,
+      "subject": "Math",
+      "sightPaceSeconds": 3
+    },
+    {
+      "id": "s-plant-parts",
+      "stage": "q1",
+      "title": "Parts of a plant",
+      "summary": "Name roots, stem, leaves and flowers.",
+      "prerequisites": [
+        "s-living"
+      ],
+      "lesson": {
+        "explanation": "Roots drink water, the stem holds the plant up, leaves make food from sunlight, flowers make seeds.",
+        "example": "Leaves catch sunlight.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which part takes in water from the soil?",
+            "choices": [
+              "Roots",
+              "Leaves",
+              "Flower"
+            ],
+            "answer": "Roots"
+          },
+          {
+            "prompt": "Which part makes food from sunlight?",
+            "choices": [
+              "Leaves",
+              "Roots",
+              "Stem"
+            ],
+            "answer": "Leaves"
+          },
+          {
+            "prompt": "Which part holds the plant up?",
+            "choices": [
+              "Stem",
+              "Flower",
+              "Seed"
+            ],
+            "answer": "Stem"
+          }
+        ]
+      },
+      "reinforcement": "Plant needs and life cycles next.",
+      "day": 25,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-maps",
+      "stage": "q1",
+      "title": "Maps and globes",
+      "summary": "Use a map and a globe.",
+      "prerequisites": [
+        "ss-rules"
+      ],
+      "lesson": {
+        "explanation": "A map is a flat drawing of a place. A globe is a round model of Earth. Blue usually shows water.",
+        "example": "On a globe, blue is ocean and green or brown is land.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "A round model of Earth is a…",
+            "choices": [
+              "Globe",
+              "Map",
+              "Graph"
+            ],
+            "answer": "Globe"
+          },
+          {
+            "prompt": "On most maps, water is…",
+            "choices": [
+              "Blue",
+              "Red"
+            ],
+            "answer": "Blue"
+          },
+          {
+            "prompt": "Draw a map of your bedroom.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Geography in every grade.",
+      "day": 26,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "r-ck",
+      "stage": "q1",
+      "title": "-ck ending",
+      "summary": "Read words ending in ck.",
+      "prerequisites": [
+        "r-digraphs"
+      ],
+      "lesson": {
+        "explanation": "After a short vowel, the /k/ sound at the end is spelled ck.",
+        "example": "duck, back, sick",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: duck, back, sick, rock",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: pack, neck, lick, tuck",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which is spelled right?",
+            "choices": [
+              "duck",
+              "duk",
+              "duc"
+            ],
+            "answer": "duck"
+          }
+        ]
+      },
+      "reinforcement": "Spelling rule used in writing.",
+      "day": 27,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-sub-10",
+      "stage": "q1",
+      "title": "Subtraction facts to 10",
+      "summary": "Subtract within 10 at sight pace.",
+      "prerequisites": [
+        "m-add-10"
+      ],
+      "lesson": {
+        "explanation": "Subtracting takes away. Think of the addition fact: 9 − 4 = ? because 4 + 5 = 9.",
+        "example": "8 − 3 = 5",
+        "tutorSteps": [
+          "Take away cubes.",
+          "Connect to the matching addition fact.",
+          "Flash practice."
+        ]
+      },
+      "practice": {
+        "generator": "sub",
+        "params": {
+          "max": 10
+        }
+      },
+      "reinforcement": "Pairs with addition in fact families.",
+      "day": 28,
+      "subject": "Math",
+      "sightPaceSeconds": 3
+    },
+    {
+      "id": "w-questions",
+      "stage": "q2",
+      "title": "Questions and exclamations",
+      "summary": "Use ? and ! correctly.",
+      "prerequisites": [
+        "w-name-sentence"
+      ],
+      "lesson": {
+        "explanation": "Use ? for asking. Use ! for strong feeling.",
+        "example": "Where is my hat? I found it!",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which mark ends: Can you help me",
+            "choices": [
+              "?",
+              ".",
+              "!"
+            ],
+            "answer": "?"
+          },
+          {
+            "prompt": "Which mark ends: Watch out",
+            "choices": [
+              "!",
+              "?"
+            ],
+            "answer": "!"
+          },
+          {
+            "prompt": "Write one question about animals.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Dialogue and expressive reading.",
+      "day": 29,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "m-doubles",
+      "stage": "q2",
+      "title": "Doubles",
+      "summary": "Know doubles to 10 + 10 by sight.",
+      "prerequisites": [
+        "m-add-10",
+        "m-skip-2"
+      ],
+      "lesson": {
+        "explanation": "A double adds a number to itself: 6 + 6 = 12.",
+        "example": "8 + 8 = 16",
+        "tutorSteps": [
+          "Use mirror pictures or egg cartons.",
+          "Chant the doubles.",
+          "Flash practice."
+        ]
+      },
+      "practice": {
+        "generator": "doubles",
+        "params": {
+          "max": 10
+        }
+      },
+      "reinforcement": "Used for near-doubles and multiplying by 2.",
+      "day": 30,
+      "subject": "Math",
+      "sightPaceSeconds": 3
+    },
+    {
+      "id": "r-blends-start",
+      "stage": "q2",
+      "title": "Beginning blends",
+      "summary": "Read words starting with two consonants.",
+      "prerequisites": [
+        "r-cvc"
+      ],
+      "lesson": {
+        "explanation": "In a blend you hear both sounds: bl, cl, fl, st, sp, tr, gr, fr.",
+        "example": "frog, stop, clap",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: frog, stop, clap, grin",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: flag, spin, trip, plum",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word starts with a blend?",
+            "choices": [
+              "stop",
+              "top",
+              "pop"
+            ],
+            "answer": "stop"
+          }
+        ]
+      },
+      "reinforcement": "Returns in long-vowel and multi-syllable words.",
+      "day": 31,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-near-doubles",
+      "stage": "q2",
+      "title": "Near doubles",
+      "summary": "Use doubles to add numbers that are one apart.",
+      "prerequisites": [
+        "m-doubles"
+      ],
+      "lesson": {
+        "explanation": "If the numbers are next to each other, double the smaller one and add 1.",
+        "example": "7 + 8 = 7 + 7 + 1 = 15",
+        "tutorSteps": [
+          "Review doubles.",
+          "Show 6 + 7 as 6 + 6 + 1.",
+          "Practice spotting near doubles."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "6 + 7 = ?",
+            "answer": "13"
+          },
+          {
+            "prompt": "5 + 6 = ?",
+            "answer": "11"
+          },
+          {
+            "prompt": "8 + 9 = ?",
+            "answer": "17"
+          },
+          {
+            "prompt": "4 + 5 = ?",
+            "answer": "9"
+          },
+          {
+            "prompt": "7 + 8 = ?",
+            "answer": "15"
+          },
+          {
+            "prompt": "9 + 10 = ?",
+            "answer": "19"
+          },
+          {
+            "prompt": "Which double helps with 7 + 8?",
+            "choices": [
+              "7 + 7",
+              "8 + 9",
+              "5 + 5"
+            ],
+            "answer": "7 + 7"
+          }
+        ]
+      },
+      "reinforcement": "A strategy reused for mental math with bigger numbers.",
+      "day": 32,
+      "subject": "Math",
+      "sightPaceSeconds": 5
+    },
+    {
+      "id": "r-blends-end",
+      "stage": "q2",
+      "title": "Ending blends",
+      "summary": "Read words ending in two consonants.",
+      "prerequisites": [
+        "r-blends-start"
+      ],
+      "lesson": {
+        "explanation": "Ending blends: st, mp, nd, nt, lt, sk.",
+        "example": "jump, hand, fast",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: jump, hand, fast, tent",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: milk, desk, belt, pond",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word ends in a blend?",
+            "choices": [
+              "lamp",
+              "lap",
+              "lab"
+            ],
+            "answer": "lamp"
+          }
+        ]
+      },
+      "reinforcement": "Returns in -ed and -ing words.",
+      "day": 33,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "s-plant-needs",
+      "stage": "q2",
+      "title": "What plants need",
+      "summary": "Plants need water, light, air and space.",
+      "prerequisites": [
+        "s-plant-parts"
+      ],
+      "lesson": {
+        "explanation": "Plants need sunlight, water, air and room to grow. Without them they wilt.",
+        "example": "A plant in a dark closet turns yellow.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Do plants need sunlight?",
+            "choices": [
+              "Yes",
+              "No"
+            ],
+            "answer": "Yes"
+          },
+          {
+            "prompt": "Which does a plant NOT need?",
+            "choices": [
+              "Candy",
+              "Water",
+              "Light"
+            ],
+            "answer": "Candy"
+          },
+          {
+            "prompt": "Plant a bean in a cup and record growth each day.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Habitats and food chains later.",
+      "day": 34,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "m-missing-addend",
+      "stage": "q2",
+      "title": "Missing numbers",
+      "summary": "Find the unknown in 4 + ? = 10.",
+      "prerequisites": [
+        "m-sub-10"
+      ],
+      "lesson": {
+        "explanation": "Ask: what do I add to the first number to reach the total? Count up, or subtract.",
+        "example": "5 + ? = 9 → 4",
+        "tutorSteps": [
+          "Hide some cubes under a cup.",
+          "Count up from the part to the whole.",
+          "Write the matching subtraction."
+        ]
+      },
+      "practice": {
+        "generator": "missingAddend",
+        "params": {
+          "max": 10
+        }
+      },
+      "reinforcement": "The start of algebra (solving for x).",
+      "day": 35,
+      "subject": "Math",
+      "sightPaceSeconds": 5
+    },
+    {
+      "id": "w-nouns",
+      "stage": "q2",
+      "title": "Nouns",
+      "summary": "Find and use naming words.",
+      "prerequisites": [
+        "w-name-sentence"
+      ],
+      "lesson": {
+        "explanation": "A noun names a person, place or thing. Names of people and places start with a capital.",
+        "example": "girl, park, ball, Charlotte",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which word is a noun?",
+            "choices": [
+              "apple",
+              "run",
+              "happy"
+            ],
+            "answer": "apple"
+          },
+          {
+            "prompt": "Which word is a noun?",
+            "choices": [
+              "school",
+              "jump",
+              "blue"
+            ],
+            "answer": "school"
+          },
+          {
+            "prompt": "Write three nouns in your room.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Grammar in every grade.",
+      "day": 36,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "r-ng-nk",
+      "stage": "q2",
+      "title": "-ng and -nk",
+      "summary": "Read words with ng and nk.",
+      "prerequisites": [
+        "r-blends-end"
+      ],
+      "lesson": {
+        "explanation": "ng says /ng/ (ring). nk says /ngk/ (pink).",
+        "example": "sing, bank, long",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: sing, ring, long, hung",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: pink, bank, sunk, think",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word ends with -nk?",
+            "choices": [
+              "sink",
+              "sing",
+              "sit"
+            ],
+            "answer": "sink"
+          }
+        ]
+      },
+      "reinforcement": "Used with -ing endings.",
+      "day": 37,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-fact-family",
+      "stage": "q2",
+      "title": "Fact families",
+      "summary": "See how +, − link three numbers.",
+      "prerequisites": [
+        "m-missing-addend"
+      ],
+      "lesson": {
+        "explanation": "3, 5 and 8 make a family: 3 + 5 = 8, 5 + 3 = 8, 8 − 5 = 3, 8 − 3 = 5.",
+        "example": "If 6 + 4 = 10 then 10 − 4 = 6",
+        "tutorSteps": [
+          "Draw a number bond (whole on top, parts below).",
+          "Write all four facts.",
+          "Quiz the related fact."
+        ]
+      },
+      "practice": {
+        "generator": "factFamily",
+        "params": {
+          "max": 10
+        }
+      },
+      "reinforcement": "Becomes multiplication/division families later.",
+      "day": 38,
+      "subject": "Math",
+      "sightPaceSeconds": 5
+    },
+    {
+      "id": "r-silent-e-a",
+      "stage": "q2",
+      "title": "Silent e: a_e",
+      "summary": "Read long a words with a silent e.",
+      "prerequisites": [
+        "r-cvc",
+        "r-digraphs"
+      ],
+      "lesson": {
+        "explanation": "A silent e at the end makes the vowel say its name: cap → cape.",
+        "example": "cake, name, gate",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: cake, name, gate, same",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: cap / cape, tap / tape, mad / made",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has long a?",
+            "choices": [
+              "tape",
+              "tap"
+            ],
+            "answer": "tape"
+          }
+        ]
+      },
+      "reinforcement": "Same rule for i, o, u next.",
+      "day": 39,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-add-20",
+      "stage": "q2",
+      "title": "Addition facts to 20",
+      "summary": "Add within 20 at sight pace using make-ten.",
+      "prerequisites": [
+        "m-add-10",
+        "m-make-ten",
+        "m-doubles"
+      ],
+      "lesson": {
+        "explanation": "Make a ten first: 8 + 5 = 8 + 2 + 3 = 10 + 3 = 13.",
+        "example": "9 + 6 = 15",
+        "tutorSteps": [
+          "Use two ten frames.",
+          "Move counters to fill one ten.",
+          "Flash practice until instant."
+        ]
+      },
+      "practice": {
+        "generator": "add",
+        "params": {
+          "max": 10
+        }
+      },
+      "reinforcement": "Used in every two-digit addition.",
+      "day": 40,
+      "subject": "Math",
+      "sightPaceSeconds": 4
+    },
+    {
+      "id": "r-silent-e-iou",
+      "stage": "q2",
+      "title": "Silent e: i_e, o_e, u_e",
+      "summary": "Read long i, o and u with silent e.",
+      "prerequisites": [
+        "r-silent-e-a"
+      ],
+      "lesson": {
+        "explanation": "The silent e rule works with every vowel: kit → kite, hop → hope, cub → cube.",
+        "example": "bike, home, cute",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: bike, time, ride, five",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: home, rope, note, bone",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: cute, cube, mule, tune",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has long o?",
+            "choices": [
+              "hope",
+              "hop"
+            ],
+            "answer": "hope"
+          },
+          {
+            "prompt": "Which word has long i?",
+            "choices": [
+              "pin",
+              "pine"
+            ],
+            "answer": "pine"
+          }
+        ]
+      },
+      "reinforcement": "Spelling long vowels in writing.",
+      "day": 41,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "w-verbs",
+      "stage": "q2",
+      "title": "Verbs",
+      "summary": "Find and use action words.",
+      "prerequisites": [
+        "w-nouns"
+      ],
+      "lesson": {
+        "explanation": "A verb tells what someone or something does: run, eat, sing.",
+        "example": "The bird sings.",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which word is a verb?",
+            "choices": [
+              "jump",
+              "dog",
+              "red"
+            ],
+            "answer": "jump"
+          },
+          {
+            "prompt": "Which word is a verb?",
+            "choices": [
+              "swim",
+              "pool",
+              "wet"
+            ],
+            "answer": "swim"
+          },
+          {
+            "prompt": "Write a sentence with a verb. Tutor underlines it.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Past tense with -ed connects here.",
+      "day": 42,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "m-sub-20",
+      "stage": "q2",
+      "title": "Subtraction facts to 20",
+      "summary": "Subtract within 20 at sight pace.",
+      "prerequisites": [
+        "m-sub-10",
+        "m-add-20"
+      ],
+      "lesson": {
+        "explanation": "Go back to ten: 14 − 6 = 14 − 4 − 2 = 10 − 2 = 8. Or think addition: 6 + ? = 14.",
+        "example": "15 − 7 = 8",
+        "tutorSteps": [
+          "Model on two ten frames.",
+          "Use the related addition fact.",
+          "Flash practice."
+        ]
+      },
+      "practice": {
+        "generator": "sub",
+        "params": {
+          "max": 20
+        }
+      },
+      "reinforcement": "Used in every two-digit subtraction.",
+      "day": 43,
+      "subject": "Math",
+      "sightPaceSeconds": 4
+    },
+    {
+      "id": "s-animals",
+      "stage": "q2",
+      "title": "Animals and their young",
+      "summary": "Animals and babies look alike and parents help them.",
+      "prerequisites": [
+        "s-living"
+      ],
+      "lesson": {
+        "explanation": "Young animals look like their parents. Many parents feed and protect their babies.",
+        "example": "A baby cat is a kitten.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "A baby dog is a…",
+            "choices": [
+              "Puppy",
+              "Calf",
+              "Chick"
+            ],
+            "answer": "Puppy"
+          },
+          {
+            "prompt": "A baby cow is a…",
+            "choices": [
+              "Calf",
+              "Kitten",
+              "Cub"
+            ],
+            "answer": "Calf"
+          },
+          {
+            "prompt": "A baby bird hatches from an…",
+            "choices": [
+              "Egg",
+              "Seed",
+              "Leaf"
+            ],
+            "answer": "Egg"
+          }
+        ]
+      },
+      "reinforcement": "Life cycles and traits later.",
+      "day": 44,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-helpers",
+      "stage": "q2",
+      "title": "Community helpers",
+      "summary": "Name jobs that help a community.",
+      "prerequisites": [
+        "ss-family"
+      ],
+      "lesson": {
+        "explanation": "Community helpers include firefighters, doctors, dentists, teachers, mail carriers and police officers.",
+        "example": "A dentist helps keep teeth healthy.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Who helps keep teeth healthy?",
+            "choices": [
+              "Dentist",
+              "Pilot",
+              "Chef"
+            ],
+            "answer": "Dentist"
+          },
+          {
+            "prompt": "Who puts out fires?",
+            "choices": [
+              "Firefighter",
+              "Teacher"
+            ],
+            "answer": "Firefighter"
+          },
+          {
+            "prompt": "Who delivers letters?",
+            "choices": [
+              "Mail carrier",
+              "Baker"
+            ],
+            "answer": "Mail carrier"
+          }
+        ]
+      },
+      "reinforcement": "Economics and jobs later.",
+      "day": 45,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "r-ee-ea",
+      "stage": "q2",
+      "title": "ee and ea",
+      "summary": "Read long e vowel teams.",
+      "prerequisites": [
+        "r-silent-e-iou"
+      ],
+      "lesson": {
+        "explanation": "When two vowels go walking, the first one does the talking: ee and ea say long e.",
+        "example": "tree, seat, beach",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: tree, see, feet, green",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: seat, beach, read, team",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has long e?",
+            "choices": [
+              "sheep",
+              "ship"
+            ],
+            "answer": "sheep"
+          }
+        ]
+      },
+      "reinforcement": "Vowel teams return in second grade.",
+      "day": 46,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-add-three",
+      "stage": "q2",
+      "title": "Add three numbers",
+      "summary": "Add three numbers by finding an easy pair first.",
+      "prerequisites": [
+        "m-add-20"
+      ],
+      "lesson": {
+        "explanation": "You can add in any order. Look for a ten or a double first.",
+        "example": "4 + 7 + 6 = (4 + 6) + 7 = 17",
+        "tutorSteps": [
+          "Show the same total in different orders.",
+          "Circle a pair that makes 10.",
+          "Practice."
+        ]
+      },
+      "practice": {
+        "generator": "add3",
+        "params": {
+          "max": 6
+        }
+      },
+      "reinforcement": "Grouping (the associative property) is used all through algebra.",
+      "day": 47,
+      "subject": "Math",
+      "sightPaceSeconds": 8
+    },
+    {
+      "id": "r-ai-ay",
+      "stage": "q2",
+      "title": "ai and ay",
+      "summary": "Read long a vowel teams.",
+      "prerequisites": [
+        "r-ee-ea"
+      ],
+      "lesson": {
+        "explanation": "ai is used in the middle of a word (rain); ay at the end (play).",
+        "example": "rain, day, paint",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: rain, tail, paint, wait",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: day, play, stay, gray",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which spelling ends a word?",
+            "choices": [
+              "ay",
+              "ai"
+            ],
+            "answer": "ay"
+          }
+        ]
+      },
+      "reinforcement": "Spelling choices in writing.",
+      "day": 48,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-word-problems",
+      "stage": "q2",
+      "title": "Word problems: add and subtract",
+      "summary": "Decide whether to add or subtract in a story.",
+      "prerequisites": [
+        "m-add-20",
+        "m-sub-20"
+      ],
+      "lesson": {
+        "explanation": "Read the story, picture it, then decide: are things joining (add) or leaving (subtract)?",
+        "example": "Sam has 7 shells and finds 5 more → 7 + 5 = 12",
+        "tutorSteps": [
+          "Read the problem aloud together.",
+          "Act it out or draw it.",
+          "Write the number sentence, then solve."
+        ]
+      },
+      "practice": {
+        "generator": "wordAdd",
+        "params": {
+          "max": 10
+        }
+      },
+      "reinforcement": "Every math level uses word problems.",
+      "day": 49,
+      "subject": "Math",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "w-adjectives",
+      "stage": "q2",
+      "title": "Adjectives",
+      "summary": "Describe nouns with adjectives.",
+      "prerequisites": [
+        "w-verbs"
+      ],
+      "lesson": {
+        "explanation": "An adjective describes a noun: color, size, shape, how it feels.",
+        "example": "a big, soft, brown bear",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which word is an adjective?",
+            "choices": [
+              "fuzzy",
+              "hop",
+              "cat"
+            ],
+            "answer": "fuzzy"
+          },
+          {
+            "prompt": "Which word describes?",
+            "choices": [
+              "tiny",
+              "run",
+              "boy"
+            ],
+            "answer": "tiny"
+          },
+          {
+            "prompt": "Describe an apple with three adjectives.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Detailed writing in later grades.",
+      "day": 50,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "r-oa-ow",
+      "stage": "q2",
+      "title": "oa and ow",
+      "summary": "Read long o vowel teams.",
+      "prerequisites": [
+        "r-ai-ay"
+      ],
+      "lesson": {
+        "explanation": "oa (boat) and ow (snow) can both say long o.",
+        "example": "boat, coat, snow, grow",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: boat, coat, road, soap",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: snow, grow, show, slow",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has long o?",
+            "choices": [
+              "goat",
+              "got"
+            ],
+            "answer": "goat"
+          }
+        ]
+      },
+      "reinforcement": "ow also says /ow/ in cow — compare in grade 2.",
+      "day": 51,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-compare-problems",
+      "stage": "q2",
+      "title": "Word problems: how many more?",
+      "summary": "Solve comparison stories.",
+      "prerequisites": [
+        "m-word-problems"
+      ],
+      "lesson": {
+        "explanation": "'How many more' means find the difference between two amounts: subtract the smaller from the bigger.",
+        "example": "Ana has 9 cards, Ben has 5. Ana has 4 more.",
+        "tutorSteps": [
+          "Line up two rows of cubes.",
+          "Count the extra ones.",
+          "Write it as subtraction."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Ana has 9 cards. Ben has 5. How many more cards does Ana have?",
+            "answer": "4"
+          },
+          {
+            "prompt": "A red tower has 12 blocks. A blue tower has 8. How many fewer blocks does the blue tower have?",
+            "answer": "4"
+          },
+          {
+            "prompt": "Mia read 7 books. Leo read 10. How many more books did Leo read?",
+            "answer": "3"
+          },
+          {
+            "prompt": "There are 15 birds and 9 nests. How many birds have no nest?",
+            "answer": "6"
+          },
+          {
+            "prompt": "Jo has 6 stickers. She needs 11. How many more does she need?",
+            "answer": "5"
+          }
+        ]
+      },
+      "reinforcement": "Difference thinking returns in measurement and data.",
+      "day": 52,
+      "subject": "Math",
+      "sightPaceSeconds": 20
+    },
+    {
+      "id": "m-place-value",
+      "stage": "q2",
+      "title": "Tens and ones",
+      "summary": "Know a two-digit number is tens and ones.",
+      "prerequisites": [
+        "m-count-120",
+        "m-skip-10"
+      ],
+      "lesson": {
+        "explanation": "In 47, the 4 means 4 tens (40) and the 7 means 7 ones.",
+        "example": "63 = 6 tens + 3 ones",
+        "tutorSteps": [
+          "Bundle straws into tens.",
+          "Build numbers with tens rods and ones cubes.",
+          "Ask what each digit is worth."
+        ]
+      },
+      "practice": {
+        "generator": "placeValue",
+        "params": {
+          "digits": 2
+        }
+      },
+      "reinforcement": "The foundation of all multi-digit math.",
+      "day": 53,
+      "subject": "Math",
+      "sightPaceSeconds": 5
+    },
+    {
+      "id": "r-r-controlled",
+      "stage": "q2",
+      "title": "ar, or, er, ir, ur",
+      "summary": "Read bossy-r vowels.",
+      "prerequisites": [
+        "r-oa-ow"
+      ],
+      "lesson": {
+        "explanation": "When r follows a vowel it changes the sound: ar (car), or (fork), er/ir/ur (her, bird, fur).",
+        "example": "car, fork, bird",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: car, star, park, farm",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: fork, corn, storm, short",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: her, bird, fur, turn",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word has 'ar'?",
+            "choices": [
+              "barn",
+              "born",
+              "burn"
+            ],
+            "answer": "barn"
+          }
+        ]
+      },
+      "reinforcement": "Returns in multi-syllable words.",
+      "day": 54,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "s-animal-parts",
+      "stage": "q2",
+      "title": "How animals use body parts",
+      "summary": "Animal parts help them survive.",
+      "prerequisites": [
+        "s-animals"
+      ],
+      "lesson": {
+        "explanation": "Animals use parts to eat, move and stay safe: beaks, claws, shells, fins, wings.",
+        "example": "A turtle hides in its shell.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which helps a fish swim?",
+            "choices": [
+              "Fins",
+              "Wings",
+              "Paws"
+            ],
+            "answer": "Fins"
+          },
+          {
+            "prompt": "A bird uses its ___ to eat.",
+            "choices": [
+              "Beak",
+              "Tail",
+              "Feathers"
+            ],
+            "answer": "Beak"
+          },
+          {
+            "prompt": "What protects a turtle?",
+            "choices": [
+              "Shell",
+              "Fur",
+              "Fins"
+            ],
+            "answer": "Shell"
+          }
+        ]
+      },
+      "reinforcement": "Adaptations in later grades.",
+      "day": 55,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-needs-wants",
+      "stage": "q3",
+      "title": "Needs and wants",
+      "summary": "Tell needs from wants.",
+      "prerequisites": [
+        "ss-helpers"
+      ],
+      "lesson": {
+        "explanation": "Needs are things we must have to live: food, water, shelter, clothes. Wants are nice to have.",
+        "example": "Water is a need; a toy is a want.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Is food a need or a want?",
+            "choices": [
+              "Need",
+              "Want"
+            ],
+            "answer": "Need"
+          },
+          {
+            "prompt": "Is a video game a need or a want?",
+            "choices": [
+              "Want",
+              "Need"
+            ],
+            "answer": "Want"
+          },
+          {
+            "prompt": "Which is a need?",
+            "choices": [
+              "Shelter",
+              "Candy",
+              "Toys"
+            ],
+            "answer": "Shelter"
+          }
+        ]
+      },
+      "reinforcement": "Saving and spending (money math).",
+      "day": 56,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "m-ten-more",
+      "stage": "q3",
+      "title": "10 more and 10 less",
+      "summary": "Add or take 10 without counting.",
+      "prerequisites": [
+        "m-place-value"
+      ],
+      "lesson": {
+        "explanation": "Adding 10 changes only the tens digit: 34 → 44. Taking 10 away: 34 → 24.",
+        "example": "10 more than 58 is 68",
+        "tutorSteps": [
+          "Use a 120 chart: move down or up one row.",
+          "Use tens rods.",
+          "Practice mentally."
+        ]
+      },
+      "practice": {
+        "generator": "tenMore",
+        "params": {
+          "max": 100
+        }
+      },
+      "reinforcement": "Mental math with tens in second grade.",
+      "day": 57,
+      "subject": "Math",
+      "sightPaceSeconds": 4
+    },
+    {
+      "id": "r-endings-s",
+      "stage": "q3",
+      "title": "Endings -s and -es",
+      "summary": "Read plural and verb endings.",
+      "prerequisites": [
+        "r-digraphs"
+      ],
+      "lesson": {
+        "explanation": "Add -s to most words. Add -es after s, x, sh, ch.",
+        "example": "cats, boxes, wishes",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: cats, dogs, runs, hops",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: boxes, wishes, lunches, buses",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which is right?",
+            "choices": [
+              "foxes",
+              "foxs"
+            ],
+            "answer": "foxes"
+          }
+        ]
+      },
+      "reinforcement": "Plural nouns in writing.",
+      "day": 58,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "w-plurals",
+      "stage": "q3",
+      "title": "Plural nouns",
+      "summary": "Write more than one with -s or -es.",
+      "prerequisites": [
+        "w-nouns",
+        "r-endings-s"
+      ],
+      "lesson": {
+        "explanation": "Add -s to most nouns, -es after s, x, sh, ch.",
+        "example": "one fox, two foxes",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "More than one bus:",
+            "choices": [
+              "buses",
+              "buss"
+            ],
+            "answer": "buses"
+          },
+          {
+            "prompt": "More than one cat:",
+            "choices": [
+              "cats",
+              "cates"
+            ],
+            "answer": "cats"
+          },
+          {
+            "prompt": "More than one dish:",
+            "choices": [
+              "dishes",
+              "dishs"
+            ],
+            "answer": "dishes"
+          }
+        ]
+      },
+      "reinforcement": "Spelling in all writing.",
+      "day": 59,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "m-compare-100",
+      "stage": "q3",
+      "title": "Compare two-digit numbers",
+      "summary": "Compare by tens first, then ones.",
+      "prerequisites": [
+        "m-place-value",
+        "m-compare-20"
+      ],
+      "lesson": {
+        "explanation": "Look at the tens first. If the tens match, compare the ones.",
+        "example": "52 > 48 because 5 tens > 4 tens",
+        "tutorSteps": [
+          "Build both with tens and ones.",
+          "Compare tens, then ones.",
+          "Write the sign."
+        ]
+      },
+      "practice": {
+        "generator": "compare",
+        "params": {
+          "max": 100
+        }
+      },
+      "reinforcement": "Ordering numbers and decimals later.",
+      "day": 60,
+      "subject": "Math",
+      "sightPaceSeconds": 5
+    },
+    {
+      "id": "r-endings-ed",
+      "stage": "q3",
+      "title": "Ending -ed",
+      "summary": "Read past tense -ed words.",
+      "prerequisites": [
+        "r-endings-s",
+        "r-blends-end"
+      ],
+      "lesson": {
+        "explanation": "-ed can sound like /t/ (jumped), /d/ (played) or /ed/ (wanted).",
+        "example": "jumped, played, wanted",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: jumped, helped, kicked",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: played, filled, smiled",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: wanted, landed, melted",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word tells about the past?",
+            "choices": [
+              "walked",
+              "walks",
+              "walking"
+            ],
+            "answer": "walked"
+          }
+        ]
+      },
+      "reinforcement": "Past tense in writing.",
+      "day": 61,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-add-tens",
+      "stage": "q3",
+      "title": "Add and subtract tens",
+      "summary": "Add or subtract multiples of 10.",
+      "prerequisites": [
+        "m-ten-more"
+      ],
+      "lesson": {
+        "explanation": "Add the tens like ones: 3 tens + 4 tens = 7 tens = 70.",
+        "example": "50 + 30 = 80, 90 − 40 = 50",
+        "tutorSteps": [
+          "Use tens rods.",
+          "Say it as tens: 5 tens + 3 tens.",
+          "Practice."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "30 + 40 = ?",
+            "answer": "70"
+          },
+          {
+            "prompt": "50 + 20 = ?",
+            "answer": "70"
+          },
+          {
+            "prompt": "60 + 30 = ?",
+            "answer": "90"
+          },
+          {
+            "prompt": "80 − 50 = ?",
+            "answer": "30"
+          },
+          {
+            "prompt": "90 − 60 = ?",
+            "answer": "30"
+          },
+          {
+            "prompt": "40 + 40 = ?",
+            "answer": "80"
+          },
+          {
+            "prompt": "70 − 20 = ?",
+            "answer": "50"
+          },
+          {
+            "prompt": "10 + 80 = ?",
+            "answer": "90"
+          }
+        ]
+      },
+      "reinforcement": "Used in two-digit adding and in rounding.",
+      "day": 62,
+      "subject": "Math",
+      "sightPaceSeconds": 5
+    },
+    {
+      "id": "r-endings-ing",
+      "stage": "q3",
+      "title": "Ending -ing",
+      "summary": "Read -ing words.",
+      "prerequisites": [
+        "r-endings-ed",
+        "r-ng-nk"
+      ],
+      "lesson": {
+        "explanation": "-ing means something is happening now. Short vowel words often double the last letter: run → running.",
+        "example": "jumping, running, sitting",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: jumping, reading, playing",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: running, sitting, hopping",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which is spelled right?",
+            "choices": [
+              "running",
+              "runing"
+            ],
+            "answer": "running"
+          }
+        ]
+      },
+      "reinforcement": "Used in writing stories.",
+      "day": 63,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "s-sky",
+      "stage": "q3",
+      "title": "Sun, moon and stars",
+      "summary": "Notice patterns in the sky.",
+      "prerequisites": [
+        "s-senses"
+      ],
+      "lesson": {
+        "explanation": "The sun seems to rise in the east and set in the west. The moon's shape seems to change. Stars come out at night.",
+        "example": "The sun rises in the morning.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Where does the sun rise?",
+            "choices": [
+              "East",
+              "West"
+            ],
+            "answer": "East"
+          },
+          {
+            "prompt": "When can we see most stars?",
+            "choices": [
+              "Night",
+              "Noon"
+            ],
+            "answer": "Night"
+          },
+          {
+            "prompt": "Draw the moon each night for a week.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Earth and space science later.",
+      "day": 64,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-directions",
+      "stage": "q3",
+      "title": "North, south, east, west",
+      "summary": "Use the four cardinal directions.",
+      "prerequisites": [
+        "ss-maps",
+        "s-sky"
+      ],
+      "lesson": {
+        "explanation": "North is up on most maps, south is down, east is right, west is left. A compass rose shows them.",
+        "example": "Never Eat Soggy Waffles: N, E, S, W clockwise.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "On most maps, north is…",
+            "choices": [
+              "Up",
+              "Down"
+            ],
+            "answer": "Up"
+          },
+          {
+            "prompt": "The sun sets in the…",
+            "choices": [
+              "West",
+              "East"
+            ],
+            "answer": "West"
+          },
+          {
+            "prompt": "Which direction is opposite of north?",
+            "choices": [
+              "South",
+              "East"
+            ],
+            "answer": "South"
+          }
+        ]
+      },
+      "reinforcement": "Map reading later.",
+      "day": 65,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-goods-services",
+      "stage": "q3",
+      "title": "Goods and services",
+      "summary": "Goods are things; services are work done for you.",
+      "prerequisites": [
+        "ss-needs-wants"
+      ],
+      "lesson": {
+        "explanation": "Goods are things you can buy and hold. Services are jobs people do for you, like a haircut or a dental cleaning.",
+        "example": "A teeth cleaning is a service; a toothbrush is a good.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "A toothbrush is a…",
+            "choices": [
+              "Good",
+              "Service"
+            ],
+            "answer": "Good"
+          },
+          {
+            "prompt": "A haircut is a…",
+            "choices": [
+              "Service",
+              "Good"
+            ],
+            "answer": "Service"
+          },
+          {
+            "prompt": "A loaf of bread is a…",
+            "choices": [
+              "Good",
+              "Service"
+            ],
+            "answer": "Good"
+          }
+        ]
+      },
+      "reinforcement": "Economics later.",
+      "day": 66,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "m-add-2digit",
+      "stage": "q3",
+      "title": "Add a two-digit and one-digit number",
+      "summary": "Add ones to ones; make a new ten if needed.",
+      "prerequisites": [
+        "m-add-20",
+        "m-place-value"
+      ],
+      "lesson": {
+        "explanation": "Add the ones first. If they make 10 or more, that makes a new ten.",
+        "example": "36 + 7 = 36 + 4 + 3 = 43",
+        "tutorSteps": [
+          "Build with tens and ones.",
+          "Combine ones; trade 10 ones for a ten.",
+          "Record the answer."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "24 + 5 = ?",
+            "answer": "29"
+          },
+          {
+            "prompt": "36 + 7 = ?",
+            "answer": "43"
+          },
+          {
+            "prompt": "58 + 4 = ?",
+            "answer": "62"
+          },
+          {
+            "prompt": "71 + 9 = ?",
+            "answer": "80"
+          },
+          {
+            "prompt": "45 + 8 = ?",
+            "answer": "53"
+          },
+          {
+            "prompt": "63 + 6 = ?",
+            "answer": "69"
+          },
+          {
+            "prompt": "29 + 3 = ?",
+            "answer": "32"
+          },
+          {
+            "prompt": "87 + 5 = ?",
+            "answer": "92"
+          }
+        ]
+      },
+      "reinforcement": "Leads to two-digit plus two-digit addition.",
+      "day": 67,
+      "subject": "Math",
+      "sightPaceSeconds": 8
+    },
+    {
+      "id": "w-spell-cvc",
+      "stage": "q3",
+      "title": "Spell CVC words",
+      "summary": "Spell short-vowel words by sound.",
+      "prerequisites": [
+        "w-letters",
+        "r-cvc"
+      ],
+      "lesson": {
+        "explanation": "Stretch the word slowly and write a letter for each sound.",
+        "example": "/m/ /a/ /p/ → map",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Tutor says: dog, sun, pig, bed, cat. Child writes them.",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Tutor says: fish, chop, duck. Child writes them.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Spelling grows with each phonics lesson.",
+      "day": 68,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "r-compound",
+      "stage": "q3",
+      "title": "Compound words",
+      "summary": "Read words made of two smaller words.",
+      "prerequisites": [
+        "r-blends-start"
+      ],
+      "lesson": {
+        "explanation": "A compound word joins two words: sun + set = sunset.",
+        "example": "cupcake, rainbow, football",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: sunset, cupcake, rainbow",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: football, bedroom, starfish",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which is a compound word?",
+            "choices": [
+              "backpack",
+              "basket",
+              "button"
+            ],
+            "answer": "backpack"
+          },
+          {
+            "prompt": "bed + time = ?",
+            "answer": "bedtime"
+          }
+        ]
+      },
+      "reinforcement": "Breaking long words into parts.",
+      "day": 69,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-add-2digit-tens",
+      "stage": "q3",
+      "title": "Add tens to a two-digit number",
+      "summary": "Add a multiple of 10 to any two-digit number.",
+      "prerequisites": [
+        "m-add-tens"
+      ],
+      "lesson": {
+        "explanation": "Only the tens change: 34 + 20 → 3 tens + 2 tens = 5 tens, keep 4 ones → 54.",
+        "example": "47 + 30 = 77",
+        "tutorSteps": [
+          "Use a 120 chart: move down rows.",
+          "Use tens rods.",
+          "Practice."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "34 + 20 = ?",
+            "answer": "54"
+          },
+          {
+            "prompt": "47 + 30 = ?",
+            "answer": "77"
+          },
+          {
+            "prompt": "15 + 60 = ?",
+            "answer": "75"
+          },
+          {
+            "prompt": "52 + 40 = ?",
+            "answer": "92"
+          },
+          {
+            "prompt": "28 + 50 = ?",
+            "answer": "78"
+          },
+          {
+            "prompt": "61 + 30 = ?",
+            "answer": "91"
+          },
+          {
+            "prompt": "9 + 70 = ?",
+            "answer": "79"
+          }
+        ]
+      },
+      "reinforcement": "Mental math strategy for all larger numbers.",
+      "day": 70,
+      "subject": "Math",
+      "sightPaceSeconds": 6
+    },
+    {
+      "id": "r-syllables",
+      "stage": "q3",
+      "title": "Syllables",
+      "summary": "Clap and read two-syllable words.",
+      "prerequisites": [
+        "r-compound"
+      ],
+      "lesson": {
+        "explanation": "A syllable is a beat with one vowel sound. Split long words into beats: rab-bit, nap-kin.",
+        "example": "rabbit, napkin, picnic",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: rabbit, napkin, picnic",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: kitten, basket, pumpkin",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "How many syllables in 'pumpkin'?",
+            "answer": "2"
+          },
+          {
+            "prompt": "How many syllables in 'cat'?",
+            "answer": "1"
+          }
+        ]
+      },
+      "reinforcement": "Decoding long words in grade 2.",
+      "day": 71,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-sub-tens",
+      "stage": "q3",
+      "title": "Subtract tens from two-digit numbers",
+      "summary": "Take away multiples of 10.",
+      "prerequisites": [
+        "m-add-2digit-tens"
+      ],
+      "lesson": {
+        "explanation": "Only the tens change: 75 − 30 → 7 tens − 3 tens = 4 tens, keep 5 ones → 45.",
+        "example": "68 − 40 = 28",
+        "tutorSteps": [
+          "Use a 120 chart: move up rows.",
+          "Use tens rods.",
+          "Practice."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "75 − 30 = ?",
+            "answer": "45"
+          },
+          {
+            "prompt": "68 − 40 = ?",
+            "answer": "28"
+          },
+          {
+            "prompt": "92 − 50 = ?",
+            "answer": "42"
+          },
+          {
+            "prompt": "54 − 20 = ?",
+            "answer": "34"
+          },
+          {
+            "prompt": "81 − 60 = ?",
+            "answer": "21"
+          },
+          {
+            "prompt": "47 − 10 = ?",
+            "answer": "37"
+          },
+          {
+            "prompt": "99 − 90 = ?",
+            "answer": "9"
+          }
+        ]
+      },
+      "reinforcement": "Leads to two-digit subtraction with regrouping.",
+      "day": 72,
+      "subject": "Math",
+      "sightPaceSeconds": 6
+    },
+    {
+      "id": "r-contractions",
+      "stage": "q3",
+      "title": "Contractions",
+      "summary": "Read words like can't, I'm, it's.",
+      "prerequisites": [
+        "r-endings-s"
+      ],
+      "lesson": {
+        "explanation": "A contraction squeezes two words together; an apostrophe replaces the missing letters.",
+        "example": "do not → don't",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: can't, don't, I'm",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: it's, we're, isn't",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "'is not' as a contraction:",
+            "choices": [
+              "isn't",
+              "is'nt",
+              "isnt"
+            ],
+            "answer": "isn't"
+          },
+          {
+            "prompt": "What does 'I'm' mean?",
+            "choices": [
+              "I am",
+              "I will",
+              "I can"
+            ],
+            "answer": "I am"
+          }
+        ]
+      },
+      "reinforcement": "Writing dialogue later.",
+      "day": 73,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "w-picture-sentence",
+      "stage": "q3",
+      "title": "Write about a picture",
+      "summary": "Write two sentences about a picture.",
+      "prerequisites": [
+        "w-adjectives",
+        "w-spaces"
+      ],
+      "lesson": {
+        "explanation": "Look carefully. Tell who, what is happening, and one detail.",
+        "example": "The girl flies a kite. The kite is red.",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Look at any picture book page. Write two sentences about it.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Leads to paragraphs.",
+      "day": 74,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "m-round-10",
+      "stage": "q3",
+      "title": "Round to the nearest ten (challenge)",
+      "summary": "Round two-digit numbers to the nearest 10.",
+      "prerequisites": [
+        "m-place-value"
+      ],
+      "lesson": {
+        "explanation": "Look at the ones: 0–4 round down, 5–9 round up.",
+        "example": "47 → 50, 32 → 30, 65 → 70",
+        "tutorSteps": [
+          "Show the number on a number line between two tens.",
+          "Which ten is closer?",
+          "Practice."
+        ]
+      },
+      "practice": {
+        "generator": "roundTen",
+        "params": {
+          "max": 100
+        }
+      },
+      "reinforcement": "Estimating answers in every later grade.",
+      "day": 75,
+      "subject": "Math",
+      "sightPaceSeconds": 6
+    },
+    {
+      "id": "s-seasons",
+      "stage": "q3",
+      "title": "Weather and seasons",
+      "summary": "Name the four seasons and weather.",
+      "prerequisites": [
+        "s-sky"
+      ],
+      "lesson": {
+        "explanation": "The four seasons are spring, summer, fall (autumn) and winter. Each has typical weather.",
+        "example": "Winter is the coldest season.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which season is coldest?",
+            "choices": [
+              "Winter",
+              "Summer"
+            ],
+            "answer": "Winter"
+          },
+          {
+            "prompt": "How many seasons are there?",
+            "answer": "4"
+          },
+          {
+            "prompt": "Leaves fall from trees in…",
+            "choices": [
+              "Fall",
+              "Spring"
+            ],
+            "answer": "Fall"
+          }
+        ]
+      },
+      "reinforcement": "Weather and climate later.",
+      "day": 76,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-symbols",
+      "stage": "q3",
+      "title": "American symbols",
+      "summary": "Know the flag, bald eagle, Statue of Liberty and Liberty Bell.",
+      "prerequisites": [
+        "ss-rules"
+      ],
+      "lesson": {
+        "explanation": "Symbols stand for ideas. The U.S. flag has 50 stars (one for each state) and 13 stripes.",
+        "example": "The bald eagle is the national bird.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "How many stars are on the U.S. flag?",
+            "answer": "50"
+          },
+          {
+            "prompt": "How many stripes are on the U.S. flag?",
+            "answer": "13"
+          },
+          {
+            "prompt": "The national bird is the…",
+            "choices": [
+              "Bald eagle",
+              "Robin",
+              "Owl"
+            ],
+            "answer": "Bald eagle"
+          }
+        ]
+      },
+      "reinforcement": "U.S. history later.",
+      "day": 77,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "r-rhyme",
+      "stage": "q3",
+      "title": "Rhyming words",
+      "summary": "Hear and make rhymes.",
+      "prerequisites": [
+        "r-cvc"
+      ],
+      "lesson": {
+        "explanation": "Rhyming words end with the same sound: cat, hat, bat.",
+        "example": "cake rhymes with lake",
+        "tutorSteps": [
+          "Say the sound or pattern and show it in a word.",
+          "Child reads each word aloud; tutor marks it.",
+          "Use each word in a sentence."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: cat — hat — bat, pig — wig — dig",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word rhymes with 'dog'?",
+            "choices": [
+              "log",
+              "dig",
+              "dot"
+            ],
+            "answer": "log"
+          },
+          {
+            "prompt": "Which rhymes with 'cake'?",
+            "choices": [
+              "lake",
+              "luck",
+              "cook"
+            ],
+            "answer": "lake"
+          },
+          {
+            "prompt": "Which rhymes with 'sun'?",
+            "choices": [
+              "fun",
+              "sin",
+              "sad"
+            ],
+            "answer": "fun"
+          }
+        ]
+      },
+      "reinforcement": "Word families help spelling.",
+      "day": 78,
+      "subject": "Reading",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-length",
+      "stage": "q3",
+      "title": "Measure length",
+      "summary": "Measure with same-size units laid end to end.",
+      "prerequisites": [
+        "m-count-20"
+      ],
+      "lesson": {
+        "explanation": "Line up units with no gaps or overlaps. Count how many units long.",
+        "example": "The pencil is 6 paper clips long.",
+        "tutorSteps": [
+          "Measure objects with paper clips or cubes.",
+          "Show gaps make wrong answers.",
+          "Record lengths."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "If a crayon is 4 cubes long and a marker is 6 cubes long, how many cubes longer is the marker?",
+            "answer": "2"
+          },
+          {
+            "prompt": "When measuring, should units overlap?",
+            "choices": [
+              "Yes",
+              "No"
+            ],
+            "answer": "No"
+          },
+          {
+            "prompt": "A book is 10 paper clips long. A notebook is 7. Which is longer?",
+            "choices": [
+              "Book",
+              "Notebook"
+            ],
+            "answer": "Book"
+          },
+          {
+            "prompt": "Measure your table in hand spans. Tutor checks.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Rulers and inches/centimeters come in second grade.",
+      "day": 79,
+      "subject": "Math",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "r-sight-1",
+      "stage": "q3",
+      "title": "Sight words set 1",
+      "summary": "Read high-frequency words instantly.",
+      "prerequisites": [
+        "r-letter-sounds"
+      ],
+      "lesson": {
+        "explanation": "Sight words show up all the time. Read them by sight in under 2 seconds each.",
+        "example": "the, a, is",
+        "tutorSteps": [
+          "Flash each word card.",
+          "Slow words go in a 'practice' pile.",
+          "Re-flash the practice pile at the end."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: the",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: a",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: is",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: you",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: to",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: and",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: we",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: it",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: in",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: said",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Reviewed in every reading lesson after this.",
+      "day": 80,
+      "subject": "Reading",
+      "sightPaceSeconds": 2
+    },
+    {
+      "id": "m-order-length",
+      "stage": "q3",
+      "title": "Order by length",
+      "summary": "Put three objects in order from shortest to longest.",
+      "prerequisites": [
+        "m-length"
+      ],
+      "lesson": {
+        "explanation": "Compare two at a time. If A is longer than B and B is longer than C, A is longer than C.",
+        "example": "rope > ribbon > string",
+        "tutorSteps": [
+          "Compare three strips of paper.",
+          "Line them up at one end.",
+          "Name shortest and longest."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "A pencil is longer than a crayon. The crayon is longer than an eraser. Which is shortest?",
+            "choices": [
+              "Pencil",
+              "Crayon",
+              "Eraser"
+            ],
+            "answer": "Eraser"
+          },
+          {
+            "prompt": "A snake is longer than a worm. A worm is longer than an ant. Which is longest?",
+            "choices": [
+              "Snake",
+              "Worm",
+              "Ant"
+            ],
+            "answer": "Snake"
+          },
+          {
+            "prompt": "Order these lengths from shortest: 9, 3, 6",
+            "choices": [
+              "3, 6, 9",
+              "9, 6, 3",
+              "6, 3, 9"
+            ],
+            "answer": "3, 6, 9"
+          }
+        ]
+      },
+      "reinforcement": "Ordering returns with numbers, fractions and data.",
+      "day": 81,
+      "subject": "Math",
+      "sightPaceSeconds": 10
+    },
+    {
+      "id": "m-time",
+      "stage": "q3",
+      "title": "Tell time to the hour and half hour",
+      "summary": "Read an analog clock.",
+      "prerequisites": [
+        "m-count-120",
+        "m-skip-5"
+      ],
+      "lesson": {
+        "explanation": "The short hand shows the hour. When the long hand points to 12 it is o'clock; to 6 it is half past.",
+        "example": "Short hand on 4, long hand on 12 → 4:00",
+        "tutorSteps": [
+          "Use a toy clock.",
+          "Move the hands together.",
+          "Read times through the day."
+        ]
+      },
+      "practice": {
+        "generator": "time"
+      },
+      "reinforcement": "Quarter hours and minutes in second grade.",
+      "day": 82,
+      "subject": "Math",
+      "sightPaceSeconds": 8
+    },
+    {
+      "id": "r-sight-2",
+      "stage": "q3",
+      "title": "Sight words set 2",
+      "summary": "Read high-frequency words instantly.",
+      "prerequisites": [
+        "r-sight-1"
+      ],
+      "lesson": {
+        "explanation": "Sight words show up all the time. Read them by sight in under 2 seconds each.",
+        "example": "was, for, he",
+        "tutorSteps": [
+          "Flash each word card.",
+          "Slow words go in a 'practice' pile.",
+          "Re-flash the practice pile at the end."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: was",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: for",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: he",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: she",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: of",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: have",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: are",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: they",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: with",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: my",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Reviewed in every reading lesson after this.",
+      "day": 83,
+      "subject": "Reading",
+      "sightPaceSeconds": 2
+    },
+    {
+      "id": "s-sound",
+      "stage": "q4",
+      "title": "Sound and vibration",
+      "summary": "Sounds are made by vibrations.",
+      "prerequisites": [
+        "s-senses"
+      ],
+      "lesson": {
+        "explanation": "Sound happens when something vibrates (shakes quickly). Stronger vibrations are louder.",
+        "example": "A plucked rubber band vibrates and hums.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Sound is made by…",
+            "choices": [
+              "Vibrations",
+              "Light",
+              "Color"
+            ],
+            "answer": "Vibrations"
+          },
+          {
+            "prompt": "Stretch a rubber band over a box and pluck it. What do you see and hear?",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "A drum hit harder sounds…",
+            "choices": [
+              "Louder",
+              "Quieter"
+            ],
+            "answer": "Louder"
+          }
+        ]
+      },
+      "reinforcement": "Waves in physics later.",
+      "day": 84,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-then-now",
+      "stage": "q4",
+      "title": "Then and now",
+      "summary": "Compare life long ago and today.",
+      "prerequisites": [
+        "ss-family"
+      ],
+      "lesson": {
+        "explanation": "Life changes over time: how people travel, talk, cook and go to school.",
+        "example": "Long ago people wrote letters; now we text too.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Long ago, people often traveled by…",
+            "choices": [
+              "Horse and wagon",
+              "Airplane"
+            ],
+            "answer": "Horse and wagon"
+          },
+          {
+            "prompt": "Ask a grandparent one thing that was different when they were 6.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "History in every grade.",
+      "day": 85,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "m-money",
+      "stage": "q4",
+      "title": "Coins",
+      "summary": "Count pennies, nickels, dimes and quarters.",
+      "prerequisites": [
+        "m-skip-5",
+        "m-skip-10",
+        "m-add-2digit"
+      ],
+      "lesson": {
+        "explanation": "Penny 1¢, nickel 5¢, dime 10¢, quarter 25¢. Start counting with the biggest coins.",
+        "example": "1 dime + 2 nickels + 3 pennies = 23¢",
+        "tutorSteps": [
+          "Sort real coins.",
+          "Count biggest to smallest.",
+          "Play store."
+        ]
+      },
+      "practice": {
+        "generator": "money"
+      },
+      "reinforcement": "Dollars and decimals later.",
+      "day": 86,
+      "subject": "Math",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "r-sight-3",
+      "stage": "q4",
+      "title": "Sight words set 3",
+      "summary": "Read high-frequency words instantly.",
+      "prerequisites": [
+        "r-sight-2"
+      ],
+      "lesson": {
+        "explanation": "Sight words show up all the time. Read them by sight in under 2 seconds each.",
+        "example": "what, there, out",
+        "tutorSteps": [
+          "Flash each word card.",
+          "Slow words go in a 'practice' pile.",
+          "Re-flash the practice pile at the end."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: what",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: there",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: out",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: this",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: from",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: some",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: come",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: do",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: were",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: your",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Reviewed in every reading lesson after this.",
+      "day": 87,
+      "subject": "Reading",
+      "sightPaceSeconds": 2
+    },
+    {
+      "id": "m-data",
+      "stage": "q4",
+      "title": "Tally charts and picture graphs",
+      "summary": "Read and answer questions about simple data.",
+      "prerequisites": [
+        "m-compare-problems",
+        "m-skip-5"
+      ],
+      "lesson": {
+        "explanation": "A tally mark stands for 1; a bundle of 5 is drawn as four lines with one across.",
+        "example": "Dogs: 𝍸 ||| = 8",
+        "tutorSteps": [
+          "Survey family about favorite fruit.",
+          "Make tallies.",
+          "Ask: which has most? how many more?"
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Tally: Cats |||| Dogs |||| ||. How many dogs?",
+            "answer": "7"
+          },
+          {
+            "prompt": "Tally: Cats |||| Dogs |||| ||. How many more dogs than cats?",
+            "answer": "3"
+          },
+          {
+            "prompt": "Apples 6, Bananas 4, Grapes 9. Which is the favorite?",
+            "choices": [
+              "Apples",
+              "Bananas",
+              "Grapes"
+            ],
+            "answer": "Grapes"
+          },
+          {
+            "prompt": "Apples 6, Bananas 4, Grapes 9. How many votes in all?",
+            "answer": "19"
+          }
+        ]
+      },
+      "reinforcement": "Bar graphs and statistics later.",
+      "day": 88,
+      "subject": "Math",
+      "sightPaceSeconds": 20
+    },
+    {
+      "id": "r-sight-4",
+      "stage": "q4",
+      "title": "Sight words set 4",
+      "summary": "Read high-frequency words instantly.",
+      "prerequisites": [
+        "r-sight-3"
+      ],
+      "lesson": {
+        "explanation": "Sight words show up all the time. Read them by sight in under 2 seconds each.",
+        "example": "could, would, should",
+        "tutorSteps": [
+          "Flash each word card.",
+          "Slow words go in a 'practice' pile.",
+          "Re-flash the practice pile at the end."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: could",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: would",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: should",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: people",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: who",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: again",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: any",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: many",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: very",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: where",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Reviewed in every reading lesson after this.",
+      "day": 89,
+      "subject": "Reading",
+      "sightPaceSeconds": 2
+    },
+    {
+      "id": "w-opinion",
+      "stage": "q4",
+      "title": "Opinion writing",
+      "summary": "Tell what you think and give a reason.",
+      "prerequisites": [
+        "w-picture-sentence"
+      ],
+      "lesson": {
+        "explanation": "State your opinion, give a reason with 'because', and end with a closing.",
+        "example": "Dogs are the best pets because they love to play.",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Write: What is the best season? Give one reason with 'because'.",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which word gives a reason?",
+            "choices": [
+              "because",
+              "and",
+              "the"
+            ],
+            "answer": "because"
+          }
+        ]
+      },
+      "reinforcement": "Persuasive essays later.",
+      "day": 90,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "m-shapes-2d",
+      "stage": "q4",
+      "title": "2D shapes",
+      "summary": "Name shapes by sides and corners.",
+      "prerequisites": [],
+      "lesson": {
+        "explanation": "Triangle: 3 sides. Square: 4 equal sides. Rectangle: 4 sides, square corners. Hexagon: 6 sides.",
+        "example": "A hexagon has 6 sides and 6 corners.",
+        "tutorSteps": [
+          "Hunt for shapes in the house.",
+          "Count sides and corners.",
+          "Draw each shape."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "How many sides does a triangle have?",
+            "answer": "3"
+          },
+          {
+            "prompt": "How many sides does a hexagon have?",
+            "answer": "6"
+          },
+          {
+            "prompt": "A shape has 4 equal sides and 4 square corners. What is it?",
+            "choices": [
+              "Square",
+              "Triangle",
+              "Circle"
+            ],
+            "answer": "Square"
+          },
+          {
+            "prompt": "How many corners does a rectangle have?",
+            "answer": "4"
+          },
+          {
+            "prompt": "Which shape has no corners?",
+            "choices": [
+              "Circle",
+              "Square",
+              "Triangle"
+            ],
+            "answer": "Circle"
+          }
+        ]
+      },
+      "reinforcement": "Geometry and area later.",
+      "day": 91,
+      "subject": "Math",
+      "sightPaceSeconds": 6
+    },
+    {
+      "id": "r-sight-5",
+      "stage": "q4",
+      "title": "Sight words set 5",
+      "summary": "Read high-frequency words instantly.",
+      "prerequisites": [
+        "r-sight-4"
+      ],
+      "lesson": {
+        "explanation": "Sight words show up all the time. Read them by sight in under 2 seconds each.",
+        "example": "because, friend, once",
+        "tutorSteps": [
+          "Flash each word card.",
+          "Slow words go in a 'practice' pile.",
+          "Re-flash the practice pile at the end."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: because",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: friend",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: once",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: every",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: thought",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: through",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: know",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: around",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: before",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: after",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Reviewed in every reading lesson after this.",
+      "day": 92,
+      "subject": "Reading",
+      "sightPaceSeconds": 2
+    },
+    {
+      "id": "m-shapes-3d",
+      "stage": "q4",
+      "title": "3D shapes",
+      "summary": "Name cubes, spheres, cones, cylinders and prisms.",
+      "prerequisites": [
+        "m-shapes-2d"
+      ],
+      "lesson": {
+        "explanation": "3D shapes are solid. A cube has 6 square faces. A sphere is round like a ball.",
+        "example": "A can is a cylinder.",
+        "tutorSteps": [
+          "Collect household objects.",
+          "Sort by shape.",
+          "Count faces on a cube."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "A ball is a…",
+            "choices": [
+              "Sphere",
+              "Cube",
+              "Cone"
+            ],
+            "answer": "Sphere"
+          },
+          {
+            "prompt": "How many faces does a cube have?",
+            "answer": "6"
+          },
+          {
+            "prompt": "An ice cream cone is shaped like a…",
+            "choices": [
+              "Cone",
+              "Cylinder",
+              "Cube"
+            ],
+            "answer": "Cone"
+          },
+          {
+            "prompt": "A soup can is a…",
+            "choices": [
+              "Cylinder",
+              "Sphere",
+              "Cone"
+            ],
+            "answer": "Cylinder"
+          }
+        ]
+      },
+      "reinforcement": "Volume and surface area later.",
+      "day": 93,
+      "subject": "Math",
+      "sightPaceSeconds": 6
+    },
+    {
+      "id": "s-light",
+      "stage": "q4",
+      "title": "Light and shadows",
+      "summary": "Light lets us see; blocked light makes shadows.",
+      "prerequisites": [
+        "s-sound"
+      ],
+      "lesson": {
+        "explanation": "We need light to see. When an object blocks light, it makes a shadow.",
+        "example": "Your shadow is long in the evening.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "We need ___ to see.",
+            "choices": [
+              "Light",
+              "Sound"
+            ],
+            "answer": "Light"
+          },
+          {
+            "prompt": "A shadow forms when light is…",
+            "choices": [
+              "Blocked",
+              "Loud"
+            ],
+            "answer": "Blocked"
+          },
+          {
+            "prompt": "Use a flashlight to make a shadow puppet.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Light and optics later.",
+      "day": 94,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "r-fluency",
+      "stage": "q4",
+      "title": "Reading fluency",
+      "summary": "Read a short passage smoothly and with expression.",
+      "prerequisites": [
+        "r-sight-2",
+        "r-cvc"
+      ],
+      "lesson": {
+        "explanation": "Fluent reading sounds like talking: smooth, not too fast, with feeling at ! and ?",
+        "example": "\"Look out!\" said the cat.",
+        "tutorSteps": [
+          "Model reading a sentence with expression.",
+          "Child reads it back.",
+          "Re-read the passage three times; time the last read."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Read aloud: The big dog ran to the park. He saw a red ball.",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: Can you see the bird in the tree? It is singing!",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Read aloud: We like to play in the rain. Then we jump in the mud.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Repeated reading builds speed for all later reading.",
+      "day": 95,
+      "subject": "Reading",
+      "sightPaceSeconds": 30
+    },
+    {
+      "id": "m-halves-fourths",
+      "stage": "q4",
+      "title": "Halves and fourths",
+      "summary": "Split shapes into equal parts.",
+      "prerequisites": [
+        "m-shapes-2d"
+      ],
+      "lesson": {
+        "explanation": "Halves: 2 equal parts. Fourths (quarters): 4 equal parts. More parts means smaller parts.",
+        "example": "A pizza cut into 4 equal slices shows fourths.",
+        "tutorSteps": [
+          "Fold paper into halves and fourths.",
+          "Cut a sandwich into equal parts.",
+          "Compare a half and a fourth."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "How many equal parts make halves?",
+            "answer": "2"
+          },
+          {
+            "prompt": "How many equal parts make fourths?",
+            "answer": "4"
+          },
+          {
+            "prompt": "Which piece is bigger?",
+            "choices": [
+              "One half",
+              "One fourth"
+            ],
+            "answer": "One half"
+          },
+          {
+            "prompt": "A quarter of a pizza is the same as one…",
+            "choices": [
+              "Fourth",
+              "Half",
+              "Whole"
+            ],
+            "answer": "Fourth"
+          },
+          {
+            "prompt": "Two halves make one…",
+            "choices": [
+              "Whole",
+              "Fourth",
+              "Third"
+            ],
+            "answer": "Whole"
+          }
+        ]
+      },
+      "reinforcement": "Fractions in third grade build directly on this.",
+      "day": 96,
+      "subject": "Math",
+      "sightPaceSeconds": 6
+    },
+    {
+      "id": "r-story-elements",
+      "stage": "q4",
+      "title": "Characters and setting",
+      "summary": "Name who is in a story and where it happens.",
+      "prerequisites": [
+        "r-fluency"
+      ],
+      "lesson": {
+        "explanation": "Characters are the people or animals in a story. The setting is where and when it happens.",
+        "example": "In 'The Three Little Pigs', characters: pigs and wolf; setting: the countryside.",
+        "tutorSteps": [
+          "Read a short story together.",
+          "Ask who and where.",
+          "Draw the setting."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Story: Max the cat napped on the warm porch. Who is the character?",
+            "choices": [
+              "Max",
+              "the porch",
+              "the sun"
+            ],
+            "answer": "Max"
+          },
+          {
+            "prompt": "Story: Max the cat napped on the warm porch. What is the setting?",
+            "choices": [
+              "the porch",
+              "Max",
+              "a nap"
+            ],
+            "answer": "the porch"
+          },
+          {
+            "prompt": "Who are the characters in a story?",
+            "choices": [
+              "The people or animals in it",
+              "Where it happens",
+              "The title"
+            ],
+            "answer": "The people or animals in it"
+          }
+        ]
+      },
+      "reinforcement": "Story elements return in every grade.",
+      "day": 97,
+      "subject": "Reading",
+      "sightPaceSeconds": 20
+    },
+    {
+      "id": "m-equal-groups",
+      "stage": "q4",
+      "title": "Equal groups (challenge)",
+      "summary": "See multiplication as equal groups.",
+      "prerequisites": [
+        "m-skip-2",
+        "m-skip-5",
+        "m-doubles"
+      ],
+      "lesson": {
+        "explanation": "3 groups of 4 is 4 + 4 + 4 = 12. Skip counting finds the total fast.",
+        "example": "2 groups of 5 = 10",
+        "tutorSteps": [
+          "Make equal groups of cubes.",
+          "Skip count the groups.",
+          "Write as repeated addition."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "3 groups of 2 = ?",
+            "answer": "6"
+          },
+          {
+            "prompt": "2 groups of 5 = ?",
+            "answer": "10"
+          },
+          {
+            "prompt": "4 groups of 3 = ?",
+            "answer": "12"
+          },
+          {
+            "prompt": "5 groups of 2 = ?",
+            "answer": "10"
+          },
+          {
+            "prompt": "3 groups of 10 = ?",
+            "answer": "30"
+          },
+          {
+            "prompt": "4 + 4 + 4 is how many groups of 4?",
+            "answer": "3"
+          }
+        ]
+      },
+      "reinforcement": "Multiplication in second and third grade.",
+      "day": 98,
+      "subject": "Math",
+      "sightPaceSeconds": 8
+    },
+    {
+      "id": "r-sequence",
+      "stage": "q4",
+      "title": "Beginning, middle, end",
+      "summary": "Retell events in order.",
+      "prerequisites": [
+        "r-story-elements"
+      ],
+      "lesson": {
+        "explanation": "Stories happen in order. Use first, next, then, last to retell.",
+        "example": "First the seed is planted, next it sprouts, last it flowers.",
+        "tutorSteps": [
+          "Read a story.",
+          "Put picture cards in order.",
+          "Retell with first/next/then/last."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Order: (A) eat the cake (B) bake the cake (C) mix the batter. What comes first?",
+            "choices": [
+              "C",
+              "B",
+              "A"
+            ],
+            "answer": "C"
+          },
+          {
+            "prompt": "Which word tells the end?",
+            "choices": [
+              "Last",
+              "First",
+              "Next"
+            ],
+            "answer": "Last"
+          },
+          {
+            "prompt": "Retell your favorite book using first, next, then, last.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Used in writing stories (narratives).",
+      "day": 99,
+      "subject": "Reading",
+      "sightPaceSeconds": 20
+    },
+    {
+      "id": "w-narrative",
+      "stage": "q4",
+      "title": "Write a story",
+      "summary": "Write a short story with a beginning, middle and end.",
+      "prerequisites": [
+        "w-picture-sentence",
+        "r-sequence"
+      ],
+      "lesson": {
+        "explanation": "Tell what happened first, next and last. Use words like first, then, finally.",
+        "example": "First we went to the zoo. Then we saw a lion. Finally we ate ice cream.",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Write 3 sentences about something you did: first, then, finally.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Story writing every year.",
+      "day": 100,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "ss-timeline",
+      "stage": "q4",
+      "title": "Timelines",
+      "summary": "Put events in order on a timeline.",
+      "prerequisites": [
+        "ss-then-now",
+        "r-sequence"
+      ],
+      "lesson": {
+        "explanation": "A timeline shows events in the order they happened, from first to last.",
+        "example": "Baby → toddler → first grade",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Make a timeline of your life with 4 events.",
+            "mode": "tutor"
+          },
+          {
+            "prompt": "Which came first?",
+            "choices": [
+              "Being a baby",
+              "Starting first grade"
+            ],
+            "answer": "Being a baby"
+          }
+        ]
+      },
+      "reinforcement": "Uses sequencing from reading.",
+      "day": 101,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "w-how-to",
+      "stage": "q4",
+      "title": "How-to writing",
+      "summary": "Write steps to do something.",
+      "prerequisites": [
+        "w-narrative"
+      ],
+      "lesson": {
+        "explanation": "Name the topic, list steps in order with first, next, last.",
+        "example": "How to brush teeth: First put on toothpaste. Next brush. Last rinse.",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Write 3 steps for making a sandwich.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Informational writing later.",
+      "day": 102,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "m-mult-5",
+      "stage": "q4",
+      "title": "Multiplication facts to 5 × 5 (challenge)",
+      "summary": "Multiply small numbers at sight pace.",
+      "prerequisites": [
+        "m-equal-groups"
+      ],
+      "lesson": {
+        "explanation": "× means 'groups of'. 3 × 4 means 3 groups of 4.",
+        "example": "4 × 5 = 20",
+        "tutorSteps": [
+          "Build arrays with cubes.",
+          "Skip count rows.",
+          "Flash practice."
+        ]
+      },
+      "practice": {
+        "generator": "mul",
+        "params": {
+          "max": 5
+        }
+      },
+      "reinforcement": "Full times tables in third grade.",
+      "day": 103,
+      "subject": "Math",
+      "sightPaceSeconds": 5
+    },
+    {
+      "id": "s-materials",
+      "stage": "q4",
+      "title": "Materials",
+      "summary": "Sort objects by what they are made of.",
+      "prerequisites": [
+        "s-senses"
+      ],
+      "lesson": {
+        "explanation": "Objects are made of materials like wood, metal, plastic, glass and cloth. Materials have properties: hard, soft, bendy, clear.",
+        "example": "A window is glass — it is clear.",
+        "tutorSteps": [
+          "Talk about it with a real object or picture.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "A spoon is often made of…",
+            "choices": [
+              "Metal",
+              "Cloth"
+            ],
+            "answer": "Metal"
+          },
+          {
+            "prompt": "Which is soft?",
+            "choices": [
+              "Cotton",
+              "Rock",
+              "Glass"
+            ],
+            "answer": "Cotton"
+          },
+          {
+            "prompt": "Which can you see through?",
+            "choices": [
+              "Glass",
+              "Wood"
+            ],
+            "answer": "Glass"
+          }
+        ]
+      },
+      "reinforcement": "Matter and chemistry later.",
+      "day": 104,
+      "subject": "Science",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "ss-citizen",
+      "stage": "q4",
+      "title": "Being a good citizen",
+      "summary": "Show kindness, honesty and responsibility.",
+      "prerequisites": [
+        "ss-rules",
+        "ss-helpers"
+      ],
+      "lesson": {
+        "explanation": "Good citizens follow rules, help others, tell the truth and take care of their community.",
+        "example": "Picking up litter at the park helps everyone.",
+        "tutorSteps": [
+          "Talk about it using the child's own life.",
+          "Do the small activity.",
+          "Ask the check questions."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Which is being a good citizen?",
+            "choices": [
+              "Picking up litter",
+              "Breaking a rule"
+            ],
+            "answer": "Picking up litter"
+          },
+          {
+            "prompt": "Name one way you can help at home this week.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Civics and community service.",
+      "day": 105,
+      "subject": "Social Studies",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "r-main-idea",
+      "stage": "q4",
+      "title": "Main idea",
+      "summary": "Say what a passage is mostly about.",
+      "prerequisites": [
+        "r-sequence"
+      ],
+      "lesson": {
+        "explanation": "The main idea is the big point. Details tell more about it.",
+        "example": "Bees make honey. Bees help flowers. Bees live in hives. → Main idea: facts about bees.",
+        "tutorSteps": [
+          "Read a short nonfiction paragraph.",
+          "Ask: what is this mostly about?",
+          "Find two details."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Frogs can jump far. Frogs eat bugs. Frogs live near water. What is this mostly about?",
+            "choices": [
+              "Frogs",
+              "Bugs",
+              "Water"
+            ],
+            "answer": "Frogs"
+          },
+          {
+            "prompt": "Snow is cold. We build snowmen. We sled down hills. Main idea?",
+            "choices": [
+              "Fun in the snow",
+              "Hills",
+              "Cold drinks"
+            ],
+            "answer": "Fun in the snow"
+          }
+        ]
+      },
+      "reinforcement": "Summarizing in every later grade.",
+      "day": 106,
+      "subject": "Reading",
+      "sightPaceSeconds": 20
+    },
+    {
+      "id": "m-div-5",
+      "stage": "q4",
+      "title": "Sharing equally (challenge)",
+      "summary": "Divide small numbers by sharing.",
+      "prerequisites": [
+        "m-mult-5"
+      ],
+      "lesson": {
+        "explanation": "÷ means share equally. 12 ÷ 3: share 12 into 3 groups → 4 each. Think 3 × ? = 12.",
+        "example": "10 ÷ 2 = 5",
+        "tutorSteps": [
+          "Share snacks into equal plates.",
+          "Connect to multiplication.",
+          "Practice."
+        ]
+      },
+      "practice": {
+        "generator": "div",
+        "params": {
+          "max": 5
+        }
+      },
+      "reinforcement": "Division and fractions later.",
+      "day": 107,
+      "subject": "Math",
+      "sightPaceSeconds": 6
+    },
+    {
+      "id": "w-journal",
+      "stage": "q4",
+      "title": "Daily journal",
+      "summary": "Write a few sentences about your day.",
+      "prerequisites": [
+        "w-questions",
+        "w-spell-cvc"
+      ],
+      "lesson": {
+        "explanation": "Write the date, then two to four sentences. Check capitals, spaces and end marks.",
+        "example": "Today I played tag. I was fast!",
+        "tutorSteps": [
+          "Model it on paper while talking through it.",
+          "Child tries it.",
+          "Check with the checklist and fix one thing."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Write 2–4 sentences about today. Tutor checks capitals, spaces, end marks.",
+            "mode": "tutor"
+          }
+        ]
+      },
+      "reinforcement": "Daily writing keeps all skills fresh.",
+      "day": 108,
+      "subject": "Writing",
+      "sightPaceSeconds": 60
+    },
+    {
+      "id": "r-text-features",
+      "stage": "q4",
+      "title": "Nonfiction text features",
+      "summary": "Use titles, pictures, captions and labels.",
+      "prerequisites": [
+        "r-main-idea"
+      ],
+      "lesson": {
+        "explanation": "Nonfiction gives facts. Titles tell the topic; captions explain pictures; labels name parts.",
+        "example": "A label arrow points to a bird's wing.",
+        "tutorSteps": [
+          "Look at a nonfiction book.",
+          "Find a title, caption and label.",
+          "Ask what each one tells you."
+        ]
+      },
+      "practice": {
+        "items": [
+          {
+            "prompt": "Words under a picture that explain it are called a…",
+            "choices": [
+              "Caption",
+              "Title",
+              "Label"
+            ],
+            "answer": "Caption"
+          },
+          {
+            "prompt": "Does nonfiction tell facts or make-believe?",
+            "choices": [
+              "Facts",
+              "Make-believe"
+            ],
+            "answer": "Facts"
+          },
+          {
+            "prompt": "A word with an arrow pointing to part of a picture is a…",
+            "choices": [
+              "Label",
+              "Caption",
+              "Title"
+            ],
+            "answer": "Label"
+          }
+        ]
+      },
+      "reinforcement": "Research and science reading.",
+      "day": 109,
+      "subject": "Reading",
+      "sightPaceSeconds": 15
+    },
+    {
+      "id": "m-sight-sprint",
+      "stage": "q4",
+      "title": "Sight math sprint",
+      "summary": "Mixed facts to 20 at sight pace.",
+      "prerequisites": [
+        "m-add-20",
+        "m-sub-20"
+      ],
+      "lesson": {
+        "explanation": "Mixed review of all addition facts. Goal: every answer in under 3 seconds.",
+        "example": "8 + 7 = 15",
+        "tutorSteps": [
+          "Warm up with make-ten.",
+          "Do a timed sprint.",
+          "Note any slow facts to review."
+        ]
+      },
+      "practice": {
+        "generator": "add",
+        "params": {
+          "max": 10
+        }
+      },
+      "reinforcement": "Keeps facts instant for all later math.",
+      "day": 110,
+      "subject": "Math",
+      "sightPaceSeconds": 3
+    }
+  ]
+}

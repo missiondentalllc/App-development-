@@ -1,0 +1,31 @@
+# XcodeGen spec. On a Mac:  brew install xcodegen && cd apps/FirstGradeTutor && xcodegen
+# then open FirstGradeTutor.xcodeproj in Xcode.
+name: FirstGradeTutor
+options:
+  bundleIdPrefix: com.missiondentalimplants
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  TutorCore:
+    path: ../../packages/TutorCore
+targets:
+  FirstGradeTutor:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      - path: ../../content/first-grade/curriculum.json
+        buildPhase: resources
+    dependencies:
+      - package: TutorCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.missiondentalimplants.firstgradetutor
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: "First Grade Tutor"
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
