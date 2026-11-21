@@ -5,6 +5,7 @@ Learning apps for iPhone and iPad, built on one shared engine.
 | App | What it does | Status |
 |---|---|---|
 | **First Grade Tutor** | A full first-grade year in 110 daily lessons (math, reading, writing, science, social studies). Built for a parent or hired tutor to run one lesson a day. | v0.1 — content complete, app screens built, not yet compiled |
+| **Movie Vault** | Browse every movie (poster, genre, release date, popularity, box office), watch for upcoming releases, rate movies and get recommendations from your ratings. Web app, works on iPhone via Add to Home Screen. | v0.1 — working, needs a free TMDB key |
 | **Math Ladder** | Adaptive math from first-grade counting through doctoral research topics (33 levels, 207 skills). Finds the biggest gaps and fixes them first. | v0.1 — full skill map, app screens built, not yet compiled |
 
 ## How the learning works
@@ -24,6 +25,7 @@ Both apps share the same rules (in `packages/TutorCore`):
 
 ```
 apps/
+  MovieVault/             Movie browser + recommendations (web app, open index.html)
   FirstGradeTutor/        iOS app (SwiftUI) + project.yml for XcodeGen
   MathLadder/             iOS app (SwiftUI) + project.yml for XcodeGen
 packages/

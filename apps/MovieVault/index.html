@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Movie Vault</title>
+  <meta name="theme-color" content="#14161c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Movie Vault">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎬 Movie Vault</h1>
+    <nav class="tabs" role="tablist">
+      <button data-tab="browse" class="active">Browse</button>
+      <button data-tab="upcoming">Coming Soon</button>
+      <button data-tab="ratings">My Ratings</button>
+      <button data-tab="foryou">For You</button>
+      <button data-tab="settings">Settings</button>
+    </nav>
+  </header>
+
+  <div id="alerts" class="alerts" hidden></div>
+
+  <main>
+    <!-- BROWSE -->
+    <section id="tab-browse" class="tab active">
+      <div class="controls">
+        <input id="q" type="search" placeholder="Search any movie by title…" autocomplete="off">
+        <select id="sort" title="Sort by">
+          <option value="popularity.desc">Most popular</option>
+          <option value="revenue.desc">Highest grossing</option>
+          <option value="primary_release_date.desc">Newest release</option>
+          <option value="primary_release_date.asc">Oldest release</option>
+          <option value="title.asc">Title A–Z</option>
+          <option value="title.desc">Title Z–A</option>
+          <option value="vote_average.desc">Best rated</option>
+        </select>
+        <select id="genre" title="Genre"><option value="">All genres</option></select>
+        <input id="yearFrom" type="number" min="1874" max="2100" placeholder="From year">
+        <input id="yearTo" type="number" min="1874" max="2100" placeholder="To year">
+        <label class="check"><input id="releasedOnly" type="checkbox" checked> Released only</label>
+        <div class="viewtoggle">
+          <button id="viewGrid" class="active" title="Poster grid">▦</button>
+          <button id="viewTable" title="Table">☰</button>
+        </div>
+      </div>
+      <p id="browseInfo" class="info"></p>
+      <div id="browseResults"></div>
+      <div id="browseSentinel" class="sentinel"></div>
+    </section>
+
+    <!-- UPCOMING -->
+    <section id="tab-upcoming" class="tab">
+      <h2>🔔 Movies you're watching for</h2>
+      <p class="info">Tap the bell on any upcoming movie. You'll get an alert here (and a phone notification if you allow it in Settings) once it's released.</p>
+      <div id="followedList" class="grid"></div>
+      <h2>🆕 Released in the last 14 days</h2>
+      <div id="newReleases" class="grid"></div>
+      <h2>📅 Coming soon <small id="upcomingCount"></small></h2>
+      <div id="upcomingList" class="grid"></div>
+      <div class="center"><button id="upcomingMore" class="btn">Load more</button></div>
+    </section>
+
+    <!-- RATINGS -->
+    <section id="tab-ratings" class="tab">
+      <div class="controls">
+        <select id="ratingsSort">
+          <option value="ratedAt">Recently rated</option>
+          <option value="stars">Highest stars</option>
+          <option value="title">Title A–Z</option>
+          <option value="date">Release date</option>
+        </select>
+        <button id="exportBtn" class="btn">Export backup</button>
+        <label class="btn">Import backup<input id="importFile" type="file" accept="application/json" hidden></label>
+      </div>
+      <p id="ratingsInfo" class="info"></p>
+      <div id="ratingsList" class="grid"></div>
+    </section>
+
+    <!-- FOR YOU -->
+    <section id="tab-foryou" class="tab">
+      <div class="controls">
+        <button id="recsRefresh" class="btn primary">Refresh recommendations</button>
+        <span id="recsStatus" class="info"></span>
+      </div>
+      <div id="tasteProfile" class="taste"></div>
+      <div id="recsList" class="grid"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="tab-settings" class="tab">
+      <div class="card settings">
+        <h2>Movie database key</h2>
+        <p>Movie Vault pulls every movie ever released (over a million titles) from The Movie Database (TMDB). It needs a free key:</p>
+        <ol>
+          <li>Make a free account at <a href="https://www.themoviedb.org/signup" target="_blank" rel="noopener">themoviedb.org</a>.</li>
+          <li>Go to <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">Settings → API</a> and request a key (choose "Personal use").</li>
+          <li>Copy the <b>API Key</b> or the <b>API Read Access Token</b> and paste it below.</li>
+        </ol>
+        <div class="row">
+          <input id="apiKey" type="password" placeholder="Paste TMDB API key or read access token" autocomplete="off">
+          <button id="saveKey" class="btn primary">Save &amp; test</button>
+        </div>
+        <p id="keyStatus" class="info"></p>
+        <p class="small">The key stays on this device only.</p>
+      </div>
+      <div class="card settings">
+        <h2>Region &amp; alerts</h2>
+        <div class="row">
+          <label>Release dates for
+            <select id="region">
+              <option value="US">United States</option><option value="GB">United Kingdom</option>
+              <option value="CA">Canada</option><option value="AU">Australia</option>
+              <option value="">Worldwide</option>
+            </select>
+          </label>
+          <button id="notifyBtn" class="btn">Allow release notifications</button>
+        </div>
+      </div>
+      <div class="card settings">
+        <h2>Your data</h2>
+        <p id="dataSummary"></p>
+        <button id="clearData" class="btn danger">Erase all ratings and alerts</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="modal">
+    <button class="close" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalBody"></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
