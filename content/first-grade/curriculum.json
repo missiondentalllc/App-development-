@@ -2,6 +2,12 @@
   "id": "first-grade",
   "title": "First Grade Tutor",
   "version": 1,
+  "glossary": [
+    {
+      "term": "CVC",
+      "meaning": "consonant-vowel-consonant: a three-letter word with a vowel in the middle, like cat, dog or sun"
+    }
+  ],
   "stages": [
     {
       "id": "q1",
@@ -152,7 +158,7 @@
         "explanation": "Numbers follow a pattern: after 9 comes a new ten. 29 → 30, 99 → 100, 109 → 110.",
         "example": "Just after 59 is 60. Just before 100 is 99.",
         "tutorSteps": [
-          "Count aloud from a starting number other than 1 (e.g. 47).",
+          "Count aloud from a starting number other than 1 (for example, 47).",
           "Use a 120 chart and point.",
           "Quiz: just before / just after."
         ]
@@ -785,7 +791,7 @@
     {
       "id": "r-cvc",
       "stage": "q1",
-      "title": "Blend CVC words fast",
+      "title": "Blend CVC (consonant-vowel-consonant) words fast",
       "summary": "Blend consonant-vowel-consonant words smoothly.",
       "prerequisites": [
         "r-short-e"
@@ -2788,7 +2794,7 @@
     {
       "id": "w-spell-cvc",
       "stage": "q3",
-      "title": "Spell CVC words",
+      "title": "Spell CVC (consonant-vowel-consonant) words",
       "summary": "Spell short-vowel words by sound.",
       "prerequisites": [
         "w-letters",

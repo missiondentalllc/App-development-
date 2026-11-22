@@ -19,7 +19,7 @@ public struct SkillMapView: View {
                 Section {
                     ForEach(section.skills) { skill in
                         NavigationLink {
-                            ScrollView { LessonCard(skill: skill).padding() }
+                            ScrollView { LessonCard(skill: skill, curriculum: curriculum).padding() }
                                 .navigationTitle(skill.title)
                         } label: {
                             row(skill)

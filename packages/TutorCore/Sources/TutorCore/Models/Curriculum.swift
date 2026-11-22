@@ -8,13 +8,29 @@ public struct Curriculum: Codable, Identifiable, Hashable {
     public let version: Int
     public let stages: [Stage]
     public let skills: [Skill]
+    /// Abbreviations used in this curriculum and what they mean (LCM, SD, sin…).
+    public let glossary: [GlossaryEntry]?
 
-    public init(id: String, title: String, version: Int, stages: [Stage], skills: [Skill]) {
+    public init(id: String, title: String, version: Int, stages: [Stage], skills: [Skill],
+                glossary: [GlossaryEntry]? = nil) {
         self.id = id
         self.title = title
         self.version = version
         self.stages = stages
         self.skills = skills
+        self.glossary = glossary
+    }
+
+    /// Glossary entries whose short form appears in any of the texts, in glossary order.
+    public func shortForms(in texts: [String?]) -> [GlossaryEntry] {
+        let text = texts.compactMap { $0 }.joined(separator: "\n")
+        guard !text.isEmpty else { return [] }
+        let range = NSRange(text.startIndex..., in: text)
+        return (glossary ?? []).filter { entry in
+            let pattern = "(?<![A-Za-z-])" + NSRegularExpression.escapedPattern(for: entry.term) + "s?(?![A-Za-z-])"
+            guard let re = try? NSRegularExpression(pattern: pattern) else { return false }
+            return re.firstMatch(in: text, range: range) != nil
+        }
     }
 
     public func skill(_ id: String) -> Skill? { skills.first { $0.id == id } }
@@ -22,6 +38,17 @@ public struct Curriculum: Codable, Identifiable, Hashable {
     public func skills(in stageId: String) -> [Skill] { skills.filter { $0.stage == stageId } }
 
     public func stage(_ id: String) -> Stage? { stages.first { $0.id == id } }
+}
+
+/// One abbreviation and its plain-English meaning.
+public struct GlossaryEntry: Codable, Hashable {
+    public let term: String
+    public let meaning: String
+
+    public init(term: String, meaning: String) {
+        self.term = term
+        self.meaning = meaning
+    }
 }
 
 /// A band of the curriculum: a grade, a course, or a level.

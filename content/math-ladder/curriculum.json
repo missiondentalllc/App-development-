@@ -2,6 +2,240 @@
   "id": "math-ladder",
   "title": "Math Ladder",
   "version": 1,
+  "glossary": [
+    {
+      "term": "gcd",
+      "meaning": "greatest common divisor: the largest whole number that divides both numbers with no remainder. gcd(12, 18) = 6"
+    },
+    {
+      "term": "lcm",
+      "meaning": "least common multiple: the smallest number that both numbers divide into with no remainder. lcm(4, 6) = 12"
+    },
+    {
+      "term": "mod",
+      "meaning": "modulo: the remainder after dividing. 17 mod 5 = 2, because 17 = 3 × 5 + 2"
+    },
+    {
+      "term": "log",
+      "meaning": "logarithm: the power you raise the base to. log base 2 of 8 = 3, because 2 × 2 × 2 = 8"
+    },
+    {
+      "term": "ln",
+      "meaning": "natural logarithm: a logarithm whose base is the number e (about 2.718)"
+    },
+    {
+      "term": "SOH-CAH-TOA",
+      "meaning": "a memory aid: Sine = Opposite ÷ Hypotenuse, Cosine = Adjacent ÷ Hypotenuse, Tangent = Opposite ÷ Adjacent"
+    },
+    {
+      "term": "sin",
+      "meaning": "sine: in a right triangle, the side opposite the angle divided by the hypotenuse"
+    },
+    {
+      "term": "cos",
+      "meaning": "cosine: in a right triangle, the side next to the angle divided by the hypotenuse"
+    },
+    {
+      "term": "tan",
+      "meaning": "tangent: in a right triangle, the side opposite the angle divided by the side next to it"
+    },
+    {
+      "term": "opp",
+      "meaning": "opposite: the side across from the angle"
+    },
+    {
+      "term": "adj",
+      "meaning": "adjacent: the side next to the angle that is not the hypotenuse"
+    },
+    {
+      "term": "hyp",
+      "meaning": "hypotenuse: the longest side of a right triangle, across from the right angle"
+    },
+    {
+      "term": "SSS",
+      "meaning": "Side-Side-Side: all three sides match, so the triangles are congruent (same size and shape)"
+    },
+    {
+      "term": "SAS",
+      "meaning": "Side-Angle-Side: two sides and the angle between them match, so the triangles are congruent"
+    },
+    {
+      "term": "ASA",
+      "meaning": "Angle-Side-Angle: two angles and the side between them match, so the triangles are congruent"
+    },
+    {
+      "term": "AAS",
+      "meaning": "Angle-Angle-Side: two angles and a side not between them match, so the triangles are congruent"
+    },
+    {
+      "term": "SSA",
+      "meaning": "Side-Side-Angle: two sides and an angle not between them. This does NOT prove triangles are congruent"
+    },
+    {
+      "term": "d/dx",
+      "meaning": "the derivative with respect to x: how fast something changes as x changes"
+    },
+    {
+      "term": "f′",
+      "meaning": "f prime: the derivative of f, how fast f is changing"
+    },
+    {
+      "term": "dx",
+      "meaning": "a tiny step in x. In an integral it marks x as the variable being added up"
+    },
+    {
+      "term": "dy",
+      "meaning": "a tiny step in y. In an integral it marks y as the variable being added up"
+    },
+    {
+      "term": "dt",
+      "meaning": "a tiny step in t (often time). In an integral it marks t as the variable being added up"
+    },
+    {
+      "term": "du",
+      "meaning": "a tiny step in u, the new variable after a substitution"
+    },
+    {
+      "term": "dz",
+      "meaning": "a tiny step in z (or along a path in the complex plane)"
+    },
+    {
+      "term": "dA",
+      "meaning": "a tiny piece of area"
+    },
+    {
+      "term": "lim",
+      "meaning": "limit: the value something gets closer and closer to"
+    },
+    {
+      "term": "iff",
+      "meaning": "if and only if: each statement is true exactly when the other one is"
+    },
+    {
+      "term": "det",
+      "meaning": "determinant: a single number computed from a square matrix. For [[a, b], [c, d]] it is ad − bc"
+    },
+    {
+      "term": "dim",
+      "meaning": "dimension: the number of independent directions in a space"
+    },
+    {
+      "term": "div",
+      "meaning": "divergence: how much a flow spreads out from a point"
+    },
+    {
+      "term": "max",
+      "meaning": "maximum: the largest value"
+    },
+    {
+      "term": "min",
+      "meaning": "minimum: the smallest value"
+    },
+    {
+      "term": "sup",
+      "meaning": "supremum: the smallest number that is greater than or equal to every value in the set"
+    },
+    {
+      "term": "ker",
+      "meaning": "kernel: everything a map sends to zero (the identity)"
+    },
+    {
+      "term": "im",
+      "meaning": "image: everything a map actually reaches"
+    },
+    {
+      "term": "Re",
+      "meaning": "real part of a complex number: for 3 + 4i it is 3"
+    },
+    {
+      "term": "Im",
+      "meaning": "imaginary part of a complex number: for 3 + 4i it is 4"
+    },
+    {
+      "term": "Var",
+      "meaning": "variance: the average squared distance of the data from the mean"
+    },
+    {
+      "term": "SD",
+      "meaning": "standard deviation: the typical distance of the data from the mean (the square root of the variance)"
+    },
+    {
+      "term": "MLE",
+      "meaning": "maximum likelihood estimate: the value that makes the data you actually saw most likely"
+    },
+    {
+      "term": "CLT",
+      "meaning": "Central Limit Theorem: averages of many random samples follow a bell-shaped (normal) curve"
+    },
+    {
+      "term": "ODE",
+      "meaning": "ordinary differential equation: an equation involving the derivatives of a function of one variable"
+    },
+    {
+      "term": "PDE",
+      "meaning": "partial differential equation: an equation involving derivatives in several variables"
+    },
+    {
+      "term": "SDE",
+      "meaning": "stochastic differential equation: a differential equation that includes random noise"
+    },
+    {
+      "term": "LU",
+      "meaning": "lower-upper: writing a matrix as a lower-triangular matrix times an upper-triangular matrix"
+    },
+    {
+      "term": "SVD",
+      "meaning": "singular value decomposition: writing any matrix as rotate, stretch, rotate (A = UΣVᵀ)"
+    },
+    {
+      "term": "PID",
+      "meaning": "principal ideal domain: a number system where every ideal comes from a single element"
+    },
+    {
+      "term": "GL",
+      "meaning": "general linear group: all invertible matrices of a given size"
+    },
+    {
+      "term": "SL",
+      "meaning": "special linear group: matrices whose determinant is 1"
+    },
+    {
+      "term": "SO",
+      "meaning": "special orthogonal group: the rotations"
+    },
+    {
+      "term": "SU",
+      "meaning": "special unitary group: complex matrices that preserve length and have determinant 1"
+    },
+    {
+      "term": "Gal",
+      "meaning": "Galois group: the symmetries of the roots of a polynomial"
+    },
+    {
+      "term": "Hom",
+      "meaning": "homomorphisms: the maps that preserve the structure"
+    },
+    {
+      "term": "ℤ",
+      "meaning": "the integers (…, −2, −1, 0, 1, 2, …). ℤₙ means the numbers 0 to n − 1 with clock arithmetic"
+    },
+    {
+      "term": "ZFC",
+      "meaning": "Zermelo–Fraenkel set theory with the axiom of Choice: the standard rules that most of mathematics is built on"
+    },
+    {
+      "term": "NP",
+      "meaning": "nondeterministic polynomial time: problems whose answers can be checked quickly, even if finding them may be slow"
+    },
+    {
+      "term": "BSD",
+      "meaning": "Birch and Swinnerton-Dyer: an unsolved conjecture about rational points on elliptic curves"
+    },
+    {
+      "term": "CRT",
+      "meaning": "Chinese Remainder Theorem: a set of remainders for different divisors pins down one number"
+    }
+  ],
   "stages": [
     {
       "id": "g1",
@@ -148,7 +382,7 @@
       "title": "Number Theory",
       "order": 21,
       "level": "Upper undergraduate",
-      "description": "Divisibility, modular arithmetic, Fermat and Euler, CRT, primes"
+      "description": "Divisibility, modular arithmetic, Fermat and Euler, Chinese Remainder Theorem, primes"
     },
     {
       "id": "analysis",
@@ -3655,7 +3889,7 @@
     {
       "id": "la-svd",
       "stage": "linalg",
-      "title": "Diagonalization and SVD",
+      "title": "Diagonalization and SVD (singular value decomposition)",
       "summary": "A = PDP⁻¹ when there are n independent eigenvectors.",
       "prerequisites": [
         "la-eigen",
@@ -4171,7 +4405,7 @@
     {
       "id": "pr-limit-theorems",
       "stage": "probability",
-      "title": "Law of large numbers and CLT",
+      "title": "Law of large numbers and the Central Limit Theorem",
       "summary": "Sample means converge to the true mean; standardized sums become approximately normal.",
       "prerequisites": [
         "pr-distributions",
@@ -6158,7 +6392,7 @@
     {
       "id": "pde-classification",
       "stage": "pde",
-      "title": "The three classical PDEs",
+      "title": "The three classical PDEs (partial differential equations)",
       "summary": "Laplace (elliptic), heat (parabolic), wave (hyperbolic) model equilibrium, diffusion and waves.",
       "prerequisites": [
         "de-second-order",

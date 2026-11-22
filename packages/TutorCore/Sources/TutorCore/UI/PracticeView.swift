@@ -79,6 +79,7 @@ public struct PracticeView: View {
                 .font(.system(size: 34, weight: .semibold, design: .rounded))
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.5)
+            ShortFormsBox(entries: session.curriculum.shortForms(in: [q.prompt] + (q.choices ?? [])))
             if let choices = q.choices {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))], spacing: 12) {
                     ForEach(choices, id: \.self) { choice in
@@ -107,7 +108,28 @@ public struct PracticeView: View {
                         .multilineTextAlignment(.center)
                         #if os(iOS)
                         .keyboardType(.numbersAndPunctuation)
-                        #endif
+                        /// "What the short forms mean": shown wherever an abbreviation appears.
+public struct ShortFormsBox: View {
+    public let entries: [GlossaryEntry]
+
+    public init(entries: [GlossaryEntry]) { self.entries = entries }
+
+    public var body: some View {
+        if !entries.isEmpty {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("What the short forms mean").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                ForEach(entries, id: \.term) { entry in
+                    (Text(entry.term).bold() + Text("  " + entry.meaning).foregroundStyle(.secondary))
+                        .font(.callout)
+                }
+            }
+            .padding(10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.secondary.opacity(0.4), style: StrokeStyle(lineWidth: 1, dash: [4])))
+        }
+    }
+}
+#endif
                         .onSubmit(send)
                     Button("Check", action: send).buttonStyle(.borderedProminent).font(.title2)
                 }
@@ -133,7 +155,10 @@ public struct PracticeView: View {
             }
             Text(String(format: "%.1f seconds", fb.seconds)).foregroundStyle(.secondary)
             if let lesson = session.lessonToShow {
-                LessonCard(skill: lesson, compact: true)
+                LessonCard(skill: lesson, compact: true, curriculum: session.curriculum,
+                           extraTexts: [session.question?.prompt, fb.expected])
+            } else {
+                ShortFormsBox(entries: session.curriculum.shortForms(in: [session.question?.prompt, fb.expected]))
             }
             Button(session.lessonToShow == nil ? "Next" : "Got it — try another") { session.next() }
                 .buttonStyle(.borderedProminent)
@@ -160,10 +185,23 @@ public struct PracticeView: View {
 public struct LessonCard: View {
     public let skill: Skill
     public var compact = false
+    /// When given, abbreviations in the lesson are explained under it.
+    public var curriculum: Curriculum?
+    public var extraTexts: [String?] = []
 
-    public init(skill: Skill, compact: Bool = false) {
+    public init(skill: Skill, compact: Bool = false, curriculum: Curriculum? = nil, extraTexts: [String?] = []) {
         self.skill = skill
         self.compact = compact
+        self.curriculum = curriculum
+        self.extraTexts = extraTexts
+    }
+
+    private var lessonTexts: [String?] {
+        var texts: [String?] = [skill.title, skill.lesson.explanation, skill.lesson.example]
+        if !compact {
+            texts += [skill.summary, skill.reinforcement] + (skill.lesson.tutorSteps ?? []).map { Optional($0) }
+        }
+        return texts + extraTexts
     }
 
     public var body: some View {
@@ -182,10 +220,34 @@ public struct LessonCard: View {
             if !compact, let r = skill.reinforcement {
                 Text("Keep it fresh: \(r)").font(.callout).foregroundStyle(.secondary)
             }
+            if let curriculum {
+                ShortFormsBox(entries: curriculum.shortForms(in: lessonTexts))
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+    }
+}
+/// "What the short forms mean": shown wherever an abbreviation appears.
+public struct ShortFormsBox: View {
+    public let entries: [GlossaryEntry]
+
+    public init(entries: [GlossaryEntry]) { self.entries = entries }
+
+    public var body: some View {
+        if !entries.isEmpty {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("What the short forms mean").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                ForEach(entries, id: \.term) { entry in
+                    (Text(entry.term).bold() + Text("  " + entry.meaning).foregroundStyle(.secondary))
+                        .font(.callout)
+                }
+            }
+            .padding(10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.secondary.opacity(0.4), style: StrokeStyle(lineWidth: 1, dash: [4])))
+        }
     }
 }
 #endif

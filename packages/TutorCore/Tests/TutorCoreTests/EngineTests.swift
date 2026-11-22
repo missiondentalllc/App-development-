@@ -99,3 +99,15 @@ final class PickerTests: XCTestCase {
         XCTAssertEqual(pick.skill?.id, "a")
     }
 }
+
+final class ShortFormTests: XCTestCase {
+    func testFindsAbbreviationsButNotWordsContainingThem() {
+        let c = Curriculum(id: "c", title: "c", version: 1, stages: [], skills: [],
+                           glossary: [GlossaryEntry(term: "lcm", meaning: "least common multiple"),
+                                      GlossaryEntry(term: "PDE", meaning: "partial differential equation"),
+                                      GlossaryEntry(term: "div", meaning: "divergence")])
+        XCTAssertEqual(c.shortForms(in: ["lcm(4, 6) = ?"]).map(\.term), ["lcm"])
+        XCTAssertEqual(c.shortForms(in: ["The three classical PDEs"]).map(\.term), ["PDE"])
+        XCTAssertEqual(c.shortForms(in: ["Divide 12 by 4", nil]).map(\.term), [])
+    }
+}

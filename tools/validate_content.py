@@ -9,6 +9,8 @@ Checks:
   - multiple-choice answers are among the choices; auto-graded items have answers
   - every generator named in content exists in TutorCore's Generators.swift
   - day-based plans: days are 1..N with no gaps, and prerequisites come on earlier days
+  - every abbreviation (LCM, SD, sin, d/dx, ...) used in lessons, questions or
+    generated questions has a plain-English meaning in the curriculum's glossary
 Prints a coverage report (skills with practice vs. "coming soon").
 Exits with status 1 if anything is wrong.
 """
@@ -24,6 +26,63 @@ GENERATORS_SWIFT = ROOT / "packages/TutorCore/Sources/TutorCore/Questions/Genera
 def generator_keys():
     text = GENERATORS_SWIFT.read_text()
     return set(re.findall(r'^\s*case "([A-Za-z0-9]+)":', text, re.M))
+
+
+# Capitalized words that are not abbreviations (emphasis, Roman numerals, matrix products).
+NOT_ABBREVIATIONS = {"NOT", "II", "III", "IV", "AB", "BA", "AI", "PDP"}
+# Lowercase math short forms the checker looks for.
+MATH_SHORT_FORMS = ["gcd", "lcm", "mod", "log", "ln", "sin", "cos", "tan", "sec", "csc", "cot", "exp",
+                    "opp", "adj", "hyp", "d/dx", "dx", "dy", "dt", "du", "dz", "dA", "lim", "iff", "det",
+                    "dim", "div", "max", "min", "sup", "inf", "ker", "im", "Re", "Im", "Var", "Cov",
+                    "Gal", "Hom", "e.g.", "i.e.", "etc.", "vs."]
+# Short forms that generators put into questions.
+GENERATOR_SHORT_FORMS = {"gcd": ["gcd"], "lcm": ["lcm"], "mod": ["mod"], "groupOrder": ["ℤ"],
+                         "logBase": ["log"], "derivative": ["f′"], "limit": ["lim"], "det2": ["det"],
+                         "integral": ["dx"]}
+
+
+def term_regex(term):
+    return re.compile(r"(?<![A-Za-z-])" + re.escape(term) + r"s?(?![A-Za-z-])")
+
+
+def texts(skill):
+    """Every piece of text a learner or tutor sees for a skill."""
+    out = [skill.get("title", ""), skill.get("summary", ""), skill.get("reinforcement") or ""]
+    lesson = skill.get("lesson", {})
+    out += [lesson.get("explanation", ""), lesson.get("example") or ""] + (lesson.get("tutorSteps") or [])
+    for item in skill.get("practice", {}).get("items") or []:
+        out += [item.get("prompt", ""), item.get("answer") or ""] + (item.get("choices") or [])
+    return out
+
+
+def check_glossary(doc):
+    errors = []
+    glossary = doc.get("glossary") or []
+    terms = set()
+    for g in glossary:
+        if not g.get("term") or not g.get("meaning"):
+            errors.append(f"glossary entry missing term or meaning: {g}")
+        terms.add(g.get("term"))
+        terms.update((g.get("term") or "").split("-"))  # SOH-CAH-TOA also covers SOH, CAH, TOA
+    # Reading and spelling lists (first grade) use real words like "log" and "sin", so lowercase
+    # math short forms are only checked in curricula that teach beyond first grade.
+    lowercase = MATH_SHORT_FORMS if doc["id"] != "first-grade" else ["e.g.", "i.e.", "etc.", "vs."]
+    places = [(s["id"], t) for s in doc["skills"] for t in texts(s)]
+    places += [(st["id"], st.get("description") or "") for st in doc["stages"]]
+    places += [(st["id"], st.get("title") or "") for st in doc["stages"]]
+    missing = {}
+    for where, text in places:
+        found = set(re.findall(r"(?<![A-Za-z])([A-Z]{2,})(?:s)?(?![A-Za-z])", text))
+        found |= {f for f in lowercase if term_regex(f).search(text)}
+        for f in found - terms - NOT_ABBREVIATIONS:
+            missing.setdefault(f, where)
+    for s in doc["skills"]:
+        for f in GENERATOR_SHORT_FORMS.get(s.get("practice", {}).get("generator"), []):
+            if f not in terms:
+                missing.setdefault(f, s["id"] + " (generated questions)")
+    for f, where in sorted(missing.items()):
+        errors.append(f"'{f}' is used ({where}) but has no meaning in the glossary")
+    return errors
 
 
 def validate(path, keys):
@@ -94,6 +153,8 @@ def validate(path, keys):
             for p in s["prerequisites"]:
                 if p in by_id and by_id[p].get("day", 0) >= s.get("day", 0):
                     errors.append(f"{s['id']} (day {s['day']}) needs {p} (day {by_id[p]['day']}) first")
+
+    errors += check_glossary(doc)
 
     with_practice = sum(1 for s in skills if s["practice"].get("generator") or s["practice"].get("items"))
     print(f"{path.relative_to(ROOT)}: {len(doc['stages'])} stages, {len(skills)} skills, "

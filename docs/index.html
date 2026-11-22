@@ -147,6 +147,11 @@ textarea.field { font-size: 0.8rem; font-family: ui-monospace, Menlo, monospace;
 .example { background: var(--paper); border-left: 3px solid var(--pencil); padding: 8px 12px; border-radius: 0 8px 8px 0; }
 .label { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .subj { color: var(--accent); }
+.terms { margin: 0; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 10px; background: var(--surface);
+  display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; text-align: left; align-self: stretch; }
+.terms div { display: flex; gap: 8px; }
+.terms dt { font-weight: 600; flex: none; min-width: 3.2em; }
+.terms dd { margin: 0; color: var(--muted); min-width: 0; }
 
 /* Practice */
 .practice { display: flex; flex-direction: column; gap: 16px; }

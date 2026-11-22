@@ -97,7 +97,20 @@ function meter(value, total) {
 }
 function row(label, value) { return `<div class="row"><span>${esc(label)}</span><span class="num">${esc(value)}</span></div>`; }
 
-function lessonCard(skill, compact = false) {
+function skillTexts(skill) {
+  const L = skill.lesson || {};
+  return [skill.title, skill.summary, L.explanation, L.example, ...(L.tutorSteps || []), skill.reinforcement];
+}
+
+// "What the short forms mean": shown wherever an abbreviation appears.
+function termsBox(texts) {
+  const found = shortFormsIn(App.curriculum, texts);
+  if (!found.length) return "";
+  return `<dl class="terms"><p class="label">What the short forms mean</p>${found.map(g =>
+    `<div><dt>${esc(g.term)}</dt><dd>${esc(g.meaning)}</dd></div>`).join("")}</dl>`;
+}
+
+function lessonCard(skill, compact = false, extraTexts = []) {
   const L = skill.lesson || {};
   let html = `<article class="lesson ${compact ? "compact" : ""}"><h3>${esc(skill.title)}</h3><p>${esc(L.explanation)}</p>`;
   if (L.example) html += `<p class="example"><span class="label">Example</span>${esc(L.example)}</p>`;
@@ -105,7 +118,8 @@ function lessonCard(skill, compact = false) {
     html += `<h4>Tutor steps</h4><ol>${L.tutorSteps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>`;
   }
   if (!compact && skill.reinforcement) html += `<p class="muted small">Keep it fresh: ${esc(skill.reinforcement)}</p>`;
-  return html + `</article>`;
+  const texts = compact ? [skill.title, L.explanation, L.example] : skillTexts(skill);
+  return html + termsBox([...texts, ...extraTexts]) + `</article>`;
 }
 
 function masteredCount() {
@@ -387,7 +401,8 @@ function viewSession(cur) {
 function questionView(q) {
   const left = Math.max(0, Comprehension.questionCapSeconds - App.session.elapsed());
   let html = `<div class="timer" aria-hidden="true"><span id="timer-fill" class="${left > 15 ? "" : "late"}" style="width:${(left / 60) * 100}%"></span></div>
-    <p class="prompt">${esc(q.prompt)}</p>`;
+    <p class="prompt">${esc(q.prompt)}</p>
+    ${termsBox([q.prompt, ...(q.choices || [])])}`;
   if (q.choices) {
     html += `<div class="choices">${q.choices.map(c => `<button class="choice" data-action="choose" data-value="${esc(c)}">${esc(c)}</button>`).join("")}</div>`;
   } else if (q.tutorJudged) {
@@ -419,7 +434,8 @@ function feedbackView(s) {
     <h2 class="display">${fb.correct ? (fb.sightPace ? "Right, at sight pace!" : "Right!") : "Not quite"}</h2>
     ${!fb.correct && fb.expected ? `<p class="answer-reveal">Answer: <strong>${esc(fb.expected)}</strong></p>` : ""}
     <p class="muted num">${fb.seconds.toFixed(1)} seconds</p>
-    ${s.lessonToShow ? lessonCard(s.lessonToShow, true) : ""}
+    ${s.lessonToShow ? lessonCard(s.lessonToShow, true, [s.question?.prompt, fb.expected])
+                     : termsBox([s.question?.prompt, fb.expected])}
     <button class="btn primary big" data-action="next" id="next-btn">${s.lessonToShow ? "Got it, try another" : "Next"}</button>
   </section>`;
 }

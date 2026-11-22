@@ -84,6 +84,19 @@ function hasPractice(skill) {
   return !!skill.practice?.generator || (skill.practice?.items || []).length > 0;
 }
 
+// ---------- Short forms (glossary) ----------
+// Each curriculum lists its abbreviations with plain-English meanings. Any text
+// shown to the learner is scanned so the meaning of every short form appears with it.
+function shortFormsIn(curriculum, texts) {
+  const list = curriculum.glossary || [];
+  if (!curriculum._glossaryRe) {
+    const escape = t => t.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
+    curriculum._glossaryRe = list.map(g => new RegExp(`(?<![A-Za-z-])${escape(g.term)}s?(?![A-Za-z-])`));
+  }
+  const text = texts.filter(Boolean).join("\n");
+  return list.filter((g, i) => curriculum._glossaryRe[i].test(text));
+}
+
 // ---------- Skill graph ----------
 class SkillGraph {
   constructor(curriculum) {
@@ -757,5 +770,5 @@ class PracticeSession {
 
 if (typeof module !== "undefined") {
   module.exports = { Comprehension, SpacedReview, SkillGraph, SkillPicker, Diagnostic, AnswerChecker,
-    makeGenerated, QuestionFactory, PracticeSession, ProfileStore, hasPractice, newSkillState, ReasonLabel };
+    makeGenerated, QuestionFactory, shortFormsIn, PracticeSession, ProfileStore, hasPractice, newSkillState, ReasonLabel };
 }

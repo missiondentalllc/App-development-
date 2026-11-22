@@ -102,7 +102,7 @@ struct SkillDetailView: View {
         let state = profile.state(skill.id, in: curriculum.id)
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                LessonCard(skill: skill)
+                LessonCard(skill: skill, curriculum: curriculum)
                 HStack {
                     Circle().fill(Comprehension.level(state).color).frame(width: 12, height: 12)
                     Text(Comprehension.level(state).label)

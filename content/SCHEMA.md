@@ -7,6 +7,9 @@ Each curriculum is one JSON file: `content/<name>/curriculum.json`.
   "id": "math-ladder",
   "title": "Math Ladder",
   "version": 1,
+  "glossary": [
+    { "term": "lcm", "meaning": "least common multiple: the smallest number both numbers divide into" }
+  ],
   "stages": [
     { "id": "g1", "title": "Grade 1", "order": 1, "level": "Elementary", "description": "…" }
   ],
@@ -68,9 +71,17 @@ A skill needs **either** a generator **or** hand-written items (or both; the gen
 
 Generators are defined in `packages/TutorCore/Sources/TutorCore/Questions/Generators.swift`.
 
+## Abbreviations
+
+Every abbreviation or acronym (LCM, SD, sin, d/dx, CVC…) must have a plain-English meaning in the
+curriculum's `glossary`. The apps show "What the short forms mean" under any lesson, question or answer
+that uses one, including generated questions. Skill titles shown in lists should spell the name out,
+e.g. "Diagonalization and SVD (singular value decomposition)".
+
 ## Rules the validator enforces
 
 - Unique skill ids; every stage and prerequisite exists; no prerequisite loops.
 - Multiple-choice answers appear among the choices; auto-graded items have an answer.
 - Generator keys exist in `Generators.swift`.
+- Every abbreviation used in lessons, questions or generated questions has a glossary meaning.
 - Day-based plans run 1..N, and every prerequisite is taught on an earlier day.
