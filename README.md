@@ -7,6 +7,19 @@ Learning apps for iPhone and iPad, built on one shared engine.
 | **First Grade Tutor** | A full first-grade year in 110 daily lessons (math, reading, writing, science, social studies). Built for a parent or hired tutor to run one lesson a day. | v0.1 — content complete, app screens built, not yet compiled |
 | **Math Ladder** | Adaptive math from first-grade counting through doctoral research topics (33 levels, 207 skills). Finds the biggest gaps and fixes them first. | v0.1 — full skill map, app screens built, not yet compiled |
 
+## Web versions (no Mac, no App Store)
+
+Both apps also run in any phone or computer browser. Each one is a single `.html` file with every lesson inside, so it works offline and can be shared by link.
+
+| File | App |
+|---|---|
+| `web/dist/first-grade-tutor.html` | First Grade Tutor |
+| `web/dist/math-ladder.html` | Math Ladder |
+
+- **Share it:** host the files (GitHub Pages, Netlify Drop, Google Sites) and text the link. On the phone, open the link, then Share → **Add to Home Screen** so it opens like an app.
+- **Progress** is saved in that phone's browser, per learner. Use **Back up or restore progress** on the Learners screen to copy it to another device.
+- **Rebuild after editing content or code:** `python3 tools/build_web.py` (source is in `web/src/`).
+
 ## How the learning works
 
 Both apps share the same rules (in `packages/TutorCore`):
@@ -26,6 +39,9 @@ Both apps share the same rules (in `packages/TutorCore`):
 apps/
   FirstGradeTutor/        iOS app (SwiftUI) + project.yml for XcodeGen
   MathLadder/             iOS app (SwiftUI) + project.yml for XcodeGen
+web/
+  src/                    Web version: engine.js (port of TutorCore), app.js (screens), style.css
+  dist/                   Built single-file apps, ready to share
 packages/
   TutorCore/              Shared Swift package: models, scoring, skill picker,
                           spaced review, placement test, question generators,
@@ -36,6 +52,7 @@ content/
   math-ladder/            Grade 1 → doctoral math skill map (JSON)
 tools/
   validate_content.py     Checks content before it ships
+  build_web.py            Builds the single-file web apps into web/dist/
 docs/
   ARCHITECTURE.md         How the pieces fit
   ROADMAP.md              What's next
