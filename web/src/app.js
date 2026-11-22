@@ -26,8 +26,7 @@ const mins = secs => `${Math.floor(secs / 60)} min`;
 async function boot() {
   ProfileStore.load();
   try {
-    const inline = document.getElementById("curriculum-data");
-    App.curriculum = inline ? JSON.parse(inline.textContent) : await (await fetch("curriculum.json")).json();
+    App.curriculum = window.CURRICULUM || await (await fetch("curriculum.json")).json();
   } catch (e) {
     $root().innerHTML = `<div class="wrap"><p class="error">The lessons didn't load. Close and reopen the page.</p></div>`;
     return;

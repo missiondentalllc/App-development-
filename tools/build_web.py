@@ -39,7 +39,7 @@ def page_body(kind: str, curriculum_json: str | None) -> str:
     parts = ['<div id="app"><p style="padding:24px">Loading…</p></div>',
              f'<script>window.APP_CONFIG = {json.dumps({"kind": kind})};</script>']
     if curriculum_json is not None:
-        parts.append(f'<script id="curriculum-data" type="application/json">{script_safe(curriculum_json)}</script>')
+        parts.append(f'<script>window.CURRICULUM = {script_safe(curriculum_json)};</script>')
     parts.append(f"<script>\n{engine}\n</script>")
     parts.append(f"<script>\n{app}\n</script>")
     return "\n".join(parts)
