@@ -4,7 +4,7 @@
 Each app becomes ONE self-contained .html file (lessons, engine and screens
 inside), so it can be texted, emailed, hosted anywhere, or opened offline.
 
-    python3 tools/build_web.py                 # writes web/dist/*.html
+    python3 tools/build_web.py                 # writes docs/*.html (served by GitHub Pages)
     python3 tools/build_web.py --artifact DIR  # also writes claude.ai artifact pages to DIR
 
 Run tools/validate_content.py first; this script only packages what is there.
@@ -15,7 +15,7 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "web" / "src"
-DIST = ROOT / "web" / "dist"
+DIST = ROOT / "docs"  # GitHub Pages serves this folder
 
 APPS = [
     # (kind, content folder, output file, short name for the home screen icon)
@@ -112,6 +112,7 @@ def main() -> None:
             print(f"wrote artifact page {d}/index.html")
 
     (DIST / "index.html").write_text(index_page())
+    (DIST / ".nojekyll").write_text("")  # serve files as-is
     print(f"wrote {(DIST / 'index.html').relative_to(ROOT)}")
 
 

@@ -13,10 +13,10 @@ Both apps also run in any phone or computer browser. Each one is a single `.html
 
 | File | App |
 |---|---|
-| `web/dist/first-grade-tutor.html` | First Grade Tutor |
-| `web/dist/math-ladder.html` | Math Ladder |
+| `docs/first-grade-tutor.html` | First Grade Tutor — https://missiondentalllc.github.io/App-development-/first-grade-tutor.html |
+| `docs/math-ladder.html` | Math Ladder — https://missiondentalllc.github.io/App-development-/math-ladder.html |
 
-- **Share it:** host the files (GitHub Pages, Netlify Drop, Google Sites) and text the link. On the phone, open the link, then Share → **Add to Home Screen** so it opens like an app.
+- **Share it:** GitHub Pages serves the `docs/` folder (Settings → Pages → Deploy from a branch → `/docs`). Text the link. On the phone, open the link, then Share → **Add to Home Screen** so it opens like an app.
 - **Progress** is saved in that phone's browser, per learner. Use **Back up or restore progress** on the Learners screen to copy it to another device.
 - **Rebuild after editing content or code:** `python3 tools/build_web.py` (source is in `web/src/`).
 
@@ -41,7 +41,6 @@ apps/
   MathLadder/             iOS app (SwiftUI) + project.yml for XcodeGen
 web/
   src/                    Web version: engine.js (port of TutorCore), app.js (screens), style.css
-  dist/                   Built single-file apps, ready to share
 packages/
   TutorCore/              Shared Swift package: models, scoring, skill picker,
                           spaced review, placement test, question generators,
@@ -52,8 +51,9 @@ content/
   math-ladder/            Grade 1 → doctoral math skill map (JSON)
 tools/
   validate_content.py     Checks content before it ships
-  build_web.py            Builds the single-file web apps into web/dist/
+  build_web.py            Builds the single-file web apps into docs/
 docs/
+  *.html                  Built web apps (served by GitHub Pages)
   ARCHITECTURE.md         How the pieces fit
   ROADMAP.md              What's next
 ```
