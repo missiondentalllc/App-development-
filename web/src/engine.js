@@ -133,7 +133,8 @@ function shortFormsIn(curriculum, texts) {
   const list = curriculum.glossary || [];
   if (!curriculum._glossaryRe) {
     const escape = t => t.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
-    curriculum._glossaryRe = list.map(g => new RegExp(`(?<![A-Za-z-])${escape(g.term)}s?(?![A-Za-z-])`));
+    // (^|non-letter) instead of a lookbehind: older Safari (before iOS 16.4) has no lookbehind.
+    curriculum._glossaryRe = list.map(g => new RegExp(`(^|[^A-Za-z-])${escape(g.term)}s?(?![A-Za-z-])`));
   }
   const text = texts.filter(Boolean).join("\n");
   return list.filter((g, i) => curriculum._glossaryRe[i].test(text));

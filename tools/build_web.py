@@ -38,7 +38,11 @@ def page_body(kind: str, curriculum_json: str | None) -> str:
     handwriting = (SRC / "handwriting.js").read_text()
     templates = (ROOT / "content" / "handwriting" / "templates.json").read_text().strip()
     app = (SRC / "app.js").read_text()
-    parts = ['<div id="app"><p style="padding:24px">Loading…</p></div>',
+    parts = ['<div id="app"><div style="padding:24px;font-family:system-ui,sans-serif;line-height:1.5">'
+             '<p>Loading…</p><p id="load-help" hidden>The app didn\'t start. Open this link in Safari, Chrome or Edge '
+             '(not inside a text message or email preview), or update the device\'s software.</p></div></div>',
+             # If the app hasn't started after a few seconds (very old browser, or a preview that blocks scripts), say how to fix it.
+             '<script>setTimeout(function(){var h=document.getElementById("load-help");if(h)h.hidden=false;},4000);</script>',
              f'<script>window.APP_CONFIG = {json.dumps({"kind": kind})};</script>']
     if curriculum_json is not None:
         parts.append(f'<script>window.CURRICULUM = {script_safe(curriculum_json)};</script>')
