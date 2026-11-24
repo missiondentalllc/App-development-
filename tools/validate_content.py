@@ -13,6 +13,7 @@ Checks:
     difficulty tier (1 Starter, 2 Core, 3 Challenge) and every tier has questions
   - every level and skill has three teaching approaches: show, together, alone
   - every hand-written question has a "why" explanation shown after any answer
+  - handwritten-answer questions ("mode": "write") have a short letters-or-digits answer
   - every abbreviation (LCM, SD, sin, d/dx, ...) used in lessons, questions or
     generated questions has a plain-English meaning in the curriculum's glossary
 Prints a coverage report (skills with practice vs. "coming soon").
@@ -154,8 +155,19 @@ def validate(path, keys):
             where = f"{sid} item {i + 1}"
             if not item.get("prompt"):
                 errors.append(f"{where}: empty prompt")
+            if item.get("pad") and item.get("mode") != "tutor":
+                errors.append(f"{where}: \"pad\" is only for tutor-judged items")
             if item.get("mode") == "tutor":
                 continue
+            if item.get("mode") == "write":
+                # Handwritten answers: one box per character, letters and digits only.
+                if not re.fullmatch(r"[A-Za-z0-9]{1,8}", item.get("answer") or ""):
+                    errors.append(f"{where}: written answers must be 1-8 letters or digits")
+                if item.get("choices"):
+                    errors.append(f"{where}: written answers have no choices")
+                continue
+            if item.get("mode") not in (None, "auto"):
+                errors.append(f"{where}: unknown mode '{item.get('mode')}'")
             if "answer" not in item:
                 errors.append(f"{where}: auto-graded item has no answer")
             elif item.get("choices") is not None:

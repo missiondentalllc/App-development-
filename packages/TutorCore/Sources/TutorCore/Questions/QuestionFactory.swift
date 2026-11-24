@@ -23,9 +23,10 @@ public final class QuestionFactory {
             if !items.isEmpty { break }
         }
         let recent = recentPrompts[skill.id] ?? []
-        let fresh = items.filter { !recent.contains($0.prompt) }
+        func key(_ i: Item) -> String { i.prompt + "|" + (i.say ?? "") }
+        let fresh = items.filter { !recent.contains(key($0)) }
         let item = dice.pick(fresh.isEmpty ? items : fresh)
-        var updated = recent + [item.prompt]
+        var updated = recent + [key(item)]
         if updated.count > max(1, items.count - 1) { updated.removeFirst() }
         recentPrompts[skill.id] = updated
 
@@ -37,6 +38,10 @@ public final class QuestionFactory {
                          tutorJudged: tutor)
         q.tier = tier
         q.why = item.why
+        q.write = item.mode == "write"
+        q.pad = tutor && (item.pad ?? false)
+        q.say = item.say
+        q.matchCase = item.matchCase ?? false
         return q
     }
 }

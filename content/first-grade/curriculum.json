@@ -206,43 +206,137 @@
             "prompt": "Write the lowercase alphabet. Tutor checks b/d/p/q.",
             "mode": "tutor",
             "tier": 3,
-            "why": "All 26 small letters, a to z, should start at the top. Check that b has its bump on the right, d has its bump on the left, and p and q have tails that go below the line."
+            "why": "All 26 small letters, a to z, should start at the top. Check that b has its bump on the right, d has its bump on the left, and p and q have tails that go below the line.",
+            "pad": true
           },
           {
             "prompt": "Write the capital alphabet.",
             "mode": "tutor",
             "tier": 2,
-            "why": "All 26 capital letters, A to Z, should be tall and touch the top line. Accept letters that start at the top and face the right way, like E and S not backwards."
+            "why": "All 26 capital letters, A to Z, should be tall and touch the top line. Accept letters that start at the top and face the right way, like E and S not backwards.",
+            "pad": true
           },
           {
             "prompt": "Write these capitals: L, T, H, E",
             "mode": "tutor",
             "tier": 1,
-            "why": "These capitals are made with straight lines that start at the top: L is down and across, T is across the top and down the middle, H is two tall lines and a bridge, E is a tall line and three across. Accept letters that stand tall and face the right way."
+            "why": "These capitals are made with straight lines that start at the top: L is down and across, T is across the top and down the middle, H is two tall lines and a bridge, E is a tall line and three across. Accept letters that stand tall and face the right way.",
+            "pad": true
           },
           {
             "prompt": "Trace and then write: a, c, o",
             "mode": "tutor",
             "tier": 1,
-            "why": "The letters a, c and o all start with a round curve that begins near the top and goes around to the left, like a clock going backwards. Accept round, closed shapes for a and o and an open shape for c."
+            "why": "The letters a, c and o all start with a round curve that begins near the top and goes around to the left, like a clock going backwards. Accept round, closed shapes for a and o and an open shape for c.",
+            "pad": true
           },
           {
             "prompt": "Write these tall letters: b, d, h, k, l, t",
             "mode": "tutor",
             "tier": 2,
-            "why": "Tall letters reach up to the top line: b, d, h, k, l and t all have a tall stick. Accept letters where the stick touches the top line and the rest sits on the bottom line."
+            "why": "Tall letters reach up to the top line: b, d, h, k, l and t all have a tall stick. Accept letters where the stick touches the top line and the rest sits on the bottom line.",
+            "pad": true
           },
           {
             "prompt": "Write these tail letters so the tails go below the line: g, j, p, q, y",
             "mode": "tutor",
             "tier": 2,
-            "why": "Tail letters hang below the line, like a monkey tail: g, j, p, q and y. Accept letters whose tails clearly dip under the bottom line."
+            "why": "Tail letters hang below the line, like a monkey tail: g, j, p, q and y. Accept letters whose tails clearly dip under the bottom line.",
+            "pad": true
           },
           {
             "prompt": "Write b, d, p, q side by side and tell how each one is different.",
             "mode": "tutor",
             "tier": 3,
             "why": "All four use a stick and a circle, but they point different ways. A good answer sounds like: b has the bump on the right at the bottom, d has the bump on the left, p has a tail down with the bump on the right, q has a tail down with the bump on the left."
+          },
+          {
+            "prompt": "Write lowercase a.",
+            "mode": "write",
+            "answer": "a",
+            "tier": 1,
+            "why": "Lowercase a: start at the middle line, curve around like a c, close the circle, then pull a straight line down to the baseline. It stays between the middle line and the baseline.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write lowercase m.",
+            "mode": "write",
+            "answer": "m",
+            "tier": 1,
+            "why": "Lowercase m: pull a short line down from the middle line, then make two humps, each coming back down to the baseline.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write lowercase t.",
+            "mode": "write",
+            "answer": "t",
+            "tier": 1,
+            "why": "Lowercase t: start a little below the top line and pull straight down to the baseline, then cross it on the middle line.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write lowercase h.",
+            "mode": "write",
+            "answer": "h",
+            "tier": 2,
+            "why": "Lowercase h is a tall letter: a long line from the top line to the baseline, then one hump from the middle line back down.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write lowercase g.",
+            "mode": "write",
+            "answer": "g",
+            "tier": 2,
+            "why": "Lowercase g: a round circle between the middle line and baseline, then a line down below the baseline with a hook to the left. Its tail goes below the line.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write lowercase b.",
+            "mode": "write",
+            "answer": "b",
+            "tier": 2,
+            "why": "Lowercase b: a tall line first, then the bump on the right at the bottom, like a bat then a ball. If the bump is on the left, it's a d.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write lowercase d.",
+            "mode": "write",
+            "answer": "d",
+            "tier": 3,
+            "why": "Lowercase d: the circle comes first, on the left, then a tall line on its right side. If the circle is on the right of the line, it's a b.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write lowercase p.",
+            "mode": "write",
+            "answer": "p",
+            "tier": 3,
+            "why": "Lowercase p: a line that goes below the baseline, with the bump on the right at the top. If the bump is on the left, it's a q.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write lowercase q.",
+            "mode": "write",
+            "answer": "q",
+            "tier": 3,
+            "why": "Lowercase q: the circle comes first, then a line on its right that goes down below the baseline. If the circle is on the right, it's a p.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write capital B.",
+            "mode": "write",
+            "answer": "B",
+            "tier": 3,
+            "why": "Capital B is tall: a line from the top line to the baseline, then two bumps on the right, one on top of the other, meeting at the middle line.",
+            "matchCase": true
+          },
+          {
+            "prompt": "Write capital E.",
+            "mode": "write",
+            "answer": "E",
+            "tier": 3,
+            "why": "Capital E: a tall line down, then three lines going right: one on the top line, one on the middle line and one on the baseline.",
+            "matchCase": true
           }
         ]
       },
@@ -804,7 +898,8 @@
             "prompt": "Copy and fix: my dog is big",
             "mode": "tutor",
             "tier": 2,
-            "why": "The fixed sentence is: My dog is big. Accept it if My starts with a capital M and there is a period at the end."
+            "why": "The fixed sentence is: My dog is big. Accept it if My starts with a capital M and there is a period at the end.",
+            "pad": true
           },
           {
             "prompt": "What mark goes at the end of a telling sentence?",
@@ -832,13 +927,15 @@
             "prompt": "Copy and fix: is it time to eat",
             "mode": "tutor",
             "tier": 3,
-            "why": "This sentence asks something, so it ends with a question mark. Accept: Is it time to eat? with a capital I at the start."
+            "why": "This sentence asks something, so it ends with a question mark. Accept: Is it time to eat? with a capital I at the start.",
+            "pad": true
           },
           {
             "prompt": "Write your own sentence about a pet or a toy. Tutor checks the capital and the end mark.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept any sentence that starts with a capital letter and ends with a period, question mark or exclamation mark, like: My cat is soft."
+            "why": "Accept any sentence that starts with a capital letter and ends with a period, question mark or exclamation mark, like: My cat is soft.",
+            "pad": true
           }
         ]
       },
@@ -1316,7 +1413,8 @@
             "prompt": "Write: I see a red bird. Tutor checks spaces.",
             "mode": "tutor",
             "tier": 2,
-            "why": "Check for a finger-width space between each word: I, see, a, red, bird. Also check for a capital I and a period at the end."
+            "why": "Check for a finger-width space between each word: I, see, a, red, bird. Also check for a capital I and a period at the end.",
+            "pad": true
           },
           {
             "prompt": "Which has spaces?",
@@ -1342,19 +1440,22 @@
             "prompt": "Write: I can hop. Tutor checks spaces.",
             "mode": "tutor",
             "tier": 2,
-            "why": "Check for a space between each of the three words: I, can, hop. Accept it if the spaces are about one finger wide."
+            "why": "Check for a space between each of the three words: I, can, hop. Accept it if the spaces are about one finger wide.",
+            "pad": true
           },
           {
             "prompt": "Copy it with spaces between the words: Thesunishot.",
             "mode": "tutor",
             "tier": 3,
-            "why": "The words are The, sun, is, hot. Accept: The sun is hot. with a finger space between each word."
+            "why": "The words are The, sun, is, hot. Accept: The sun is hot. with a finger space between each word.",
+            "pad": true
           },
           {
             "prompt": "Write your own sentence with four or more words. Tutor checks the finger spaces.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept any sentence with four or more words, like: I like to play ball. Each word needs a finger-width space before the next one."
+            "why": "Accept any sentence with four or more words, like: I like to play ball. Each word needs a finger-width space before the next one.",
+            "pad": true
           }
         ]
       },
@@ -1836,7 +1937,8 @@
             "prompt": "Write the words back and neck. Tutor checks the ck.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept back and neck spelled with c and k together at the end: b-a-c-k and n-e-c-k."
+            "why": "Accept back and neck spelled with c and k together at the end: b-a-c-k and n-e-c-k.",
+            "pad": true
           }
         ]
       },
@@ -1929,7 +2031,8 @@
             "prompt": "Write one question about animals.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept any question about animals that starts with a capital letter and ends with a question mark, like: Do cats like milk?"
+            "why": "Accept any question about animals that starts with a capital letter and ends with a question mark, like: Do cats like milk?",
+            "pad": true
           },
           {
             "prompt": "Does this ask something? Do you like cake",
@@ -1976,7 +2079,8 @@
             "prompt": "Write one sentence that shows strong feeling and ends with !",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept a sentence with strong feeling, a capital letter at the start, and an exclamation mark at the end, like: I love my dog!"
+            "why": "Accept a sentence with strong feeling, a capital letter at the start, and an exclamation mark at the end, like: I love my dog!",
+            "pad": true
           }
         ]
       },
@@ -2476,7 +2580,8 @@
             "prompt": "Write three nouns in your room.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept any three things you can see or touch in a room, like bed, lamp, book or rug. Each one names a thing, so each one is a noun."
+            "why": "Accept any three things you can see or touch in a room, like bed, lamp, book or rug. Each one names a thing, so each one is a noun.",
+            "pad": true
           },
           {
             "prompt": "Which word names a thing?",
@@ -2514,7 +2619,8 @@
             "prompt": "Write a sentence with two nouns. Tutor circles them.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept any sentence with two words that name people, places or things, like \"The dog ran to the park.\" Here dog and park are the nouns to circle."
+            "why": "Accept any sentence with two words that name people, places or things, like \"The dog ran to the park.\" Here dog and park are the nouns to circle.",
+            "pad": true
           }
         ]
       },
@@ -2907,7 +3013,8 @@
             "prompt": "Write a sentence with a verb. Tutor underlines it.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept any sentence that tells what someone or something does, like \"The dog runs.\" The verb to underline is the action word, here runs."
+            "why": "Accept any sentence that tells what someone or something does, like \"The dog runs.\" The verb to underline is the action word, here runs.",
+            "pad": true
           },
           {
             "prompt": "Which word is something you can do?",
@@ -3504,7 +3611,8 @@
             "prompt": "Write a sentence about your pet or toy with two adjectives.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept a sentence with two describing words, like \"My dog is small and fluffy\" or \"I have a soft, brown bear.\""
+            "why": "Accept a sentence with two describing words, like \"My dog is small and fluffy\" or \"I have a soft, brown bear.\"",
+            "pad": true
           }
         ]
       },
@@ -4218,7 +4326,50 @@
             "prompt": "Write more than one: pig, box, wish",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept pigs, boxes and wishes. Pig just gets s, but box ends with x and wish ends with sh, so they get -es."
+            "why": "Accept pigs, boxes and wishes. Pig just gets s, but box ends with x and wish ends with sh, so they get -es.",
+            "pad": true
+          },
+          {
+            "prompt": "Write more than one: pig",
+            "mode": "write",
+            "answer": "pigs",
+            "tier": 1,
+            "why": "Most words just add s to mean more than one: pig becomes pigs."
+          },
+          {
+            "prompt": "Write more than one: cat",
+            "mode": "write",
+            "answer": "cats",
+            "tier": 1,
+            "why": "Add s to the end: cat becomes cats."
+          },
+          {
+            "prompt": "Write more than one: box",
+            "mode": "write",
+            "answer": "boxes",
+            "tier": 2,
+            "why": "Words that end in x add es, because you can hear an extra beat: box, boxes."
+          },
+          {
+            "prompt": "Write more than one: fox",
+            "mode": "write",
+            "answer": "foxes",
+            "tier": 2,
+            "why": "Fox ends in x, so add es: foxes. Say it and you can hear the extra beat."
+          },
+          {
+            "prompt": "Write more than one: wish",
+            "mode": "write",
+            "answer": "wishes",
+            "tier": 3,
+            "why": "Words that end in sh add es: wish becomes wishes."
+          },
+          {
+            "prompt": "Write more than one: bus",
+            "mode": "write",
+            "answer": "buses",
+            "tier": 3,
+            "why": "Words that end in s add es: bus becomes buses."
           }
         ]
       },
@@ -4923,37 +5074,112 @@
             "prompt": "Tutor says: dog, sun, pig, bed, cat. Child writes them.",
             "mode": "tutor",
             "tier": 2,
-            "why": "Each word has three sounds and one letter for each: d-o-g, s-u-n, p-i-g, b-e-d, c-a-t. Accept all five spelled exactly; letters may be a little wobbly."
+            "why": "Each word has three sounds and one letter for each: d-o-g, s-u-n, p-i-g, b-e-d, c-a-t. Accept all five spelled exactly; letters may be a little wobbly.",
+            "pad": true
           },
           {
             "prompt": "Tutor says: fish, chop, duck. Child writes them.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Each word has a two-letter team: fish ends with s-h, chop starts with c-h, and duck ends with c-k. Accept f-i-s-h, c-h-o-p and d-u-c-k."
+            "why": "Each word has a two-letter team: fish ends with s-h, chop starts with c-h, and duck ends with c-k. Accept f-i-s-h, c-h-o-p and d-u-c-k.",
+            "pad": true
           },
           {
             "prompt": "Tutor says: cat, sit. Child writes them.",
             "mode": "tutor",
             "tier": 1,
-            "why": "Stretch each word and write a letter for each sound: c-a-t and s-i-t. Accept both words spelled exactly."
+            "why": "Stretch each word and write a letter for each sound: c-a-t and s-i-t. Accept both words spelled exactly.",
+            "pad": true
           },
           {
             "prompt": "Tutor says: mat, hop. Child writes them.",
             "mode": "tutor",
             "tier": 1,
-            "why": "Stretch each word and write a letter for each sound: m-a-t and h-o-p. Accept both words spelled exactly."
+            "why": "Stretch each word and write a letter for each sound: m-a-t and h-o-p. Accept both words spelled exactly.",
+            "pad": true
           },
           {
             "prompt": "Tutor says: rug, ten, fox, lip. Child writes them.",
             "mode": "tutor",
             "tier": 2,
-            "why": "Each word has three sounds with a short vowel in the middle: r-u-g, t-e-n, f-o-x, l-i-p. Accept all four spelled exactly."
+            "why": "Each word has three sounds with a short vowel in the middle: r-u-g, t-e-n, f-o-x, l-i-p. Accept all four spelled exactly.",
+            "pad": true
           },
           {
             "prompt": "Tutor says: shop, chin, rock. Child writes them.",
             "mode": "tutor",
             "tier": 3,
-            "why": "These words have two-letter teams: shop starts with s-h, chin starts with c-h, and rock ends with c-k. Accept s-h-o-p, c-h-i-n and r-o-c-k."
+            "why": "These words have two-letter teams: shop starts with s-h, chin starts with c-h, and rock ends with c-k. Accept s-h-o-p, c-h-i-n and r-o-c-k.",
+            "pad": true
+          },
+          {
+            "prompt": "Copy this word: cat",
+            "mode": "write",
+            "answer": "cat",
+            "tier": 1,
+            "why": "Look at each letter and write it in its own box: c, a, t. Say the sounds as you write: /k/ /a/ /t/."
+          },
+          {
+            "prompt": "Copy this word: sun",
+            "mode": "write",
+            "answer": "sun",
+            "tier": 1,
+            "why": "Write s, u, n, one in each box. Say the sounds as you write: /s/ /u/ /n/."
+          },
+          {
+            "prompt": "Copy this word: pig",
+            "mode": "write",
+            "answer": "pig",
+            "tier": 1,
+            "why": "Write p, i, g, one in each box. The p and g both have tails that go below the baseline."
+          },
+          {
+            "prompt": "Listen, then write the word you hear.",
+            "mode": "write",
+            "answer": "mat",
+            "tier": 2,
+            "why": "Mat has three sounds, /m/ /a/ /t/, and each sound gets one letter: m, a, t.",
+            "say": "mat"
+          },
+          {
+            "prompt": "Listen carefully, then write the word.",
+            "mode": "write",
+            "answer": "sit",
+            "tier": 2,
+            "why": "Sit has three sounds, /s/ /i/ /t/: s, i, t. The middle sound /i/ is spelled with the letter i.",
+            "say": "sit"
+          },
+          {
+            "prompt": "Hear the word, then spell it.",
+            "mode": "write",
+            "answer": "hop",
+            "tier": 2,
+            "why": "Hop has three sounds, /h/ /o/ /p/: h, o, p. The middle sound /o/ is spelled with o.",
+            "say": "hop"
+          },
+          {
+            "prompt": "Write the word your tutor says.",
+            "mode": "write",
+            "answer": "rug",
+            "tier": 3,
+            "why": "Rug has three sounds, /r/ /u/ /g/: r, u, g. Stretch the word out slowly to hear each one.",
+            "say": "rug"
+          },
+          {
+            "prompt": "Spell the word you hear.",
+            "mode": "write",
+            "answer": "bed",
+            "tier": 3,
+            "why": "Bed has three sounds, /b/ /e/ /d/: b, e, d. Watch the b and d: b has its bump on the right, d has its circle on the left.",
+            "say": "bed"
+          },
+          {
+            "prompt": "Say the word slowly, then write it.",
+            "mode": "write",
+            "answer": "fox",
+            "tier": 3,
+            "why": "Fox has the sounds /f/ /o/ /ks/: f, o, x. The letter x makes the /ks/ sound at the end.",
+            "say": "fox"
           }
         ]
       },
@@ -5420,7 +5646,8 @@
             "prompt": "Look at any picture book page. Write two sentences about it.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept two complete sentences about the page, each starting with a capital letter and ending with a period, like: The dog runs. He has a red ball."
+            "why": "Accept two complete sentences about the page, each starting with a capital letter and ending with a period, like: The dog runs. He has a red ball.",
+            "pad": true
           },
           {
             "prompt": "Look at a picture. Tell who is in it out loud.",
@@ -5438,19 +5665,22 @@
             "prompt": "Look at a picture. Write one sentence about who is in it.",
             "mode": "tutor",
             "tier": 2,
-            "why": "Accept one written sentence that names who is in the picture, like: There is a cat. It should start with a capital and end with a period."
+            "why": "Accept one written sentence that names who is in the picture, like: There is a cat. It should start with a capital and end with a period.",
+            "pad": true
           },
           {
             "prompt": "Look at a picture. Write one sentence with a describing word, like big or red.",
             "mode": "tutor",
             "tier": 2,
-            "why": "Accept one written sentence that uses a describing word, like: The big dog is brown. Check that the describing word fits the picture."
+            "why": "Accept one written sentence that uses a describing word, like: The big dog is brown. Check that the describing word fits the picture.",
+            "pad": true
           },
           {
             "prompt": "Look at a family photo. Write two sentences: who is in it and one detail.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept two sentences: one that tells who is in the photo and one that gives a detail, like: Mom and I are at the park. Mom has a blue hat."
+            "why": "Accept two sentences: one that tells who is in the photo and one that gives a detail, like: Mom and I are at the park. Mom has a blue hat.",
+            "pad": true
           }
         ]
       },
@@ -6740,13 +6970,15 @@
             "prompt": "Write: What is the best season? Give one reason with 'because'.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept a sentence that names a season and gives a reason with because, like \"Winter is the best season because I can play in the snow.\""
+            "why": "Accept a sentence that names a season and gives a reason with because, like \"Winter is the best season because I can play in the snow.\"",
+            "pad": true
           },
           {
             "prompt": "Write: What is the best game to play? Give a reason with 'because' and end with a closing sentence.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept an opinion, a reason with because, and an ending. Example: \"Tag is the best game because it is fast. That is why I love tag.\""
+            "why": "Accept an opinion, a reason with because, and an ending. Example: \"Tag is the best game because it is fast. That is why I love tag.\"",
+            "pad": true
           }
         ]
       },
@@ -7640,13 +7872,15 @@
             "prompt": "Write 3 sentences about something you did: first, then, finally.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept 3 written sentences in order, using first, then and finally, each with a capital letter and an end mark."
+            "why": "Accept 3 written sentences in order, using first, then and finally, each with a capital letter and an end mark.",
+            "pad": true
           },
           {
             "prompt": "Write a story about a day at the park with a beginning, middle and end.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept a story with a beginning, middle and end in order, like arriving at the park, playing on the slide, then going home."
+            "why": "Accept a story with a beginning, middle and end in order, like arriving at the park, playing on the slide, then going home.",
+            "pad": true
           }
         ]
       },
@@ -7791,7 +8025,8 @@
             "prompt": "Write 3 steps for making a sandwich.",
             "mode": "tutor",
             "tier": 2,
-            "why": "Accept 3 steps in an order that works, like \"First get bread. Next add peanut butter. Last put the bread together.\""
+            "why": "Accept 3 steps in an order that works, like \"First get bread. Next add peanut butter. Last put the bread together.\"",
+            "pad": true
           },
           {
             "prompt": "Say aloud 3 steps for washing your hands.",
@@ -7803,13 +8038,15 @@
             "prompt": "Write how to brush your teeth: give it a title, then write steps with first, next, last.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept a title like \"How to Brush Your Teeth\" and steps in order using first, next and last, like put on toothpaste, brush, rinse."
+            "why": "Accept a title like \"How to Brush Your Teeth\" and steps in order using first, next and last, like put on toothpaste, brush, rinse.",
+            "pad": true
           },
           {
             "prompt": "Write how to plant a seed: give it a title, then write steps with first, next, last.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept a title like \"How to Plant a Seed\" and steps in order using first, next and last, like dig a hole, put in the seed, add water."
+            "why": "Accept a title like \"How to Plant a Seed\" and steps in order using first, next and last, like dig a hole, put in the seed, add water.",
+            "pad": true
           }
         ]
       },
@@ -8209,7 +8446,8 @@
             "prompt": "Write today's date at the top of your journal page.",
             "mode": "tutor",
             "tier": 2,
-            "why": "Accept the date written at the top, like \"November 24, 2026\", with a capital letter for the month."
+            "why": "Accept the date written at the top, like \"November 24, 2026\", with a capital letter for the month.",
+            "pad": true
           },
           {
             "prompt": "Say one sentence aloud about your day, then write it with a capital letter and an end mark.",
@@ -8221,13 +8459,15 @@
             "prompt": "Write 2–4 sentences about today. Tutor checks capitals, spaces, end marks.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept 2 to 4 sentences about today. Each one starts with a capital, has spaces between words and ends with an end mark."
+            "why": "Accept 2 to 4 sentences about today. Each one starts with a capital, has spaces between words and ends with an end mark.",
+            "pad": true
           },
           {
             "prompt": "Write 4 sentences about your weekend. Check capitals, spaces and end marks.",
             "mode": "tutor",
             "tier": 3,
-            "why": "Accept 4 sentences about the weekend, each with a capital at the start, spaces between words and an end mark."
+            "why": "Accept 4 sentences about the weekend, each with a capital at the start, spaces between words and an end mark.",
+            "pad": true
           }
         ]
       },

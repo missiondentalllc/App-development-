@@ -32,6 +32,7 @@ Both apps share the same rules (in `packages/TutorCore`):
 - **Three difficulty tiers per skill.** Starter, Core and Challenge. Two right in a row moves up a tier; two misses in a row moves down. A skill only counts as mastered at the Challenge tier.
 - **Three teaching approaches.** Every level and skill that isn't 100% mastered shows three ways to teach it: Show (tutor demonstrates), Do together (take turns on one problem), Try alone (one hint only if stuck).
 - **Skip skills.** During practice, **Skip** sets the current skill aside for the rest of the session without scoring it. On a skill's page, **Skip this skill** takes it out of practice and review for good and keeps the skills that build on it open (undo any time). First Grade also has **Skip this day**.
+- **Writing pad.** Writing questions use lined paper like a first-grade worksheet (top line, dashed middle line, baseline). Short answers (a letter, a spelling word, a plural) are written one letter per box and checked against model letters, catching b/d/p/q reversals; the app shows what it read and the tutor can mark it right if it misread. Spelling words can be read aloud by the app. Sentences and stories are written on the pad and marked by the tutor.
 - **Lesson after a miss.** A wrong answer shows that skill's short lesson before the next question, plus the next teaching approach in order.
 - **Profiles per child.** Each learner has separate progress.
 - **Timed, pausable sessions.** Study time is timestamped and pauses are subtracted, so you can take it off screen time. Partial sessions still count. Progress can be exported to Google Drive or Files from the learner list.
@@ -52,10 +53,12 @@ packages/
 content/
   SCHEMA.md               How lesson files are written
   first-grade/            110-day first-grade curriculum (JSON)
+  handwriting/            Model letter shapes for checking handwriting (a–z, A–Z, 0–9)
   math-ladder/            Grade 1 → doctoral math skill map (JSON)
 tools/
   validate_content.py     Checks content before it ships
   build_web.py            Builds the single-file web apps into docs/
+  make_handwriting_templates.py  Builds the model letters used to check handwriting
 docs/
   *.html                  Built web apps (served by GitHub Pages)
   ARCHITECTURE.md         How the pieces fit

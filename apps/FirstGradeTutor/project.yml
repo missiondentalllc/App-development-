@@ -16,6 +16,8 @@ targets:
       - path: Sources
       - path: ../../content/first-grade/curriculum.json
         buildPhase: resources
+      - path: ../../content/handwriting/templates.json
+        buildPhase: resources
     dependencies:
       - package: TutorCore
     settings:

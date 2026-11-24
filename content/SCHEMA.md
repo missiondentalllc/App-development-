@@ -90,7 +90,13 @@ A skill needs **either** a generator **or** hand-written items (or both; the gen
   answers, right or wrong. For tutor-judged items it says what a correct response looks or sounds like.
   Generated questions build their own explanation from the numbers in the question.
 - Answers are matched loosely: spaces and capitals are ignored, and equal numbers match (`1/2` = `0.5` = `2/4`).
-- `"mode": "tutor"` shows **Correct / Not yet** buttons for the tutor (reading aloud, handwriting).
+- `"mode": "tutor"` shows **Correct / Not yet** buttons for the tutor (reading aloud, open writing).
+  Add `"pad": true` to show lined writing paper so the child writes on screen and the tutor reads it there.
+- `"mode": "write"` has the child write a short answer (1–8 letters or digits) on lined paper, one box
+  per character. The app checks each box against model letters (`content/handwriting/templates.json`,
+  built by `tools/make_handwriting_templates.py`), shows what it read, and the tutor can mark it right
+  if the app misread it. Optional: `"say": "dog"` (a word the tutor reads aloud; the app can speak it
+  too) and `"matchCase": true` (capital vs lowercase must match).
 - Choices are shuffled on screen.
 
 **Generators** (endless questions; optional `params` in brackets)

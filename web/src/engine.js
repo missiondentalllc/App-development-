@@ -732,9 +732,10 @@ class QuestionFactory {
       if (items.length) break;
     }
     const recent = this.recent[skill.id] || [];
-    const fresh = items.filter(i => !recent.includes(i.prompt));
+    const key = i => i.prompt + "|" + (i.say || "");
+    const fresh = items.filter(i => !recent.includes(key(i)));
     const item = Dice.pick(fresh.length ? fresh : items);
-    const updated = [...recent, item.prompt];
+    const updated = [...recent, key(item)];
     if (updated.length > Math.max(1, items.length - 1)) updated.shift();
     this.recent[skill.id] = updated;
     return {
@@ -743,6 +744,13 @@ class QuestionFactory {
       choices: item.choices ? Dice.shuffled(item.choices) : null,
       answer: item.answer ?? null,
       tutorJudged: item.mode === "tutor",
+      // "write": the child writes a short answer on the pad, one box per character.
+      write: item.mode === "write",
+      // A writing pad for tutor-judged writing (sentences, stories).
+      pad: item.mode === "tutor" && !!item.pad,
+      // Words the tutor reads aloud (spelling dictation); the app can speak them too.
+      say: item.say || null,
+      matchCase: !!item.matchCase,
       why: item.why || null,
       tier,
     };
@@ -897,6 +905,29 @@ class PracticeSession {
   }
   next() { this.feedback = null; this.lessonToShow = null; this.approach = null; this.advance(); }
 
+  /** A written answer, already checked by the handwriting checker. */
+  submitWritten(read, isCorrect) {
+    if (!this.question || this.feedback || this.isPaused || !this.question.write) return;
+    this.record(read || "(blank)", isCorrect, this.elapsed());
+  }
+
+  /** The tutor says a handwritten answer the app marked wrong was right after all. */
+  overrideLast() {
+    const u = this.undo, fb = this.feedback;
+    if (!u || !fb || fb.correct || !this.question?.write) return;
+    const skill = this.graph.skill(u.skillId), cid = this.curriculum.id;
+    const fixed = Comprehension.record(u.before, true, u.secs, skill.sightPaceSeconds);
+    this.profile.progress[cid] = { ...statesOf(this.profile, cid), [skill.id]: fixed };
+    const a = this.session.attempts[u.attempt];
+    if (a) { a.correct = true; a.given += " (tutor: correct)"; }
+    this.missesBySkill[skill.id] = u.misses;
+    this.correct += 1;
+    this.feedback = { ...fb, correct: true, overridden: true, sightPace: false };
+    this.lessonToShow = null;
+    this.approach = null;
+    this.persist();
+  }
+
   /** Skip the current skill for the rest of this session. Nothing is scored. */
   get canSkip() { return !this.diagnostic && !!this.question && !this.feedback && !this.isPaused && !this.finished; }
   skip() {
@@ -954,7 +985,10 @@ class PracticeSession {
     if (!q || !skill) return;
     const secs = Math.min(seconds, Comprehension.questionCapSeconds);
     const cid = this.curriculum.id;
-    const updated = Comprehension.record(stateOf(this.profile, cid, skill.id), isCorrect, secs, skill.sightPaceSeconds);
+    const before = stateOf(this.profile, cid, skill.id);
+    const updated = Comprehension.record(before, isCorrect, secs, skill.sightPaceSeconds);
+    // Kept so the tutor can mark a handwriting check as right after all.
+    this.undo = { skillId: skill.id, before, secs, attempt: this.session.attempts.length, misses: this.missesBySkill[skill.id] || 0 };
     this.profile.progress[cid] = { ...statesOf(this.profile, cid), [skill.id]: updated };
     this.session.attempts.push({ skillId: skill.id, prompt: q.prompt, given, correct: isCorrect, seconds: secs, at: Date.now() });
     if (this.diagnostic) this.diagnostic.record(skill, isCorrect, secs);

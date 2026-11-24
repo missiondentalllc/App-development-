@@ -32,6 +32,7 @@ async function boot() {
     return;
   }
   App.graph = new SkillGraph(App.curriculum);
+  try { if (window.HANDWRITING) Handwriting.load(window.HANDWRITING); } catch (e) {}
   App.picker = new SkillPicker(App.graph);
   document.title = App.curriculum.title;
   let last = null;
@@ -75,6 +76,7 @@ function render(scroll) {
   if (cur.screen !== "learners" && !profile()) { App.stack = [{ screen: "learners" }]; return render(true); }
   $root().innerHTML = (views[cur.screen] || viewLearners)(cur);
   if (scroll) window.scrollTo(0, 0);
+  Pad.attach();
   const input = document.getElementById("answer-input");
   if (input) { input.value = App.typed; input.focus({ preventScroll: true }); }
 }
@@ -460,13 +462,23 @@ function viewSession(cur) {
 
 function questionView(q) {
   const left = Math.max(0, Comprehension.questionCapSeconds - App.session.elapsed());
-  let html = `<div class="timer" aria-hidden="true"><span id="timer-fill" class="${left > 15 ? "" : "late"}" style="width:${(left / 60) * 100}%"></span></div>
+  let html = `${q.pad ? "" : `<div class="timer" aria-hidden="true"><span id="timer-fill" class="${left > 15 ? "" : "late"}" style="width:${(left / 60) * 100}%"></span></div>`}
     <p class="prompt">${esc(q.prompt)}</p>
     ${termsBox([q.prompt, ...(q.choices || [])])}`;
-  if (q.choices) {
+  if (q.say) {
+    html += `<div class="say-row"><button class="btn" data-action="say">Hear the word</button>
+      <span class="small muted">Tutor: say <strong>“${esc(q.say)}”</strong></span></div>`;
+  }
+  if (q.write) {
+    const n = [...q.answer.replace(/\s+/g, "")].length;
+    html += `${Pad.html("boxes", n)}
+      <p class="small muted center">Write one letter in each box.</p>
+      <button class="btn primary big wide" data-action="check-writing">Check</button>`;
+  } else if (q.choices) {
     html += `<div class="choices">${q.choices.map(c => `<button class="choice" data-action="choose" data-value="${esc(c)}">${esc(c)}</button>`).join("")}</div>`;
   } else if (q.tutorJudged) {
-    html += `<p class="small muted center">Tutor: mark the answer</p><div class="btn-row center-row">
+    if (q.pad) html += Pad.html("free", 4);
+    html += `<p class="small muted center">Tutor: ${q.pad ? "read what was written, then " : ""}mark the answer</p><div class="btn-row center-row">
       <button class="btn big warn-btn" data-action="judge" data-ok="0">Not yet</button>
       <button class="btn big ok-btn" data-action="judge" data-ok="1">Correct</button></div>`;
   } else if (keypadOK(q)) {
@@ -494,6 +506,9 @@ function feedbackView(s) {
     <h2 class="display">${fb.correct ? (fb.sightPace ? "Right, at sight pace!" : "Right!") : "Not quite"}</h2>
     ${!fb.correct && fb.expected ? `<p class="answer-reveal">${fb.given && fb.given !== "(time up)" ? `You answered <strong class="given">${esc(fb.given)}</strong>. ` : fb.given === "(time up)" ? "Time ran out. " : ""}The answer is <strong>${esc(fb.expected)}</strong>.</p>` : ""}
     <p class="muted num">${fb.seconds.toFixed(1)} seconds</p>
+    ${s.question?.write && Pad.snapshot ? `<figure class="writing-shot"><img src="${Pad.snapshot}" alt="What was written">
+      <figcaption class="small muted">${fb.overridden ? "Marked right by the tutor." : `The app read: <strong>${esc(fb.given)}</strong>`}</figcaption></figure>` : ""}
+    ${s.question?.write && !fb.correct ? `<button class="btn" data-action="override">Tutor: it was right</button>` : ""}
     ${fb.why ? `<div class="why"><span class="label">${fb.correct ? "Why it's right" : "Why"}</span><p>${esc(fb.why)}</p></div>` : ""}
     ${s.lessonToShow ? lessonCard(s.lessonToShow, true, [s.question?.prompt, fb.expected, fb.why], s.approach)
                      : termsBox([s.question?.prompt, fb.expected, fb.why])}
@@ -529,7 +544,8 @@ function tick() {
   const left = Math.max(0, Comprehension.questionCapSeconds - s.elapsed());
   const fill = document.getElementById("timer-fill");
   if (fill) { fill.style.width = `${(left / 60) * 100}%`; fill.classList.toggle("late", left <= 15); }
-  if (left <= 0) { s.timeUp(); render(); }
+  // Free writing (sentences, stories) takes young children longer than a minute: no time limit there.
+  if (left <= 0 && !s.question.pad) { s.timeUp(); render(); }
 }
 
 // ---------- Events ----------
@@ -607,8 +623,21 @@ function onClick(e) {
     case "choose": s?.submit(el.dataset.value); return render();
     case "judge": s?.judge(el.dataset.ok === "1"); return render();
     case "key": return pressKey(el.dataset.key);
+    case "say": return speak(s?.question?.say);
+    case "pad-undo": return Pad.undo();
+    case "pad-clear": return Pad.clear();
+    case "check-writing": {
+      if (!s?.question?.write) return;
+      if (!Pad.hasInk()) { toast("Write the answer in the boxes first."); return; }
+      const result = Handwriting.checkAnswer(Pad.boxes(), s.question.answer, { matchCase: s.question.matchCase });
+      Pad.takeSnapshot();
+      s.submitWritten(result.read, result.correct);
+      Pad.reset();
+      return render();
+    }
+    case "override": s?.overrideLast(); return render();
     case "check": return sendTyped();
-    case "next": App.typed = ""; s?.next(); return render();
+    case "next": App.typed = ""; Pad.reset(); Pad.snapshot = null; s?.next(); return render();
     case "session-done": {
       const done = App.sessionDone; App.sessionDone = null;
       if (done) return done();
@@ -643,6 +672,90 @@ function addLearner() {
   if (!name) { input.focus(); return; }
   ProfileStore.add(name);
   render();
+}
+
+// ---------- Writing pad ----------
+// Lined like first-grade handwriting paper: solid top line, dashed middle line, solid
+// baseline, and room below for tails. In guide-line units y = 2 top, 1 middle, 0 base, -1 tails.
+const Pad = {
+  kind: null, cells: 1, strokes: [], current: null, snapshot: null, canvas: null,
+  html(kind, n) {
+    if (this.kind !== kind || this.cells !== n) { this.kind = kind; this.cells = n; this.strokes = []; }
+    return `<div class="pad-wrap"><canvas id="pad" class="pad pad-${kind}" aria-label="${kind === "boxes" ? "Writing boxes" : "Writing paper"}"></canvas>
+      <div class="btn-row pad-tools"><button class="btn small" data-action="pad-undo">Undo</button><button class="btn small" data-action="pad-clear">Clear</button></div></div>`;
+  },
+  reset() { this.strokes = []; this.current = null; },
+  hasInk() { return this.strokes.some(s => s.length > 1); },
+  // Geometry in CSS pixels.
+  rows() { return this.kind === "free" ? this.cells : 1; },
+  geom() {
+    const c = this.canvas, w = c.clientWidth, h = c.clientHeight, rowH = h / this.rows();
+    const u = rowH / 4.4;                     // one guide unit: middle line to baseline
+    return { w, h, rowH, u, base: r => r * rowH + rowH * 0.12 + 2 * u };
+  },
+  attach() {
+    const c = document.getElementById("pad");
+    this.canvas = c;
+    if (!c) return;
+    const dpr = window.devicePixelRatio || 1;
+    c.width = Math.round(c.clientWidth * dpr); c.height = Math.round(c.clientHeight * dpr);
+    const ctx = c.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const pos = e => { const r = c.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    c.onpointerdown = e => { e.preventDefault(); c.setPointerCapture(e.pointerId); this.current = [pos(e)]; this.strokes.push(this.current); this.draw(); };
+    c.onpointermove = e => { if (!this.current) return; e.preventDefault(); this.current.push(pos(e)); this.draw(); };
+    c.onpointerup = c.onpointercancel = () => { this.current = null; };
+    this.draw();
+  },
+  draw() {
+    const c = this.canvas; if (!c) return;
+    const ctx = c.getContext("2d"), g = this.geom(), css = getComputedStyle(document.documentElement);
+    const ink = css.getPropertyValue("--ink").trim(), line = css.getPropertyValue("--accent").trim(), soft = css.getPropertyValue("--line").trim();
+    ctx.clearRect(0, 0, g.w, g.h);
+    for (let r = 0; r < this.rows(); r++) {
+      const b = g.base(r);
+      const hline = (y, dash, color, width) => { ctx.beginPath(); ctx.setLineDash(dash); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.moveTo(0, y); ctx.lineTo(g.w, y); ctx.stroke(); };
+      hline(b - 2 * g.u, [], soft, 1.5);       // top line
+      hline(b - g.u, [6, 6], soft, 1.5);       // dashed middle line
+      hline(b, [], line, 2);                   // baseline
+      hline(b + g.u, [2, 6], soft, 1);         // bottom of tails
+    }
+    ctx.setLineDash([]);
+    if (this.kind === "boxes") {
+      ctx.strokeStyle = soft; ctx.lineWidth = 1.5;
+      for (let i = 1; i < this.cells; i++) { const x = (g.w / this.cells) * i; ctx.beginPath(); ctx.moveTo(x, 6); ctx.lineTo(x, g.h - 6); ctx.stroke(); }
+    }
+    ctx.strokeStyle = ink; ctx.lineWidth = Math.max(3, g.u * 0.16); ctx.lineCap = "round"; ctx.lineJoin = "round";
+    for (const s of this.strokes) {
+      ctx.beginPath();
+      s.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
+      if (s.length === 1) ctx.lineTo(s[0].x + 0.1, s[0].y + 0.1);
+      ctx.stroke();
+    }
+  },
+  undo() { this.strokes.pop(); this.draw(); },
+  clear() { this.strokes = []; this.draw(); },
+  takeSnapshot() { try { this.snapshot = this.canvas.toDataURL("image/png"); } catch (e) { this.snapshot = null; } },
+  /** Strokes per box, in guide-line units, for the handwriting checker. */
+  boxes() {
+    const g = this.geom(), cw = g.w / this.cells, b = g.base(0);
+    const out = Array.from({ length: this.cells }, () => []);
+    for (const s of this.strokes) {
+      if (!s.length) continue;
+      const cx = s.reduce((t, p) => t + p.x, 0) / s.length;
+      const i = Math.min(this.cells - 1, Math.max(0, Math.floor(cx / cw)));
+      out[i].push(s.map(p => [(p.x - i * cw) / g.u, (b - p.y) / g.u]));
+    }
+    return out;
+  },
+};
+
+function speak(text) {
+  if (!text) return;
+  try {
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.8; u.lang = "en-US";
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  } catch (e) { toast("This browser can't speak. Tutor, please read the word aloud."); }
 }
 
 // ---------- Backup ----------

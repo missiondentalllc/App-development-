@@ -25,6 +25,8 @@ public final class PracticeSession: ObservableObject {
         public let why: String?
         public let seconds: Double
         public let sightPace: Bool
+        /// The tutor marked a handwritten answer right after the app said no.
+        public var overridden = false
     }
 
     @Published public private(set) var question: Question?
@@ -36,6 +38,8 @@ public final class PracticeSession: ObservableObject {
     /// Set after a miss: which teaching approach to show (0 Show, 1 Do together, 2 Try alone).
     @Published public private(set) var approachIndex: Int?
     private var missesBySkill: [String: Int] = [:]
+    /// Kept so the tutor can mark a handwriting check as right after all.
+    private var undo: (skillId: String, before: SkillState, seconds: Double, attempt: Int, misses: Int)?
     @Published public private(set) var isPaused = false
     @Published public private(set) var answered = 0
     @Published public private(set) var correct = 0
@@ -127,6 +131,32 @@ public final class PracticeSession: ObservableObject {
     }
 
     /// Move on after feedback (and after the lesson, if one was shown).
+    /// A written answer, already checked by the handwriting checker.
+    public func submitWritten(read: String, correct isCorrect: Bool) {
+        guard let q = question, q.write, feedback == nil, !isPaused else { return }
+        record(given: read.isEmpty ? "(blank)" : read, correct: isCorrect, seconds: elapsed())
+    }
+
+    /// The tutor says a handwritten answer the app marked wrong was right after all.
+    public func overrideLast() {
+        guard let u = undo, let fb = feedback, !fb.correct, question?.write == true,
+              let skill = graph.skill(u.skillId) else { return }
+        let fixed = Comprehension.record(u.before, correct: true, seconds: u.seconds, sightPace: skill.sightPaceSeconds)
+        profile.setState(fixed, for: skill.id, in: curriculum.id)
+        if u.attempt < session.attempts.count {
+            let a = session.attempts[u.attempt]
+            session.attempts[u.attempt] = Attempt(skillId: a.skillId, prompt: a.prompt, given: a.given + " (tutor: correct)",
+                                                  correct: true, seconds: a.seconds, at: a.at)
+        }
+        missesBySkill[skill.id] = u.misses
+        correct += 1
+        feedback = Feedback(correct: true, expected: fb.expected, given: fb.given, why: fb.why,
+                            seconds: fb.seconds, sightPace: false, overridden: true)
+        lessonToShow = nil
+        approachIndex = nil
+        persist()
+    }
+
     /// True when the current skill can be skipped (not during the placement test).
     public var canSkip: Bool { diagnostic == nil && question != nil && feedback == nil && !isPaused && !finished }
 
@@ -198,6 +228,7 @@ public final class PracticeSession: ObservableObject {
         guard let q = question, let skill = currentSkill else { return }
         let secs = min(seconds, Comprehension.questionCapSeconds)
         let old = profile.state(skill.id, in: curriculum.id)
+        undo = (skill.id, old, secs, session.attempts.count, missesBySkill[skill.id] ?? 0)
         let new = Comprehension.record(old, correct: isCorrect, seconds: secs, sightPace: skill.sightPaceSeconds)
         profile.setState(new, for: skill.id, in: curriculum.id)
         session.attempts.append(Attempt(skillId: skill.id, prompt: q.prompt, given: given, correct: isCorrect, seconds: secs))

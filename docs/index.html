@@ -189,6 +189,16 @@ textarea.field { font-size: 0.8rem; font-family: ui-monospace, Menlo, monospace;
   border-radius: 0 10px 10px 0; padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; }
 .big-num { font-size: 1.6rem; font-weight: 600; }
 
+/* Writing pad */
+.pad-wrap { display: flex; flex-direction: column; gap: 8px; align-self: stretch; }
+.pad { width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; touch-action: none; display: block; cursor: crosshair; }
+.pad-boxes { height: 170px; }
+.pad-free { height: 420px; }
+.pad-tools { justify-content: flex-end; }
+.say-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.writing-shot { margin: 0; display: flex; flex-direction: column; gap: 6px; align-items: center; align-self: stretch; }
+.writing-shot img { width: 100%; max-width: 480px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+
 #toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); opacity: 0;
   background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 12px; font-size: 0.9rem; max-width: calc(100% - 32px);
   transition: opacity 0.2s, transform 0.2s; pointer-events: none; z-index: 20; }

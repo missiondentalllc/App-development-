@@ -13,6 +13,13 @@ public struct Question: Identifiable, Hashable {
     public var tier: Int = 3
     /// Short explanation shown after the learner answers, right or wrong.
     public var why: String?
+    /// The child writes the answer on the pad, one box per character.
+    public var write = false
+    /// Tutor-judged writing: show a writing pad.
+    public var pad = false
+    /// Words to read aloud (spelling dictation).
+    public var say: String?
+    public var matchCase = false
 
     public init(skillId: String, prompt: String, choices: [String]? = nil,
                 answer: String?, tutorJudged: Bool = false) {

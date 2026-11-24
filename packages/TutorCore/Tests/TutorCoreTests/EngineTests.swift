@@ -167,3 +167,18 @@ final class SkipTests: XCTestCase {
         XCTAssertTrue(p.skippedSkills(in: "c").isEmpty)
     }
 }
+
+final class HandwritingTests: XCTestCase {
+    func testModelLettersPassAndReversalsAreCaught() throws {
+        let path = #filePath.replacingOccurrences(of: "packages/TutorCore/Tests/TutorCoreTests/EngineTests.swift",
+                                                  with: "content/handwriting/templates.json")
+        let data = try Data(contentsOf: URL(fileURLWithPath: path))
+        let checker = try XCTUnwrap(Handwriting(templatesJSON: data))
+        let doc = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        let chars = try XCTUnwrap(doc["chars"] as? [String: [[[[Double]]]]])
+        func strokes(_ ch: String) -> [Handwriting.Stroke] { chars[ch]![0].map { $0.map { CGPoint(x: $0[0], y: $0[1]) } } }
+        XCTAssertTrue(checker.checkBox(strokes("b"), expected: "b").ok)
+        XCTAssertFalse(checker.checkBox(strokes("b"), expected: "d").ok)
+        XCTAssertTrue(checker.checkAnswer([strokes("c"), strokes("a"), strokes("t")], answer: "cat").correct)
+    }
+}

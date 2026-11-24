@@ -131,10 +131,17 @@ public struct Item: Codable, Hashable {
     public let choices: [String]?
     /// Correct answer. Ignored for tutor-judged items.
     public let answer: String?
-    /// "auto" (default) or "tutor" — the tutor marks it right/wrong (reading aloud, writing).
+    /// "auto" (default), "tutor" (the tutor marks it: reading aloud, open writing) or
+    /// "write" (the child writes a short answer on the pad, one box per character).
     public let mode: String?
     /// Difficulty: 1 Starter, 2 Core, 3 Challenge (the full skill). Nil fits any tier.
     public var tier: Int? = nil
     /// Short explanation shown after the learner answers, right or wrong.
     public var why: String? = nil
+    /// Tutor-judged items: show a writing pad (sentences, stories).
+    public var pad: Bool? = nil
+    /// Words the tutor reads aloud for spelling; the app can speak them too.
+    public var say: String? = nil
+    /// Written answers: capital vs lowercase must match.
+    public var matchCase: Bool? = nil
 }

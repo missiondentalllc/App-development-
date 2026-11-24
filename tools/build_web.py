@@ -35,12 +35,16 @@ def script_safe(text: str) -> str:
 
 def page_body(kind: str, curriculum_json: str | None) -> str:
     engine = (SRC / "engine.js").read_text()
+    handwriting = (SRC / "handwriting.js").read_text()
+    templates = (ROOT / "content" / "handwriting" / "templates.json").read_text().strip()
     app = (SRC / "app.js").read_text()
     parts = ['<div id="app"><p style="padding:24px">Loading…</p></div>',
              f'<script>window.APP_CONFIG = {json.dumps({"kind": kind})};</script>']
     if curriculum_json is not None:
         parts.append(f'<script>window.CURRICULUM = {script_safe(curriculum_json)};</script>')
+    parts.append(f"<script>window.HANDWRITING = {script_safe(templates)};</script>")
     parts.append(f"<script>\n{engine}\n</script>")
+    parts.append(f"<script>\n{handwriting}\n</script>")
     parts.append(f"<script>\n{app}\n</script>")
     return "\n".join(parts)
 

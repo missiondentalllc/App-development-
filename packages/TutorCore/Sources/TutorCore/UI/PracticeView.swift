@@ -7,6 +7,8 @@ public struct PracticeView: View {
     @ObservedObject var session: PracticeSession
     var onDone: () -> Void
     @State private var typed = ""
+    @StateObject private var pad = PadModel()
+    private static let handwriting = Handwriting.bundled()
     @State private var now = Date()
     private let tick = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()
 
@@ -26,7 +28,8 @@ public struct PracticeView: View {
         .onAppear { if session.question == nil && !session.finished { session.start() } }
         .onReceive(tick) { date in
             now = date
-            if session.feedback == nil, !session.isPaused, session.question != nil,
+            // Free writing (sentences, stories) takes young children longer than a minute: no time limit there.
+            if session.feedback == nil, !session.isPaused, let q = session.question, !q.pad,
                session.elapsed(now: date) >= Comprehension.questionCapSeconds {
                 session.timeUp()
             }
@@ -76,14 +79,53 @@ public struct PracticeView: View {
     private func questionView(_ q: Question) -> some View {
         let left = max(0, Comprehension.questionCapSeconds - session.elapsed(now: now))
         return VStack(spacing: 24) {
-            ProgressView(value: left, total: Comprehension.questionCapSeconds)
-                .tint(left > 15 ? .green : .orange)
+            if !q.pad {
+                ProgressView(value: left, total: Comprehension.questionCapSeconds)
+                    .tint(left > 15 ? .green : .orange)
+            }
             Text(q.prompt)
                 .font(.system(size: 34, weight: .semibold, design: .rounded))
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.5)
             ShortFormsBox(entries: session.curriculum.shortForms(in: [q.prompt] + (q.choices ?? [])))
-            if let choices = q.choices {
+            if let say = q.say {
+                HStack {
+                    Button("Hear the word") { Speaker.say(say) }.buttonStyle(.bordered)
+                    Text("Tutor: say “\(say)”").font(.callout).foregroundStyle(.secondary)
+                }
+            }
+            if q.write, let answer = q.answer {
+                let cells = answer.filter { !$0.isWhitespace }.count
+                VStack(spacing: 8) {
+                    WritingPad(model: pad, cells: cells)
+                    HStack {
+                        Spacer()
+                        Button("Undo") { pad.undo() }.buttonStyle(.bordered)
+                        Button("Clear") { pad.clear() }.buttonStyle(.bordered)
+                    }
+                    Text("Write one letter in each box.").font(.caption).foregroundStyle(.secondary)
+                    if let checker = PracticeView.handwriting {
+                        Button {
+                            guard pad.hasInk else { return }
+                            let result = checker.checkAnswer(pad.boxes(cells: cells), answer: answer, matchCase: q.matchCase)
+                            pad.keepSnapshot()
+                            session.submitWritten(read: result.read, correct: result.correct)
+                            pad.clear()
+                        } label: {
+                            Text("Check").frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent).controlSize(.large)
+                    } else {
+                        // Model letters missing from the app bundle: the tutor judges instead.
+                        HStack(spacing: 16) {
+                            Button("Not yet") { pad.keepSnapshot(); session.submitWritten(read: "(tutor)", correct: false); pad.clear() }
+                                .buttonStyle(.bordered).tint(.orange)
+                            Button("Correct") { pad.keepSnapshot(); session.submitWritten(read: answer, correct: true); pad.clear() }
+                                .buttonStyle(.borderedProminent).tint(.green)
+                        }
+                    }
+                }
+            } else if let choices = q.choices {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))], spacing: 12) {
                     ForEach(choices, id: \.self) { choice in
                         Button(choice) { session.submit(choice) }
@@ -94,7 +136,16 @@ public struct PracticeView: View {
                 }
             } else if q.tutorJudged {
                 VStack(spacing: 8) {
-                    Text("Tutor: mark the answer").font(.caption).foregroundStyle(.secondary)
+                    if q.pad {
+                        WritingPad(model: pad, cells: 0, rows: 4)
+                        HStack {
+                            Spacer()
+                            Button("Undo") { pad.undo() }.buttonStyle(.bordered)
+                            Button("Clear") { pad.clear() }.buttonStyle(.bordered)
+                        }
+                    }
+                    Text(q.pad ? "Tutor: read what was written, then mark the answer" : "Tutor: mark the answer")
+                        .font(.caption).foregroundStyle(.secondary)
                     HStack(spacing: 16) {
                         Button("Not yet") { session.judge(correct: false) }
                             .buttonStyle(.bordered).tint(.orange)
@@ -149,6 +200,14 @@ public struct PracticeView: View {
                 .multilineTextAlignment(.center)
             }
             Text(String(format: "%.1f seconds", fb.seconds)).foregroundStyle(.secondary)
+            if session.question?.write == true, let answer = session.question?.answer {
+                WritingPad(model: pad, cells: answer.filter { !$0.isWhitespace }.count, interactive: false, showSnapshot: true)
+                Text(fb.overridden ? "Marked right by the tutor." : "The app read: \(fb.given)")
+                    .font(.callout).foregroundStyle(.secondary)
+                if !fb.correct {
+                    Button("Tutor: it was right") { session.overrideLast() }.buttonStyle(.bordered)
+                }
+            }
             if let why = fb.why {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(fb.correct ? "Why it's right" : "Why").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
@@ -165,7 +224,7 @@ public struct PracticeView: View {
             } else {
                 ShortFormsBox(entries: session.curriculum.shortForms(in: [session.question?.prompt, fb.expected, fb.why]))
             }
-            Button(session.lessonToShow == nil ? "Next" : "Got it — try another") { session.next() }
+            Button(session.lessonToShow == nil ? "Next" : "Got it — try another") { pad.clear(); session.next() }
                 .buttonStyle(.borderedProminent)
                 .font(.title2)
         }
