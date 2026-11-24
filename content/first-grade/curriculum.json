@@ -117,32 +117,37 @@
           {
             "prompt": "Read aloud: m, s, t, b, f",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Each letter has its own sound: m says /m/, s says /s/, t says /t/, b says /b/, f says /f/. Accept the letter sounds, not the letter names, said clearly."
           },
           {
             "prompt": "Read aloud: p, n, d, g, l",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Listen for the sounds: p says /p/, n says /n/, d says /d/, g says /g/ as in goat, l says /l/. Accept quick, clear sounds, not letter names."
           },
           {
             "prompt": "Read aloud: c, h, j, k, r",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Listen for the sounds: c says /k/ as in cat, h says /h/, j says /j/, k says /k/, r says /r/. Accept a short, clean sound for each one."
           },
           {
             "prompt": "Read aloud: v, w, x, y, z",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Listen for the sounds: v says /v/, w says /w/, y says /y/ as in yes, z says /z/. The letter x usually says /ks/ as in fox, so accept /ks/ for x."
           },
           {
-            "prompt": "What sound does 'm' start?",
+            "prompt": "Which word starts with the /m/ sound?",
             "choices": [
               "moon",
               "sun",
               "top"
             ],
             "answer": "moon",
-            "tier": 1
+            "tier": 1,
+            "why": "Moon starts with the /m/ sound: mmm-oon. Sun starts with /s/ and top starts with /t/, so moon is the only m word."
           },
           {
             "prompt": "Which word starts with the /s/ sound?",
@@ -152,17 +157,20 @@
               "top"
             ],
             "answer": "sun",
-            "tier": 1
+            "tier": 1,
+            "why": "Sun starts with /s/, like a snake hissing: sss-un. Map starts with /m/ and top starts with /t/."
           },
           {
             "prompt": "Read aloud as fast as you can: a, e, i, o, u, q",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "These are the short vowel sounds: a as in apple, e as in egg, i as in itch, o as in octopus, u as in up. The letter q almost always comes with u and says /kw/ as in queen. Accept clear sounds said quickly."
           },
           {
             "prompt": "Read aloud fast: b, d, p, q, g",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "These letters look alike, so go slowly at first: b says /b/, d says /d/, p says /p/, q says /kw/, g says /g/. Accept each sound correct with no mix-ups between b and d or p and q."
           }
         ]
       },
@@ -197,37 +205,44 @@
           {
             "prompt": "Write the lowercase alphabet. Tutor checks b/d/p/q.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "All 26 small letters, a to z, should start at the top. Check that b has its bump on the right, d has its bump on the left, and p and q have tails that go below the line."
           },
           {
             "prompt": "Write the capital alphabet.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "All 26 capital letters, A to Z, should be tall and touch the top line. Accept letters that start at the top and face the right way, like E and S not backwards."
           },
           {
             "prompt": "Write these capitals: L, T, H, E",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "These capitals are made with straight lines that start at the top: L is down and across, T is across the top and down the middle, H is two tall lines and a bridge, E is a tall line and three across. Accept letters that stand tall and face the right way."
           },
           {
             "prompt": "Trace and then write: a, c, o",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "The letters a, c and o all start with a round curve that begins near the top and goes around to the left, like a clock going backwards. Accept round, closed shapes for a and o and an open shape for c."
           },
           {
             "prompt": "Write these tall letters: b, d, h, k, l, t",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Tall letters reach up to the top line: b, d, h, k, l and t all have a tall stick. Accept letters where the stick touches the top line and the rest sits on the bottom line."
           },
           {
             "prompt": "Write these tail letters so the tails go below the line: g, j, p, q, y",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Tail letters hang below the line, like a monkey tail: g, j, p, q and y. Accept letters whose tails clearly dip under the bottom line."
           },
           {
             "prompt": "Write b, d, p, q side by side and tell how each one is different.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "All four use a stick and a circle, but they point different ways. A good answer sounds like: b has the bump on the right at the bottom, d has the bump on the left, p has a tail down with the bump on the right, q has a tail down with the bump on the left."
           }
         ]
       },
@@ -298,12 +313,14 @@
           {
             "prompt": "Read aloud: cat, map, sad, ham",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short a in the middle, like in apple: c-a-t, m-a-p, s-a-d, h-a-m. Accept smooth blending with the /a/ sound, not the long a in cake."
           },
           {
             "prompt": "Read aloud: bag, fan, tap, jam",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has the short a sound in the middle: b-a-g, f-a-n, t-a-p, j-a-m. Accept smooth blending without long stops between sounds."
           },
           {
             "prompt": "Which word has short a?",
@@ -313,7 +330,8 @@
               "hit"
             ],
             "answer": "hat",
-            "tier": 1
+            "tier": 1,
+            "why": "Hat has the /a/ sound like in apple: h-a-t. Hot has an o sound and hit has an i sound."
           },
           {
             "prompt": "Which word has the /a/ sound like in apple?",
@@ -323,17 +341,20 @@
               "cop"
             ],
             "answer": "cap",
-            "tier": 1
+            "tier": 1,
+            "why": "Cap has the /a/ sound like in apple: c-a-p. Cup has the /u/ sound and cop has the /o/ sound."
           },
           {
             "prompt": "Read aloud: ran, wag, pat, cab, lad",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word has short a in the middle: r-a-n, w-a-g, p-a-t, c-a-b, l-a-d. Accept all five read with the /a/ sound and smooth blending."
           },
           {
             "prompt": "Read this sentence aloud: The cat had a bag.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Cat, had and bag all have short a, like in apple. Accept the whole sentence read smoothly, with the words The and a read by sight."
           }
         ]
       },
@@ -373,12 +394,14 @@
               "Touch"
             ],
             "answer": "Smell",
-            "tier": 1
+            "tier": 1,
+            "why": "Your nose is how you smell things, like cookies baking. You taste with your tongue and touch with your skin."
           },
           {
             "prompt": "How many senses do we have?",
             "answer": "5",
-            "tier": 2
+            "tier": 2,
+            "why": "We have 5 senses: sight, hearing, smell, taste and touch. Count them on one hand, one finger for each."
           },
           {
             "prompt": "You feel a soft blanket with your sense of…",
@@ -388,7 +411,8 @@
               "Hearing"
             ],
             "answer": "Touch",
-            "tier": 2
+            "tier": 2,
+            "why": "Your skin feels things, so touching tells you a blanket is soft. Sight is for seeing and hearing is for sounds."
           },
           {
             "prompt": "Which body part do you see with?",
@@ -398,7 +422,8 @@
               "Nose"
             ],
             "answer": "Eyes",
-            "tier": 1
+            "tier": 1,
+            "why": "Your eyes are what you see with. Ears are for hearing and your nose is for smelling."
           },
           {
             "prompt": "You hear a dog bark. Which sense are you using?",
@@ -408,7 +433,8 @@
               "Sight"
             ],
             "answer": "Hearing",
-            "tier": 2
+            "tier": 2,
+            "why": "A bark is a sound, and sounds come in through your ears, so you are using hearing. You could see the dog, but sight does not hear the bark."
           },
           {
             "prompt": "Which sense tells you a lemon is sour?",
@@ -418,12 +444,14 @@
               "Sight"
             ],
             "answer": "Taste",
-            "tier": 3
+            "tier": 3,
+            "why": "Sour is a taste, and you taste with your tongue. You could see that a lemon is yellow, but seeing cannot tell you it is sour."
           },
           {
             "prompt": "Name all five senses and the body part for each one.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "A full answer names five: sight with eyes, hearing with ears, smell with nose, taste with tongue, and touch with skin. Accept hands for touch too."
           }
         ]
       },
@@ -462,12 +490,14 @@
               "To make people sad"
             ],
             "answer": "To stay safe and be fair",
-            "tier": 1
+            "tier": 1,
+            "why": "Rules help keep us safe and make things fair for everyone. Good rules are not made to make people sad."
           },
           {
             "prompt": "Name two rules at home.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept any two real home rules, like brush your teeth, put your toys away, or no jumping on the bed. A strong answer also says why the rule helps."
           },
           {
             "prompt": "Which is a safe rule?",
@@ -476,7 +506,8 @@
               "Run with scissors"
             ],
             "answer": "Walk in the hallway",
-            "tier": 1
+            "tier": 1,
+            "why": "Walking in the hallway keeps people from bumping and falling. Running with scissors could hurt someone, so it is not safe."
           },
           {
             "prompt": "Which rule is fair?",
@@ -485,17 +516,20 @@
               "Only the biggest kid gets the slide"
             ],
             "answer": "Take turns on the slide",
-            "tier": 2
+            "tier": 2,
+            "why": "Taking turns lets everyone get a chance on the slide, which is fair. If only the biggest kid gets it, the others never get a turn."
           },
           {
             "prompt": "Tell why we wait for the walk sign before we cross the street.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "A good answer says the walk sign means cars should be stopped, so it is safe to cross. Waiting keeps us from being hit by a car."
           },
           {
             "prompt": "Make up a new rule for play time and tell how it keeps people safe or fair.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any rule that makes sense for play time, like take turns with the ball or stay where a grown-up can see you. The child should say how it keeps people safe or makes things fair."
           }
         ]
       },
@@ -567,12 +601,14 @@
           {
             "prompt": "Read aloud: pig, sit, win, lip",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short i in the middle, like in itch: p-i-g, s-i-t, w-i-n, l-i-p. Accept smooth blending with /i/, not the long i in bike."
           },
           {
             "prompt": "Read aloud: big, fix, hid, mix",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short i in the middle: b-i-g, f-i-x, h-i-d, m-i-x. In fix and mix, the x says /ks/ at the end. Accept smooth blending."
           },
           {
             "prompt": "Which word has short i?",
@@ -582,7 +618,8 @@
               "pen"
             ],
             "answer": "pin",
-            "tier": 1
+            "tier": 1,
+            "why": "Pin has the /i/ sound like in itch: p-i-n. Pan has the a sound and pen has the e sound, which sounds close to i, so listen carefully."
           },
           {
             "prompt": "Which word has the /i/ sound like in itch?",
@@ -592,17 +629,20 @@
               "sup"
             ],
             "answer": "sip",
-            "tier": 1
+            "tier": 1,
+            "why": "Sip has the /i/ sound like in itch: s-i-p. Sap has the /a/ sound and sup has the /u/ sound."
           },
           {
             "prompt": "Read aloud: rib, kit, dig, zip, wig",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word has short i in the middle: r-i-b, k-i-t, d-i-g, z-i-p, w-i-g. Accept all five read smoothly with the /i/ sound."
           },
           {
             "prompt": "Read this sentence aloud: The pig sits in a big pit.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Pig, sits, big and pit all have short i. Accept the sentence read smoothly, with the s on the end of sits."
           }
         ]
       },
@@ -674,12 +714,14 @@
           {
             "prompt": "Read aloud: hot, dog, mop, fox",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short o in the middle, like in octopus: h-o-t, d-o-g, m-o-p, f-o-x. Accept smooth blending, with x saying /ks/ in fox."
           },
           {
             "prompt": "Read aloud: log, pot, rod, top",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short o in the middle: l-o-g, p-o-t, r-o-d, t-o-p. Accept smooth blending with the /o/ sound."
           },
           {
             "prompt": "Which word has short o?",
@@ -689,7 +731,8 @@
               "cat"
             ],
             "answer": "cot",
-            "tier": 1
+            "tier": 1,
+            "why": "Cot has the /o/ sound like in octopus: c-o-t. Cut has the /u/ sound and cat has the /a/ sound."
           },
           {
             "prompt": "Which word has the /o/ sound like in octopus?",
@@ -699,17 +742,20 @@
               "hug"
             ],
             "answer": "hop",
-            "tier": 1
+            "tier": 1,
+            "why": "Hop has the /o/ sound like in octopus: h-o-p. Hip has the /i/ sound and hug has the /u/ sound."
           },
           {
             "prompt": "Read aloud: cob, nod, jot, hog, sob",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word has short o in the middle: c-o-b, n-o-d, j-o-t, h-o-g, s-o-b. Accept all five read smoothly with the /o/ sound."
           },
           {
             "prompt": "Read this sentence aloud: The dog got on top of the box.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Dog, got, on, top and box all have short o. Accept the sentence read smoothly, with The, of and the read by sight."
           }
         ]
       },
@@ -751,12 +797,14 @@
               "The cat sat"
             ],
             "answer": "The cat sat.",
-            "tier": 1
+            "tier": 1,
+            "why": "A sentence needs a capital letter at the start and a mark at the end. The cat sat. has both; the other two are missing the capital or the period."
           },
           {
             "prompt": "Copy and fix: my dog is big",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The fixed sentence is: My dog is big. Accept it if My starts with a capital M and there is a period at the end."
           },
           {
             "prompt": "What mark goes at the end of a telling sentence?",
@@ -766,7 +814,8 @@
               "A dash (-)"
             ],
             "answer": "A period (.)",
-            "tier": 1
+            "tier": 1,
+            "why": "A telling sentence tells something, and it ends with a period, like: The dog runs. A comma goes in the middle of a sentence, not at the end."
           },
           {
             "prompt": "Which sentence is correct?",
@@ -776,17 +825,20 @@
               "Can you hop"
             ],
             "answer": "Can you hop?",
-            "tier": 2
+            "tier": 2,
+            "why": "Can you hop? starts with a capital C and ends with a question mark because it asks something. The others are missing the capital or the question mark."
           },
           {
             "prompt": "Copy and fix: is it time to eat",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "This sentence asks something, so it ends with a question mark. Accept: Is it time to eat? with a capital I at the start."
           },
           {
             "prompt": "Write your own sentence about a pet or a toy. Tutor checks the capital and the end mark.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any sentence that starts with a capital letter and ends with a period, question mark or exclamation mark, like: My cat is soft."
           }
         ]
       },
@@ -858,12 +910,14 @@
           {
             "prompt": "Read aloud: sun, cup, bug, run",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short u in the middle, like in up: s-u-n, c-u-p, b-u-g, r-u-n. Accept smooth blending with the /u/ sound."
           },
           {
             "prompt": "Read aloud: mud, hut, tub, gum",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short u in the middle: m-u-d, h-u-t, t-u-b, g-u-m. Accept smooth blending with the /u/ sound."
           },
           {
             "prompt": "Which word has short u?",
@@ -873,7 +927,8 @@
               "bas"
             ],
             "answer": "bus",
-            "tier": 1
+            "tier": 1,
+            "why": "Bus has the /u/ sound like in up: b-u-s. Bis and bas are not real words, and they have the i and a sounds."
           },
           {
             "prompt": "Which word has the /u/ sound like in up?",
@@ -883,17 +938,20 @@
               "cob"
             ],
             "answer": "cub",
-            "tier": 1
+            "tier": 1,
+            "why": "Cub has the /u/ sound like in up: c-u-b. Cab has the /a/ sound and cob has the /o/ sound."
           },
           {
             "prompt": "Read aloud: dug, nut, sub, pup, hug",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word has short u in the middle: d-u-g, n-u-t, s-u-b, p-u-p, h-u-g. Accept all five read smoothly with the /u/ sound."
           },
           {
             "prompt": "Read this sentence aloud: The pup dug in the mud.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Pup, dug and mud all have short u. Accept the sentence read smoothly, with The, in and the read without stopping."
           }
         ]
       },
@@ -934,7 +992,8 @@
               "No"
             ],
             "answer": "Yes",
-            "tier": 1
+            "tier": 1,
+            "why": "A dog is living because it grows, eats food, drinks water and can have puppies."
           },
           {
             "prompt": "Is a rock living?",
@@ -943,7 +1002,8 @@
               "No"
             ],
             "answer": "No",
-            "tier": 1
+            "tier": 1,
+            "why": "A rock is not living because it does not grow, eat, drink or have babies. It just stays a rock."
           },
           {
             "prompt": "Which is living?",
@@ -953,7 +1013,8 @@
               "Chair"
             ],
             "answer": "Flower",
-            "tier": 2
+            "tier": 2,
+            "why": "A flower is living because it grows and needs water and sunlight. A car and a chair are made by people and do not grow."
           },
           {
             "prompt": "Which is nonliving?",
@@ -963,7 +1024,8 @@
               "Tree"
             ],
             "answer": "Ball",
-            "tier": 2
+            "tier": 2,
+            "why": "A ball is nonliving because it does not grow, eat or drink. A bird and a tree are both living things."
           },
           {
             "prompt": "Which one grows and needs food and water?",
@@ -973,12 +1035,14 @@
               "Rock"
             ],
             "answer": "Kitten",
-            "tier": 3
+            "tier": 3,
+            "why": "A kitten grows into a cat and needs food and water. A teddy bear and a rock never grow or eat."
           },
           {
             "prompt": "Name one living thing and one nonliving thing in your room and tell how you know.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept one living thing, like a plant, a pet or a person, and one nonliving thing, like a bed or a book. The child should give a reason, like it grows and eats, or it does not grow."
           }
         ]
       },
@@ -1015,7 +1079,8 @@
           {
             "prompt": "Name the people in your family and one job each does.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept the real people in the child's family, big or small, with one job for each, like Mom cooks dinner or my brother feeds the dog. Every family looks different, so any family is fine."
           },
           {
             "prompt": "Are all families the same?",
@@ -1024,7 +1089,8 @@
               "Yes"
             ],
             "answer": "No",
-            "tier": 1
+            "tier": 1,
+            "why": "Families come in many sizes and kinds. Some are big, some are small, and some have grandparents or one parent, so they are not all the same."
           },
           {
             "prompt": "Do family members help each other?",
@@ -1033,7 +1099,8 @@
               "No"
             ],
             "answer": "Yes",
-            "tier": 1
+            "tier": 1,
+            "why": "Family members help each other, like sharing chores or caring for someone who is sick."
           },
           {
             "prompt": "Which is a chore a family can share at home?",
@@ -1042,17 +1109,20 @@
               "Flying to the moon"
             ],
             "answer": "Folding the laundry",
-            "tier": 2
+            "tier": 2,
+            "why": "Folding the laundry is a real job at home that family members can share. Nobody can fly to the moon as a chore."
           },
           {
             "prompt": "Tell one job you do to help your family.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept any real helping job, like setting the table, feeding a pet, or making the bed."
           },
           {
             "prompt": "Tell one way your family is the same as a friend's family and one way it is different.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept one thing that is the same, like both families have a pet, and one thing that is different, like one family has more kids. Keep it kind; no family is better."
           }
         ]
       },
@@ -1123,12 +1193,14 @@
           {
             "prompt": "Read aloud: bed, pen, wet, leg",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short e in the middle, like in egg: b-e-d, p-e-n, w-e-t, l-e-g. Accept the /e/ sound, not the long e in see."
           },
           {
             "prompt": "Read aloud: hen, jet, ten, web",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has short e in the middle: h-e-n, j-e-t, t-e-n, w-e-b. Accept smooth blending with the /e/ sound."
           },
           {
             "prompt": "Which word has short e?",
@@ -1138,7 +1210,8 @@
               "not"
             ],
             "answer": "net",
-            "tier": 1
+            "tier": 1,
+            "why": "Net has the /e/ sound like in egg: n-e-t. Nut has the /u/ sound and not has the /o/ sound."
           },
           {
             "prompt": "Which word has short e?",
@@ -1147,7 +1220,8 @@
               "pet"
             ],
             "answer": "pet",
-            "tier": 3
+            "tier": 3,
+            "why": "Pet has the /e/ sound like in egg. Pit has short i, which sounds close, so listen: p-e-t has your mouth a bit more open."
           },
           {
             "prompt": "Which word has the /e/ sound like in egg?",
@@ -1157,17 +1231,20 @@
               "rug"
             ],
             "answer": "red",
-            "tier": 1
+            "tier": 1,
+            "why": "Red has the /e/ sound like in egg: r-e-d. Rod has the /o/ sound and rug has the /u/ sound."
           },
           {
             "prompt": "Read aloud: pen, pin, bed, bid, set, sit",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "These come in pairs that change only the middle sound: pen and pin, bed and bid, set and sit. Accept each pair read with /e/ in the first word and /i/ in the second."
           },
           {
             "prompt": "Read this sentence aloud: Ten red hens get wet.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Ten, red, hens, get and wet all have short e. Accept the sentence read smoothly, with the s on hens."
           }
         ]
       },
@@ -1238,7 +1315,8 @@
           {
             "prompt": "Write: I see a red bird. Tutor checks spaces.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Check for a finger-width space between each word: I, see, a, red, bird. Also check for a capital I and a period at the end."
           },
           {
             "prompt": "Which has spaces?",
@@ -1247,7 +1325,8 @@
               "Wecanrun."
             ],
             "answer": "We can run.",
-            "tier": 1
+            "tier": 1,
+            "why": "We can run. has a space between each word, so you can see the three words. Wecanrun. squashes them together."
           },
           {
             "prompt": "Which one is easy to read?",
@@ -1256,22 +1335,26 @@
               "Mycatisbig."
             ],
             "answer": "My cat is big.",
-            "tier": 1
+            "tier": 1,
+            "why": "My cat is big. is easy to read because spaces show where each word ends. Mycatisbig. is hard to read."
           },
           {
             "prompt": "Write: I can hop. Tutor checks spaces.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Check for a space between each of the three words: I, can, hop. Accept it if the spaces are about one finger wide."
           },
           {
             "prompt": "Copy it with spaces between the words: Thesunishot.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The words are The, sun, is, hot. Accept: The sun is hot. with a finger space between each word."
           },
           {
             "prompt": "Write your own sentence with four or more words. Tutor checks the finger spaces.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any sentence with four or more words, like: I like to play ball. Each word needs a finger-width space before the next one."
           }
         ]
       },
@@ -1308,12 +1391,14 @@
           {
             "prompt": "Read aloud: sat, pin, hop, rug, wet",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word is CVC with a short vowel in the middle: sat, pin, hop, rug, wet. Accept smooth blending without long pauses between sounds."
           },
           {
             "prompt": "Read aloud: mad, fit, jog, hum, beg",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word is CVC with a short vowel in the middle: mad, fit, jog, hum, beg. Accept smooth blending without stopping between sounds."
           },
           {
             "prompt": "Blend /d/ /o/ /g/:",
@@ -1323,7 +1408,8 @@
               "dug"
             ],
             "answer": "dog",
-            "tier": 1
+            "tier": 1,
+            "why": "Slide the sounds together: /d/ /o/ /g/ makes dog. Dig has /i/ in the middle and dug has /u/."
           },
           {
             "prompt": "Blend /c/ /a/ /t/:",
@@ -1333,17 +1419,20 @@
               "cut"
             ],
             "answer": "cat",
-            "tier": 1
+            "tier": 1,
+            "why": "Slide the sounds together: /c/ /a/ /t/ makes cat. Cot has /o/ in the middle and cut has /u/."
           },
           {
             "prompt": "Read aloud fast: lid, vet, cub, nap, rot, wig",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "All six are CVC words with a short vowel: lid, vet, cub, nap, rot, wig. Accept quick, smooth reading with each vowel sound correct."
           },
           {
             "prompt": "Read this sentence aloud fast: Sam had a red hat.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Sam, had, red and hat are CVC words, and a is a sight word. Accept the sentence read smoothly and quickly, without sounding out each letter out loud."
           }
         ]
       },
@@ -1411,22 +1500,26 @@
           {
             "prompt": "Read aloud: ship, shop, fish",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The letters s and h work together to say one sound, /sh/, like a quiet sound: ship, shop, fish. Accept /sh/ at the start of ship and shop and at the end of fish."
           },
           {
             "prompt": "Read aloud: chin, chop, much",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The letters c and h work together to say /ch/, like a sneeze: chin, chop, much. Accept /ch/ at the start of chin and chop and at the end of much."
           },
           {
             "prompt": "Read aloud: thin, this, bath",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The letters t and h say /th/ with your tongue between your teeth. In thin and bath it is a quiet th; in this it is a buzzy th. Accept either th sound as long as it is not /t/ or /f/."
           },
           {
             "prompt": "Read aloud: when, whip, which",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The letters w and h say /w/ at the start: when, whip, which. Which also ends with /ch/. Accept /w/ at the start of each word."
           },
           {
             "prompt": "Which word starts with sh?",
@@ -1436,7 +1529,8 @@
               "tell"
             ],
             "answer": "shell",
-            "tier": 1
+            "tier": 1,
+            "why": "Shell starts with s and h, which say /sh/. Chell is not a real word, and tell starts with /t/."
           },
           {
             "prompt": "Which word starts with ch?",
@@ -1446,7 +1540,8 @@
               "tip"
             ],
             "answer": "chip",
-            "tier": 1
+            "tier": 1,
+            "why": "Chip starts with c and h, which say /ch/. Ship starts with /sh/ and tip starts with /t/."
           }
         ]
       },
@@ -1522,7 +1617,8 @@
               "Flower"
             ],
             "answer": "Roots",
-            "tier": 2
+            "tier": 2,
+            "why": "The roots grow down into the soil and drink up water for the plant. Leaves and flowers are above the ground."
           },
           {
             "prompt": "Which part makes food from sunlight?",
@@ -1532,7 +1628,8 @@
               "Stem"
             ],
             "answer": "Leaves",
-            "tier": 2
+            "tier": 2,
+            "why": "Leaves catch sunlight and use it to make food for the plant. Roots drink water and the stem holds the plant up."
           },
           {
             "prompt": "Which part holds the plant up?",
@@ -1542,7 +1639,8 @@
               "Seed"
             ],
             "answer": "Stem",
-            "tier": 1
+            "tier": 1,
+            "why": "The stem stands tall like a straw and holds the plant up. It also carries water from the roots to the leaves."
           },
           {
             "prompt": "Which part grows under the ground?",
@@ -1551,7 +1649,8 @@
               "Flower"
             ],
             "answer": "Roots",
-            "tier": 1
+            "tier": 1,
+            "why": "The roots grow under the ground in the soil. The flower grows up high where bees can find it."
           },
           {
             "prompt": "Which part makes seeds?",
@@ -1561,12 +1660,14 @@
               "Roots"
             ],
             "answer": "Flower",
-            "tier": 3
+            "tier": 3,
+            "why": "The flower makes seeds, and seeds grow into new plants. The stem holds the plant up and the roots drink water."
           },
           {
             "prompt": "Name the four plant parts and tell what each one does.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "A full answer: roots drink water, the stem holds the plant up, leaves make food from sunlight, and the flower makes seeds. Accept the four parts with one job each in the child's own words."
           }
         ]
       },
@@ -1608,7 +1709,8 @@
               "Graph"
             ],
             "answer": "Globe",
-            "tier": 2
+            "tier": 2,
+            "why": "A globe is round like a ball, just like Earth, so it is a model of Earth. A map is flat."
           },
           {
             "prompt": "On most maps, water is…",
@@ -1617,12 +1719,14 @@
               "Red"
             ],
             "answer": "Blue",
-            "tier": 1
+            "tier": 1,
+            "why": "Maps use blue for water, like oceans, lakes and rivers. Red is not used for water."
           },
           {
             "prompt": "Draw a map of your bedroom.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a drawing that shows the room from above, with things like the bed, door and window in about the right places."
           },
           {
             "prompt": "Is a globe round or flat?",
@@ -1631,7 +1735,8 @@
               "Flat"
             ],
             "answer": "Round",
-            "tier": 1
+            "tier": 1,
+            "why": "A globe is round like a ball because Earth is round."
           },
           {
             "prompt": "A flat drawing of a place is a…",
@@ -1641,12 +1746,14 @@
               "Picture frame"
             ],
             "answer": "Map",
-            "tier": 2
+            "tier": 2,
+            "why": "A map is a flat drawing of a place. A globe is round, and a picture frame just holds a picture."
           },
           {
             "prompt": "On a globe, point to the blue ocean and to green or brown land.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept pointing to any blue part for ocean and any green or brown part for land."
           }
         ]
       },
@@ -1683,12 +1790,14 @@
           {
             "prompt": "Read aloud: duck, back, sick, rock",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has a short vowel and ends in ck, which says one /k/ sound: duck, back, sick, rock. Accept smooth reading with one /k/ at the end, not two."
           },
           {
             "prompt": "Read aloud: pack, neck, lick, tuck",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has a short vowel and ends in ck: pack, neck, lick, tuck. Accept smooth reading with one /k/ sound at the end."
           },
           {
             "prompt": "Which is spelled right?",
@@ -1698,7 +1807,8 @@
               "duc"
             ],
             "answer": "duck",
-            "tier": 1
+            "tier": 1,
+            "why": "Duck has the short u sound, and after a short vowel the /k/ sound at the end is spelled ck. So duck is right, not duk or duc."
           },
           {
             "prompt": "Which word ends in ck?",
@@ -1708,7 +1818,8 @@
               "sit"
             ],
             "answer": "sock",
-            "tier": 1
+            "tier": 1,
+            "why": "Sock ends with c and k together, which say /k/. Sun ends in n and sit ends in t."
           },
           {
             "prompt": "Pick the right spelling for the word that rhymes with back:",
@@ -1718,12 +1829,14 @@
               "sac"
             ],
             "answer": "sack",
-            "tier": 3
+            "tier": 3,
+            "why": "Sack rhymes with back, and both have short a, so the /k/ at the end is spelled ck: s-a-c-k."
           },
           {
             "prompt": "Write the words back and neck. Tutor checks the ck.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept back and neck spelled with c and k together at the end: b-a-c-k and n-e-c-k."
           }
         ]
       },
@@ -1799,7 +1912,8 @@
               "!"
             ],
             "answer": "?",
-            "tier": 2
+            "tier": 2,
+            "why": "Can you help me is asking for something, so it ends with a question mark."
           },
           {
             "prompt": "Which mark ends: Watch out",
@@ -1808,12 +1922,14 @@
               "?"
             ],
             "answer": "!",
-            "tier": 2
+            "tier": 2,
+            "why": "Watch out shows strong feeling, like a warning, so it ends with an exclamation mark. It is not asking anything."
           },
           {
             "prompt": "Write one question about animals.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any question about animals that starts with a capital letter and ends with a question mark, like: Do cats like milk?"
           },
           {
             "prompt": "Does this ask something? Do you like cake",
@@ -1822,7 +1938,8 @@
               "No"
             ],
             "answer": "Yes",
-            "tier": 1
+            "tier": 1,
+            "why": "Do you like cake asks someone something, and it wants an answer, so yes, it is a question."
           },
           {
             "prompt": "Which one is a question?",
@@ -1831,7 +1948,8 @@
               "It is raining."
             ],
             "answer": "Is it raining?",
-            "tier": 1
+            "tier": 1,
+            "why": "Is it raining? asks something and ends with a question mark. It is raining. tells something, so it ends with a period."
           },
           {
             "prompt": "Which mark ends: What is your name",
@@ -1840,7 +1958,8 @@
               "!"
             ],
             "answer": "?",
-            "tier": 2
+            "tier": 2,
+            "why": "What is your name asks something, so it ends with a question mark. Words like what often start a question."
           },
           {
             "prompt": "Which mark ends: Wow, I won",
@@ -1850,12 +1969,14 @@
               "."
             ],
             "answer": "!",
-            "tier": 2
+            "tier": 2,
+            "why": "Wow, I won shows strong, happy feeling, so it ends with an exclamation mark."
           },
           {
             "prompt": "Write one sentence that shows strong feeling and ends with !",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a sentence with strong feeling, a capital letter at the start, and an exclamation mark at the end, like: I love my dog!"
           }
         ]
       },
@@ -1927,12 +2048,14 @@
           {
             "prompt": "Read aloud: frog, stop, clap, grin",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word starts with a blend where you hear both sounds: fr-og, st-op, cl-ap, gr-in. Accept both starting sounds heard clearly."
           },
           {
             "prompt": "Read aloud: flag, spin, trip, plum",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word starts with a blend: fl-ag, sp-in, tr-ip, pl-um. Accept both starting sounds said, not just one."
           },
           {
             "prompt": "Which word starts with a blend?",
@@ -1942,7 +2065,8 @@
               "pop"
             ],
             "answer": "stop",
-            "tier": 1
+            "tier": 1,
+            "why": "Stop starts with s and t, and you hear both: /s/ /t/. Top and pop start with only one sound."
           },
           {
             "prompt": "Which one starts with two consonant sounds?",
@@ -1952,7 +2076,8 @@
               "log"
             ],
             "answer": "frog",
-            "tier": 1
+            "tier": 1,
+            "why": "Frog starts with /f/ and /r/ together. Fog and log start with just one sound."
           },
           {
             "prompt": "Which blend starts the word clap?",
@@ -1962,17 +2087,20 @@
               "bl"
             ],
             "answer": "cl",
-            "tier": 2
+            "tier": 2,
+            "why": "Say clap slowly: /c/ /l/ /a/ /p/. The first two sounds are c and l, so the blend is cl."
           },
           {
             "prompt": "Read aloud: drum, swim, brick, glad",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word starts with a blend: dr-um, sw-im, br-ick, gl-ad. Brick also ends in ck. Accept both starting sounds heard."
           },
           {
             "prompt": "Read aloud: slip, crab, step, blot",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word starts with a blend: sl-ip, cr-ab, st-ep, bl-ot. Accept both starting sounds heard and short vowels in the middle."
           }
         ]
       },
@@ -2009,32 +2137,38 @@
           {
             "prompt": "6 + 7 = ?",
             "answer": "13",
-            "tier": 2
+            "tier": 2,
+            "why": "6 and 7 are next to each other. Double the smaller: 6 + 6 = 12, then add 1 more to get 13."
           },
           {
             "prompt": "5 + 6 = ?",
             "answer": "11",
-            "tier": 1
+            "tier": 1,
+            "why": "5 and 6 are next to each other. Double the smaller: 5 + 5 = 10, then add 1 more to get 11."
           },
           {
             "prompt": "8 + 9 = ?",
             "answer": "17",
-            "tier": 3
+            "tier": 3,
+            "why": "8 and 9 are next to each other. Double the smaller: 8 + 8 = 16, then add 1 more to get 17."
           },
           {
             "prompt": "4 + 5 = ?",
             "answer": "9",
-            "tier": 1
+            "tier": 1,
+            "why": "4 and 5 are next to each other. Double the smaller: 4 + 4 = 8, then add 1 more to get 9."
           },
           {
             "prompt": "7 + 8 = ?",
             "answer": "15",
-            "tier": 2
+            "tier": 2,
+            "why": "7 and 8 are next to each other. Double the smaller: 7 + 7 = 14, then add 1 more to get 15."
           },
           {
             "prompt": "9 + 10 = ?",
             "answer": "19",
-            "tier": 3
+            "tier": 3,
+            "why": "9 and 10 are next to each other. Double the smaller: 9 + 9 = 18, then add 1 more to get 19."
           },
           {
             "prompt": "Which double helps with 7 + 8?",
@@ -2044,7 +2178,8 @@
               "5 + 5"
             ],
             "answer": "7 + 7",
-            "tier": 1
+            "tier": 1,
+            "why": "7 is the smaller number, so double it: 7 + 7 = 14. Then 7 + 8 is just 1 more, which is 15."
           },
           {
             "prompt": "Which double helps with 6 + 7?",
@@ -2054,12 +2189,14 @@
               "7 + 8"
             ],
             "answer": "6 + 6",
-            "tier": 1
+            "tier": 1,
+            "why": "6 is the smaller number, so double it: 6 + 6 = 12. Then 6 + 7 is just 1 more, which is 13."
           },
           {
             "prompt": "3 + 4 = ?",
             "answer": "7",
-            "tier": 2
+            "tier": 2,
+            "why": "3 and 4 are next to each other. Double the smaller: 3 + 3 = 6, then add 1 more to get 7."
           }
         ]
       },
@@ -2096,12 +2233,14 @@
           {
             "prompt": "Read aloud: jump, hand, fast, tent",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends with a blend where you hear both sounds: ju-mp, ha-nd, fa-st, te-nt. Accept both ending sounds heard clearly."
           },
           {
             "prompt": "Read aloud: milk, desk, belt, pond",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word ends with two sounds: mi-lk, de-sk, be-lt, po-nd. Accept both ending sounds said, not just the last one."
           },
           {
             "prompt": "Which word ends in a blend?",
@@ -2111,7 +2250,8 @@
               "lab"
             ],
             "answer": "lamp",
-            "tier": 1
+            "tier": 1,
+            "why": "Lamp ends with m and p, and you hear both: /m/ /p/. Lap and lab end with just one sound."
           },
           {
             "prompt": "Which one ends with two consonant sounds?",
@@ -2121,7 +2261,8 @@
               "bed"
             ],
             "answer": "best",
-            "tier": 1
+            "tier": 1,
+            "why": "Best ends with /s/ and /t/ together. Bet and bed end with just one sound."
           },
           {
             "prompt": "Which blend ends the word tent?",
@@ -2131,17 +2272,20 @@
               "st"
             ],
             "answer": "nt",
-            "tier": 2
+            "tier": 2,
+            "why": "Say tent slowly: /t/ /e/ /n/ /t/. The last two sounds are n and t, so the blend is nt, not nd."
           },
           {
             "prompt": "Read aloud: lump, sand, mask, gift",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends with a blend: lu-mp, sa-nd, ma-sk, gi-ft. Accept both ending sounds heard clearly."
           },
           {
             "prompt": "Read aloud: stamp, blend, crust, felt",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "These words have blends at both ends: st-a-mp, bl-e-nd, cr-u-st, and felt ends in lt. Accept all the sounds heard, with none dropped."
           }
         ]
       },
@@ -2182,7 +2326,8 @@
               "No"
             ],
             "answer": "Yes",
-            "tier": 1
+            "tier": 1,
+            "why": "Plants need sunlight to make their food, so yes. Without light, a plant turns yellow and gets weak."
           },
           {
             "prompt": "Which does a plant NOT need?",
@@ -2192,12 +2337,14 @@
               "Light"
             ],
             "answer": "Candy",
-            "tier": 2
+            "tier": 2,
+            "why": "Plants need water and light to grow, but they do not need candy. Candy is a treat for people."
           },
           {
             "prompt": "Plant a bean in a cup and record growth each day.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a cup with a bean planted in soil, watered and kept in light, plus a simple daily record like a drawing, a mark, or how tall it grew."
           },
           {
             "prompt": "Do plants need water?",
@@ -2206,7 +2353,8 @@
               "No"
             ],
             "answer": "Yes",
-            "tier": 1
+            "tier": 1,
+            "why": "Plants need water to live and grow, so yes. Without water, a plant wilts and droops."
           },
           {
             "prompt": "A plant kept in a dark closet will probably…",
@@ -2216,7 +2364,8 @@
               "Make candy"
             ],
             "answer": "Turn yellow",
-            "tier": 2
+            "tier": 2,
+            "why": "In a dark closet the plant gets no sunlight, so it cannot make food and turns yellow. It will not grow bigger without light."
           },
           {
             "prompt": "Which one is something plants need?",
@@ -2226,12 +2375,14 @@
               "Shoes"
             ],
             "answer": "Air",
-            "tier": 2
+            "tier": 2,
+            "why": "Plants need air, just like we do. Toys and shoes are things people use, and plants do not need them."
           },
           {
             "prompt": "Name the four things a plant needs to grow.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "A full answer names sunlight, water, air and room to grow. Accept these four in any order."
           }
         ]
       },
@@ -2307,7 +2458,8 @@
               "happy"
             ],
             "answer": "apple",
-            "tier": 1
+            "tier": 1,
+            "why": "An apple is a thing you can hold and eat, so apple is a noun. Run is something you do, and happy tells how you feel."
           },
           {
             "prompt": "Which word is a noun?",
@@ -2317,12 +2469,14 @@
               "blue"
             ],
             "answer": "school",
-            "tier": 2
+            "tier": 2,
+            "why": "A school is a place, and a noun names a person, place or thing. Jump is something you do, and blue is a color."
           },
           {
             "prompt": "Write three nouns in your room.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any three things you can see or touch in a room, like bed, lamp, book or rug. Each one names a thing, so each one is a noun."
           },
           {
             "prompt": "Which word names a thing?",
@@ -2331,7 +2485,8 @@
               "sit"
             ],
             "answer": "cat",
-            "tier": 1
+            "tier": 1,
+            "why": "A cat is a thing you can see and pet, so cat names a thing. Sit is something you do."
           },
           {
             "prompt": "Which word names a place?",
@@ -2341,7 +2496,8 @@
               "soft"
             ],
             "answer": "park",
-            "tier": 2
+            "tier": 2,
+            "why": "A park is a place you can go to play, so park names a place. Sing is something you do, and soft tells how something feels."
           },
           {
             "prompt": "Which noun should start with a capital letter?",
@@ -2351,12 +2507,14 @@
               "ball"
             ],
             "answer": "charlotte",
-            "tier": 2
+            "tier": 2,
+            "why": "Charlotte is a girl's own name, and names of people start with a capital letter. Girl and ball are not special names, so they stay small."
           },
           {
             "prompt": "Write a sentence with two nouns. Tutor circles them.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any sentence with two words that name people, places or things, like \"The dog ran to the park.\" Here dog and park are the nouns to circle."
           }
         ]
       },
@@ -2393,12 +2551,14 @@
           {
             "prompt": "Read aloud: sing, ring, long, hung",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends with ng, which makes one sound like at the end of ring: sing, ring, long, hung. Accept the ng sound said smoothly, not as a separate n and g."
           },
           {
             "prompt": "Read aloud: pink, bank, sunk, think",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word ends with nk, which sounds like ng plus a k: pink, bank, sunk, think. Listen for th at the start of think and a clear k sound at the end of each word."
           },
           {
             "prompt": "Which word ends with -nk?",
@@ -2408,7 +2568,8 @@
               "sit"
             ],
             "answer": "sink",
-            "tier": 1
+            "tier": 1,
+            "why": "Sink ends with the letters n and k, so it ends with -nk. Sing ends with -ng instead, and sit has no n at all."
           },
           {
             "prompt": "Which word has -ng at the end?",
@@ -2418,7 +2579,8 @@
               "kick"
             ],
             "answer": "king",
-            "tier": 1
+            "tier": 1,
+            "why": "King ends with the letters n and g, so it has -ng at the end. Kit ends with t, and kick ends with ck."
           },
           {
             "prompt": "Which word ends with -ng?",
@@ -2428,17 +2590,20 @@
               "win"
             ],
             "answer": "wing",
-            "tier": 2
+            "tier": 2,
+            "why": "Wing ends with n and g, so it ends with -ng. Wink is tricky because it ends with -nk, and win ends with just n."
           },
           {
             "prompt": "Read aloud: song, wink, bring, trunk",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Song and bring end with ng, like ring. Wink and trunk end with nk, like pink. Accept each word blended smoothly with the right ending sound."
           },
           {
             "prompt": "Read aloud: sang, honk, lung, ink",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Sang and lung end with ng, like ring. Honk and ink end with nk, like pink. Accept each word read smoothly with a clear ending."
           }
         ]
       },
@@ -2510,12 +2675,14 @@
           {
             "prompt": "Read aloud: cake, name, gate, same",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has a silent e at the end, so the a says its name, like in cake, name, gate, same. Accept the long a sound and a quiet e."
           },
           {
             "prompt": "Read aloud: cap / cape, tap / tape, mad / made",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "In each pair the first word has a short a, and the e at the end makes the a say its name: cap and cape, tap and tape, mad and made. Accept a clear change in the a sound."
           },
           {
             "prompt": "Which word has long a?",
@@ -2524,7 +2691,8 @@
               "tap"
             ],
             "answer": "tape",
-            "tier": 1
+            "tier": 1,
+            "why": "Tape has a silent e at the end, so the a says its name. Tap has no e, so its a is short, like in apple."
           },
           {
             "prompt": "Which word says its long a sound?",
@@ -2533,7 +2701,8 @@
               "cane"
             ],
             "answer": "cane",
-            "tier": 1
+            "tier": 1,
+            "why": "Cane has a silent e at the end, so the a says its name. Can has no e, so its a is short."
           },
           {
             "prompt": "Add a silent e to hat. What word do you get?",
@@ -2543,17 +2712,20 @@
               "heat"
             ],
             "answer": "hate",
-            "tier": 2
+            "tier": 2,
+            "why": "Put an e at the end of hat and the a says its name: h-a-t-e, hate. Heat has an extra letter and a different vowel sound."
           },
           {
             "prompt": "Read aloud: lake, game, wave, plate",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends with a silent e, so the a says its name: lake, game, wave, plate. Accept the long a sound and both sounds of the pl blend at the start of plate."
           },
           {
             "prompt": "Read aloud: pan / pane, rat / rate, plan / plane",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "In each pair the e at the end makes the short a turn into a long a: pan and pane, rat and rate, plan and plane. Accept a clear change from short a to long a."
           }
         ]
       },
@@ -2626,17 +2798,20 @@
           {
             "prompt": "Read aloud: bike, time, ride, five",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends with a silent e, so the i says its name: bike, time, ride, five. Accept the long i sound, like in ice, and a quiet e."
           },
           {
             "prompt": "Read aloud: home, rope, note, bone",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends with a silent e, so the o says its name: home, rope, note, bone. Accept the long o sound, like in open, and a quiet e."
           },
           {
             "prompt": "Read aloud: cute, cube, mule, tune",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word ends with a silent e, so the u says its name: cute, cube, mule, tune. Accept the long u sound, like you or oo, and a quiet e."
           },
           {
             "prompt": "Which word has long o?",
@@ -2645,7 +2820,8 @@
               "hop"
             ],
             "answer": "hope",
-            "tier": 1
+            "tier": 1,
+            "why": "Hope has a silent e at the end, so the o says its name. Hop has no e, so its o is short."
           },
           {
             "prompt": "Which word has long i?",
@@ -2654,7 +2830,8 @@
               "pine"
             ],
             "answer": "pine",
-            "tier": 1
+            "tier": 1,
+            "why": "Pine has a silent e at the end, so the i says its name. Pin has no e, so its i is short."
           },
           {
             "prompt": "Which word has long u?",
@@ -2663,12 +2840,14 @@
               "cube"
             ],
             "answer": "cube",
-            "tier": 2
+            "tier": 2,
+            "why": "Cube has a silent e at the end, so the u says its name, like you. Cub has no e, so its u is short, like in up."
           },
           {
             "prompt": "Read aloud: kit / kite, hop / hope, cub / cube",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "In each pair the e at the end makes the vowel say its name: kit and kite, hop and hope, cub and cube. Accept a clear change from the short sound to the long sound."
           }
         ]
       },
@@ -2710,7 +2889,8 @@
               "red"
             ],
             "answer": "jump",
-            "tier": 2
+            "tier": 2,
+            "why": "Jump is something you can do, so jump is a verb. Dog names an animal, and red is a color."
           },
           {
             "prompt": "Which word is a verb?",
@@ -2720,12 +2900,14 @@
               "wet"
             ],
             "answer": "swim",
-            "tier": 2
+            "tier": 2,
+            "why": "Swim is something you can do in the water, so swim is a verb. Pool names a place, and wet tells how something feels."
           },
           {
             "prompt": "Write a sentence with a verb. Tutor underlines it.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any sentence that tells what someone or something does, like \"The dog runs.\" The verb to underline is the action word, here runs."
           },
           {
             "prompt": "Which word is something you can do?",
@@ -2734,7 +2916,8 @@
               "cup"
             ],
             "answer": "eat",
-            "tier": 1
+            "tier": 1,
+            "why": "Eat is something you can do, so eat is the action word. A cup is a thing, not something you do."
           },
           {
             "prompt": "Which word is an action?",
@@ -2743,7 +2926,8 @@
               "hat"
             ],
             "answer": "run",
-            "tier": 1
+            "tier": 1,
+            "why": "Run is something you can do with your legs, so run is an action. A hat is a thing you wear."
           },
           {
             "prompt": "Find the verb: The cat sleeps.",
@@ -2753,7 +2937,8 @@
               "The"
             ],
             "answer": "sleeps",
-            "tier": 3
+            "tier": 3,
+            "why": "Sleeps tells what the cat does, so sleeps is the verb. Cat names the animal, and the word The just points to it."
           }
         ]
       },
@@ -2830,7 +3015,8 @@
               "Chick"
             ],
             "answer": "Puppy",
-            "tier": 1
+            "tier": 1,
+            "why": "A baby dog is called a puppy. A calf is a baby cow, and a chick is a baby bird."
           },
           {
             "prompt": "A baby cow is a…",
@@ -2840,7 +3026,8 @@
               "Cub"
             ],
             "answer": "Calf",
-            "tier": 2
+            "tier": 2,
+            "why": "A baby cow is called a calf. A kitten is a baby cat, and a cub is a baby bear or lion."
           },
           {
             "prompt": "A baby bird hatches from an…",
@@ -2850,7 +3037,8 @@
               "Leaf"
             ],
             "answer": "Egg",
-            "tier": 2
+            "tier": 2,
+            "why": "A mother bird lays eggs, and the baby bird grows inside and then hatches out. Seeds grow into plants, not birds."
           },
           {
             "prompt": "A baby cat is a…",
@@ -2859,7 +3047,8 @@
               "Puppy"
             ],
             "answer": "Kitten",
-            "tier": 1
+            "tier": 1,
+            "why": "A baby cat is called a kitten. A puppy is a baby dog."
           },
           {
             "prompt": "Does a baby duck look like its parent?",
@@ -2868,7 +3057,8 @@
               "No"
             ],
             "answer": "Yes",
-            "tier": 1
+            "tier": 1,
+            "why": "A baby duck has a bill, webbed feet and feathers just like its parent, so it looks like a small duck. Its feathers just look fluffier at first."
           },
           {
             "prompt": "How does a mother bird help her chicks?",
@@ -2878,12 +3068,14 @@
               "She hides them in sand"
             ],
             "answer": "She brings them food",
-            "tier": 3
+            "tier": 3,
+            "why": "A mother bird flies off to find food and brings it back to feed her chicks. Birds do not paint their chicks or hide them in sand."
           },
           {
             "prompt": "Name one baby animal and tell how its parent takes care of it.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any baby animal and a real way its parent helps, like \"A puppy drinks milk from its mother\" or \"A mother bird brings worms to her chicks.\""
           }
         ]
       },
@@ -2925,7 +3117,8 @@
               "Chef"
             ],
             "answer": "Dentist",
-            "tier": 2
+            "tier": 2,
+            "why": "A dentist checks and cleans our teeth to keep them healthy. A pilot flies planes, and a chef cooks food."
           },
           {
             "prompt": "Who puts out fires?",
@@ -2934,7 +3127,8 @@
               "Teacher"
             ],
             "answer": "Firefighter",
-            "tier": 1
+            "tier": 1,
+            "why": "A firefighter uses hoses and water to put out fires. A teacher helps children learn."
           },
           {
             "prompt": "Who delivers letters?",
@@ -2943,7 +3137,8 @@
               "Baker"
             ],
             "answer": "Mail carrier",
-            "tier": 1
+            "tier": 1,
+            "why": "A mail carrier brings letters and packages to our homes. A baker makes bread and cakes."
           },
           {
             "prompt": "Who helps you when you are sick?",
@@ -2953,7 +3148,8 @@
               "Firefighter"
             ],
             "answer": "Doctor",
-            "tier": 2
+            "tier": 2,
+            "why": "A doctor helps you feel better when you are sick. A mail carrier brings letters, and a firefighter puts out fires."
           },
           {
             "prompt": "Who teaches children at school?",
@@ -2963,17 +3159,20 @@
               "Police officer"
             ],
             "answer": "Teacher",
-            "tier": 2
+            "tier": 2,
+            "why": "A teacher helps children learn at school. A dentist takes care of teeth, and a police officer helps keep people safe."
           },
           {
             "prompt": "Name a community helper and tell how they help people.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any community helper with a true way they help, like \"A police officer keeps people safe\" or \"A doctor helps sick people get better.\""
           },
           {
             "prompt": "Draw a community helper at work and tell about the picture.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a drawing of any community helper doing their job, with a sentence or two about it, like \"This is a firefighter spraying water on a fire.\""
           }
         ]
       },
@@ -3010,12 +3209,14 @@
           {
             "prompt": "Read aloud: tree, see, feet, green",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has ee, and ee says long e, like in see: tree, see, feet, green. Accept the long e sound in every word."
           },
           {
             "prompt": "Read aloud: seat, beach, read, team",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word has ea, and here ea says long e: seat, beach, read, team. Read can also be said like red when it means already read, so accept either."
           },
           {
             "prompt": "Which word has long e?",
@@ -3024,7 +3225,8 @@
               "ship"
             ],
             "answer": "sheep",
-            "tier": 1
+            "tier": 1,
+            "why": "Sheep has ee, and ee says long e. Ship has just one i, so it has a short i sound."
           },
           {
             "prompt": "Which word says long e?",
@@ -3033,7 +3235,8 @@
               "bead"
             ],
             "answer": "bead",
-            "tier": 1
+            "tier": 1,
+            "why": "Bead has ea, and ea says long e. Bed has only one vowel, so its e is short."
           },
           {
             "prompt": "Which letters make long e in the word meat?",
@@ -3043,17 +3246,20 @@
               "at"
             ],
             "answer": "ea",
-            "tier": 2
+            "tier": 2,
+            "why": "In meat, the two vowels e and a sit together, and the first one does the talking, so ea says long e. The letters m and t are just the start and end sounds."
           },
           {
             "prompt": "Read aloud: keep, leaf, sweet, peach",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Keep and sweet have ee, and leaf and peach have ea. Both spellings say long e, so accept the long e sound in every word."
           },
           {
             "prompt": "Read aloud: bee, eat, week, sea",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Bee and week have ee, and eat and sea have ea. Both spellings say long e, so accept the long e sound in every word."
           }
         ]
       },
@@ -3124,12 +3330,14 @@
           {
             "prompt": "Read aloud: rain, tail, paint, wait",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has ai in the middle, and ai says long a: rain, tail, paint, wait. Accept the long a sound, like the letter name A."
           },
           {
             "prompt": "Read aloud: day, play, stay, gray",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends with ay, and ay says long a: day, play, stay, gray. Accept the long a sound at the end of each word."
           },
           {
             "prompt": "Which spelling ends a word?",
@@ -3138,7 +3346,8 @@
               "ai"
             ],
             "answer": "ay",
-            "tier": 3
+            "tier": 3,
+            "why": "We use ay at the end of a word, like in play and day. We use ai in the middle, like in rain."
           },
           {
             "prompt": "Which word says long a?",
@@ -3147,7 +3356,8 @@
               "ran"
             ],
             "answer": "rain",
-            "tier": 1
+            "tier": 1,
+            "why": "Rain has ai, and ai says long a. Ran has just one a, so it has a short a sound."
           },
           {
             "prompt": "Which word has the long a sound?",
@@ -3156,7 +3366,8 @@
               "pan"
             ],
             "answer": "pay",
-            "tier": 1
+            "tier": 1,
+            "why": "Pay ends with ay, and ay says long a. Pan has just one a, so its a is short."
           },
           {
             "prompt": "Which is spelled correctly?",
@@ -3165,12 +3376,14 @@
               "trayn"
             ],
             "answer": "train",
-            "tier": 3
+            "tier": 3,
+            "why": "The long a sound is in the middle of train, and we spell long a in the middle with ai. We save ay for the end of a word."
           },
           {
             "prompt": "Read aloud: mail, may, snail, tray",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Mail and snail have ai in the middle, and may and tray have ay at the end. Both spellings say long a, so accept the long a sound in every word."
           }
         ]
       },
@@ -3247,7 +3460,8 @@
               "cat"
             ],
             "answer": "fuzzy",
-            "tier": 2
+            "tier": 2,
+            "why": "Fuzzy tells how something feels, like a fuzzy blanket, so fuzzy is an adjective. Hop is something you do, and cat names an animal."
           },
           {
             "prompt": "Which word describes?",
@@ -3257,12 +3471,14 @@
               "boy"
             ],
             "answer": "tiny",
-            "tier": 2
+            "tier": 2,
+            "why": "Tiny tells the size of something, like a tiny bug, so tiny describes. Run is something you do, and boy names a person."
           },
           {
             "prompt": "Describe an apple with three adjectives.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept three describing words that fit an apple, like red, round and crunchy, or sweet, shiny and juicy. Each word should tell color, size, shape, taste or feel."
           },
           {
             "prompt": "Which word tells a color?",
@@ -3271,7 +3487,8 @@
               "jump"
             ],
             "answer": "green",
-            "tier": 1
+            "tier": 1,
+            "why": "Green is a color, like green grass. Jump is something you do."
           },
           {
             "prompt": "Which word describes a size?",
@@ -3280,12 +3497,14 @@
               "dog"
             ],
             "answer": "big",
-            "tier": 1
+            "tier": 1,
+            "why": "Big tells how large something is, so big describes a size. Dog names an animal."
           },
           {
             "prompt": "Write a sentence about your pet or toy with two adjectives.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a sentence with two describing words, like \"My dog is small and fluffy\" or \"I have a soft, brown bear.\""
           }
         ]
       },
@@ -3322,12 +3541,14 @@
           {
             "prompt": "Read aloud: boat, coat, road, soap",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has oa, and oa says long o, like in boat: boat, coat, road, soap. Accept the long o sound in every word."
           },
           {
             "prompt": "Read aloud: snow, grow, show, slow",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends with ow, and here ow says long o: snow, grow, show, slow. Accept the long o sound, not the ow sound in cow."
           },
           {
             "prompt": "Which word has long o?",
@@ -3336,7 +3557,8 @@
               "got"
             ],
             "answer": "goat",
-            "tier": 1
+            "tier": 1,
+            "why": "Goat has oa, and oa says long o. Got has just one o, so its o is short."
           },
           {
             "prompt": "Which word says long o?",
@@ -3345,7 +3567,8 @@
               "road"
             ],
             "answer": "road",
-            "tier": 1
+            "tier": 1,
+            "why": "Road has oa, and oa says long o. Rod has just one o, so its o is short."
           },
           {
             "prompt": "Which letters make long o in the word bowl?",
@@ -3355,12 +3578,14 @@
               "wl"
             ],
             "answer": "ow",
-            "tier": 3
+            "tier": 3,
+            "why": "In bowl, the letters o and w work together to say long o. The b and l are the start and end sounds."
           },
           {
             "prompt": "Read aloud: toad, blow, float, crow",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Toad and float have oa, and blow and crow have ow. Both say long o, so accept the long o sound in every word."
           }
         ]
       },
@@ -3397,32 +3622,38 @@
           {
             "prompt": "Ana has 9 cards. Ben has 5. How many more cards does Ana have?",
             "answer": "4",
-            "tier": 2
+            "tier": 2,
+            "why": "Ana has 9 and Ben has 5. Take away the smaller from the bigger: 9 − 5 = 4. So Ana has 4 more cards."
           },
           {
             "prompt": "A red tower has 12 blocks. A blue tower has 8. How many fewer blocks does the blue tower have?",
             "answer": "4",
-            "tier": 3
+            "tier": 3,
+            "why": "The red tower has 12 and the blue tower has 8. Find the difference: 12 − 8 = 4. So the blue tower has 4 fewer blocks."
           },
           {
             "prompt": "Mia read 7 books. Leo read 10. How many more books did Leo read?",
             "answer": "3",
-            "tier": 2
+            "tier": 2,
+            "why": "Leo read 10 and Mia read 7. Count up from 7 to 10: 8, 9, 10. That is 3, so Leo read 3 more books."
           },
           {
             "prompt": "There are 15 birds and 9 nests. How many birds have no nest?",
             "answer": "6",
-            "tier": 3
+            "tier": 3,
+            "why": "Put one bird in each of the 9 nests. Then 15 − 9 = 6 birds are left with no nest."
           },
           {
             "prompt": "Jo has 6 stickers. She needs 11. How many more does she need?",
             "answer": "5",
-            "tier": 3
+            "tier": 3,
+            "why": "Jo has 6 and needs 11. Count up from 6 to 11: 7, 8, 9, 10, 11. That is 5 more stickers."
           },
           {
             "prompt": "Tom has 4 cars. Sue has 2 cars. How many more cars does Tom have?",
             "answer": "2",
-            "tier": 1
+            "tier": 1,
+            "why": "Tom has 4 and Sue has 2. Take away the smaller from the bigger: 4 − 2 = 2. So Tom has 2 more cars."
           },
           {
             "prompt": "Kim has 5 apples. Max has 3 apples. Who has more?",
@@ -3431,12 +3662,14 @@
               "Max"
             ],
             "answer": "Kim",
-            "tier": 1
+            "tier": 1,
+            "why": "Kim has 5 apples and Max has 3. Five is bigger than 3, so Kim has more."
           },
           {
             "prompt": "There are 6 cups and 4 lids. How many cups have no lid?",
             "answer": "2",
-            "tier": 1
+            "tier": 1,
+            "why": "Put one lid on each cup. The 4 lids cover 4 cups, and 6 − 4 = 2 cups have no lid."
           }
         ]
       },
@@ -3508,17 +3741,20 @@
           {
             "prompt": "Read aloud: car, star, park, farm",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has ar, which says the sound in car: car, star, park, farm. Accept the ar sound, not a short a."
           },
           {
             "prompt": "Read aloud: fork, corn, storm, short",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has or, which says the sound in fork: fork, corn, storm, short. Accept the or sound in every word."
           },
           {
             "prompt": "Read aloud: her, bird, fur, turn",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Er, ir and ur all make the same sound, like in her: her, bird, fur, turn. Accept that same sound in every word."
           },
           {
             "prompt": "Which word has 'ar'?",
@@ -3528,7 +3764,8 @@
               "burn"
             ],
             "answer": "barn",
-            "tier": 3
+            "tier": 3,
+            "why": "Barn has the letters a and r together, so it has ar. Born has or, and burn has ur."
           },
           {
             "prompt": "Which word has 'or'?",
@@ -3537,7 +3774,8 @@
               "can"
             ],
             "answer": "corn",
-            "tier": 1
+            "tier": 1,
+            "why": "Corn has the letters o and r together, so it has or. Can has no r at all."
           },
           {
             "prompt": "Which word has 'ir'?",
@@ -3546,12 +3784,14 @@
               "gal"
             ],
             "answer": "girl",
-            "tier": 1
+            "tier": 1,
+            "why": "Girl has the letters i and r together, so it has ir. Gal has no r at all."
           },
           {
             "prompt": "Read aloud: shark, sport, shirt, hurt",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Shark has ar, sport has or, shirt has ir, and hurt has ur. Accept the sh sound at the start of the first three words and the right r sound in each."
           }
         ]
       },
@@ -3593,7 +3833,8 @@
               "Paws"
             ],
             "answer": "Fins",
-            "tier": 1
+            "tier": 1,
+            "why": "Fish move their fins back and forth to push through the water. Birds have wings, and dogs have paws."
           },
           {
             "prompt": "A bird uses its ___ to eat.",
@@ -3603,7 +3844,8 @@
               "Feathers"
             ],
             "answer": "Beak",
-            "tier": 2
+            "tier": 2,
+            "why": "A bird picks up and cracks its food with its beak. Its tail and feathers help it fly, not eat."
           },
           {
             "prompt": "What protects a turtle?",
@@ -3613,7 +3855,8 @@
               "Fins"
             ],
             "answer": "Shell",
-            "tier": 2
+            "tier": 2,
+            "why": "A turtle can pull its head and legs into its hard shell to stay safe. Turtles do not have fur or fins on their backs."
           },
           {
             "prompt": "Which helps a bird fly?",
@@ -3622,7 +3865,8 @@
               "Shell"
             ],
             "answer": "Wings",
-            "tier": 1
+            "tier": 1,
+            "why": "A bird flaps its wings to fly. A shell is hard and heavy and helps animals like turtles stay safe."
           },
           {
             "prompt": "What does an eagle use to grab its food?",
@@ -3632,12 +3876,14 @@
               "Shell"
             ],
             "answer": "Claws",
-            "tier": 3
+            "tier": 3,
+            "why": "An eagle grabs its food with the sharp claws on its feet. Fins are for swimming, and a shell is for hiding."
           },
           {
             "prompt": "Pick an animal and tell how one of its body parts helps it eat, move or stay safe.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any animal with a true use of a body part, like \"A duck uses its webbed feet to swim\" or \"A turtle hides in its shell to stay safe.\""
           }
         ]
       },
@@ -3678,7 +3924,8 @@
               "Want"
             ],
             "answer": "Need",
-            "tier": 1
+            "tier": 1,
+            "why": "We must eat food to live and grow, so food is a need."
           },
           {
             "prompt": "Is a video game a need or a want?",
@@ -3687,7 +3934,8 @@
               "Need"
             ],
             "answer": "Want",
-            "tier": 1
+            "tier": 1,
+            "why": "A video game is fun, but we can live without it, so it is a want."
           },
           {
             "prompt": "Which is a need?",
@@ -3697,7 +3945,8 @@
               "Toys"
             ],
             "answer": "Shelter",
-            "tier": 2
+            "tier": 2,
+            "why": "Shelter is a home that keeps us safe and warm, and we need it to live. Candy and toys are nice, but we can live without them."
           },
           {
             "prompt": "Is water a need or a want?",
@@ -3706,7 +3955,8 @@
               "Want"
             ],
             "answer": "Need",
-            "tier": 1
+            "tier": 1,
+            "why": "Our bodies must have water to live, so water is a need."
           },
           {
             "prompt": "Is a balloon a need or a want?",
@@ -3715,7 +3965,8 @@
               "Need"
             ],
             "answer": "Want",
-            "tier": 2
+            "tier": 2,
+            "why": "A balloon is fun to play with, but we can live without it, so it is a want."
           },
           {
             "prompt": "Pick the want:",
@@ -3725,7 +3976,8 @@
               "Coat"
             ],
             "answer": "Toy robot",
-            "tier": 2
+            "tier": 2,
+            "why": "A toy robot is fun, but we can live without it, so it is a want. Water and a coat help keep us alive and warm, so they are needs."
           },
           {
             "prompt": "Pick the need:",
@@ -3735,7 +3987,8 @@
               "Bubble gum"
             ],
             "answer": "Clothes",
-            "tier": 3
+            "tier": 3,
+            "why": "Clothes keep our bodies warm and safe, so they are a need. Stickers and bubble gum are fun, but we can live without them."
           },
           {
             "prompt": "Which one is a want?",
@@ -3745,7 +3998,8 @@
               "Bike"
             ],
             "answer": "Bike",
-            "tier": 3
+            "tier": 3,
+            "why": "A bike is fun to ride, but we can live without it, so it is a want. A bed and food are needs."
           }
         ]
       },
@@ -3816,12 +4070,14 @@
           {
             "prompt": "Read aloud: cats, dogs, runs, hops",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Each word is a short word plus an s: cat-s, dog-s, run-s, hop-s. Accept an s sound in cats and hops and a z-like sound in dogs and runs."
           },
           {
             "prompt": "Read aloud: boxes, wishes, lunches, buses",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word ends in s, x, sh or ch, so it gets -es, which adds an extra beat: box-es, wish-es, lunch-es, bus-es. Accept two beats in each word."
           },
           {
             "prompt": "Which is right?",
@@ -3830,12 +4086,14 @@
               "foxs"
             ],
             "answer": "foxes",
-            "tier": 2
+            "tier": 2,
+            "why": "Fox ends with x, and words ending in x get -es. So the right word is foxes."
           },
           {
             "prompt": "Read aloud: hats, pigs",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Each word is a short word plus s: hat-s, pig-s. Accept an s sound at the end of hats and a z-like sound at the end of pigs."
           },
           {
             "prompt": "Which is right for more than one dog?",
@@ -3844,7 +4102,8 @@
               "doges"
             ],
             "answer": "dogs",
-            "tier": 1
+            "tier": 1,
+            "why": "Dog does not end in s, x, sh or ch, so we just add s: dogs."
           },
           {
             "prompt": "Which is right for more than one dish?",
@@ -3853,12 +4112,14 @@
               "dishs"
             ],
             "answer": "dishes",
-            "tier": 3
+            "tier": 3,
+            "why": "Dish ends with sh, and words ending in sh get -es. So the right word is dishes."
           },
           {
             "prompt": "Read aloud: foxes, benches, glasses, bushes",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word ends in x, ch, s or sh, so it gets -es with an extra beat: fox-es, bench-es, glass-es, bush-es. Accept two beats in each word."
           }
         ]
       },
@@ -3900,7 +4161,8 @@
               "buss"
             ],
             "answer": "buses",
-            "tier": 2
+            "tier": 2,
+            "why": "Bus ends with s, and words ending in s get -es. So more than one bus is buses."
           },
           {
             "prompt": "More than one cat:",
@@ -3909,7 +4171,8 @@
               "cates"
             ],
             "answer": "cats",
-            "tier": 1
+            "tier": 1,
+            "why": "Cat does not end in s, x, sh or ch, so we just add s: cats. Cates is not a word."
           },
           {
             "prompt": "More than one dish:",
@@ -3918,7 +4181,8 @@
               "dishs"
             ],
             "answer": "dishes",
-            "tier": 3
+            "tier": 3,
+            "why": "Dish ends with sh, so we add -es. More than one dish is dishes."
           },
           {
             "prompt": "More than one hat:",
@@ -3927,7 +4191,8 @@
               "hates"
             ],
             "answer": "hats",
-            "tier": 1
+            "tier": 1,
+            "why": "Hat does not end in s, x, sh or ch, so we just add s: hats. Hates is a different word that means not liking something."
           },
           {
             "prompt": "More than one fox:",
@@ -3936,7 +4201,8 @@
               "foxs"
             ],
             "answer": "foxes",
-            "tier": 2
+            "tier": 2,
+            "why": "Fox ends with x, so we add -es. More than one fox is foxes."
           },
           {
             "prompt": "More than one bench:",
@@ -3945,12 +4211,14 @@
               "benchs"
             ],
             "answer": "benches",
-            "tier": 3
+            "tier": 3,
+            "why": "Bench ends with ch, so we add -es. More than one bench is benches."
           },
           {
             "prompt": "Write more than one: pig, box, wish",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept pigs, boxes and wishes. Pig just gets s, but box ends with x and wish ends with sh, so they get -es."
           }
         ]
       },
@@ -4023,17 +4291,20 @@
           {
             "prompt": "Read aloud: jumped, helped, kicked",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "In each word the -ed sounds like t: jumpt, helpt, kickt. Accept a quick t sound at the end, with no extra beat."
           },
           {
             "prompt": "Read aloud: played, filled, smiled",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "In each word the -ed sounds like d: playd, filld, smiled. Accept a soft d sound at the end, with no extra beat."
           },
           {
             "prompt": "Read aloud: wanted, landed, melted",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word ends in t or d before the -ed, so -ed adds an extra beat: want-ed, land-ed, melt-ed. Accept two beats in each word."
           },
           {
             "prompt": "Which word tells about the past?",
@@ -4043,12 +4314,14 @@
               "walking"
             ],
             "answer": "walked",
-            "tier": 1
+            "tier": 1,
+            "why": "The -ed ending tells that something already happened, so walked is about the past. Walks and walking are about now."
           },
           {
             "prompt": "Read aloud: kicked, filled",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Kicked ends with a t sound, like kickt. Filled ends with a d sound, like filld. Accept each with no extra beat."
           },
           {
             "prompt": "Which word tells about yesterday?",
@@ -4058,12 +4331,14 @@
               "jumping"
             ],
             "answer": "jumped",
-            "tier": 2
+            "tier": 2,
+            "why": "Jumped has the -ed ending, which tells that it already happened, like yesterday. Jumps and jumping are about now."
           },
           {
             "prompt": "Read aloud: melted, smiled, helped, wanted",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Melted and wanted end with an extra beat, like ed. Smiled ends with a d sound, and helped ends with a t sound. Accept these three different endings."
           }
         ]
       },
@@ -4100,57 +4375,68 @@
           {
             "prompt": "30 + 40 = ?",
             "answer": "70",
-            "tier": 2
+            "tier": 2,
+            "why": "30 is 3 tens and 40 is 4 tens. 3 tens + 4 tens = 7 tens, which is 70."
           },
           {
             "prompt": "50 + 20 = ?",
             "answer": "70",
-            "tier": 2
+            "tier": 2,
+            "why": "50 is 5 tens and 20 is 2 tens. 5 tens + 2 tens = 7 tens, which is 70."
           },
           {
             "prompt": "60 + 30 = ?",
             "answer": "90",
-            "tier": 2
+            "tier": 2,
+            "why": "60 is 6 tens and 30 is 3 tens. 6 tens + 3 tens = 9 tens, which is 90."
           },
           {
             "prompt": "80 − 50 = ?",
             "answer": "30",
-            "tier": 3
+            "tier": 3,
+            "why": "80 is 8 tens and 50 is 5 tens. 8 tens take away 5 tens leaves 3 tens, which is 30."
           },
           {
             "prompt": "90 − 60 = ?",
             "answer": "30",
-            "tier": 3
+            "tier": 3,
+            "why": "90 is 9 tens and 60 is 6 tens. 9 tens take away 6 tens leaves 3 tens, which is 30."
           },
           {
             "prompt": "40 + 40 = ?",
             "answer": "80",
-            "tier": 2
+            "tier": 2,
+            "why": "40 is 4 tens. 4 tens + 4 tens = 8 tens, which is 80."
           },
           {
             "prompt": "70 − 20 = ?",
             "answer": "50",
-            "tier": 3
+            "tier": 3,
+            "why": "70 is 7 tens and 20 is 2 tens. 7 tens take away 2 tens leaves 5 tens, which is 50."
           },
           {
             "prompt": "10 + 80 = ?",
             "answer": "90",
-            "tier": 2
+            "tier": 2,
+            "why": "10 is 1 ten and 80 is 8 tens. 1 ten + 8 tens = 9 tens, which is 90."
           },
           {
             "prompt": "10 + 10 = ?",
             "answer": "20",
-            "tier": 1
+            "tier": 1,
+            "why": "10 is 1 ten. 1 ten + 1 ten = 2 tens, which is 20."
           },
           {
             "prompt": "20 + 10 = ?",
             "answer": "30",
-            "tier": 1
+            "tier": 1,
+            "why": "20 is 2 tens and 10 is 1 ten. 2 tens + 1 ten = 3 tens, which is 30."
           },
           {
             "prompt": "30 − 10 = ?",
             "answer": "20",
-            "tier": 1
+            "tier": 1,
+            "why": "30 is 3 tens and 10 is 1 ten. 3 tens take away 1 ten leaves 2 tens, which is 20."
           }
         ]
       },
@@ -4188,12 +4474,14 @@
           {
             "prompt": "Read aloud: jumping, reading, playing",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Each word is a word plus -ing: jump-ing, read-ing, play-ing. Accept the base word read smoothly with the ing sound at the end."
           },
           {
             "prompt": "Read aloud: running, sitting, hopping",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has a short vowel, so the last letter doubles before -ing: run-ning, sit-ting, hop-ping. Accept a short vowel sound in each word."
           },
           {
             "prompt": "Which is spelled right?",
@@ -4202,12 +4490,14 @@
               "runing"
             ],
             "answer": "running",
-            "tier": 3
+            "tier": 3,
+            "why": "Run has a short u and ends with one n, so we double the n before adding -ing: running."
           },
           {
             "prompt": "Read aloud: going, eating",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Each word is a word plus -ing: go-ing, eat-ing. Accept the base word said clearly with ing at the end."
           },
           {
             "prompt": "Which -ing word is spelled right?",
@@ -4216,12 +4506,14 @@
               "plaing"
             ],
             "answer": "playing",
-            "tier": 1
+            "tier": 1,
+            "why": "Play keeps all its letters, and we just add -ing: play-ing. Dropping the y makes the wrong spelling plaing."
           },
           {
             "prompt": "Read aloud: swimming, digging, napping",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has a short vowel, so the last letter doubles before -ing: swim-ming, dig-ging, nap-ping. Accept a short vowel sound in each word."
           },
           {
             "prompt": "Pick the right spelling:",
@@ -4230,7 +4522,8 @@
               "sitting"
             ],
             "answer": "sitting",
-            "tier": 3
+            "tier": 3,
+            "why": "Sit has a short i and ends with one t, so we double the t before adding -ing: sitting. Siting with one t would make the i say its name."
           }
         ]
       },
@@ -4271,7 +4564,8 @@
               "West"
             ],
             "answer": "East",
-            "tier": 1
+            "tier": 1,
+            "why": "Each morning the sun comes up in the east. It goes down in the west."
           },
           {
             "prompt": "When can we see most stars?",
@@ -4280,12 +4574,14 @@
               "Noon"
             ],
             "answer": "Night",
-            "tier": 1
+            "tier": 1,
+            "why": "Stars are in the sky all the time, but the sun is so bright in the day that we can only see them at night."
           },
           {
             "prompt": "Draw the moon each night for a week.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept seven drawings, one for each night, that show the moon's shape changing, like getting a little bigger or smaller. Cloudy nights can be marked as cloudy."
           },
           {
             "prompt": "When do we see the sun?",
@@ -4294,7 +4590,8 @@
               "Night"
             ],
             "answer": "Day",
-            "tier": 2
+            "tier": 2,
+            "why": "We see the sun in the day, and that is what makes it light outside. At night our side of Earth is turned away from the sun."
           },
           {
             "prompt": "Where does the sun set?",
@@ -4303,7 +4600,8 @@
               "East"
             ],
             "answer": "West",
-            "tier": 2
+            "tier": 2,
+            "why": "The sun goes down in the west each evening. It comes up in the east in the morning."
           },
           {
             "prompt": "Does the moon always look the same shape?",
@@ -4312,7 +4610,8 @@
               "Yes"
             ],
             "answer": "No",
-            "tier": 3
+            "tier": 3,
+            "why": "The moon's shape seems to change from night to night. Sometimes it looks round and full, and sometimes it looks like a thin curve."
           }
         ]
       },
@@ -4354,7 +4653,8 @@
               "Down"
             ],
             "answer": "Up",
-            "tier": 1
+            "tier": 1,
+            "why": "Maps are drawn with north at the top. So when you look at a map, north is up."
           },
           {
             "prompt": "The sun sets in the…",
@@ -4363,7 +4663,8 @@
               "East"
             ],
             "answer": "West",
-            "tier": 2
+            "tier": 2,
+            "why": "The sun comes up in the east in the morning and goes down in the west at night. So the sun sets in the west."
           },
           {
             "prompt": "Which direction is opposite of north?",
@@ -4372,7 +4673,8 @@
               "East"
             ],
             "answer": "South",
-            "tier": 2
+            "tier": 2,
+            "why": "North and south point opposite ways. On a map, north is up and south is down."
           },
           {
             "prompt": "On most maps, south is…",
@@ -4381,7 +4683,8 @@
               "Up"
             ],
             "answer": "Down",
-            "tier": 1
+            "tier": 1,
+            "why": "South is the opposite of north. North is at the top of a map, so south is at the bottom, which is down."
           },
           {
             "prompt": "On most maps, east is on the…",
@@ -4390,7 +4693,8 @@
               "Left"
             ],
             "answer": "Right",
-            "tier": 3
+            "tier": 3,
+            "why": "Think of the words Never Eat Soggy Waffles going around clockwise: north is up, then east comes next on the right side."
           },
           {
             "prompt": "Which direction is opposite of east?",
@@ -4399,7 +4703,8 @@
               "North"
             ],
             "answer": "West",
-            "tier": 3
+            "tier": 3,
+            "why": "East and west point opposite ways. East is on the right of a map and west is on the left."
           }
         ]
       },
@@ -4440,7 +4745,8 @@
               "Service"
             ],
             "answer": "Good",
-            "tier": 1
+            "tier": 1,
+            "why": "A toothbrush is a thing you can buy and hold in your hand. Things you can hold are goods."
           },
           {
             "prompt": "A haircut is a…",
@@ -4449,7 +4755,8 @@
               "Good"
             ],
             "answer": "Service",
-            "tier": 2
+            "tier": 2,
+            "why": "A haircut is a job someone does for you. You can't hold it, so it is a service."
           },
           {
             "prompt": "A loaf of bread is a…",
@@ -4458,7 +4765,8 @@
               "Service"
             ],
             "answer": "Good",
-            "tier": 1
+            "tier": 1,
+            "why": "A loaf of bread is a thing you can buy, hold and eat. That makes it a good."
           },
           {
             "prompt": "A book is a…",
@@ -4467,7 +4775,8 @@
               "Service"
             ],
             "answer": "Good",
-            "tier": 2
+            "tier": 2,
+            "why": "You can buy a book and hold it in your hands. Things you can hold are goods."
           },
           {
             "prompt": "Fixing a car is a…",
@@ -4476,7 +4785,8 @@
               "Good"
             ],
             "answer": "Service",
-            "tier": 3
+            "tier": 3,
+            "why": "When a mechanic fixes a car, they are doing a job for you. A job someone does for you is a service."
           },
           {
             "prompt": "Which is a service?",
@@ -4486,7 +4796,8 @@
               "An apple"
             ],
             "answer": "Mowing a lawn",
-            "tier": 3
+            "tier": 3,
+            "why": "Mowing a lawn is a job someone does for you, so it is a service. A ball and an apple are things you can hold, so they are goods."
           }
         ]
       },
@@ -4524,47 +4835,56 @@
           {
             "prompt": "24 + 5 = ?",
             "answer": "29",
-            "tier": 1
+            "tier": 1,
+            "why": "Add the ones: 4 + 5 = 9. Keep the 2 tens. So 24 + 5 = 29."
           },
           {
             "prompt": "36 + 7 = ?",
             "answer": "43",
-            "tier": 2
+            "tier": 2,
+            "why": "Split 7 into 4 and 3. 36 + 4 = 40, then 40 + 3 = 43."
           },
           {
             "prompt": "58 + 4 = ?",
             "answer": "62",
-            "tier": 3
+            "tier": 3,
+            "why": "Split 4 into 2 and 2. 58 + 2 = 60, then 60 + 2 = 62."
           },
           {
             "prompt": "71 + 9 = ?",
             "answer": "80",
-            "tier": 2
+            "tier": 2,
+            "why": "Add the ones: 1 + 9 = 10. That makes a new ten, so 7 tens and 1 more ten is 8 tens. 71 + 9 = 80."
           },
           {
             "prompt": "45 + 8 = ?",
             "answer": "53",
-            "tier": 3
+            "tier": 3,
+            "why": "Split 8 into 5 and 3. 45 + 5 = 50, then 50 + 3 = 53."
           },
           {
             "prompt": "63 + 6 = ?",
             "answer": "69",
-            "tier": 1
+            "tier": 1,
+            "why": "Add the ones: 3 + 6 = 9. Keep the 6 tens. So 63 + 6 = 69."
           },
           {
             "prompt": "29 + 3 = ?",
             "answer": "32",
-            "tier": 2
+            "tier": 2,
+            "why": "Split 3 into 1 and 2. 29 + 1 = 30, then 30 + 2 = 32."
           },
           {
             "prompt": "87 + 5 = ?",
             "answer": "92",
-            "tier": 3
+            "tier": 3,
+            "why": "Split 5 into 3 and 2. 87 + 3 = 90, then 90 + 2 = 92."
           },
           {
             "prompt": "12 + 3 = ?",
             "answer": "15",
-            "tier": 1
+            "tier": 1,
+            "why": "Add the ones: 2 + 3 = 5. Keep the 1 ten. So 12 + 3 = 15."
           }
         ]
       },
@@ -4602,32 +4922,38 @@
           {
             "prompt": "Tutor says: dog, sun, pig, bed, cat. Child writes them.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has three sounds and one letter for each: d-o-g, s-u-n, p-i-g, b-e-d, c-a-t. Accept all five spelled exactly; letters may be a little wobbly."
           },
           {
             "prompt": "Tutor says: fish, chop, duck. Child writes them.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word has a two-letter team: fish ends with s-h, chop starts with c-h, and duck ends with c-k. Accept f-i-s-h, c-h-o-p and d-u-c-k."
           },
           {
             "prompt": "Tutor says: cat, sit. Child writes them.",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Stretch each word and write a letter for each sound: c-a-t and s-i-t. Accept both words spelled exactly."
           },
           {
             "prompt": "Tutor says: mat, hop. Child writes them.",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Stretch each word and write a letter for each sound: m-a-t and h-o-p. Accept both words spelled exactly."
           },
           {
             "prompt": "Tutor says: rug, ten, fox, lip. Child writes them.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has three sounds with a short vowel in the middle: r-u-g, t-e-n, f-o-x, l-i-p. Accept all four spelled exactly."
           },
           {
             "prompt": "Tutor says: shop, chin, rock. Child writes them.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "These words have two-letter teams: shop starts with s-h, chin starts with c-h, and rock ends with c-k. Accept s-h-o-p, c-h-i-n and r-o-c-k."
           }
         ]
       },
@@ -4664,12 +4990,14 @@
           {
             "prompt": "Read aloud: sunset, cupcake, rainbow",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word is two small words joined together: sun-set, cup-cake, rain-bow. Accept each word read smoothly as one word, without a long stop in the middle."
           },
           {
             "prompt": "Read aloud: football, bedroom, starfish",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word is two small words joined together: foot-ball, bed-room, star-fish. Accept each word read smoothly as one word."
           },
           {
             "prompt": "Which is a compound word?",
@@ -4679,17 +5007,20 @@
               "button"
             ],
             "answer": "backpack",
-            "tier": 2
+            "tier": 2,
+            "why": "Backpack is made of two words, back and pack. Basket and button are not made of two real words."
           },
           {
             "prompt": "bed + time = ?",
             "answer": "bedtime",
-            "tier": 1
+            "tier": 1,
+            "why": "Put the two words together with no space: bed + time makes bedtime, the time you go to bed."
           },
           {
             "prompt": "cup + cake = ?",
             "answer": "cupcake",
-            "tier": 1
+            "tier": 1,
+            "why": "Put the two words together with no space: cup + cake makes cupcake, a little cake made in a cup."
           },
           {
             "prompt": "Which word is made of two smaller words?",
@@ -4699,12 +5030,14 @@
               "rain"
             ],
             "answer": "rainbow",
-            "tier": 2
+            "tier": 2,
+            "why": "Rainbow is made of rain and bow. Rabbit is not two words, and rain is only one word."
           },
           {
             "prompt": "Read aloud: pancake, sailboat, doghouse, snowman",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word is two small words joined: pan-cake, sail-boat, dog-house, snow-man. Accept all four read smoothly as whole words."
           }
         ]
       },
@@ -4741,47 +5074,56 @@
           {
             "prompt": "34 + 20 = ?",
             "answer": "54",
-            "tier": 2
+            "tier": 2,
+            "why": "Only the tens change. 3 tens + 2 tens = 5 tens, and keep the 4 ones. So 34 + 20 = 54."
           },
           {
             "prompt": "47 + 30 = ?",
             "answer": "77",
-            "tier": 2
+            "tier": 2,
+            "why": "Only the tens change. 4 tens + 3 tens = 7 tens, and keep the 7 ones. So 47 + 30 = 77."
           },
           {
             "prompt": "15 + 60 = ?",
             "answer": "75",
-            "tier": 2
+            "tier": 2,
+            "why": "Only the tens change. 1 ten + 6 tens = 7 tens, and keep the 5 ones. So 15 + 60 = 75."
           },
           {
             "prompt": "52 + 40 = ?",
             "answer": "92",
-            "tier": 3
+            "tier": 3,
+            "why": "Only the tens change. 5 tens + 4 tens = 9 tens, and keep the 2 ones. So 52 + 40 = 92."
           },
           {
             "prompt": "28 + 50 = ?",
             "answer": "78",
-            "tier": 3
+            "tier": 3,
+            "why": "Only the tens change. 2 tens + 5 tens = 7 tens, and keep the 8 ones. So 28 + 50 = 78."
           },
           {
             "prompt": "61 + 30 = ?",
             "answer": "91",
-            "tier": 3
+            "tier": 3,
+            "why": "Only the tens change. 6 tens + 3 tens = 9 tens, and keep the 1 one. So 61 + 30 = 91."
           },
           {
             "prompt": "9 + 70 = ?",
             "answer": "79",
-            "tier": 1
+            "tier": 1,
+            "why": "9 has no tens, just 9 ones. 70 is 7 tens. Put them together: 7 tens and 9 ones is 79."
           },
           {
             "prompt": "13 + 10 = ?",
             "answer": "23",
-            "tier": 1
+            "tier": 1,
+            "why": "Adding 10 adds one more ten. 1 ten + 1 ten = 2 tens, keep the 3 ones. So 13 + 10 = 23."
           },
           {
             "prompt": "21 + 20 = ?",
             "answer": "41",
-            "tier": 1
+            "tier": 1,
+            "why": "Only the tens change. 2 tens + 2 tens = 4 tens, and keep the 1 one. So 21 + 20 = 41."
           }
         ]
       },
@@ -4818,32 +5160,38 @@
           {
             "prompt": "Read aloud: rabbit, napkin, picnic",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Each word has two beats: rab-bit, nap-kin, pic-nic. Accept each word read as one smooth word, clapping or tapping two beats is a bonus."
           },
           {
             "prompt": "Read aloud: kitten, basket, pumpkin",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Each word has two beats: kit-ten, bas-ket, pump-kin. Accept each word read smoothly as one whole word."
           },
           {
             "prompt": "How many syllables in 'pumpkin'?",
             "answer": "2",
-            "tier": 2
+            "tier": 2,
+            "why": "Clap as you say it: pump-kin. That is two claps, so pumpkin has 2 syllables."
           },
           {
             "prompt": "How many syllables in 'cat'?",
             "answer": "1",
-            "tier": 1
+            "tier": 1,
+            "why": "Clap as you say cat. You only clap once, because it has one vowel sound. So cat has 1 syllable."
           },
           {
             "prompt": "How many syllables in 'dog'?",
             "answer": "1",
-            "tier": 1
+            "tier": 1,
+            "why": "Clap as you say dog. You only clap once, so dog has 1 syllable."
           },
           {
             "prompt": "How many syllables in 'rabbit'?",
             "answer": "2",
-            "tier": 2
+            "tier": 2,
+            "why": "Clap as you say it: rab-bit. That is two claps, so rabbit has 2 syllables."
           },
           {
             "prompt": "Which word has 2 syllables?",
@@ -4853,7 +5201,8 @@
               "sun"
             ],
             "answer": "napkin",
-            "tier": 3
+            "tier": 3,
+            "why": "Napkin has two beats: nap-kin. Hat and sun each have only one beat."
           }
         ]
       },
@@ -4890,47 +5239,56 @@
           {
             "prompt": "75 − 30 = ?",
             "answer": "45",
-            "tier": 2
+            "tier": 2,
+            "why": "Only the tens change. 7 tens take away 3 tens is 4 tens, and keep the 5 ones. So 75 − 30 = 45."
           },
           {
             "prompt": "68 − 40 = ?",
             "answer": "28",
-            "tier": 2
+            "tier": 2,
+            "why": "Only the tens change. 6 tens take away 4 tens is 2 tens, and keep the 8 ones. So 68 − 40 = 28."
           },
           {
             "prompt": "92 − 50 = ?",
             "answer": "42",
-            "tier": 3
+            "tier": 3,
+            "why": "Only the tens change. 9 tens take away 5 tens is 4 tens, and keep the 2 ones. So 92 − 50 = 42."
           },
           {
             "prompt": "54 − 20 = ?",
             "answer": "34",
-            "tier": 2
+            "tier": 2,
+            "why": "Only the tens change. 5 tens take away 2 tens is 3 tens, and keep the 4 ones. So 54 − 20 = 34."
           },
           {
             "prompt": "81 − 60 = ?",
             "answer": "21",
-            "tier": 3
+            "tier": 3,
+            "why": "Only the tens change. 8 tens take away 6 tens is 2 tens, and keep the 1 one. So 81 − 60 = 21."
           },
           {
             "prompt": "47 − 10 = ?",
             "answer": "37",
-            "tier": 1
+            "tier": 1,
+            "why": "Taking away 10 takes away one ten. 4 tens become 3 tens, keep the 7 ones. So 47 − 10 = 37."
           },
           {
             "prompt": "99 − 90 = ?",
             "answer": "9",
-            "tier": 3
+            "tier": 3,
+            "why": "9 tens take away 9 tens leaves 0 tens. Only the 9 ones are left, so 99 − 90 = 9."
           },
           {
             "prompt": "25 − 10 = ?",
             "answer": "15",
-            "tier": 1
+            "tier": 1,
+            "why": "Taking away 10 takes away one ten. 2 tens become 1 ten, keep the 5 ones. So 25 − 10 = 15."
           },
           {
             "prompt": "36 − 10 = ?",
             "answer": "26",
-            "tier": 1
+            "tier": 1,
+            "why": "Taking away 10 takes away one ten. 3 tens become 2 tens, keep the 6 ones. So 36 − 10 = 26."
           }
         ]
       },
@@ -4967,12 +5325,14 @@
           {
             "prompt": "Read aloud: can't, don't, I'm",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Can't means can not, don't means do not, and I'm means I am. Accept each word read smoothly, saying the short form, not the two long words."
           },
           {
             "prompt": "Read aloud: it's, we're, isn't",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "It's means it is, we're means we are, and isn't means is not. Accept each read smoothly as one word; we're sounds like weer, not like were."
           },
           {
             "prompt": "'is not' as a contraction:",
@@ -4982,7 +5342,8 @@
               "isnt"
             ],
             "answer": "isn't",
-            "tier": 3
+            "tier": 3,
+            "why": "Take out the o in not and put an apostrophe in its place: is not becomes isn't. The apostrophe goes where the o was, not before the n."
           },
           {
             "prompt": "What does 'I'm' mean?",
@@ -4992,7 +5353,8 @@
               "I can"
             ],
             "answer": "I am",
-            "tier": 2
+            "tier": 2,
+            "why": "I'm is I and am squeezed together. The apostrophe takes the place of the letter a."
           },
           {
             "prompt": "What does 'don't' mean?",
@@ -5001,12 +5363,14 @@
               "did not"
             ],
             "answer": "do not",
-            "tier": 1
+            "tier": 1,
+            "why": "Don't is do and not squeezed together. The apostrophe takes the place of the o in not."
           },
           {
             "prompt": "Read aloud: I'm, can't",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept I'm read as one word meaning I am, and can't read as one word meaning can not."
           },
           {
             "prompt": "'we are' as a contraction:",
@@ -5016,7 +5380,8 @@
               "we'r"
             ],
             "answer": "we're",
-            "tier": 3
+            "tier": 3,
+            "why": "Take out the a in are and put an apostrophe there: we are becomes we're. Were without the apostrophe is a different word."
           }
         ]
       },
@@ -5054,32 +5419,38 @@
           {
             "prompt": "Look at any picture book page. Write two sentences about it.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept two complete sentences about the page, each starting with a capital letter and ending with a period, like: The dog runs. He has a red ball."
           },
           {
             "prompt": "Look at a picture. Tell who is in it out loud.",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept any answer that names who is in the picture, like: A girl and her dad. Pointing and naming each person or animal is enough."
           },
           {
             "prompt": "Look at a picture. Say one sentence about what is happening.",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept one full sentence that tells an action, like: The boy is kicking a ball. It should say who and what they are doing."
           },
           {
             "prompt": "Look at a picture. Write one sentence about who is in it.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept one written sentence that names who is in the picture, like: There is a cat. It should start with a capital and end with a period."
           },
           {
             "prompt": "Look at a picture. Write one sentence with a describing word, like big or red.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept one written sentence that uses a describing word, like: The big dog is brown. Check that the describing word fits the picture."
           },
           {
             "prompt": "Look at a family photo. Write two sentences: who is in it and one detail.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept two sentences: one that tells who is in the photo and one that gives a detail, like: Mom and I are at the park. Mom has a blue hat."
           }
         ]
       },
@@ -5154,12 +5525,14 @@
               "Summer"
             ],
             "answer": "Winter",
-            "tier": 1
+            "tier": 1,
+            "why": "Winter has the coldest weather, with short days and sometimes snow. Summer is the hot season."
           },
           {
             "prompt": "How many seasons are there?",
             "answer": "4",
-            "tier": 2
+            "tier": 2,
+            "why": "The four seasons are spring, summer, fall and winter. Count them: 1, 2, 3, 4."
           },
           {
             "prompt": "Leaves fall from trees in…",
@@ -5168,7 +5541,8 @@
               "Spring"
             ],
             "answer": "Fall",
-            "tier": 2
+            "tier": 2,
+            "why": "In fall, the weather gets cooler and many trees drop their leaves. That is why it is called fall."
           },
           {
             "prompt": "Which season is hottest?",
@@ -5177,7 +5551,8 @@
               "Winter"
             ],
             "answer": "Summer",
-            "tier": 1
+            "tier": 1,
+            "why": "Summer has the hottest weather and long sunny days. Winter is the cold season."
           },
           {
             "prompt": "Flowers start to grow in…",
@@ -5186,7 +5561,8 @@
               "Winter"
             ],
             "answer": "Spring",
-            "tier": 3
+            "tier": 3,
+            "why": "In spring, the weather gets warmer and there is more rain and sun, so flowers start to grow. In winter it is too cold."
           },
           {
             "prompt": "Which season comes after winter?",
@@ -5196,7 +5572,8 @@
               "Summer"
             ],
             "answer": "Spring",
-            "tier": 3
+            "tier": 3,
+            "why": "The seasons go in order: spring, summer, fall, winter, and then spring again. So spring comes right after winter."
           }
         ]
       },
@@ -5233,12 +5610,14 @@
           {
             "prompt": "How many stars are on the U.S. flag?",
             "answer": "50",
-            "tier": 2
+            "tier": 2,
+            "why": "The American flag has one star for each state. There are 50 states, so there are 50 stars."
           },
           {
             "prompt": "How many stripes are on the U.S. flag?",
             "answer": "13",
-            "tier": 3
+            "tier": 3,
+            "why": "The American flag has 13 red and white stripes, one for each of the first 13 colonies that started the country."
           },
           {
             "prompt": "The national bird is the…",
@@ -5248,7 +5627,8 @@
               "Owl"
             ],
             "answer": "Bald eagle",
-            "tier": 1
+            "tier": 1,
+            "why": "The bald eagle was picked as the national bird of the United States because it stands for being strong and free."
           },
           {
             "prompt": "What colors are on the American flag?",
@@ -5257,7 +5637,8 @@
               "Green and yellow"
             ],
             "answer": "Red, white and blue",
-            "tier": 1
+            "tier": 1,
+            "why": "The American flag has red and white stripes and white stars on a blue box. So its colors are red, white and blue."
           },
           {
             "prompt": "The big statue holding a torch is the…",
@@ -5266,7 +5647,8 @@
               "Liberty Bell"
             ],
             "answer": "Statue of Liberty",
-            "tier": 2
+            "tier": 2,
+            "why": "The Statue of Liberty is a huge statue of a lady holding a torch up high. The Liberty Bell is a bell, not a statue."
           },
           {
             "prompt": "Each star on the American flag stands for a…",
@@ -5276,7 +5658,8 @@
               "City"
             ],
             "answer": "State",
-            "tier": 3
+            "tier": 3,
+            "why": "There is one star for each of the 50 states. So each star stands for a state."
           }
         ]
       },
@@ -5313,7 +5696,8 @@
           {
             "prompt": "Read aloud: cat — hat — bat, pig — wig — dig",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Each group ends with the same sound: cat, hat, bat all end in at, and pig, wig, dig all end in ig. Accept each word read clearly."
           },
           {
             "prompt": "Which word rhymes with 'dog'?",
@@ -5323,7 +5707,8 @@
               "dot"
             ],
             "answer": "log",
-            "tier": 2
+            "tier": 2,
+            "why": "Dog and log both end with the sound og. Dig and dot start like dog but end differently."
           },
           {
             "prompt": "Which rhymes with 'cake'?",
@@ -5333,7 +5718,8 @@
               "cook"
             ],
             "answer": "lake",
-            "tier": 2
+            "tier": 2,
+            "why": "Cake and lake both end with the sound ake. Luck and cook end with different sounds."
           },
           {
             "prompt": "Which rhymes with 'sun'?",
@@ -5343,7 +5729,8 @@
               "sad"
             ],
             "answer": "fun",
-            "tier": 1
+            "tier": 1,
+            "why": "Sun and fun both end with the sound un. Sin and sad start like sun but end differently."
           },
           {
             "prompt": "Which rhymes with 'hat'?",
@@ -5352,7 +5739,8 @@
               "hot"
             ],
             "answer": "bat",
-            "tier": 1
+            "tier": 1,
+            "why": "Hat and bat both end with the sound at. Hot ends with ot, so it does not rhyme."
           },
           {
             "prompt": "Which rhymes with 'bed'?",
@@ -5362,12 +5750,14 @@
               "bib"
             ],
             "answer": "red",
-            "tier": 3
+            "tier": 3,
+            "why": "Bed and red both end with the sound ed. Bad and bib start like bed but end differently."
           },
           {
             "prompt": "Say two words that rhyme with 'pig'.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any two words that end with the ig sound, like big, dig, wig, fig or jig. Made-up words that rhyme can be fine too."
           }
         ]
       },
@@ -5404,7 +5794,8 @@
           {
             "prompt": "If a crayon is 4 cubes long and a marker is 6 cubes long, how many cubes longer is the marker?",
             "answer": "2",
-            "tier": 3
+            "tier": 3,
+            "why": "Find the difference: count on from 4 to 6, that is 5, 6, two more. So the marker is 2 cubes longer."
           },
           {
             "prompt": "When measuring, should units overlap?",
@@ -5413,7 +5804,8 @@
               "No"
             ],
             "answer": "No",
-            "tier": 1
+            "tier": 1,
+            "why": "If units overlap, you count the same space twice and get too big a number. So units should not overlap."
           },
           {
             "prompt": "A book is 10 paper clips long. A notebook is 7. Which is longer?",
@@ -5422,12 +5814,14 @@
               "Notebook"
             ],
             "answer": "Book",
-            "tier": 2
+            "tier": 2,
+            "why": "10 paper clips is more than 7 paper clips, so the book is longer."
           },
           {
             "prompt": "Measure your table in hand spans. Tutor checks.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a count where the hands are placed end to end along the table with no gaps or overlaps, like: The table is 8 hand spans long."
           },
           {
             "prompt": "When measuring, should we leave gaps between units?",
@@ -5436,12 +5830,14 @@
               "Yes"
             ],
             "answer": "No",
-            "tier": 1
+            "tier": 1,
+            "why": "If you leave gaps, you skip some length and get too small a number. So there should be no gaps."
           },
           {
             "prompt": "A spoon is 5 cubes long. A fork is 7 cubes long. How many cubes longer is the fork?",
             "answer": "2",
-            "tier": 2
+            "tier": 2,
+            "why": "Count on from 5 to 7: 6, 7. That is 2 more, so the fork is 2 cubes longer."
           }
         ]
       },
@@ -5478,57 +5874,68 @@
           {
             "prompt": "Read aloud: the",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept the word the read right away, in under 2 seconds, without sounding it out. It sounds like thuh."
           },
           {
             "prompt": "Read aloud: a",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept the word a read right away. It usually sounds like uh."
           },
           {
             "prompt": "Read aloud: is",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept is read right away, in under 2 seconds. It sounds like iz, with a z sound at the end."
           },
           {
             "prompt": "Read aloud: you",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept you read right away, in under 2 seconds. It sounds like yoo."
           },
           {
             "prompt": "Read aloud: to",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept to read right away, in under 2 seconds. It sounds like too."
           },
           {
             "prompt": "Read aloud: and",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept and read right away, in under 2 seconds, with the d at the end."
           },
           {
             "prompt": "Read aloud: we",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept we read right away, in under 2 seconds. It sounds like wee."
           },
           {
             "prompt": "Read aloud: it",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept it read right away, in under 2 seconds, with a short i sound."
           },
           {
             "prompt": "Read aloud: in",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept in read right away, in under 2 seconds, with a short i sound."
           },
           {
             "prompt": "Read aloud: said",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept said read right away; it sounds like sed, not say-id. It is a tricky word that does not sound like its letters."
           },
           {
             "prompt": "Read aloud: the, is, to, said",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept all four words read quickly, each in under 2 seconds: the, is, to, said. Said should sound like sed."
           }
         ]
       },
@@ -5570,7 +5977,8 @@
               "Eraser"
             ],
             "answer": "Eraser",
-            "tier": 2
+            "tier": 2,
+            "why": "The pencil is longer than the crayon, and the crayon is longer than the eraser. The eraser is shorter than both, so it is shortest."
           },
           {
             "prompt": "A snake is longer than a worm. A worm is longer than an ant. Which is longest?",
@@ -5580,7 +5988,8 @@
               "Ant"
             ],
             "answer": "Snake",
-            "tier": 2
+            "tier": 2,
+            "why": "The snake is longer than the worm, and the worm is longer than the ant. So the snake is longer than both, which makes it longest."
           },
           {
             "prompt": "Order these lengths from shortest: 9, 3, 6",
@@ -5590,7 +5999,8 @@
               "6, 3, 9"
             ],
             "answer": "3, 6, 9",
-            "tier": 3
+            "tier": 3,
+            "why": "Start with the smallest number, 3. Then comes 6, then 9. So the order is 3, 6, 9."
           },
           {
             "prompt": "Which is longer: a 5-cube strip or a 2-cube strip?",
@@ -5599,7 +6009,8 @@
               "2 cubes"
             ],
             "answer": "5 cubes",
-            "tier": 1
+            "tier": 1,
+            "why": "5 is more than 2, so the strip with 5 cubes is longer."
           },
           {
             "prompt": "Which is shortest: 4 clips, 8 clips or 6 clips?",
@@ -5609,7 +6020,8 @@
               "6 clips"
             ],
             "answer": "4 clips",
-            "tier": 1
+            "tier": 1,
+            "why": "4 is the smallest number of the three, so 4 clips is the shortest."
           },
           {
             "prompt": "Order these lengths from shortest: 7, 2, 5",
@@ -5619,7 +6031,8 @@
               "5, 2, 7"
             ],
             "answer": "2, 5, 7",
-            "tier": 3
+            "tier": 3,
+            "why": "Start with the smallest number, 2. Then comes 5, then 7. So the order is 2, 5, 7."
           }
         ]
       },
@@ -5688,57 +6101,68 @@
           {
             "prompt": "Read aloud: was",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept was read right away, in under 2 seconds. It sounds like wuz, not like it is spelled."
           },
           {
             "prompt": "Read aloud: for",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept for read right away, in under 2 seconds. It sounds like the number four."
           },
           {
             "prompt": "Read aloud: he",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept he read right away, in under 2 seconds. It sounds like hee."
           },
           {
             "prompt": "Read aloud: she",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept she read right away, in under 2 seconds. It starts with the sh sound."
           },
           {
             "prompt": "Read aloud: of",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept of read right away; it sounds like uv, with a v sound at the end."
           },
           {
             "prompt": "Read aloud: have",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept have read right away; it sounds like hav, and the e at the end is quiet."
           },
           {
             "prompt": "Read aloud: are",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept are read right away, in under 2 seconds. It sounds like the letter r."
           },
           {
             "prompt": "Read aloud: they",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept they read right away; it sounds like thay, rhyming with day."
           },
           {
             "prompt": "Read aloud: with",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept with read right away, in under 2 seconds, ending with the th sound."
           },
           {
             "prompt": "Read aloud: my",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept my read right away, in under 2 seconds. It rhymes with by."
           },
           {
             "prompt": "Read aloud: he, my, for, are",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept all four words read quickly, each in under 2 seconds: he, my, for, are."
           }
         ]
       },
@@ -5780,7 +6204,8 @@
               "Color"
             ],
             "answer": "Vibrations",
-            "tier": 1
+            "tier": 1,
+            "why": "Sound is made when something shakes back and forth very fast. That shaking is called vibration. Light and color do not make sound."
           },
           {
             "prompt": "Hum and touch your throat. Your throat…",
@@ -5789,7 +6214,8 @@
               "Stays still"
             ],
             "answer": "Shakes",
-            "tier": 1
+            "tier": 1,
+            "why": "When you hum, parts inside your throat shake fast to make the sound. You can feel that shaking with your fingers."
           },
           {
             "prompt": "A drum hit harder sounds…",
@@ -5798,7 +6224,8 @@
               "Quieter"
             ],
             "answer": "Louder",
-            "tier": 2
+            "tier": 2,
+            "why": "Hitting a drum harder makes it shake more strongly. Stronger shaking makes a louder sound."
           },
           {
             "prompt": "A soft tap on a drum sounds…",
@@ -5807,7 +6234,8 @@
               "Louder"
             ],
             "answer": "Quieter",
-            "tier": 2
+            "tier": 2,
+            "why": "A soft tap makes the drum shake only a little. Smaller shaking makes a quieter sound."
           },
           {
             "prompt": "Which one makes sound by vibrating?",
@@ -5816,12 +6244,14 @@
               "A rock sitting still"
             ],
             "answer": "A plucked guitar string",
-            "tier": 2
+            "tier": 2,
+            "why": "A plucked guitar string shakes back and forth fast, and that makes sound. A rock sitting still is not shaking, so it makes no sound."
           },
           {
             "prompt": "Stretch a rubber band over a box and pluck it. What do you see and hear?",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept an answer that says the rubber band moves or shakes fast, maybe looking blurry, and makes a humming or twangy sound."
           },
           {
             "prompt": "You hold a ringing bell so it stops shaking. What happens to the sound?",
@@ -5830,7 +6260,8 @@
               "It gets louder"
             ],
             "answer": "It stops",
-            "tier": 3
+            "tier": 3,
+            "why": "Sound comes from shaking. When you hold the bell, it stops shaking, so the sound stops too."
           }
         ]
       },
@@ -5871,7 +6302,8 @@
               "Airplane"
             ],
             "answer": "Horse and wagon",
-            "tier": 1
+            "tier": 1,
+            "why": "Long ago there were no cars or airplanes, so people rode horses or horse-drawn wagons to get places."
           },
           {
             "prompt": "Today, many people talk to faraway friends with…",
@@ -5880,7 +6312,8 @@
               "A horse"
             ],
             "answer": "A phone",
-            "tier": 1
+            "tier": 1,
+            "why": "Today we have phones that let us talk to people who live far away. A horse can't carry your voice."
           },
           {
             "prompt": "Long ago, people cooked food over a…",
@@ -5889,7 +6322,8 @@
               "Microwave"
             ],
             "answer": "Fire",
-            "tier": 2
+            "tier": 2,
+            "why": "Long ago there were no microwaves or electric stoves, so people cooked food over a fire."
           },
           {
             "prompt": "Long ago, many children went to school in…",
@@ -5898,17 +6332,20 @@
               "A spaceship"
             ],
             "answer": "A one-room schoolhouse",
-            "tier": 2
+            "tier": 2,
+            "why": "Long ago, many towns had one small school with one room, where children of all ages learned together. Spaceships are not schools."
           },
           {
             "prompt": "Ask a grandparent one thing that was different when they were 6.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any real change the child shares from the grandparent, like: Grandma had no computer at school, or Grandpa walked to school."
           },
           {
             "prompt": "Tell one way traveling is different now than long ago.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept one true difference, like: Long ago people rode horses, and now we ride in cars, buses or airplanes."
           }
         ]
       },
@@ -5978,57 +6415,68 @@
           {
             "prompt": "Read aloud: out",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept out read right away, in under 2 seconds. It rhymes with shout."
           },
           {
             "prompt": "Read aloud: this",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept this read right away, in under 2 seconds, starting with the th sound."
           },
           {
             "prompt": "Read aloud: do",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept do read right away; it sounds like doo, not like dough."
           },
           {
             "prompt": "Read aloud: what",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept what read right away; it sounds like wut. It is a tricky word."
           },
           {
             "prompt": "Read aloud: from",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept from read right away; it sounds like frum. It is a tricky word."
           },
           {
             "prompt": "Read aloud: some",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept some read right away; it sounds like sum, and the e is quiet."
           },
           {
             "prompt": "Read aloud: come",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept come read right away; it sounds like kum, and the e is quiet."
           },
           {
             "prompt": "Read aloud: there",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept there read right away; it sounds like thair, rhyming with hair."
           },
           {
             "prompt": "Read aloud: were",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept were read right away; it sounds like wer, rhyming with fur."
           },
           {
             "prompt": "Read aloud: your",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept your read right away; it sounds like yor, rhyming with more."
           },
           {
             "prompt": "Read aloud in a row, quickly: what, there, out, were, your",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept all five words read quickly in a row, each in under 2 seconds: what, there, out, were, your."
           }
         ]
       },
@@ -6071,17 +6519,20 @@
               "Grapes"
             ],
             "answer": "Grapes",
-            "tier": 1
+            "tier": 1,
+            "why": "Grapes got 9 votes. That is more than Apples with 6 and Bananas with 4, so Grapes is the favorite."
           },
           {
             "prompt": "Tally: Birds |||. How many birds?",
             "answer": "3",
-            "tier": 1
+            "tier": 1,
+            "why": "Each tally mark stands for 1. Count the marks: 1, 2, 3. So there are 3 birds."
           },
           {
             "prompt": "Tally: Cats |||| (4). Dogs: a bundle of 5 and ||. How many dogs?",
             "answer": "7",
-            "tier": 2
+            "tier": 2,
+            "why": "A bundle of tally marks is 5. Then count on the 2 extra marks: 6, 7. So there are 7 dogs."
           },
           {
             "prompt": "Red 5, Blue 3, Green 7. Which color got the fewest votes?",
@@ -6091,27 +6542,32 @@
               "Green"
             ],
             "answer": "Blue",
-            "tier": 2
+            "tier": 2,
+            "why": "Blue got 3 votes. That is less than Red with 5 and Green with 7, so Blue got the fewest."
           },
           {
             "prompt": "Picture graph (each ★ is 1 pet): Cats ★★★, Dogs ★★★★★. How many dogs?",
             "answer": "5",
-            "tier": 2
+            "tier": 2,
+            "why": "Each star is 1 pet. Count the stars next to Dogs: 1, 2, 3, 4, 5. So there are 5 dogs."
           },
           {
             "prompt": "Tally: Cats ||||. Dogs: a bundle of 5 and ||. How many more dogs than cats?",
             "answer": "3",
-            "tier": 3
+            "tier": 3,
+            "why": "Cats have 4 marks. Dogs have a bundle of 5 and 2 more, which is 7. Count up from 4 to 7: 5, 6, 7. That is 3 more dogs."
           },
           {
             "prompt": "Apples 6, Bananas 4, Grapes 9. How many votes in all?",
             "answer": "19",
-            "tier": 3
+            "tier": 3,
+            "why": "Add all the votes: 6 + 4 = 10, and 10 + 9 = 19. So there are 19 votes in all."
           },
           {
             "prompt": "Red 5, Blue 3, Green 7. How many more votes did Green get than Blue?",
             "answer": "4",
-            "tier": 3
+            "tier": 3,
+            "why": "Green got 7 and Blue got 3. Count up from 3 to 7: 4, 5, 6, 7. That is 4 more votes for Green."
           }
         ]
       },
@@ -6148,57 +6604,68 @@
           {
             "prompt": "Read aloud: who",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "The word who sounds like \"hoo\". The w is silent. Accept it read quickly and smoothly, in about 2 seconds."
           },
           {
             "prompt": "Read aloud: any",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "The word any sounds like \"en-ee\", not \"an-ee\". Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: very",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "The word very sounds like \"vair-ee\". Accept it read smoothly in about 2 seconds without sounding out."
           },
           {
             "prompt": "Read aloud: could",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The word could sounds like \"kood\". The l is silent. Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: would",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The word would sounds like \"wood\". The l is silent. Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: should",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The word should sounds like \"shood\". The l is silent. Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: many",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The word many sounds like \"men-ee\", not \"man-ee\". Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: people",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The word people sounds like \"pee-pul\". The o is silent. Accept it read smoothly in about 2 seconds."
           },
           {
             "prompt": "Read aloud: again",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The word again sounds like \"uh-gen\". Accept it read by sight in about 2 seconds without sounding out."
           },
           {
             "prompt": "Read aloud: where",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The word where sounds like \"wair\", rhyming with \"chair\". Accept it read by sight in about 2 seconds, not mixed up with \"were\"."
           },
           {
             "prompt": "Read aloud in a row, quickly: could, people, again, where, many",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept all five words read correctly in order, each in about 2 seconds, with no long stops: could, people, again, where, many."
           }
         ]
       },
@@ -6240,7 +6707,8 @@
               "the"
             ],
             "answer": "because",
-            "tier": 1
+            "tier": 1,
+            "why": "The word because tells why. It gives a reason, like \"I like dogs because they are fun.\" The words and and the do not tell why."
           },
           {
             "prompt": "Which sentence tells an opinion?",
@@ -6249,12 +6717,14 @@
               "Pizza is round."
             ],
             "answer": "Pizza is the best food.",
-            "tier": 1
+            "tier": 1,
+            "why": "\"Pizza is the best food\" is what someone thinks, so it is an opinion. Others may not agree. \"Pizza is round\" is a fact anyone can check."
           },
           {
             "prompt": "Finish it aloud: I like summer because…",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept any real reason about summer, like \"I like summer because I can swim.\" The reason should tell why the child likes summer."
           },
           {
             "prompt": "Cats are the best pets because…",
@@ -6263,17 +6733,20 @@
               "the sky is blue"
             ],
             "answer": "they are soft and cuddly",
-            "tier": 2
+            "tier": 2,
+            "why": "A reason must tell why cats are good pets. Being soft and cuddly does that. The sky being blue has nothing to do with cats."
           },
           {
             "prompt": "Write: What is the best season? Give one reason with 'because'.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a sentence that names a season and gives a reason with because, like \"Winter is the best season because I can play in the snow.\""
           },
           {
             "prompt": "Write: What is the best game to play? Give a reason with 'because' and end with a closing sentence.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept an opinion, a reason with because, and an ending. Example: \"Tag is the best game because it is fast. That is why I love tag.\""
           }
         ]
       },
@@ -6308,7 +6781,8 @@
           {
             "prompt": "How many sides does a triangle have?",
             "answer": "3",
-            "tier": 1
+            "tier": 1,
+            "why": "A triangle has 3 straight sides. You can count them: 1, 2, 3. Tri means three."
           },
           {
             "prompt": "Which shape has no corners?",
@@ -6318,12 +6792,14 @@
               "Triangle"
             ],
             "answer": "Circle",
-            "tier": 1
+            "tier": 1,
+            "why": "A circle is round all the way around, so it has no corners. A square has 4 corners and a triangle has 3."
           },
           {
             "prompt": "How many sides does a hexagon have?",
             "answer": "6",
-            "tier": 2
+            "tier": 2,
+            "why": "A hexagon has 6 sides. Count them all the way around: 1, 2, 3, 4, 5, 6."
           },
           {
             "prompt": "A shape has 4 equal sides and 4 square corners. What is it?",
@@ -6333,17 +6809,20 @@
               "Circle"
             ],
             "answer": "Square",
-            "tier": 2
+            "tier": 2,
+            "why": "A square has 4 sides that are all the same length and 4 square corners. A triangle has only 3 sides, and a circle has none."
           },
           {
             "prompt": "How many corners does a rectangle have?",
             "answer": "4",
-            "tier": 2
+            "tier": 2,
+            "why": "A rectangle has 4 sides, and a corner is where two sides meet. So it has 4 corners."
           },
           {
             "prompt": "A shape has 6 sides. How many corners does it have?",
             "answer": "6",
-            "tier": 3
+            "tier": 3,
+            "why": "Every side meets the next side at a corner. So a shape with 6 sides has 6 corners. It is a hexagon."
           },
           {
             "prompt": "A shape has 4 sides and 4 square corners. 2 sides are long and 2 are short. What is it?",
@@ -6353,7 +6832,8 @@
               "Hexagon"
             ],
             "answer": "Rectangle",
-            "tier": 3
+            "tier": 3,
+            "why": "A rectangle has 4 sides and square corners, with 2 long sides and 2 short sides. A square would need all 4 sides the same length."
           }
         ]
       },
@@ -6390,57 +6870,68 @@
           {
             "prompt": "Read aloud: around",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "The word around sounds like \"uh-round\". Accept it read smoothly by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: before",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "The word before sounds like \"bee-for\". Accept it read by sight in about 2 seconds without sounding out."
           },
           {
             "prompt": "Read aloud: after",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "The word after sounds like \"af-ter\". Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: because",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The word because sounds like \"bee-kuz\". Accept it read smoothly by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: friend",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The word friend sounds like \"frend\". The i is silent. Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: every",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The word every sounds like \"ev-ree\". Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: know",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "The word know sounds like \"no\". The k and w are silent. Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: once",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The word once sounds like \"wunss\". Accept it read by sight in about 2 seconds, not as \"ons\"."
           },
           {
             "prompt": "Read aloud: thought",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The word thought sounds like \"thawt\". The g and h are silent. Accept it read by sight in about 2 seconds."
           },
           {
             "prompt": "Read aloud: through",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "The word through sounds like \"throo\". Accept it read by sight in about 2 seconds, not mixed up with \"though\"."
           },
           {
             "prompt": "Read aloud in a row, quickly: once, thought, through, friend, because",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept all five words read correctly in order, each in about 2 seconds, with no long stops: once, thought, through, friend, because."
           }
         ]
       },
@@ -6482,7 +6973,8 @@
               "Cone"
             ],
             "answer": "Sphere",
-            "tier": 1
+            "tier": 1,
+            "why": "A ball is round all over, just like a sphere. A cube has flat square faces, and a cone has a point."
           },
           {
             "prompt": "An ice cream cone is shaped like a…",
@@ -6492,7 +6984,8 @@
               "Cube"
             ],
             "answer": "Cone",
-            "tier": 1
+            "tier": 1,
+            "why": "An ice cream cone has a round opening and comes to a point at the bottom. That is a cone shape."
           },
           {
             "prompt": "A soup can is a…",
@@ -6502,7 +6995,8 @@
               "Cone"
             ],
             "answer": "Cylinder",
-            "tier": 2
+            "tier": 2,
+            "why": "A soup can has a flat circle on the top and the bottom, and a curved side. That is a cylinder."
           },
           {
             "prompt": "A toy block with 6 square faces is a…",
@@ -6512,7 +7006,8 @@
               "Cone"
             ],
             "answer": "Cube",
-            "tier": 2
+            "tier": 2,
+            "why": "A cube has 6 flat faces, and every face is a square. A toy block like that is a cube."
           },
           {
             "prompt": "Which shape can roll in any direction?",
@@ -6521,12 +7016,14 @@
               "Cube"
             ],
             "answer": "Sphere",
-            "tier": 2
+            "tier": 2,
+            "why": "A sphere is round everywhere, so it can roll any way you push it. A cube has flat faces, so it slides instead."
           },
           {
             "prompt": "How many faces does a cube have?",
             "answer": "6",
-            "tier": 3
+            "tier": 3,
+            "why": "A cube has 6 faces: top, bottom, front, back, left and right. Count them: 1, 2, 3, 4, 5, 6."
           },
           {
             "prompt": "What shape is each face of a cube?",
@@ -6536,7 +7033,8 @@
               "Circle"
             ],
             "answer": "Square",
-            "tier": 3
+            "tier": 3,
+            "why": "Every face of a cube is a square. All its edges are the same length, so each face has 4 equal sides."
           },
           {
             "prompt": "Which shape has a point on top and a circle on the bottom?",
@@ -6546,7 +7044,8 @@
               "Cube"
             ],
             "answer": "Cone",
-            "tier": 3
+            "tier": 3,
+            "why": "A cone has a flat circle on one end and comes to a point at the other. A cylinder has circles on both ends."
           }
         ]
       },
@@ -6587,7 +7086,8 @@
               "Sound"
             ],
             "answer": "Light",
-            "tier": 1
+            "tier": 1,
+            "why": "Our eyes see things when light bounces off them. Sound helps us hear, not see."
           },
           {
             "prompt": "Can you see in a totally dark room?",
@@ -6596,7 +7096,8 @@
               "Yes"
             ],
             "answer": "No",
-            "tier": 1
+            "tier": 1,
+            "why": "With no light at all, nothing bounces into our eyes, so we cannot see."
           },
           {
             "prompt": "A shadow forms when light is…",
@@ -6605,7 +7106,8 @@
               "Loud"
             ],
             "answer": "Blocked",
-            "tier": 2
+            "tier": 2,
+            "why": "A shadow is a dark spot where light cannot reach because something is in the way. Shadows are not about sound."
           },
           {
             "prompt": "Which gives off light?",
@@ -6614,7 +7116,8 @@
               "A rock"
             ],
             "answer": "The sun",
-            "tier": 2
+            "tier": 2,
+            "why": "The sun makes its own light. A rock does not glow; we only see it when light shines on it."
           },
           {
             "prompt": "Which makes a shadow?",
@@ -6623,17 +7126,20 @@
               "Air"
             ],
             "answer": "Your hand in front of a flashlight",
-            "tier": 2
+            "tier": 2,
+            "why": "Your hand blocks the light from the flashlight, so a dark shape appears behind it. Air lets light pass through, so it makes no shadow."
           },
           {
             "prompt": "Use a flashlight to make a shadow puppet.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept any shadow shape made by putting hands or an object between the flashlight and a wall. The child can say the hand blocks the light."
           },
           {
             "prompt": "Stand outside on a sunny day. Point to your shadow and tell what is blocking the light.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept the child pointing to the dark shape on the ground and saying their body is blocking the sunlight."
           }
         ]
       },
@@ -6671,32 +7177,38 @@
           {
             "prompt": "Read aloud: The big dog ran to the park. He saw a red ball.",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept smooth reading with all words right and a short stop at each period. It should sound like talking, not word by word."
           },
           {
             "prompt": "Read aloud: I see a cat. The cat is fat.",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept smooth reading of all the words with a short stop after \"cat.\" It should sound like talking."
           },
           {
             "prompt": "Read aloud: We like to play in the rain. Then we jump in the mud.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept smooth reading, a short stop at each period, and words like \"Then\" read without stopping to sound out."
           },
           {
             "prompt": "Read aloud: Mom and I went to the store. We got milk and eggs.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept all words read right, with a short stop at each period, at a talking speed, not too fast."
           },
           {
             "prompt": "Read aloud: Can you see the bird in the tree? It is singing!",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept the first sentence read like a question, with the voice going up at the end, and \"It is singing!\" read with excitement."
           },
           {
             "prompt": "Read aloud with feeling: \"Look out!\" said the cat. \"Is that a big dog?\"",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept \"Look out!\" read with alarm, like a warning, and \"Is that a big dog?\" read like a question, with the voice going up."
           }
         ]
       },
@@ -6733,17 +7245,20 @@
           {
             "prompt": "How many equal parts make halves?",
             "answer": "2",
-            "tier": 1
+            "tier": 1,
+            "why": "Halves means a whole cut into 2 equal parts. Each part is one half."
           },
           {
             "prompt": "Fold a paper in half. How many parts do you see?",
             "answer": "2",
-            "tier": 1
+            "tier": 1,
+            "why": "When you fold a paper in half, the fold splits it into 2 equal parts."
           },
           {
             "prompt": "How many equal parts make fourths?",
             "answer": "4",
-            "tier": 2
+            "tier": 2,
+            "why": "Fourths means a whole cut into 4 equal parts. Each part is one fourth."
           },
           {
             "prompt": "A quarter of a pizza is the same as one…",
@@ -6753,7 +7268,8 @@
               "Whole"
             ],
             "answer": "Fourth",
-            "tier": 2
+            "tier": 2,
+            "why": "A quarter and a fourth mean the same thing: one of 4 equal parts. A half would be one of 2 parts."
           },
           {
             "prompt": "Two halves make one…",
@@ -6763,7 +7279,8 @@
               "Third"
             ],
             "answer": "Whole",
-            "tier": 2
+            "tier": 2,
+            "why": "If you cut something into 2 equal parts, putting both halves back together makes the whole thing again."
           },
           {
             "prompt": "Which piece is bigger?",
@@ -6772,12 +7289,14 @@
               "One fourth"
             ],
             "answer": "One half",
-            "tier": 3
+            "tier": 3,
+            "why": "One half is 1 of 2 parts and one fourth is 1 of 4 parts. More parts means smaller pieces, so the half is bigger."
           },
           {
             "prompt": "How many fourths make one whole?",
             "answer": "4",
-            "tier": 3
+            "tier": 3,
+            "why": "Fourths come from cutting a whole into 4 equal parts. So it takes 4 fourths to make the whole again."
           },
           {
             "prompt": "A sandwich is cut into 2 parts: one big and one small. Is it cut into halves?",
@@ -6786,7 +7305,8 @@
               "Yes"
             ],
             "answer": "No",
-            "tier": 3
+            "tier": 3,
+            "why": "Halves must be 2 equal parts, the same size. One big and one small piece are not equal, so they are not halves."
           }
         ]
       },
@@ -6828,7 +7348,8 @@
               "the sun"
             ],
             "answer": "Max",
-            "tier": 1
+            "tier": 1,
+            "why": "A character is a person or animal in the story. Max is a cat, so Max is the character. The porch and the sun are things, not characters."
           },
           {
             "prompt": "Story: A frog hopped into the pond. Who is the character?",
@@ -6838,7 +7359,8 @@
               "a hop"
             ],
             "answer": "the frog",
-            "tier": 1
+            "tier": 1,
+            "why": "A character is a person or animal in the story. The frog is an animal that does something: it hops. The pond is where it happens."
           },
           {
             "prompt": "Story: Max the cat napped on the warm porch. What is the setting?",
@@ -6848,7 +7370,8 @@
               "a nap"
             ],
             "answer": "the porch",
-            "tier": 2
+            "tier": 2,
+            "why": "The setting is where the story happens. Max napped on the porch, so the porch is the setting. Max is the character."
           },
           {
             "prompt": "Who are the characters in a story?",
@@ -6858,7 +7381,8 @@
               "The title"
             ],
             "answer": "The people or animals in it",
-            "tier": 2
+            "tier": 2,
+            "why": "Characters are the people or animals in a story. Where it happens is the setting, not the characters."
           },
           {
             "prompt": "What is the setting of a story?",
@@ -6868,7 +7392,8 @@
               "The title"
             ],
             "answer": "Where and when it happens",
-            "tier": 3
+            "tier": 3,
+            "why": "The setting tells where and when a story happens. Who is in it means the characters, not the setting."
           },
           {
             "prompt": "Story: At night, Pip the owl flew over the dark forest. What is the setting?",
@@ -6878,7 +7403,8 @@
               "flying"
             ],
             "answer": "the dark forest at night",
-            "tier": 3
+            "tier": 3,
+            "why": "The setting is where and when. Where: the dark forest. When: at night. Pip is the character, and flying is what Pip does."
           }
         ]
       },
@@ -6917,37 +7443,44 @@
           {
             "prompt": "3 groups of 2 = ?",
             "answer": "6",
-            "tier": 1
+            "tier": 1,
+            "why": "3 groups of 2 means 2 + 2 + 2. Skip count by 2s: 2, 4, 6. So it is 6."
           },
           {
             "prompt": "2 groups of 5 = ?",
             "answer": "10",
-            "tier": 1
+            "tier": 1,
+            "why": "2 groups of 5 means 5 + 5. Skip count by 5s: 5, 10. So it is 10."
           },
           {
             "prompt": "4 groups of 3 = ?",
             "answer": "12",
-            "tier": 2
+            "tier": 2,
+            "why": "4 groups of 3 means 3 + 3 + 3 + 3. Skip count by 3s: 3, 6, 9, 12. So it is 12."
           },
           {
             "prompt": "5 groups of 2 = ?",
             "answer": "10",
-            "tier": 2
+            "tier": 2,
+            "why": "5 groups of 2 means 2 + 2 + 2 + 2 + 2. Skip count by 2s: 2, 4, 6, 8, 10. So it is 10."
           },
           {
             "prompt": "3 groups of 10 = ?",
             "answer": "30",
-            "tier": 3
+            "tier": 3,
+            "why": "3 groups of 10 means 10 + 10 + 10. Skip count by 10s: 10, 20, 30. So it is 30."
           },
           {
             "prompt": "4 + 4 + 4 is how many groups of 4?",
             "answer": "3",
-            "tier": 3
+            "tier": 3,
+            "why": "Count how many 4s are being added: 4, 4, 4. There are three of them, so it is 3 groups of 4."
           },
           {
             "prompt": "2 + 2 + 2 + 2 + 2 is how many groups of 2?",
             "answer": "5",
-            "tier": 3
+            "tier": 3,
+            "why": "Count how many 2s are being added: 2, 2, 2, 2, 2. There are five of them, so it is 5 groups of 2."
           }
         ]
       },
@@ -6989,7 +7522,8 @@
               "Next"
             ],
             "answer": "Last",
-            "tier": 1
+            "tier": 1,
+            "why": "Last tells what happens at the very end. First tells the beginning, and next tells what comes after."
           },
           {
             "prompt": "Which word tells the beginning?",
@@ -6999,7 +7533,8 @@
               "Then"
             ],
             "answer": "First",
-            "tier": 1
+            "tier": 1,
+            "why": "First tells what happens at the very beginning. Last and then come later."
           },
           {
             "prompt": "Order: (A) eat the cake (B) bake the cake (C) mix the batter. What comes first?",
@@ -7009,7 +7544,8 @@
               "A"
             ],
             "answer": "C",
-            "tier": 2
+            "tier": 2,
+            "why": "You have to mix the batter before you can bake it, and bake the cake before you eat it. So mixing the batter, letter C, comes first."
           },
           {
             "prompt": "Order: (A) the chick hatches (B) the hen lays an egg (C) the chick grows up. What comes first?",
@@ -7019,17 +7555,20 @@
               "C"
             ],
             "answer": "B",
-            "tier": 2
+            "tier": 2,
+            "why": "A chick comes from an egg, so the hen must lay the egg first. That is letter B. Then the chick hatches and grows up."
           },
           {
             "prompt": "Retell your favorite book using first, next, then, last.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a retelling in the right order that uses first, next, then and last, like \"First the bear lost his hat. Next he asked a fox...\""
           },
           {
             "prompt": "Retell 'The Three Little Pigs': what happened at the beginning, the middle and the end?",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept the right order. Beginning: the pigs build houses of straw, sticks and bricks. Middle: the wolf blows down two houses. End: he cannot blow down the brick house."
           }
         ]
       },
@@ -7071,12 +7610,14 @@
               "Finally"
             ],
             "answer": "First",
-            "tier": 1
+            "tier": 1,
+            "why": "First tells what happens at the start of a story. Finally tells the end."
           },
           {
             "prompt": "Tell aloud one thing you did today, starting with 'First'.",
             "mode": "tutor",
-            "tier": 1
+            "tier": 1,
+            "why": "Accept one sentence that begins with \"First\" and tells something real, like \"First I ate breakfast.\""
           },
           {
             "prompt": "Which word tells the end of a story?",
@@ -7086,22 +7627,26 @@
               "Then"
             ],
             "answer": "Finally",
-            "tier": 2
+            "tier": 2,
+            "why": "Finally tells what happens at the very end. First is the start and then is the middle."
           },
           {
             "prompt": "Say 3 sentences aloud about your morning using first, then, finally.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept 3 sentences in order: one starting with first, one with then, one with finally. Example: \"First I woke up. Then I ate. Finally I went to school.\""
           },
           {
             "prompt": "Write 3 sentences about something you did: first, then, finally.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept 3 written sentences in order, using first, then and finally, each with a capital letter and an end mark."
           },
           {
             "prompt": "Write a story about a day at the park with a beginning, middle and end.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a story with a beginning, middle and end in order, like arriving at the park, playing on the slide, then going home."
           }
         ]
       },
@@ -7143,7 +7688,8 @@
               "Starting first grade"
             ],
             "answer": "Being a baby",
-            "tier": 1
+            "tier": 1,
+            "why": "Everyone is a baby first. You grow for years before you start first grade."
           },
           {
             "prompt": "Which happens first in a day?",
@@ -7152,7 +7698,8 @@
               "Going to bed"
             ],
             "answer": "Waking up",
-            "tier": 1
+            "tier": 1,
+            "why": "You wake up in the morning and go to bed at night. Morning comes first."
           },
           {
             "prompt": "A timeline shows events in order from…",
@@ -7161,7 +7708,8 @@
               "Last to first"
             ],
             "answer": "First to last",
-            "tier": 2
+            "tier": 2,
+            "why": "A timeline starts with what happened first and moves to what happened last, like reading left to right."
           },
           {
             "prompt": "Put in order: toddler, baby, first grader. Which goes in the middle?",
@@ -7171,17 +7719,20 @@
               "First grader"
             ],
             "answer": "Toddler",
-            "tier": 2
+            "tier": 2,
+            "why": "The order is baby, then toddler, then first grader. Toddler is in the middle."
           },
           {
             "prompt": "Make a timeline of your life with 4 events.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept 4 events from the child's life in the right order, like being born, learning to walk, starting school, first grade."
           },
           {
             "prompt": "Make a timeline of your day with 4 events, from morning to night.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept 4 events in order from morning to night, like waking up, eating breakfast, going to school, going to bed."
           }
         ]
       },
@@ -7222,7 +7773,8 @@
               "Last"
             ],
             "answer": "First",
-            "tier": 1
+            "tier": 1,
+            "why": "First tells the step you do at the start. Last tells the step at the end."
           },
           {
             "prompt": "Which word tells the last step?",
@@ -7232,27 +7784,32 @@
               "Next"
             ],
             "answer": "Last",
-            "tier": 1
+            "tier": 1,
+            "why": "Last tells the final step. First is the start, and next is a middle step."
           },
           {
             "prompt": "Write 3 steps for making a sandwich.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept 3 steps in an order that works, like \"First get bread. Next add peanut butter. Last put the bread together.\""
           },
           {
             "prompt": "Say aloud 3 steps for washing your hands.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept 3 steps in order, like \"First wet your hands. Next rub with soap. Last rinse and dry.\""
           },
           {
             "prompt": "Write how to brush your teeth: give it a title, then write steps with first, next, last.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a title like \"How to Brush Your Teeth\" and steps in order using first, next and last, like put on toothpaste, brush, rinse."
           },
           {
             "prompt": "Write how to plant a seed: give it a title, then write steps with first, next, last.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a title like \"How to Plant a Seed\" and steps in order using first, next and last, like dig a hole, put in the seed, add water."
           }
         ]
       },
@@ -7327,7 +7884,8 @@
               "Cloth"
             ],
             "answer": "Metal",
-            "tier": 1
+            "tier": 1,
+            "why": "Spoons are usually metal because metal is hard and strong. Cloth is soft and floppy, so it could not hold soup."
           },
           {
             "prompt": "Which can you see through?",
@@ -7336,7 +7894,8 @@
               "Wood"
             ],
             "answer": "Glass",
-            "tier": 1
+            "tier": 1,
+            "why": "Glass is clear, so light goes through it and you can see through it. Wood blocks the light."
           },
           {
             "prompt": "Which is soft?",
@@ -7346,7 +7905,8 @@
               "Glass"
             ],
             "answer": "Cotton",
-            "tier": 2
+            "tier": 2,
+            "why": "Cotton feels soft and squishy. Rock and glass are hard."
           },
           {
             "prompt": "A wooden chair is made of…",
@@ -7355,7 +7915,8 @@
               "Glass"
             ],
             "answer": "Wood",
-            "tier": 2
+            "tier": 2,
+            "why": "A wooden chair is made of wood. The word wooden means made of wood."
           },
           {
             "prompt": "Which material is bendy?",
@@ -7365,7 +7926,8 @@
               "Rock"
             ],
             "answer": "Cloth",
-            "tier": 3
+            "tier": 3,
+            "why": "Cloth bends and folds easily without breaking. Glass and rock are hard and would crack or not bend at all."
           },
           {
             "prompt": "Why are windows made of glass?",
@@ -7374,12 +7936,14 @@
               "It is soft"
             ],
             "answer": "You can see through it",
-            "tier": 3
+            "tier": 3,
+            "why": "Glass is clear, so you can see outside through a window. Glass is hard, not soft."
           },
           {
             "prompt": "Find 3 things at home and tell what material each one is made of.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept 3 things with a correct material for each, like \"a spoon is metal, a cup is glass, a table is wood.\""
           }
         ]
       },
@@ -7421,7 +7985,8 @@
               "Breaking a rule"
             ],
             "answer": "Picking up litter",
-            "tier": 1
+            "tier": 1,
+            "why": "Picking up litter keeps a place clean for everyone. Breaking a rule is not being a good citizen."
           },
           {
             "prompt": "Which is being honest?",
@@ -7430,12 +7995,14 @@
               "Hiding a broken cup"
             ],
             "answer": "Telling the truth",
-            "tier": 1
+            "tier": 1,
+            "why": "Being honest means telling the truth. Hiding a broken cup keeps the truth hidden."
           },
           {
             "prompt": "Name one way you can help at home this week.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept any real way to help, like setting the table, feeding a pet or picking up toys."
           },
           {
             "prompt": "A friend drops her books. A good citizen…",
@@ -7444,17 +8011,20 @@
               "Laughs"
             ],
             "answer": "Helps pick them up",
-            "tier": 2
+            "tier": 2,
+            "why": "Good citizens help others. Helping pick up the books is kind, and laughing would hurt her feelings."
           },
           {
             "prompt": "Name one rule at school and tell why it helps everyone.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a real school rule and a reason, like \"Walk in the hall so nobody gets hurt.\""
           },
           {
             "prompt": "Tell about a time you helped someone. How did it help?",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a true story of helping and how it helped, like \"I helped my sister find her shoe, so she was not late.\""
           }
         ]
       },
@@ -7496,7 +8066,8 @@
               "Water"
             ],
             "answer": "Frogs",
-            "tier": 1
+            "tier": 1,
+            "why": "Every sentence tells something about frogs. Bugs and water are only in one sentence each, so they are details."
           },
           {
             "prompt": "Dogs bark. Dogs wag their tails. Dogs like bones. What is this mostly about?",
@@ -7506,7 +8077,8 @@
               "Tails"
             ],
             "answer": "Dogs",
-            "tier": 1
+            "tier": 1,
+            "why": "Every sentence tells about dogs. Bones and tails are small details about dogs."
           },
           {
             "prompt": "Snow is cold. We build snowmen. We sled down hills. Main idea?",
@@ -7516,7 +8088,8 @@
               "Cold drinks"
             ],
             "answer": "Fun in the snow",
-            "tier": 2
+            "tier": 2,
+            "why": "All the sentences are about things in the snow: it is cold, snowmen, sledding. Hills are only one detail."
           },
           {
             "prompt": "Apples can be red or green. Apples grow on trees. We can eat apples. Main idea?",
@@ -7526,7 +8099,8 @@
               "The color green"
             ],
             "answer": "Facts about apples",
-            "tier": 2
+            "tier": 2,
+            "why": "Every sentence tells a fact about apples. Trees and green are just details in one sentence."
           },
           {
             "prompt": "Fish swim with fins. Fish breathe with gills. Some fish live in the sea. Which is a detail, not the main idea?",
@@ -7535,12 +8109,14 @@
               "Facts about fish"
             ],
             "answer": "Fish breathe with gills",
-            "tier": 3
+            "tier": 3,
+            "why": "\"Fish breathe with gills\" is one small fact. \"Facts about fish\" is the big point that covers all the sentences, so it is the main idea."
           },
           {
             "prompt": "Read: The sun is hot. The sun gives us light. Plants need the sun. Say the main idea and two details.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept a main idea like \"facts about the sun\" plus two details from the text, such as \"the sun is hot\" and \"plants need the sun.\""
           }
         ]
       },
@@ -7616,7 +8192,8 @@
               "today I ran."
             ],
             "answer": "Today I ran.",
-            "tier": 1
+            "tier": 1,
+            "why": "A sentence must start with a capital letter. \"Today\" starts with a big T, but \"today\" starts with a small t."
           },
           {
             "prompt": "Which sentence has an end mark?",
@@ -7625,27 +8202,32 @@
               "I was fast"
             ],
             "answer": "I was fast!",
-            "tier": 1
+            "tier": 1,
+            "why": "An end mark is a period, question mark or exclamation mark at the end. \"I was fast!\" has one; the other has nothing."
           },
           {
             "prompt": "Write today's date at the top of your journal page.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept the date written at the top, like \"November 24, 2026\", with a capital letter for the month."
           },
           {
             "prompt": "Say one sentence aloud about your day, then write it with a capital letter and an end mark.",
             "mode": "tutor",
-            "tier": 2
+            "tier": 2,
+            "why": "Accept one sentence said aloud and then written with a capital letter at the start and an end mark at the end."
           },
           {
             "prompt": "Write 2–4 sentences about today. Tutor checks capitals, spaces, end marks.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept 2 to 4 sentences about today. Each one starts with a capital, has spaces between words and ends with an end mark."
           },
           {
             "prompt": "Write 4 sentences about your weekend. Check capitals, spaces and end marks.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept 4 sentences about the weekend, each with a capital at the start, spaces between words and an end mark."
           }
         ]
       },
@@ -7686,7 +8268,8 @@
               "Make-believe"
             ],
             "answer": "Facts",
-            "tier": 1
+            "tier": 1,
+            "why": "Nonfiction books tell true facts about real things. Make-believe stories are fiction."
           },
           {
             "prompt": "The words at the top of a book that tell the topic are the…",
@@ -7696,7 +8279,8 @@
               "Caption"
             ],
             "answer": "Title",
-            "tier": 1
+            "tier": 1,
+            "why": "The title is the name of the book and tells the topic. A label names a part of a picture, and a caption explains a picture."
           },
           {
             "prompt": "Words under a picture that explain it are called a…",
@@ -7706,7 +8290,8 @@
               "Label"
             ],
             "answer": "Caption",
-            "tier": 2
+            "tier": 2,
+            "why": "A caption is the words under a picture that tell about it. A label names just one part, and the title names the book."
           },
           {
             "prompt": "A book called 'All About Sharks' most likely has…",
@@ -7715,7 +8300,8 @@
               "A fairy tale"
             ],
             "answer": "Facts about sharks",
-            "tier": 2
+            "tier": 2,
+            "why": "The title says \"All About,\" which tells us the book gives facts on sharks. A fairy tale is make-believe."
           },
           {
             "prompt": "A word with an arrow pointing to part of a picture is a…",
@@ -7725,12 +8311,14 @@
               "Title"
             ],
             "answer": "Label",
-            "tier": 3
+            "tier": 3,
+            "why": "A label is a word with an arrow pointing to a part, like \"wing\". A caption is a sentence that explains the whole picture."
           },
           {
             "prompt": "Open a nonfiction book. Point to a title, a caption and a label, and tell what each one tells you.",
             "mode": "tutor",
-            "tier": 3
+            "tier": 3,
+            "why": "Accept pointing to each feature and telling its job: the title tells the topic, a caption explains a picture, a label names a part."
           }
         ]
       },

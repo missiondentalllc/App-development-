@@ -80,12 +80,15 @@ A skill needs **either** a generator **or** hand-written items (or both; the gen
 
 ```json
 "items": [
-  { "prompt": "Free answer question", "answer": "42" },
+  { "prompt": "Free answer question", "answer": "42", "why": "6 groups of 7 make 42." },
   { "prompt": "Multiple choice", "choices": ["right", "wrong"], "answer": "right" },
   { "prompt": "Read aloud: cat, map, sad", "mode": "tutor", "tier": 1 }
 ]
 ```
 
+- Every item has a `why`: one or two sentences explaining the reasoning, shown after the learner
+  answers, right or wrong. For tutor-judged items it says what a correct response looks or sounds like.
+  Generated questions build their own explanation from the numbers in the question.
 - Answers are matched loosely: spaces and capitals are ignored, and equal numbers match (`1/2` = `0.5` = `2/4`).
 - `"mode": "tutor"` shows **Correct / Not yet** buttons for the tutor (reading aloud, handwriting).
 - Choices are shuffled on screen.
@@ -100,7 +103,7 @@ A skill needs **either** a generator **or** hand-written items (or both; the gen
 | Integers, powers | `integerAdd` (max), `integerMul` (max), `exponent` (maxBase), `sqrt` (max) |
 | Algebra | `linearEq` (max), `proportion`, `slope`, `evalPoly`, `quadraticRoots` |
 | Statistics | `mean`, `median`, `probabilityDie`, `binomial` (max) |
-| Number theory, algebra | `gcd`, `lcm`, `mod` (max), `modInverse`, `eulerPhi`, `groupOrder` |
+| Number theory, algebra | `gcd` (max), `lcm` (max), `mod` (max), `modInverse`, `eulerPhi`, `groupOrder` |
 | Calculus | `logBase`, `derivative`, `integral`, `limit`, `geometricSeries` |
 | Linear algebra, complex | `det2`, `dot`, `eigenTriangular`, `complexModulus` |
 
@@ -120,5 +123,6 @@ e.g. "Diagonalization and SVD (singular value decomposition)".
 - Generator keys exist in `Generators.swift`.
 - Every skill has a part (1–3); every level and skill has show, together and alone approaches.
 - Hand-written questions have a tier (1–3), and every tier has at least one question.
+- Every hand-written question has a `why` explanation.
 - Every abbreviation used in lessons, questions or generated questions has a glossary meaning.
 - Day-based plans run 1..N, and every prerequisite is taught on an earlier day.

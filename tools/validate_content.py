@@ -12,6 +12,7 @@ Checks:
   - every skill is in part 1, 2 or 3 of its level; hand-written questions have a
     difficulty tier (1 Starter, 2 Core, 3 Challenge) and every tier has questions
   - every level and skill has three teaching approaches: show, together, alone
+  - every hand-written question has a "why" explanation shown after any answer
   - every abbreviation (LCM, SD, sin, d/dx, ...) used in lessons, questions or
     generated questions has a plain-English meaning in the curriculum's glossary
 Prints a coverage report (skills with practice vs. "coming soon").
@@ -55,7 +56,7 @@ def texts(skill):
     out += [lesson.get("explanation", ""), lesson.get("example") or ""] + (lesson.get("tutorSteps") or [])
     out += list((lesson.get("approaches") or {}).values())
     for item in skill.get("practice", {}).get("items") or []:
-        out += [item.get("prompt", ""), item.get("answer") or ""] + (item.get("choices") or [])
+        out += [item.get("prompt", ""), item.get("answer") or "", item.get("why") or ""] + (item.get("choices") or [])
     return out
 
 
@@ -78,6 +79,9 @@ def check_structure(doc):
             errors.append(f"{sid}: part must be 1, 2 or 3")
         approaches(sid, s.get("lesson", {}).get("approaches"))
         items = s.get("practice", {}).get("items") or []
+        for n, i in enumerate(items, 1):
+            if not (i.get("why") or "").strip():
+                errors.append(f"{sid} item {n}: needs a \"why\" explanation")
         if items and not s["practice"].get("generator"):
             tiers = [i.get("tier") for i in items]
             if any(t not in (1, 2, 3) for t in tiers):

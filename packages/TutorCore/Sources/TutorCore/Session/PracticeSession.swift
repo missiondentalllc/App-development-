@@ -19,6 +19,10 @@ public final class PracticeSession: ObservableObject {
     public struct Feedback: Equatable {
         public let correct: Bool
         public let expected: String?
+        /// What the learner answered.
+        public let given: String
+        /// Why the answer is right (shown after any answer).
+        public let why: String?
         public let seconds: Double
         public let sightPace: Bool
     }
@@ -180,6 +184,7 @@ public final class PracticeSession: ObservableObject {
         if isCorrect { correct += 1 }
         let pace = skill.sightPaceSeconds ?? Comprehension.defaultSightPace
         feedback = Feedback(correct: isCorrect, expected: q.tutorJudged ? nil : q.answer,
+                            given: given, why: q.why,
                             seconds: secs, sightPace: isCorrect && secs <= pace)
         if !isCorrect, diagnostic == nil {
             lessonToShow = skill

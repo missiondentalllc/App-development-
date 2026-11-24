@@ -182,7 +182,10 @@ textarea.field { font-size: 0.8rem; font-family: ui-monospace, Menlo, monospace;
 .feedback { align-items: center; text-align: center; }
 .feedback.good .display { color: var(--good); }
 .feedback.miss .display { color: var(--warn); }
-.answer-reveal { font-size: 1.4rem; }
+.answer-reveal { font-size: 1.25rem; }
+.answer-reveal .given { color: var(--warn); }
+.why { align-self: stretch; text-align: left; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--pencil);
+  border-radius: 0 10px 10px 0; padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; }
 .big-num { font-size: 1.6rem; font-weight: 600; }
 
 #toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); opacity: 0;

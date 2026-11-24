@@ -135,3 +135,19 @@ final class TierTests: XCTestCase {
         XCTAssertEqual(QuestionGenerators.tierParams("add", ["max": 10], tier: 3)["max"], 10)
     }
 }
+
+final class ExplanationTests: XCTestCase {
+    func testEveryGeneratorExplainsItsAnswer() {
+        let text = (try? String(contentsOfFile: #filePath.replacingOccurrences(of: "Tests/TutorCoreTests/EngineTests.swift",
+                                                                              with: "Sources/TutorCore/Questions/Generators.swift"))) ?? ""
+        let keys = text.components(separatedBy: "case \"").dropFirst().compactMap { $0.split(separator: "\"").first.map(String.init) }
+        XCTAssertGreaterThan(keys.count, 50)
+        let dice = Dice(seed: 42)
+        for key in keys {
+            for tier in 1...3 {
+                let q = QuestionGenerators.make(key, skillId: "x", dice: dice, tier: tier)
+                XCTAssertNotNil(q?.why, "\(key) tier \(tier) has no explanation")
+            }
+        }
+    }
+}

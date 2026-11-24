@@ -11,6 +11,8 @@ public struct Question: Identifiable, Hashable {
     public let tutorJudged: Bool
     /// Difficulty tier this question was made for (1 Starter, 2 Core, 3 Challenge).
     public var tier: Int = 3
+    /// Short explanation shown after the learner answers, right or wrong.
+    public var why: String?
 
     public init(skillId: String, prompt: String, choices: [String]? = nil,
                 answer: String?, tutorJudged: Bool = false) {

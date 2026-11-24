@@ -388,7 +388,7 @@ const GeneratorSizes = {
   add: { max: 10 }, add3: { max: 9 }, sub: { max: 10 }, missingAddend: { max: 10 }, doubles: { max: 10 },
   factFamily: { max: 10 }, wordAdd: { max: 10 }, mul: { max: 10 }, div: { max: 10 }, fractionOf: { maxDen: 10 },
   fractionAdd: { maxDen: 12 }, integerAdd: { max: 20 }, integerMul: { max: 12 }, exponent: { maxBase: 6 },
-  sqrt: { max: 15 }, linearEq: { max: 10 }, binomial: { max: 10 }, mod: { max: 13 },
+  sqrt: { max: 15 }, linearEq: { max: 10 }, binomial: { max: 10 }, mod: { max: 13 }, gcd: { max: 12 }, lcm: { max: 15 },
 };
 
 function tierParams(key, params, tier) {
@@ -409,125 +409,198 @@ function tierParams(key, params, tier) {
 function makeGenerated(key, params, skillId, tier = 3) {
   const d = Dice;
   const p = (name, fb) => (params && params[name] != null ? params[name] : fb);
-  const q = (prompt, answer) => ({ skillId, prompt, answer: String(answer) });
-  const mc = (prompt, choices, answer) => ({ skillId, prompt, choices, answer });
+  // Every generated question carries "why": a short explanation shown after any answer.
+  const q = (prompt, answer, why) => ({ skillId, prompt, answer: String(answer), why });
+  const mc = (prompt, choices, answer, why) => ({ skillId, prompt, choices, answer, why });
+  const list = (from, to, step = 1) => { const out = []; for (let i = from; step > 0 ? i <= to : i >= to; i += step) out.push(i); return out; };
+  const countOn = (a, b) => b === 0 ? `Adding 0 leaves ${a} the same.` : b <= 6 ? `Start at ${a} and count on ${b}: ${list(a + 1, a + b).join(", ")}.` : `Make a ten or add in parts: ${a} + ${b} = ${a + b}.`;
 
   switch (key) {
     // Counting and number sense
     case "count": {
       const n = d.int(1, p("max", 20));
       const dots = Array.from({ length: n }, (_, i) => (i > 0 && i % 5 === 0 ? " ●" : "●")).join("");
-      return q(`How many dots?\n${dots}`, n);
+      const groups = Math.floor(n / 5), rest = n % 5;
+      const why = n > 5 ? `The dots come in groups of 5. ${groups} group${groups > 1 ? "s" : ""} of 5 is ${groups * 5}${rest ? `, plus ${rest} more makes ${n}` : ""}.` : `Touch each dot once and count: ${list(1, n).join(", ")}. The last number said is ${n}.`;
+      return q(`How many dots?\n${dots}`, n, why);
     }
     case "countBy": {
       const step = p("step", 1);
       const start = step * d.int(0, Math.max(0, Math.floor(p("max", 100) / step) - 3));
-      return q(`What comes next?\n${start}, ${start + step}, ${start + 2 * step}, __`, start + 3 * step);
+      return q(`What comes next?\n${start}, ${start + step}, ${start + 2 * step}, __`, start + 3 * step,
+        `Each number is ${step} more than the one before. ${start + 2 * step} + ${step} = ${start + 3 * step}.`);
     }
     case "numberAfter": {
       const n = d.int(1, p("max", 120));
-      return d.bool() ? q(`What number comes just after ${n}?`, n + 1) : q(`What number comes just before ${n}?`, n - 1);
+      return d.bool() ? q(`What number comes just after ${n}?`, n + 1, `Just after means 1 more: ${n} + 1 = ${n + 1}.`)
+                      : q(`What number comes just before ${n}?`, n - 1, `Just before means 1 less: ${n} − 1 = ${n - 1}.`);
     }
     case "compare": {
       const a = d.int(0, p("max", 100));
       let b = d.int(0, p("max", 100));
       if (d.int(0, 5) === 0) b = a;
-      return mc(`Which sign goes in the blank?\n${a} __ ${b}`, [">", "<", "="], a > b ? ">" : a < b ? "<" : "=");
+      const why = a === b ? `Both numbers are ${a}, so they are equal: ${a} = ${b}.`
+        : `${Math.max(a, b)} is bigger than ${Math.min(a, b)}. The open side of the sign faces the bigger number: ${a} ${a > b ? ">" : "<"} ${b}.`;
+      return mc(`Which sign goes in the blank?\n${a} __ ${b}`, [">", "<", "="], a > b ? ">" : a < b ? "<" : "=", why);
     }
     case "placeValue": {
       const digits = Math.max(2, Math.min(4, p("digits", 2)));
       const n = d.int(10 ** (digits - 1), 10 ** digits - 1);
       const places = ["ones", "tens", "hundreds", "thousands"];
       const i = d.int(0, digits - 1);
-      return q(`What digit is in the ${places[i]} place of ${n}?`, Math.floor(n / 10 ** i) % 10);
+      const digit = Math.floor(n / 10 ** i) % 10;
+      const order = places.slice(0, digits).reverse().join(", ");
+      return q(`What digit is in the ${places[i]} place of ${n}?`, digit,
+        `Reading ${n} from left to right, the places are ${order}. The ${places[i]} digit is ${digit}.`);
     }
     case "tenMore": {
       const n = d.int(10, Math.max(10, p("max", 100) - 10));
-      return d.bool() ? q(`What is 10 more than ${n}?`, n + 10) : q(`What is 10 less than ${n}?`, n - 10);
+      return d.bool() ? q(`What is 10 more than ${n}?`, n + 10, `10 more changes only the tens digit, up by 1: ${n} → ${n + 10}.`)
+                      : q(`What is 10 less than ${n}?`, n - 10, `10 less changes only the tens digit, down by 1: ${n} → ${n - 10}.`);
     }
     case "evenOdd": {
       const n = d.int(0, p("max", 50));
-      return mc(`Is ${n} even or odd?`, ["Even", "Odd"], n % 2 === 0 ? "Even" : "Odd");
+      const even = n % 2 === 0;
+      return mc(`Is ${n} even or odd?`, ["Even", "Odd"], even ? "Even" : "Odd",
+        `Look at the last digit, ${n % 10}. ${even ? "0, 2, 4, 6 and 8 make a number even: it splits into two equal groups." : "1, 3, 5, 7 and 9 make a number odd: one is left over when you make pairs."}`);
     }
     case "roundTen": {
       const n = d.int(0, p("max", 100));
-      return q(`Round ${n} to the nearest ten.`, Math.round(n / 10) * 10);
+      const r = Math.round(n / 10) * 10, ones = n % 10;
+      return q(`Round ${n} to the nearest ten.`, r,
+        `${n} is between ${n - ones} and ${n - ones + 10}. The ones digit is ${ones}, ${ones >= 5 ? "5 or more, so round up" : "less than 5, so round down"} to ${r}.`);
     }
 
     // Addition and subtraction
-    case "add": { const m = p("max", 10), a = d.int(0, m), b = d.int(0, m); return q(`${a} + ${b} = ?`, a + b); }
-    case "add3": { const m = p("max", 9), a = d.int(0, m), b = d.int(0, m), c = d.int(0, m); return q(`${a} + ${b} + ${c} = ?`, a + b + c); }
-    case "sub": { const a = d.int(0, p("max", 10)), b = d.int(0, a); return q(`${a} − ${b} = ?`, a - b); }
-    case "missingAddend": { const c = d.int(0, p("max", 10)), a = d.int(0, c); return q(`${a} + ? = ${c}`, c - a); }
-    case "makeTen": { const a = d.int(0, 10); return q(`${a} + ? = 10`, 10 - a); }
-    case "doubles": { const n = d.int(0, p("max", 10)); return q(`${n} + ${n} = ?`, 2 * n); }
+    case "add": { const m = p("max", 10), a = d.int(0, m), b = d.int(0, m); return q(`${a} + ${b} = ?`, a + b, countOn(Math.max(a, b), Math.min(a, b)) + (a < b && a > 0 ? ` (Starting from the bigger number is faster.)` : "")); }
+    case "add3": {
+      const m = p("max", 9), a = d.int(0, m), b = d.int(0, m), c = d.int(0, m);
+      return q(`${a} + ${b} + ${c} = ?`, a + b + c, `Add two at a time: ${a} + ${b} = ${a + b}, then ${a + b} + ${c} = ${a + b + c}.`);
+    }
+    case "sub": {
+      const a = d.int(0, p("max", 10)), b = d.int(0, a);
+      return q(`${a} − ${b} = ?`, a - b, b === 0 ? `Taking away 0 leaves ${a}.` : `Start at ${b} and count up to ${a}. That is ${a - b} steps, so ${a} − ${b} = ${a - b}. Check: ${a - b} + ${b} = ${a}.`);
+    }
+    case "missingAddend": {
+      const c = d.int(0, p("max", 10)), a = d.int(0, c);
+      return q(`${a} + ? = ${c}`, c - a, `Count up from ${a} to ${c}: that is ${c - a}. Check: ${a} + ${c - a} = ${c}.`);
+    }
+    case "makeTen": { const a = d.int(0, 10); return q(`${a} + ? = 10`, 10 - a, `${a} and ${10 - a} are partners that make 10. On a ten frame, ${a} filled leaves ${10 - a} empty.`); }
+    case "doubles": { const n = d.int(0, p("max", 10)); return q(`${n} + ${n} = ?`, 2 * n, `A double is the same number twice. ${n} + ${n} = ${2 * n}${n <= 5 ? ` (like ${n} fingers on each hand)` : ""}.`); }
     case "factFamily": {
       const m = p("max", 10), a = d.int(1, m), b = d.int(1, m);
-      return q(`If ${a} + ${b} = ${a + b}, what is ${a + b} − ${b}?`, a);
+      return q(`If ${a} + ${b} = ${a + b}, what is ${a + b} − ${b}?`, a,
+        `${a}, ${b} and ${a + b} are a fact family. Taking ${b} back away from ${a + b} leaves ${a}.`);
     }
     case "wordAdd": {
       const m = p("max", 10), a = d.int(1, m), b = d.int(1, m);
       const thing = d.pick(["apples", "stickers", "blocks", "shells", "crayons"]);
-      if (d.bool()) return q(`Sam has ${a} ${thing}. Sam gets ${b} more. How many ${thing} now?`, a + b);
-      return q(`Sam has ${a + b} ${thing}. Sam gives away ${b}. How many ${thing} are left?`, a);
+      if (d.bool()) return q(`Sam has ${a} ${thing}. Sam gets ${b} more. How many ${thing} now?`, a + b, `"Gets more" means add: ${a} + ${b} = ${a + b} ${thing}.`);
+      return q(`Sam has ${a + b} ${thing}. Sam gives away ${b}. How many ${thing} are left?`, a, `"Gives away" means subtract: ${a + b} − ${b} = ${a} ${thing}.`);
     }
     case "money": {
       // Starter: dimes and pennies only. Core adds nickels. Challenge adds quarters.
       const qu = tier >= 3 ? d.int(0, 3) : 0, di = d.int(0, 4), ni = tier >= 2 ? d.int(0, 3) : 0, pe = d.int(0, 4);
-      const coins = [[qu, "quarter", "quarters"], [di, "dime", "dimes"], [ni, "nickel", "nickels"], [pe, "penny", "pennies"]];
-      const parts = coins.filter(c => c[0] > 0).map(c => (c[0] === 1 ? `1 ${c[1]}` : `${c[0]} ${c[2]}`));
-      if (!parts.length) return q("How many cents is 1 dime?", 10);
-      return q(`How many cents?\n${parts.join(", ")}`, qu * 25 + di * 10 + ni * 5 + pe);
+      const coins = [[qu, "quarter", "quarters", 25], [di, "dime", "dimes", 10], [ni, "nickel", "nickels", 5], [pe, "penny", "pennies", 1]].filter(c => c[0] > 0);
+      if (!coins.length) return q("How many cents is 1 dime?", 10, "A dime is worth 10 cents.");
+      const parts = coins.map(c => (c[0] === 1 ? `1 ${c[1]}` : `${c[0]} ${c[2]}`));
+      const total = qu * 25 + di * 10 + ni * 5 + pe;
+      const steps = coins.map(c => `${c[0] === 1 ? `1 ${c[1]}` : `${c[0]} ${c[2]}`} = ${c[0] * c[3]}¢`).join(", ");
+      return q(`How many cents?\n${parts.join(", ")}`, total, `Count the biggest coins first. ${steps}. Together that is ${total} cents.`);
     }
     case "time": {
       const h = d.int(1, 12);
-      if (tier === 1 || d.bool()) return q(`The short hand points to ${h}. The long hand points to 12. What time is it?`, `${h}:00`);
+      if (tier === 1 || d.bool()) return q(`The short hand points to ${h}. The long hand points to 12. What time is it?`, `${h}:00`,
+        `The short hand tells the hour: ${h}. The long hand on 12 means exactly on the hour, so it is ${h}:00 (${h} o'clock).`);
       const nh = h === 12 ? 1 : h + 1;
-      return q(`The short hand is between ${h} and ${nh}. The long hand points to 6. What time is it?`, `${h}:30`);
+      return q(`The short hand is between ${h} and ${nh}. The long hand points to 6. What time is it?`, `${h}:30`,
+        `The hour is the number the short hand has passed: ${h}. The long hand on 6 means half past, 30 minutes. So it is ${h}:30.`);
     }
 
     // Multiplication, division, fractions, decimals
-    case "mul": { const a = d.int(p("min", 0), p("max", 10)), b = d.int(p("min", 0), p("max", 10)); return q(`${a} × ${b} = ?`, a * b); }
-    case "div": { const b = d.int(1, p("max", 10)), x = d.int(0, p("max", 10)); return q(`${b * x} ÷ ${b} = ?`, x); }
+    case "mul": {
+      const a = d.int(p("min", 0), p("max", 10)), b = d.int(p("min", 0), p("max", 10));
+      const why = a === 0 || b === 0 ? `Anything times 0 is 0.` : `${a} × ${b} means ${b} groups of ${a}${b <= 5 ? `: ${Array(b).fill(a).join(" + ")} = ${a * b}` : ` = ${a * b}`}.`;
+      return q(`${a} × ${b} = ?`, a * b, why);
+    }
+    case "div": {
+      const b = d.int(1, p("max", 10)), x = d.int(0, p("max", 10));
+      return q(`${b * x} ÷ ${b} = ?`, x, `Think: what times ${b} makes ${b * x}? ${x} × ${b} = ${b * x}, so ${b * x} ÷ ${b} = ${x}.`);
+    }
     case "orderOps": {
       const a = d.int(1, 9), b = d.int(1, 9), c = d.int(1, 9);
-      return d.bool() ? q(`${a} + ${b} × ${c} = ?`, a + b * c) : q(`(${a} + ${b}) × ${c} = ?`, (a + b) * c);
+      return d.bool() ? q(`${a} + ${b} × ${c} = ?`, a + b * c, `Multiply before adding: ${b} × ${c} = ${b * c}, then ${a} + ${b * c} = ${a + b * c}.`)
+                      : q(`(${a} + ${b}) × ${c} = ?`, (a + b) * c, `Parentheses come first: ${a} + ${b} = ${a + b}, then ${a + b} × ${c} = ${(a + b) * c}.`);
     }
-    case "fractionOf": { const den = d.int(2, p("maxDen", 10)), n = den * d.int(1, 10); return q(`What is 1/${den} of ${n}?`, n / den); }
-    case "fractionAdd": { const den = d.int(2, p("maxDen", 12)), a = d.int(1, den), b = d.int(1, den); return q(`${a}/${den} + ${b}/${den} = ?`, `${a + b}/${den}`); }
+    case "fractionOf": {
+      const den = d.int(2, p("maxDen", 10)), n = den * d.int(1, 10);
+      return q(`What is 1/${den} of ${n}?`, n / den, `1/${den} means split into ${den} equal groups. ${n} ÷ ${den} = ${n / den}.`);
+    }
+    case "fractionAdd": {
+      const den = d.int(2, p("maxDen", 12)), a = d.int(1, den), b = d.int(1, den);
+      return q(`${a}/${den} + ${b}/${den} = ?`, `${a + b}/${den}`, `The pieces are the same size (${den}ths), so add the tops and keep the bottom: ${a} + ${b} = ${a + b}, giving ${a + b}/${den}.`);
+    }
     case "fractionCompare": {
       const d1 = d.int(2, 12), d2 = d.int(2, 12), n1 = d.int(1, d1), n2 = d.int(1, d2);
-      if (n1 * d2 === n2 * d1) return mc("Which is greater?", [`${n1}/${d1}`, `${n1 + 1}/${d1}`], `${n1 + 1}/${d1}`);
-      return mc("Which is greater?", [`${n1}/${d1}`, `${n2}/${d2}`], n1 * d2 > n2 * d1 ? `${n1}/${d1}` : `${n2}/${d2}`);
+      if (n1 * d2 === n2 * d1) return mc("Which is greater?", [`${n1}/${d1}`, `${n1 + 1}/${d1}`], `${n1 + 1}/${d1}`, `Same bottom number, so the one with more pieces is bigger: ${n1 + 1} pieces beats ${n1}.`);
+      const big = n1 * d2 > n2 * d1 ? `${n1}/${d1}` : `${n2}/${d2}`;
+      return mc("Which is greater?", [`${n1}/${d1}`, `${n2}/${d2}`], big,
+        `Cross-multiply to compare: ${n1} × ${d2} = ${n1 * d2} and ${n2} × ${d1} = ${n2 * d1}. The larger product belongs to ${big}.`);
     }
-    case "decimalAdd": { const a = d.int(1, 99), b = d.int(1, 99); return q(`${G.tenths(a)} + ${G.tenths(b)} = ?`, G.tenths(a + b)); }
-    case "percent": { const pct = d.pick([10, 20, 25, 50, 75]), n = 20 * d.int(1, 10); return q(`What is ${pct}% of ${n}?`, pct * n / 100); }
+    case "decimalAdd": {
+      const a = d.int(1, 99), b = d.int(1, 99);
+      return q(`${G.tenths(a)} + ${G.tenths(b)} = ?`, G.tenths(a + b), `Line up the decimal points and add tenths: ${a} tenths + ${b} tenths = ${a + b} tenths = ${G.tenths(a + b)}.`);
+    }
+    case "percent": {
+      const pct = d.pick([10, 20, 25, 50, 75]), n = 20 * d.int(1, 10);
+      return q(`What is ${pct}% of ${n}?`, pct * n / 100, `${pct}% means ${pct} out of 100, which is ${pct}/100. ${n} × ${pct} ÷ 100 = ${pct * n / 100}.`);
+    }
 
     // Integers, powers, roots
-    case "integerAdd": { const m = p("max", 20), a = d.int(-m, m), b = d.int(-m, m); return q(`(${a}) + (${b}) = ?`, a + b); }
-    case "integerMul": { const m = p("max", 12), a = d.int(-m, m), b = d.int(-m, m); return q(`(${a}) × (${b}) = ?`, a * b); }
-    case "exponent": { const base = d.int(2, p("maxBase", 6)), e = d.int(2, base <= 3 ? 5 : 3); return q(`${base}^${e} = ?`, base ** e); }
-    case "sqrt": { const n = d.int(1, p("max", 15)); return q(`√${n * n} = ?`, n); }
+    case "integerAdd": {
+      const m = p("max", 20), a = d.int(-m, m), b = d.int(-m, m);
+      const why = (a >= 0) === (b >= 0) ? `Same signs: add the sizes (${Math.abs(a)} + ${Math.abs(b)} = ${Math.abs(a) + Math.abs(b)}) and keep the sign. Answer: ${a + b}.`
+        : `Different signs: subtract the sizes (${Math.max(Math.abs(a), Math.abs(b))} − ${Math.min(Math.abs(a), Math.abs(b))} = ${Math.abs(a + b)}) and take the sign of the bigger size. Answer: ${a + b}.`;
+      return q(`(${a}) + (${b}) = ?`, a + b, why);
+    }
+    case "integerMul": {
+      const m = p("max", 12), a = d.int(-m, m), b = d.int(-m, m);
+      const why = a === 0 || b === 0 ? "Anything times 0 is 0." : `${Math.abs(a)} × ${Math.abs(b)} = ${Math.abs(a * b)}. ${(a < 0) === (b < 0) ? "Same signs give a positive answer" : "Different signs give a negative answer"}: ${a * b}.`;
+      return q(`(${a}) × (${b}) = ?`, a * b, why);
+    }
+    case "exponent": {
+      const base = d.int(2, p("maxBase", 6)), e = d.int(2, base <= 3 ? 5 : 3);
+      return q(`${base}^${e} = ?`, base ** e, `${base}^${e} means ${e} copies of ${base} multiplied: ${Array(e).fill(base).join(" × ")} = ${base ** e}.`);
+    }
+    case "sqrt": { const n = d.int(1, p("max", 15)); return q(`√${n * n} = ?`, n, `The square root asks which number times itself gives ${n * n}. ${n} × ${n} = ${n * n}.`); }
 
     // Algebra
     case "linearEq": {
       const m = p("max", 10);
       let a = d.int(1, 9); if (d.bool()) a = -a;
-      const x = d.int(-m, m), b = d.int(-m, m);
-      return q(`Solve for x:\n${G.term(a, "x")}${G.signed(b)} = ${a * x + b}`, x);
+      const x = d.int(-m, m), b = d.int(-m, m), rhs = a * x + b;
+      const step1 = b === 0 ? `${G.term(a, "x")} = ${rhs}` : `${b > 0 ? "Subtract" : "Add"} ${Math.abs(b)} on both sides: ${G.term(a, "x")} = ${rhs - b}`;
+      return q(`Solve for x:\n${G.term(a, "x")}${G.signed(b)} = ${rhs}`, x,
+        `${step1}. ${a === 1 ? "" : `Divide both sides by ${a}: `}x = ${x}. Check: ${a} × ${x}${G.signed(b)} = ${rhs}.`);
     }
-    case "proportion": { const a = d.int(1, 9), b = d.int(2, 9), k = d.int(2, 6); return q(`${a}/${b} = x/${b * k}. What is x?`, a * k); }
+    case "proportion": {
+      const a = d.int(1, 9), b = d.int(2, 9), k = d.int(2, 6);
+      return q(`${a}/${b} = x/${b * k}. What is x?`, a * k, `The bottom went from ${b} to ${b * k}, which is × ${k}. Do the same to the top: ${a} × ${k} = ${a * k}.`);
+    }
     case "slope": {
-      const x1 = d.int(-5, 5), dx = d.int(1, 5), m = d.int(-4, 4), y1 = d.int(-5, 5);
-      return q(`What is the slope of the line through (${x1}, ${y1}) and (${x1 + dx}, ${y1 + m * dx})?`, m);
+      const x1 = d.int(-5, 5), dx = d.int(1, 5), m = d.int(-4, 4), y1 = d.int(-5, 5), y2 = y1 + m * dx;
+      return q(`What is the slope of the line through (${x1}, ${y1}) and (${x1 + dx}, ${y2})?`, m,
+        `Slope = rise ÷ run = (${y2} − ${y1}) ÷ (${x1 + dx} − ${x1}) = ${y2 - y1} ÷ ${dx} = ${m}.`);
     }
     case "evalPoly": {
       const a = d.int(1, 4), b = d.int(-5, 5), c = d.int(-9, 9), k = d.int(-3, 3);
-      return q(`f(x) = ${G.term(a, "x²")}${G.signedTerm(b, "x")}${G.signed(c)}. What is f(${k})?`, a * k * k + b * k + c);
+      return q(`f(x) = ${G.term(a, "x²")}${G.signedTerm(b, "x")}${G.signed(c)}. What is f(${k})?`, a * k * k + b * k + c,
+        `Put ${k} in for x: ${a}(${k})² + ${b}(${k}) + ${c} = ${a * k * k} + ${b * k} + ${c} = ${a * k * k + b * k + c}.`);
     }
     case "quadraticRoots": {
       const r = d.int(-9, 9); let s = d.int(-9, 9); if (s === r) s += 1;
-      return q(`Solve x²${G.signedTerm(-(r + s), "x")}${G.signed(r * s)} = 0.\nGive the larger solution.`, Math.max(r, s));
+      return q(`Solve x²${G.signedTerm(-(r + s), "x")}${G.signed(r * s)} = 0.\nGive the larger solution.`, Math.max(r, s),
+        `Find two numbers that multiply to ${r * s} and add to ${r + s}: ${r} and ${s}. So (x${G.signed(-r)})(x${G.signed(-s)}) = 0 and x = ${r} or x = ${s}. The larger is ${Math.max(r, s)}.`);
     }
 
     // Statistics and probability
@@ -536,53 +609,103 @@ function makeGenerated(key, params, skillId, tier = 3) {
       const values = Array.from({ length: n - 1 }, () => d.int(1, 20));
       const target = d.int(5, 15);
       values.push(target * n - values.reduce((a, b) => a + b, 0));
-      if (values[values.length - 1] < 0) return q("Mean of 2, 4, 6?", 4);
-      return q(`What is the mean of ${d.shuffled(values).join(", ")}?`, target);
+      if (values[values.length - 1] < 0) return q("Mean of 2, 4, 6?", 4, "Add them: 2 + 4 + 6 = 12. Divide by how many (3): 12 ÷ 3 = 4.");
+      const shown = d.shuffled(values);
+      return q(`What is the mean of ${shown.join(", ")}?`, target, `Add them: ${shown.join(" + ")} = ${target * n}. Divide by how many (${n}): ${target * n} ÷ ${n} = ${target}.`);
     }
     case "median": {
       const values = Array.from({ length: tier === 1 ? 3 : 2 * d.int(1, 3) + 1 }, () => d.int(1, 50));
-      return q(`What is the median of ${values.join(", ")}?`, [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)]);
+      const sorted = [...values].sort((a, b) => a - b), mid = sorted[Math.floor(values.length / 2)];
+      return q(`What is the median of ${values.join(", ")}?`, mid, `Put them in order: ${sorted.join(", ")}. The middle one is ${mid}.`);
     }
-    case "probabilityDie": { const k = d.int(1, 5); return q(`A fair die is rolled. What is the probability of rolling a number greater than ${k}? (fraction)`, `${6 - k}/6`); }
-    case "binomial": { const n = d.int(2, p("max", 10)), k = d.int(0, n); return q(`How many ways to choose ${k} items from ${n}? (${n} choose ${k})`, G.choose(n, k)); }
+    case "probabilityDie": {
+      const k = d.int(1, 5);
+      return q(`A fair die is rolled. What is the probability of rolling a number greater than ${k}? (fraction)`, `${6 - k}/6`,
+        `The numbers greater than ${k} are ${list(k + 1, 6).join(", ")}: ${6 - k} of the 6 equally likely sides. So ${6 - k}/6.`);
+    }
+    case "binomial": {
+      const n = d.int(2, p("max", 10)), k = d.int(0, n);
+      return q(`How many ways to choose ${k} items from ${n}? (${n} choose ${k})`, G.choose(n, k),
+        k === 0 || k === n ? `There is only 1 way to choose ${k === 0 ? "none" : "all of them"}.` : `${n} choose ${k} = ${n}! ÷ (${k}! × ${n - k}!) = ${G.choose(n, k)}. (n! means n × (n − 1) × … × 1.)`);
+    }
 
     // Number theory
-    case "gcd": { const g = d.int(1, 12), a = g * d.int(1, 12), b = g * d.int(1, 12); return q(`gcd(${a}, ${b}) = ?`, G.gcd(a, b)); }
-    case "lcm": { const a = d.int(2, 15), b = d.int(2, 15); return q(`lcm(${a}, ${b}) = ?`, a / G.gcd(a, b) * b); }
-    case "mod": { const n = d.int(2, p("max", 13)), a = d.int(0, 200); return q(`${a} mod ${n} = ?`, a % n); }
+    case "gcd": {
+      const m = p("max", 12), g = d.int(1, m), a = g * d.int(1, m), b = g * d.int(1, m), ans = G.gcd(a, b);
+      return q(`gcd(${a}, ${b}) = ?`, ans, `${ans} divides both: ${a} = ${ans} × ${a / ans} and ${b} = ${ans} × ${b / ans}. ${a / ans} and ${b / ans} share no other factor, so ${ans} is the greatest.`);
+    }
+    case "lcm": {
+      const m = p("max", 15), a = d.int(2, m), b = d.int(2, m), ans = a / G.gcd(a, b) * b;
+      return q(`lcm(${a}, ${b}) = ?`, ans, `Count up by ${Math.max(a, b)}s until you reach a number ${Math.min(a, b)} divides: ${ans} = ${a} × ${ans / a} = ${b} × ${ans / b}.`);
+    }
+    case "mod": {
+      const n = d.int(2, p("max", 13)), a = d.int(0, 200);
+      return q(`${a} mod ${n} = ?`, a % n, `${a} = ${Math.floor(a / n)} × ${n} + ${a % n}. The remainder is ${a % n}.`);
+    }
     case "modInverse": {
       const prime = d.pick([5, 7, 11, 13]), a = d.int(1, prime - 1);
       let inv = 1; for (let i = 1; i < prime; i++) if ((a * i) % prime === 1) { inv = i; break; }
-      return q(`Find the inverse of ${a} modulo ${prime} (a number from 1 to ${prime - 1}).`, inv);
+      return q(`Find the inverse of ${a} modulo ${prime} (a number from 1 to ${prime - 1}).`, inv,
+        `The inverse times ${a} leaves remainder 1: ${a} × ${inv} = ${a * inv} = ${Math.floor(a * inv / prime)} × ${prime} + 1.`);
     }
     case "eulerPhi": {
       const n = d.int(2, 40);
-      let c = 0; for (let i = 1; i <= n; i++) if (G.gcd(i, n) === 1) c++;
-      return q(`φ(${n}) = ? (how many numbers from 1 to ${n} share no factor with ${n})`, c);
+      const co = list(1, n).filter(i => G.gcd(i, n) === 1);
+      return q(`φ(${n}) = ? (how many numbers from 1 to ${n} share no factor with ${n})`, co.length,
+        co.length <= 16 ? `They are ${co.join(", ")}: ${co.length} numbers.` : `Count the numbers from 1 to ${n} that share no factor with ${n}: there are ${co.length}.`);
     }
-    case "groupOrder": { const n = d.int(4, 24), k = d.int(1, n - 1); return q(`In the group ℤ${G.sub(n)} under addition, what is the order of ${k}?`, n / G.gcd(n, k)); }
+    case "groupOrder": {
+      const n = d.int(4, 24), k = d.int(1, n - 1), g = G.gcd(n, k);
+      return q(`In the group ℤ${G.sub(n)} under addition, what is the order of ${k}?`, n / g,
+        `The order is how many times you add ${k} to get back to 0 (mod ${n}). That is ${n} ÷ gcd(${n}, ${k}) = ${n} ÷ ${g} = ${n / g}.`);
+    }
 
     // Calculus and series
-    case "logBase": { const base = d.pick([2, 3, 5, 10]), e = d.int(0, 4); return q(`log base ${base} of ${base ** e} = ?`, e); }
+    case "logBase": {
+      const base = d.pick([2, 3, 5, 10]), e = d.int(0, 4);
+      return q(`log base ${base} of ${base ** e} = ?`, e, e === 0 ? `Any base to the power 0 is 1, so the answer is 0.` : `${base} to the power ${e} is ${base ** e} (${Array(e).fill(base).join(" × ")}), so the logarithm is ${e}.`);
+    }
     case "derivative": {
       const a = d.int(1, 5), n = d.int(2, 4), b = d.int(-6, 6), k = d.int(-2, 2);
-      return q(`f(x) = ${G.term(a, `x^${n}`)}${G.signedTerm(b, "x")}. What is f′(${k})?`, a * n * k ** (n - 1) + b);
+      return q(`f(x) = ${G.term(a, `x^${n}`)}${G.signedTerm(b, "x")}. What is f′(${k})?`, a * n * k ** (n - 1) + b,
+        `Power rule: bring the power down and lower it by 1. f′(x) = ${a * n}x^${n - 1}${G.signed(b)}. At x = ${k}: ${a * n} × ${k ** (n - 1)}${G.signed(b)} = ${a * n * k ** (n - 1) + b}.`);
     }
-    case "integral": { const a = d.int(1, 6), k = d.int(1, 5); return q(`Evaluate the integral from 0 to ${k} of ${2 * a}x dx.`, a * k * k); }
-    case "limit": { const a = d.int(-6, 6); return q(`lim as x → ${a} of (x² − ${a * a}) / (x${G.signed(-a)}) = ?`, 2 * a); }
-    case "geometricSeries": { const a = d.int(1, 20) * 2; return q(`${a} + ${a / 2} + ${G.half(a, 4)} + ${G.half(a, 8)} + … (forever) = ?`, 2 * a); }
+    case "integral": {
+      const a = d.int(1, 6), k = d.int(1, 5);
+      return q(`Evaluate the integral from 0 to ${k} of ${2 * a}x dx.`, a * k * k, `An antiderivative of ${2 * a}x is ${G.term(a, "x²")}. Evaluate from 0 to ${k}: ${a} × ${k * k} − 0 = ${a * k * k}.`);
+    }
+    case "limit": {
+      const a = d.int(-6, 6);
+      return q(`lim as x → ${a} of (x² − ${a * a}) / (x${G.signed(-a)}) = ?`, 2 * a,
+        `Factor the top: x² − ${a * a} = (x${G.signed(-a)})(x${G.signed(a)}). Cancel (x${G.signed(-a)}) to get x${G.signed(a)}, then put in x = ${a}: ${2 * a}.`);
+    }
+    case "geometricSeries": {
+      const a = d.int(1, 20) * 2;
+      return q(`${a} + ${a / 2} + ${G.half(a, 4)} + ${G.half(a, 8)} + … (forever) = ?`, 2 * a,
+        `Each term is half the one before. A geometric series with first term ${a} and ratio 1/2 adds up to ${a} ÷ (1 − 1/2) = ${2 * a}.`);
+    }
 
     // Linear algebra and complex numbers
-    case "det2": { const v = Array.from({ length: 4 }, () => d.int(-6, 6)); return q(`det [[${v[0]}, ${v[1]}], [${v[2]}, ${v[3]}]] = ?`, v[0] * v[3] - v[1] * v[2]); }
+    case "det2": {
+      const v = Array.from({ length: 4 }, () => d.int(-6, 6));
+      return q(`det [[${v[0]}, ${v[1]}], [${v[2]}, ${v[3]}]] = ?`, v[0] * v[3] - v[1] * v[2],
+        `ad − bc = (${v[0]})(${v[3]}) − (${v[1]})(${v[2]}) = ${v[0] * v[3]} − ${v[1] * v[2]} = ${v[0] * v[3] - v[1] * v[2]}.`);
+    }
     case "dot": {
       const u = Array.from({ length: 3 }, () => d.int(-5, 5)), w = Array.from({ length: 3 }, () => d.int(-5, 5));
-      return q(`(${u.join(", ")}) · (${w.join(", ")}) = ?`, u.reduce((s, x, i) => s + x * w[i], 0));
+      const prods = u.map((x, i) => x * w[i]);
+      return q(`(${u.join(", ")}) · (${w.join(", ")}) = ?`, prods.reduce((s, x) => s + x, 0),
+        `Multiply matching parts and add: ${u.map((x, i) => `(${x})(${w[i]})`).join(" + ")} = ${prods.join(" + ")} = ${prods.reduce((s, x) => s + x, 0)}.`);
     }
     case "eigenTriangular": {
       const a = d.int(-6, 6), b = d.int(-6, 6); let dd = d.int(-6, 6); if (dd === a) dd += 1;
-      return q(`The matrix [[${a}, ${b}], [0, ${dd}]] has two eigenvalues. What is the larger one?`, Math.max(a, dd));
+      return q(`The matrix [[${a}, ${b}], [0, ${dd}]] has two eigenvalues. What is the larger one?`, Math.max(a, dd),
+        `For a triangular matrix the eigenvalues are the numbers on the diagonal: ${a} and ${dd}. The larger is ${Math.max(a, dd)}.`);
     }
-    case "complexModulus": { const t = d.pick([[3, 4, 5], [5, 12, 13], [6, 8, 10], [8, 15, 17], [7, 24, 25]]); return q(`|${t[0]} + ${t[1]}i| = ?`, t[2]); }
+    case "complexModulus": {
+      const t = d.pick([[3, 4, 5], [5, 12, 13], [6, 8, 10], [8, 15, 17], [7, 24, 25]]);
+      return q(`|${t[0]} + ${t[1]}i| = ?`, t[2], `The size of a + bi is √(a² + b²) = √(${t[0] ** 2} + ${t[1] ** 2}) = √${t[2] ** 2} = ${t[2]}.`);
+    }
 
     default: return null;
   }
@@ -617,6 +740,7 @@ class QuestionFactory {
       choices: item.choices ? Dice.shuffled(item.choices) : null,
       answer: item.answer ?? null,
       tutorJudged: item.mode === "tutor",
+      why: item.why || null,
       tier,
     };
   }
@@ -802,7 +926,8 @@ class PracticeSession {
     this.answered += 1;
     if (isCorrect) this.correct += 1;
     const pace = skill.sightPaceSeconds ?? Comprehension.defaultSightPace;
-    this.feedback = { correct: isCorrect, expected: q.tutorJudged ? null : q.answer, seconds: secs, sightPace: isCorrect && secs <= pace };
+    this.feedback = { correct: isCorrect, expected: q.tutorJudged ? null : q.answer, given, why: q.why || null,
+                      seconds: secs, sightPace: isCorrect && secs <= pace };
     if (!isCorrect && !this.diagnostic) {
       this.lessonToShow = skill;
       // Each miss on a skill brings the next teaching approach: Show, Do together, Try alone.

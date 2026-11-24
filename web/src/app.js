@@ -480,10 +480,11 @@ function feedbackView(s) {
   const fb = s.feedback;
   return `<section class="feedback stack ${fb.correct ? "good" : "miss"}">
     <h2 class="display">${fb.correct ? (fb.sightPace ? "Right, at sight pace!" : "Right!") : "Not quite"}</h2>
-    ${!fb.correct && fb.expected ? `<p class="answer-reveal">Answer: <strong>${esc(fb.expected)}</strong></p>` : ""}
+    ${!fb.correct && fb.expected ? `<p class="answer-reveal">${fb.given && fb.given !== "(time up)" ? `You answered <strong class="given">${esc(fb.given)}</strong>. ` : fb.given === "(time up)" ? "Time ran out. " : ""}The answer is <strong>${esc(fb.expected)}</strong>.</p>` : ""}
     <p class="muted num">${fb.seconds.toFixed(1)} seconds</p>
-    ${s.lessonToShow ? lessonCard(s.lessonToShow, true, [s.question?.prompt, fb.expected], s.approach)
-                     : termsBox([s.question?.prompt, fb.expected])}
+    ${fb.why ? `<div class="why"><span class="label">${fb.correct ? "Why it's right" : "Why"}</span><p>${esc(fb.why)}</p></div>` : ""}
+    ${s.lessonToShow ? lessonCard(s.lessonToShow, true, [s.question?.prompt, fb.expected, fb.why], s.approach)
+                     : termsBox([s.question?.prompt, fb.expected, fb.why])}
     <button class="btn primary big" data-action="next" id="next-btn">${s.lessonToShow ? "Got it, try another" : "Next"}</button>
   </section>`;
 }

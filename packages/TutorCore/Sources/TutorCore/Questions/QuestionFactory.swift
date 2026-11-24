@@ -36,6 +36,7 @@ public final class QuestionFactory {
                          answer: item.answer,
                          tutorJudged: tutor)
         q.tier = tier
+        q.why = item.why
         return q
     }
 }

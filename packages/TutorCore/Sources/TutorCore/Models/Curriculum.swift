@@ -135,4 +135,6 @@ public struct Item: Codable, Hashable {
     public let mode: String?
     /// Difficulty: 1 Starter, 2 Core, 3 Challenge (the full skill). Nil fits any tier.
     public var tier: Int? = nil
+    /// Short explanation shown after the learner answers, right or wrong.
+    public var why: String? = nil
 }

@@ -135,15 +135,32 @@ public struct PracticeView: View {
                 .font(.largeTitle.bold())
                 .foregroundStyle(fb.correct ? .green : .orange)
             if !fb.correct, let expected = fb.expected {
-                Text("Answer: \(expected)").font(.title2)
+                Group {
+                    if fb.given == "(time up)" {
+                        Text("Time ran out. The answer is \(expected).")
+                    } else {
+                        Text("You answered \(fb.given). The answer is \(expected).")
+                    }
+                }
+                .font(.title3)
+                .multilineTextAlignment(.center)
             }
             Text(String(format: "%.1f seconds", fb.seconds)).foregroundStyle(.secondary)
+            if let why = fb.why {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(fb.correct ? "Why it's right" : "Why").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                    Text(why)
+                }
+                .padding(12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 10))
+            }
             if let lesson = session.lessonToShow {
                 LessonCard(skill: lesson, compact: true, curriculum: session.curriculum,
-                           extraTexts: [session.question?.prompt, fb.expected],
+                           extraTexts: [session.question?.prompt, fb.expected, fb.why],
                            approachIndex: session.approachIndex)
             } else {
-                ShortFormsBox(entries: session.curriculum.shortForms(in: [session.question?.prompt, fb.expected]))
+                ShortFormsBox(entries: session.curriculum.shortForms(in: [session.question?.prompt, fb.expected, fb.why]))
             }
             Button(session.lessonToShow == nil ? "Next" : "Got it — try another") { session.next() }
                 .buttonStyle(.borderedProminent)
