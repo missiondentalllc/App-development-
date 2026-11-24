@@ -9,6 +9,9 @@ Checks:
   - multiple-choice answers are among the choices; auto-graded items have answers
   - every generator named in content exists in TutorCore's Generators.swift
   - day-based plans: days are 1..N with no gaps, and prerequisites come on earlier days
+  - every skill is in part 1, 2 or 3 of its level; hand-written questions have a
+    difficulty tier (1 Starter, 2 Core, 3 Challenge) and every tier has questions
+  - every level and skill has three teaching approaches: show, together, alone
   - every abbreviation (LCM, SD, sin, d/dx, ...) used in lessons, questions or
     generated questions has a plain-English meaning in the curriculum's glossary
 Prints a coverage report (skills with practice vs. "coming soon").
@@ -50,9 +53,39 @@ def texts(skill):
     out = [skill.get("title", ""), skill.get("summary", ""), skill.get("reinforcement") or ""]
     lesson = skill.get("lesson", {})
     out += [lesson.get("explanation", ""), lesson.get("example") or ""] + (lesson.get("tutorSteps") or [])
+    out += list((lesson.get("approaches") or {}).values())
     for item in skill.get("practice", {}).get("items") or []:
         out += [item.get("prompt", ""), item.get("answer") or ""] + (item.get("choices") or [])
     return out
+
+
+APPROACH_KEYS = ("show", "together", "alone")
+
+
+def check_structure(doc):
+    """Parts, difficulty tiers and teaching approaches."""
+    errors = []
+
+    def approaches(where, a):
+        if not isinstance(a, dict) or any(not (a.get(k) or "").strip() for k in APPROACH_KEYS):
+            errors.append(f"{where}: needs three teaching approaches (show, together, alone)")
+
+    for st in doc["stages"]:
+        approaches(f"level {st['id']}", st.get("approaches"))
+    for s in doc["skills"]:
+        sid = s["id"]
+        if s.get("part") not in (1, 2, 3):
+            errors.append(f"{sid}: part must be 1, 2 or 3")
+        approaches(sid, s.get("lesson", {}).get("approaches"))
+        items = s.get("practice", {}).get("items") or []
+        if items and not s["practice"].get("generator"):
+            tiers = [i.get("tier") for i in items]
+            if any(t not in (1, 2, 3) for t in tiers):
+                errors.append(f"{sid}: every question needs tier 1, 2 or 3")
+            for t in (1, 2, 3):
+                if t not in tiers:
+                    errors.append(f"{sid}: no tier {t} questions")
+    return errors
 
 
 def check_glossary(doc):
@@ -70,6 +103,7 @@ def check_glossary(doc):
     places = [(s["id"], t) for s in doc["skills"] for t in texts(s)]
     places += [(st["id"], st.get("description") or "") for st in doc["stages"]]
     places += [(st["id"], st.get("title") or "") for st in doc["stages"]]
+    places += [(st["id"], t) for st in doc["stages"] for t in (st.get("approaches") or {}).values()]
     missing = {}
     for where, text in places:
         found = set(re.findall(r"(?<![A-Za-z])([A-Z]{2,})(?:s)?(?![A-Za-z])", text))
@@ -154,6 +188,7 @@ def validate(path, keys):
                 if p in by_id and by_id[p].get("day", 0) >= s.get("day", 0):
                     errors.append(f"{s['id']} (day {s['day']}) needs {p} (day {by_id[p]['day']}) first")
 
+    errors += check_structure(doc)
     errors += check_glossary(doc)
 
     with_practice = sum(1 for s in skills if s["practice"].get("generator") or s["practice"].get("items"))
