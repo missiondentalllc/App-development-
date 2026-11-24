@@ -31,6 +31,7 @@ Both apps share the same rules (in `packages/TutorCore`):
 - **Three parts per level.** Every level is split into Part 1 Foundations, Part 2 Building and Part 3 Mastery, each with its own progress and practice button.
 - **Three difficulty tiers per skill.** Starter, Core and Challenge. Two right in a row moves up a tier; two misses in a row moves down. A skill only counts as mastered at the Challenge tier.
 - **Three teaching approaches.** Every level and skill that isn't 100% mastered shows three ways to teach it: Show (tutor demonstrates), Do together (take turns on one problem), Try alone (one hint only if stuck).
+- **Skip skills.** During practice, **Skip** sets the current skill aside for the rest of the session without scoring it. On a skill's page, **Skip this skill** takes it out of practice and review for good and keeps the skills that build on it open (undo any time). First Grade also has **Skip this day**.
 - **Lesson after a miss.** A wrong answer shows that skill's short lesson before the next question, plus the next teaching approach in order.
 - **Profiles per child.** Each learner has separate progress.
 - **Timed, pausable sessions.** Study time is timestamped and pauses are subtracted, so you can take it off screen time. Partial sessions still count. Progress can be exported to Google Drive or Files from the learner list.

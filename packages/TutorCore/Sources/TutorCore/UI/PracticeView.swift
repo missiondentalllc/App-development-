@@ -47,6 +47,9 @@ public struct PracticeView: View {
                     session.isPaused ? session.resume() : session.pause()
                 }
                 .buttonStyle(.bordered)
+                if session.canSkip {
+                    Button("Skip") { typed = ""; session.skip() }.buttonStyle(.bordered)
+                }
                 Button("End") { session.end() }.buttonStyle(.bordered)
             }
         }
@@ -173,6 +176,10 @@ public struct PracticeView: View {
             Text("Session done").font(.largeTitle.bold())
             Text("\(session.correct) of \(session.answered) right")
                 .font(.title2)
+            if session.skippedCount > 0 {
+                Text("Skipped \(session.skippedCount) skill\(session.skippedCount == 1 ? "" : "s") this session.")
+                    .foregroundStyle(.secondary)
+            }
             Text("Study time: \(Int(session.activeSeconds / 60)) min \(Int(session.activeSeconds) % 60) s")
                 .foregroundStyle(.secondary)
             if let d = session.diagnostic {

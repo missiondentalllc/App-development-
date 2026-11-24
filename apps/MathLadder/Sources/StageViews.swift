@@ -89,6 +89,9 @@ struct StageDetailView: View {
                                 HStack {
                                     Circle().fill(level.color).frame(width: 10, height: 10)
                                     Text(skill.title)
+                                    if profile.skippedSkills(in: curriculum.id).contains(skill.id) {
+                                        Text("Skipped").font(.caption2).foregroundStyle(.secondary)
+                                    }
                                     Spacer()
                                     Text(level.label + (state.attempts > 0 ? " · " + (Tiers.names[Tiers.current(state)] ?? "") : ""))
                                         .font(.caption).foregroundStyle(.secondary)
@@ -149,6 +152,20 @@ struct SkillDetailView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+                let isSkipped = profile.skippedSkills(in: curriculum.id).contains(skill.id)
+                if isSkipped {
+                    Text("This skill is skipped. The app won't pick it for practice or review, and skills that build on it stay open.")
+                        .font(.callout)
+                }
+                Button(isSkipped ? "Stop skipping this skill" : "Skip this skill") {
+                    var p = profile
+                    p.setSkipped(!isSkipped, skillId: skill.id, in: curriculum.id)
+                    store.update(p)
+                }
+                if !isSkipped {
+                    Text("Skipping takes it out of practice and review, and keeps the skills that build on it open. You can undo it here any time.")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
             }
             .padding()
         }

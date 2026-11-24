@@ -10,6 +10,9 @@ public struct Profile: Codable, Identifiable, Hashable {
     /// First-grade plan: the day the learner is on, per curriculum.
     public var currentDay: [String: Int]
     public var sessions: [StudySession]
+    /// curriculumId -> skills the tutor chose to skip. The app stops picking them,
+    /// and skills that build on them stay unlocked.
+    public var skipped: [String: [String]]?
 
     public init(name: String) {
         self.id = UUID()
@@ -18,6 +21,18 @@ public struct Profile: Codable, Identifiable, Hashable {
         self.progress = [:]
         self.currentDay = [:]
         self.sessions = []
+    }
+
+    public func skippedSkills(in curriculumId: String) -> Set<String> {
+        Set(skipped?[curriculumId] ?? [])
+    }
+
+    public mutating func setSkipped(_ on: Bool, skillId: String, in curriculumId: String) {
+        var set = skippedSkills(in: curriculumId)
+        if on { set.insert(skillId) } else { set.remove(skillId) }
+        var all = skipped ?? [:]
+        all[curriculumId] = set.sorted()
+        skipped = all
     }
 
     public func state(_ skillId: String, in curriculumId: String) -> SkillState {

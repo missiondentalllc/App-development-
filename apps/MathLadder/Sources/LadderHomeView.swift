@@ -16,7 +16,8 @@ struct LadderHomeView: View {
     var body: some View {
         List {
             Section {
-                let pick = SkillPicker(graph: graph).next(states: states)
+                let skipped = profile.skippedSkills(in: curriculum.id)
+                let pick = SkillPicker(graph: graph).next(states: states, excluding: skipped, skipped: skipped)
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Up next · \(pick.reason.label)").font(.subheadline).foregroundStyle(.secondary)
                     Text(pick.skill?.title ?? "Everything available is mastered").font(.title2.bold())
@@ -83,8 +84,10 @@ struct LadderHomeView: View {
     /// Weak skills that the most later material depends on.
     private var biggestGaps: [Skill] {
         let g = graph
+        let skipped = profile.skippedSkills(in: curriculum.id)
         return curriculum.skills
             .filter {
+                guard !skipped.contains($0.id) else { return false }
                 let s = states[$0.id] ?? SkillState()
                 return s.attempts >= 3 && !s.provisional && s.comprehension < Comprehension.passThreshold
             }

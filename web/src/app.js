@@ -87,6 +87,9 @@ function bar(title, opts = {}) {
 }
 
 function dot(level) { return `<span class="dot lv-${level}" aria-hidden="true"></span>`; }
+const skipped = () => skippedSet(profile(), App.curriculum.id);
+const isSkipped = id => skipped().has(id);
+const skipTag = id => (isSkipped(id) ? ` <span class="chip skip-chip">Skipped</span>` : "");
 function levelChip(s) {
   const l = Comprehension.level(s);
   const tier = s.attempts > 0 ? ` · ${Tiers.names[Tiers.current(s)]} tier` : "";
@@ -101,7 +104,8 @@ function approachesList(a, heading) {
 
 function stageFullyMastered(stageId) {
   const st = states();
-  return App.graph.skillsIn(stageId).every(s => Comprehension.isFullyMastered(st[s.id]));
+  const sk = skipped();
+  return App.graph.skillsIn(stageId).filter(s => !sk.has(s.id)).every(s => Comprehension.isFullyMastered(st[s.id]));
 }
 
 function stageApproaches(stage) {
@@ -236,7 +240,7 @@ function viewHomeFG() {
     const s = stateOf(p, App.curriculum.id, skill.id);
     html += `<section class="today">
       <p class="eyebrow">Day ${day} of ${total} · <span class="subj">${esc(skill.subject || "")}</span> · Part ${App.graph.partOfSkill(skill)}: ${PartNames[App.graph.partOfSkill(skill)]}</p>
-      <h2 class="display">${esc(skill.title)}</h2>
+      <h2 class="display">${esc(skill.title)}${skipTag(skill.id)}</h2>
       <p>${esc(skill.summary)}</p>
       ${levelChip(s)}
       <button class="btn primary big" data-action="lesson" data-id="${esc(skill.id)}">Start today's lesson</button>
@@ -267,9 +271,10 @@ function viewHomeFG() {
 // ---------- Math Ladder home ----------
 function viewHomeML() {
   const p = profile(), st = states();
-  const pick = App.picker.next(st);
+  const sk = skipped();
+  const pick = App.picker.next(st, Date.now(), sk, sk);
   const stage = pick.skill ? App.graph.stage(pick.skill.stage) : null;
-  const gaps = App.picker.biggestGaps(st);
+  const gaps = App.picker.biggestGaps(st).filter(g => !sk.has(g.id));
   let html = bar(p.name, { learners: true });
   html += `<main class="wrap stack">`;
   html += `<section class="today">
@@ -315,6 +320,7 @@ function viewLesson(cur) {
     ${lessonCard(skill)}
     ${earlier.length ? `<p class="small muted">Builds on: ${esc(earlier.join(", "))}</p>` : ""}
     <button class="btn primary big" data-action="lesson-practice" data-id="${esc(skill.id)}">Start practice</button>
+    ${skill.day && skill.day < App.curriculum.skills.length ? `<button class="btn ghost" data-action="skip-day" data-id="${esc(skill.id)}">Skip this day and go to Day ${skill.day + 1}</button>` : ""}
   </main>`;
 }
 
@@ -369,7 +375,7 @@ function viewStage(cur) {
     for (const s of part.skills) {
       const x = st[s.id], l = Comprehension.level(x);
       const tier = x?.attempts ? ` · ${Tiers.names[Tiers.current(x)]}` : "";
-      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${esc(s.title)}</span><span class="small muted">${Comprehension.levelLabel[l]}${tier}</span></button>`;
+      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${esc(s.title)}${skipTag(s.id)}</span><span class="small muted">${Comprehension.levelLabel[l]}${tier}</span></button>`;
     }
     html += `</div><button class="btn ghost small" data-action="stage-practice" data-id="${esc(stage.id)}" data-part="${part.n}">Practice Part ${part.n}</button></section>`;
   }
@@ -388,6 +394,11 @@ function viewSkill(cur) {
   }
   if (hasPractice(skill)) html += `<button class="btn primary big" data-action="skill-practice" data-id="${esc(skill.id)}">Practice this skill</button>`;
   else html += `<p class="muted small">Practice for this skill is coming soon.</p>`;
+  html += isSkipped(skill.id)
+    ? `<section class="card pad stack-sm"><p><strong>This skill is skipped.</strong> The app won't pick it for practice or review, and skills that build on it stay open.</p>
+       <button class="btn" data-action="unskip-skill" data-id="${esc(skill.id)}">Stop skipping this skill</button></section>`
+    : `<button class="btn ghost" data-action="skip-skill" data-id="${esc(skill.id)}">Skip this skill</button>
+       <p class="small muted">Skipping takes it out of practice and review, and keeps the skills that build on it open. You can undo it here any time.</p>`;
   return html + `</main>`;
 }
 
@@ -409,7 +420,7 @@ function viewMap() {
     for (const s of sec.skills) {
       const x = st[s.id] || newSkillState(), l = Comprehension.level(x);
       const right = !hasPractice(s) ? `<span class="small muted">coming soon</span>` : (x.attempts > 0 || x.provisional) ? `<span class="num">${pct(x.comprehension)}</span>` : "";
-      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${s.day ? `<span class="muted small num">Day ${s.day}</span> ` : ""}${esc(s.title)}</span>${right}</button>`;
+      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${s.day ? `<span class="muted small num">Day ${s.day}</span> ` : ""}${esc(s.title)}${skipTag(s.id)}</span>${right}</button>`;
     }
     html += `</div></section>`;
   }
@@ -437,6 +448,7 @@ function viewSession(cur) {
     html += `<div class="practice-head"><div><strong>${esc(s.currentSkill?.title || "")}</strong>
       <span class="small muted block">${ReasonLabel[s.reason]}${s.question?.tier && !s.diagnostic ? ` · ${Tiers.names[s.question.tier]} tier` : ""}</span></div>
       <span class="num count">${Math.min(s.answered + (s.feedback ? 0 : 1), Math.max(s.goal, 1))}/${s.goal}</span>
+      ${s.canSkip ? `<button class="btn small ghost" data-action="skip" title="Skip this skill for the rest of this session">Skip</button>` : ""}
       <button class="btn small ghost" data-action="end">End</button></div>`;
   }
   if (s.finished) html += summaryView(s);
@@ -498,6 +510,7 @@ function summaryView(s) {
   }
   return `<section class="center stack"><h2 class="display">Session done</h2>
     <p class="big-num num">${s.correct} of ${s.answered} right</p>
+    ${s.skippedCount ? `<p class="muted">Skipped ${s.skippedCount} skill${s.skippedCount === 1 ? "" : "s"} this session.</p>` : ""}
     <p class="muted">Study time: ${Math.floor(secs / 60)} min ${secs % 60} s</p>${placed}
     <button class="btn primary big" data-action="session-done">Done</button></section>`;
 }
@@ -557,6 +570,16 @@ function onClick(e) {
       return startSession({ type: "focus", skillIds: [id], reviewCount: 4 }, 8, `Day ${skill.day ?? ""}`, () => {
         App.session = null; App.stack.pop(); App.stack.pop(); App.stack.push({ screen: "result", id }); render(true);
       });
+    }
+    case "skip": App.typed = ""; s?.skip(); return render();
+    case "skip-skill": setSkipped(profile(), App.curriculum.id, id, true); toast("Skipped. Undo any time on this page."); return render();
+    case "unskip-skill": setSkipped(profile(), App.curriculum.id, id, false); toast("Back in practice."); return render();
+    case "skip-day": {
+      const skill = App.graph.skill(id), p = profile();
+      setSkipped(p, App.curriculum.id, id, true);
+      p.currentDay = p.currentDay || {};
+      p.currentDay[App.curriculum.id] = Math.min(App.curriculum.skills.length, (skill.day || 1) + 1);
+      ProfileStore.save(); toast(`Skipped Day ${skill.day}.`); return goHome();
     }
     case "move-on": {
       const p = profile(); p.currentDay = p.currentDay || {};

@@ -135,6 +135,7 @@ p { margin: 0; }
 .dot.lv-mastered { background: var(--lv-mastered); }
 .dot.lv-sight { background: var(--lv-sight); }
 .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; padding: 3px 10px 3px 8px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); }
+.skip-chip { font-size: 0.72rem; padding: 1px 8px; vertical-align: middle; color: var(--muted); font-weight: 500; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 0.82rem; color: var(--muted); }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 
@@ -395,8 +396,9 @@ class SkillGraph {
   partOfSkill(skill) {
     return this.partsOf(skill.stage).find(p => p.skills.includes(skill))?.n || 1;
   }
-  isUnlocked(skill, states) {
-    return (skill.prerequisites || []).every(p => Comprehension.isPassed(states[p]));
+  /** Unlocked when every prerequisite is passed or was skipped on purpose. */
+  isUnlocked(skill, states, skipped = new Set()) {
+    return (skill.prerequisites || []).every(p => skipped.has(p) || Comprehension.isPassed(states[p]));
   }
 }
 
@@ -406,7 +408,9 @@ const ReasonLabel = { repair: "Fixing a gap", review: "Memory review", advance: 
 class SkillPicker {
   constructor(graph) { this.graph = graph; }
 
-  next(states, now = Date.now(), excluding = new Set()) {
+  /** excluding: skills to leave out (skipped for good or for this session).
+      skipped: skills skipped for good; they count as done for unlocking what builds on them. */
+  next(states, now = Date.now(), excluding = new Set(), skipped = new Set()) {
     const st = id => states[id] || newSkillState();
     const practicable = this.graph.ordered.filter(s => hasPractice(s) && !excluding.has(s.id));
 
@@ -424,7 +428,7 @@ class SkillPicker {
       .sort((a, b) => (st(a.id).nextReview ?? now) - (st(b.id).nextReview ?? now));
     if (due.length) return { skill: due[0], reason: "review" };
 
-    const unlocked = practicable.filter(s => this.graph.isUnlocked(s, states));
+    const unlocked = practicable.filter(s => this.graph.isUnlocked(s, states, skipped));
     const inProgress = unlocked.find(s => {
       const x = st(s.id), l = Comprehension.level(x);
       return x.attempts > 0 && (l === "learning" || l === "passing");
@@ -1016,6 +1020,18 @@ const ProfileStore = {
   },
 };
 
+// Skills a tutor chose to skip, per learner and curriculum. The app stops picking them,
+// and skills that build on them stay unlocked. Undo any time from the skill's page.
+function skippedSet(profile, curriculumId) {
+  return new Set(profile.skipped?.[curriculumId] || []);
+}
+function setSkipped(profile, curriculumId, skillId, on) {
+  const set = skippedSet(profile, curriculumId);
+  if (on) set.add(skillId); else set.delete(skillId);
+  profile.skipped = { ...(profile.skipped || {}), [curriculumId]: [...set] };
+  ProfileStore.save();
+}
+
 function stateOf(profile, curriculumId, skillId) {
   return profile.progress?.[curriculumId]?.[skillId] || newSkillState();
 }
@@ -1041,14 +1057,20 @@ class PracticeSession {
     this.picker = new SkillPicker(graph);
     this.factory = new QuestionFactory();
     this.plan = [];
+    this.planIndex = 0;
     this.diagnostic = null;
     this.goal = goal;
+    this.skipped = skippedSet(profile, curriculum.id);   // skipped for good
+    this.sessionSkips = new Set();                       // skipped for this session only
+    this.skippedCount = 0;
 
     if (mode.type === "focus") {
-      const focus = mode.skillIds.filter(id => graph.skill(id) && hasPractice(graph.skill(id)));
+      // Practicing one chosen skill always works; level, part and review practice leave out skipped skills.
+      const focus = mode.skillIds.filter(id => graph.skill(id) && hasPractice(graph.skill(id)) &&
+                                               (mode.skillIds.length === 1 || !this.skipped.has(id)));
       const per = focus.length ? Math.max(1, Math.floor(goal / focus.length)) : 0;
       for (let i = 0; i < per; i++) this.plan.push(...focus);
-      this.plan.push(...PracticeSession.reviewSkills(mode.reviewCount, new Set(mode.skillIds), graph, profile, curriculum.id));
+      this.plan.push(...PracticeSession.reviewSkills(mode.reviewCount, new Set([...mode.skillIds, ...this.skipped]), graph, profile, curriculum.id));
       this.goal = this.plan.length;
     } else if (mode.type === "diagnostic") {
       this.diagnostic = new Diagnostic(graph);
@@ -1088,6 +1110,20 @@ class PracticeSession {
     this.record("(time up)", false, Comprehension.questionCapSeconds);
   }
   next() { this.feedback = null; this.lessonToShow = null; this.approach = null; this.advance(); }
+
+  /** Skip the current skill for the rest of this session. Nothing is scored. */
+  get canSkip() { return !this.diagnostic && !!this.question && !this.feedback && !this.isPaused && !this.finished; }
+  skip() {
+    if (!this.canSkip) return;
+    const id = this.currentSkill.id;
+    this.sessionSkips.add(id);
+    this.skippedCount += 1;
+    if (this.mode.type === "focus") {
+      this.plan = this.plan.slice(0, this.planIndex).concat(this.plan.slice(this.planIndex).filter(x => x !== id));
+      this.goal = this.plan.length;
+    }
+    this.advance();
+  }
 
   pause() {
     if (this.isPaused || this.finished) return;
@@ -1137,6 +1173,7 @@ class PracticeSession {
     this.session.attempts.push({ skillId: skill.id, prompt: q.prompt, given, correct: isCorrect, seconds: secs, at: Date.now() });
     if (this.diagnostic) this.diagnostic.record(skill, isCorrect, secs);
     this.answered += 1;
+    this.planIndex += 1;
     if (isCorrect) this.correct += 1;
     const pace = skill.sightPaceSeconds ?? Comprehension.defaultSightPace;
     this.feedback = { correct: isCorrect, expected: q.tutorJudged ? null : q.answer, given, why: q.why || null,
@@ -1164,15 +1201,19 @@ class PracticeSession {
   nextSkill() {
     if (this.mode.type === "adaptive") {
       if (this.answered >= this.goal) return null;
-      const pick = this.picker.next(statesOf(this.profile, this.curriculum.id));
+      const states = statesOf(this.profile, this.curriculum.id);
+      const leaveOut = new Set([...this.skipped, ...this.sessionSkips]);
+      let pick = this.picker.next(states, Date.now(), leaveOut, this.skipped);
+      // If skipping left nothing open, let this session's skips unlock what builds on them too.
+      if (!pick.skill && this.sessionSkips.size) pick = this.picker.next(states, Date.now(), leaveOut, leaveOut);
       this.reason = pick.reason;
       return pick.skill;
     }
     if (this.mode.type === "focus") {
-      if (this.answered >= this.plan.length) return null;
+      if (this.planIndex >= this.plan.length) return null;
       const tail = Math.min(this.mode.reviewCount, this.plan.length);
-      this.reason = this.answered < this.plan.length - tail ? "advance" : "review";
-      return this.graph.skill(this.plan[this.answered]);
+      this.reason = this.planIndex < this.plan.length - tail ? "advance" : "review";
+      return this.graph.skill(this.plan[this.planIndex]);
     }
     if (!this.diagnostic || this.diagnostic.finished) return null;
     this.reason = "advance";
@@ -1204,7 +1245,7 @@ class PracticeSession {
 
 if (typeof module !== "undefined") {
   module.exports = { Comprehension, SpacedReview, SkillGraph, SkillPicker, Diagnostic, AnswerChecker,
-    makeGenerated, tierParams, QuestionFactory, shortFormsIn, Tiers, PartNames, Approaches, PracticeSession, ProfileStore, hasPractice, newSkillState, ReasonLabel };
+    makeGenerated, tierParams, QuestionFactory, skippedSet, setSkipped, shortFormsIn, Tiers, PartNames, Approaches, PracticeSession, ProfileStore, hasPractice, newSkillState, ReasonLabel };
 }
 
 </script>
@@ -1298,6 +1339,9 @@ function bar(title, opts = {}) {
 }
 
 function dot(level) { return `<span class="dot lv-${level}" aria-hidden="true"></span>`; }
+const skipped = () => skippedSet(profile(), App.curriculum.id);
+const isSkipped = id => skipped().has(id);
+const skipTag = id => (isSkipped(id) ? ` <span class="chip skip-chip">Skipped</span>` : "");
 function levelChip(s) {
   const l = Comprehension.level(s);
   const tier = s.attempts > 0 ? ` · ${Tiers.names[Tiers.current(s)]} tier` : "";
@@ -1312,7 +1356,8 @@ function approachesList(a, heading) {
 
 function stageFullyMastered(stageId) {
   const st = states();
-  return App.graph.skillsIn(stageId).every(s => Comprehension.isFullyMastered(st[s.id]));
+  const sk = skipped();
+  return App.graph.skillsIn(stageId).filter(s => !sk.has(s.id)).every(s => Comprehension.isFullyMastered(st[s.id]));
 }
 
 function stageApproaches(stage) {
@@ -1447,7 +1492,7 @@ function viewHomeFG() {
     const s = stateOf(p, App.curriculum.id, skill.id);
     html += `<section class="today">
       <p class="eyebrow">Day ${day} of ${total} · <span class="subj">${esc(skill.subject || "")}</span> · Part ${App.graph.partOfSkill(skill)}: ${PartNames[App.graph.partOfSkill(skill)]}</p>
-      <h2 class="display">${esc(skill.title)}</h2>
+      <h2 class="display">${esc(skill.title)}${skipTag(skill.id)}</h2>
       <p>${esc(skill.summary)}</p>
       ${levelChip(s)}
       <button class="btn primary big" data-action="lesson" data-id="${esc(skill.id)}">Start today's lesson</button>
@@ -1478,9 +1523,10 @@ function viewHomeFG() {
 // ---------- Math Ladder home ----------
 function viewHomeML() {
   const p = profile(), st = states();
-  const pick = App.picker.next(st);
+  const sk = skipped();
+  const pick = App.picker.next(st, Date.now(), sk, sk);
   const stage = pick.skill ? App.graph.stage(pick.skill.stage) : null;
-  const gaps = App.picker.biggestGaps(st);
+  const gaps = App.picker.biggestGaps(st).filter(g => !sk.has(g.id));
   let html = bar(p.name, { learners: true });
   html += `<main class="wrap stack">`;
   html += `<section class="today">
@@ -1526,6 +1572,7 @@ function viewLesson(cur) {
     ${lessonCard(skill)}
     ${earlier.length ? `<p class="small muted">Builds on: ${esc(earlier.join(", "))}</p>` : ""}
     <button class="btn primary big" data-action="lesson-practice" data-id="${esc(skill.id)}">Start practice</button>
+    ${skill.day && skill.day < App.curriculum.skills.length ? `<button class="btn ghost" data-action="skip-day" data-id="${esc(skill.id)}">Skip this day and go to Day ${skill.day + 1}</button>` : ""}
   </main>`;
 }
 
@@ -1580,7 +1627,7 @@ function viewStage(cur) {
     for (const s of part.skills) {
       const x = st[s.id], l = Comprehension.level(x);
       const tier = x?.attempts ? ` · ${Tiers.names[Tiers.current(x)]}` : "";
-      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${esc(s.title)}</span><span class="small muted">${Comprehension.levelLabel[l]}${tier}</span></button>`;
+      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${esc(s.title)}${skipTag(s.id)}</span><span class="small muted">${Comprehension.levelLabel[l]}${tier}</span></button>`;
     }
     html += `</div><button class="btn ghost small" data-action="stage-practice" data-id="${esc(stage.id)}" data-part="${part.n}">Practice Part ${part.n}</button></section>`;
   }
@@ -1599,6 +1646,11 @@ function viewSkill(cur) {
   }
   if (hasPractice(skill)) html += `<button class="btn primary big" data-action="skill-practice" data-id="${esc(skill.id)}">Practice this skill</button>`;
   else html += `<p class="muted small">Practice for this skill is coming soon.</p>`;
+  html += isSkipped(skill.id)
+    ? `<section class="card pad stack-sm"><p><strong>This skill is skipped.</strong> The app won't pick it for practice or review, and skills that build on it stay open.</p>
+       <button class="btn" data-action="unskip-skill" data-id="${esc(skill.id)}">Stop skipping this skill</button></section>`
+    : `<button class="btn ghost" data-action="skip-skill" data-id="${esc(skill.id)}">Skip this skill</button>
+       <p class="small muted">Skipping takes it out of practice and review, and keeps the skills that build on it open. You can undo it here any time.</p>`;
   return html + `</main>`;
 }
 
@@ -1620,7 +1672,7 @@ function viewMap() {
     for (const s of sec.skills) {
       const x = st[s.id] || newSkillState(), l = Comprehension.level(x);
       const right = !hasPractice(s) ? `<span class="small muted">coming soon</span>` : (x.attempts > 0 || x.provisional) ? `<span class="num">${pct(x.comprehension)}</span>` : "";
-      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${s.day ? `<span class="muted small num">Day ${s.day}</span> ` : ""}${esc(s.title)}</span>${right}</button>`;
+      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${s.day ? `<span class="muted small num">Day ${s.day}</span> ` : ""}${esc(s.title)}${skipTag(s.id)}</span>${right}</button>`;
     }
     html += `</div></section>`;
   }
@@ -1648,6 +1700,7 @@ function viewSession(cur) {
     html += `<div class="practice-head"><div><strong>${esc(s.currentSkill?.title || "")}</strong>
       <span class="small muted block">${ReasonLabel[s.reason]}${s.question?.tier && !s.diagnostic ? ` · ${Tiers.names[s.question.tier]} tier` : ""}</span></div>
       <span class="num count">${Math.min(s.answered + (s.feedback ? 0 : 1), Math.max(s.goal, 1))}/${s.goal}</span>
+      ${s.canSkip ? `<button class="btn small ghost" data-action="skip" title="Skip this skill for the rest of this session">Skip</button>` : ""}
       <button class="btn small ghost" data-action="end">End</button></div>`;
   }
   if (s.finished) html += summaryView(s);
@@ -1709,6 +1762,7 @@ function summaryView(s) {
   }
   return `<section class="center stack"><h2 class="display">Session done</h2>
     <p class="big-num num">${s.correct} of ${s.answered} right</p>
+    ${s.skippedCount ? `<p class="muted">Skipped ${s.skippedCount} skill${s.skippedCount === 1 ? "" : "s"} this session.</p>` : ""}
     <p class="muted">Study time: ${Math.floor(secs / 60)} min ${secs % 60} s</p>${placed}
     <button class="btn primary big" data-action="session-done">Done</button></section>`;
 }
@@ -1768,6 +1822,16 @@ function onClick(e) {
       return startSession({ type: "focus", skillIds: [id], reviewCount: 4 }, 8, `Day ${skill.day ?? ""}`, () => {
         App.session = null; App.stack.pop(); App.stack.pop(); App.stack.push({ screen: "result", id }); render(true);
       });
+    }
+    case "skip": App.typed = ""; s?.skip(); return render();
+    case "skip-skill": setSkipped(profile(), App.curriculum.id, id, true); toast("Skipped. Undo any time on this page."); return render();
+    case "unskip-skill": setSkipped(profile(), App.curriculum.id, id, false); toast("Back in practice."); return render();
+    case "skip-day": {
+      const skill = App.graph.skill(id), p = profile();
+      setSkipped(p, App.curriculum.id, id, true);
+      p.currentDay = p.currentDay || {};
+      p.currentDay[App.curriculum.id] = Math.min(App.curriculum.skills.length, (skill.day || 1) + 1);
+      ProfileStore.save(); toast(`Skipped Day ${skill.day}.`); return goHome();
     }
     case "move-on": {
       const p = profile(); p.currentDay = p.currentDay || {};

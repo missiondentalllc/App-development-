@@ -43,7 +43,12 @@ public final class PracticeSession: ObservableObject {
 
     public let curriculum: Curriculum
     public let graph: SkillGraph
-    public let goal: Int
+    @Published public private(set) var goal: Int
+    /// Skills skipped during this session.
+    @Published public private(set) var skippedCount = 0
+    private var sessionSkips: Set<String> = []
+    private let skippedForGood: Set<String>
+    private var planIndex = 0
     public private(set) var profile: Profile
     public private(set) var diagnostic: Diagnostic?
 
@@ -69,10 +74,12 @@ public final class PracticeSession: ObservableObject {
         case .adaptive:
             break
         case .focus(let ids, let reviewCount):
-            let focus = ids.filter { g.skill($0)?.hasPractice == true }
+            // Practicing one chosen skill always works; level, part and review practice leave out skipped skills.
+            let skippedIds = profile.skippedSkills(in: curriculum.id)
+            let focus = ids.filter { g.skill($0)?.hasPractice == true && (ids.count == 1 || !skippedIds.contains($0)) }
             let perSkill = focus.isEmpty ? 0 : max(1, goal / focus.count)
             for _ in 0..<perSkill { plannedSkills.append(contentsOf: focus) }
-            plannedSkills.append(contentsOf: PracticeSession.reviewSkills(count: reviewCount, excluding: Set(ids),
+            plannedSkills.append(contentsOf: PracticeSession.reviewSkills(count: reviewCount, excluding: Set(ids).union(skippedIds),
                                                                graph: g, profile: profile, curriculumId: curriculum.id))
             sessionGoal = plannedSkills.count
         case .diagnostic:
@@ -91,6 +98,7 @@ public final class PracticeSession: ObservableObject {
         self.plan = plannedSkills
         self.diagnostic = placement
         self.goal = sessionGoal
+        self.skippedForGood = profile.skippedSkills(in: curriculum.id)
     }
 
     // MARK: Flow
@@ -119,6 +127,21 @@ public final class PracticeSession: ObservableObject {
     }
 
     /// Move on after feedback (and after the lesson, if one was shown).
+    /// True when the current skill can be skipped (not during the placement test).
+    public var canSkip: Bool { diagnostic == nil && question != nil && feedback == nil && !isPaused && !finished }
+
+    /// Skip the current skill for the rest of this session. Nothing is scored.
+    public func skip() {
+        guard canSkip, let id = currentSkill?.id else { return }
+        sessionSkips.insert(id)
+        skippedCount += 1
+        if case .focus = mode {
+            plan = Array(plan[..<planIndex]) + plan[planIndex...].filter { $0 != id }
+            goal = plan.count
+        }
+        advance()
+    }
+
     public func next() {
         feedback = nil
         lessonToShow = nil
@@ -181,6 +204,7 @@ public final class PracticeSession: ObservableObject {
         diagnostic?.record(skill: skill, correct: isCorrect, seconds: secs)
 
         answered += 1
+        planIndex += 1
         if isCorrect { correct += 1 }
         let pace = skill.sightPaceSeconds ?? Comprehension.defaultSightPace
         feedback = Feedback(correct: isCorrect, expected: q.tutorJudged ? nil : q.answer,
@@ -215,13 +239,19 @@ public final class PracticeSession: ObservableObject {
         switch mode {
         case .adaptive:
             guard answered < goal else { return nil }
-            let pick = picker.next(states: profile.progress[curriculum.id] ?? [:])
+            let states = profile.progress[curriculum.id] ?? [:]
+            let leaveOut = skippedForGood.union(sessionSkips)
+            var pick = picker.next(states: states, excluding: leaveOut, skipped: skippedForGood)
+            // If skipping left nothing open, let this session's skips unlock what builds on them too.
+            if pick.skill == nil && !sessionSkips.isEmpty {
+                pick = picker.next(states: states, excluding: leaveOut, skipped: leaveOut)
+            }
             reason = pick.reason
             return pick.skill
         case .focus:
-            guard answered < plan.count else { return nil }
-            reason = answered < plan.count - reviewTail ? .advance : .review
-            return graph.skill(plan[answered])
+            guard planIndex < plan.count else { return nil }
+            reason = planIndex < plan.count - reviewTail ? .advance : .review
+            return graph.skill(plan[planIndex])
         case .diagnostic:
             guard let d = diagnostic, !d.finished else { return nil }
             reason = .advance

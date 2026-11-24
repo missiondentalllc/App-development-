@@ -31,7 +31,10 @@ public struct SkillPicker {
 
     public init(graph: SkillGraph) { self.graph = graph }
 
-    public func next(states: [String: SkillState], now: Date = Date(), excluding: Set<String> = []) -> Pick {
+    /// `excluding`: skills to leave out (skipped for good or for this session).
+    /// `skipped`: skills skipped for good; they count as done for unlocking what builds on them.
+    public func next(states: [String: SkillState], now: Date = Date(), excluding: Set<String> = [],
+                     skipped: Set<String> = []) -> Pick {
         let practicable = graph.ordered.filter { $0.hasPractice && !excluding.contains($0.id) }
 
         // 1. Repair the weakest high-impact skill.
@@ -50,7 +53,7 @@ public struct SkillPicker {
         if let first = due.first { return Pick(skill: first, reason: .review) }
 
         // 3. Keep working on an unlocked skill that isn't mastered, else start a new one.
-        let unlocked = practicable.filter { graph.isUnlocked($0, states: states) }
+        let unlocked = practicable.filter { graph.isUnlocked($0, states: states, skipped: skipped) }
         if let inProgress = unlocked.first(where: {
             let s = states[$0.id] ?? SkillState()
             let level = Comprehension.level(s)

@@ -46,6 +46,10 @@ struct LessonFlowView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+                if let day = skill.day, day < curriculum.skills.count {
+                    Button("Skip this day and go to Day \(day + 1)") { skipDay(to: day + 1) }
+                        .frame(maxWidth: .infinity)
+                }
             }
             .padding()
         }
@@ -86,6 +90,14 @@ struct LessonFlowView: View {
         session = PracticeSession(curriculum: curriculum, profile: profile, store: store,
                                   mode: .focus(skillIds: [skill.id], reviewCount: 4), goal: 8)
         step = .practice
+    }
+
+    private func skipDay(to day: Int) {
+        guard var profile = store.profile(profileId) else { return }
+        profile.setSkipped(true, skillId: skill.id, in: curriculum.id)
+        profile.currentDay[curriculum.id] = day
+        store.update(profile)
+        dismiss()
     }
 
     private func moveOn(to day: Int) {

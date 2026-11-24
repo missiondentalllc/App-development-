@@ -151,3 +151,19 @@ final class ExplanationTests: XCTestCase {
         }
     }
 }
+
+final class SkipTests: XCTestCase {
+    func testSkippedSkillIsLeftOutAndUnlocksWhatBuildsOnIt() {
+        let picker = SkillPicker(graph: SkillGraph(PickerTests().makeCurriculum()))
+        let pick = picker.next(states: [:], excluding: ["a"], skipped: ["a"])
+        XCTAssertEqual(pick.skill?.id, "b")
+    }
+
+    func testProfileRemembersSkippedSkills() {
+        var p = Profile(name: "T")
+        p.setSkipped(true, skillId: "a", in: "c")
+        XCTAssertEqual(p.skippedSkills(in: "c"), ["a"])
+        p.setSkipped(false, skillId: "a", in: "c")
+        XCTAssertTrue(p.skippedSkills(in: "c").isEmpty)
+    }
+}

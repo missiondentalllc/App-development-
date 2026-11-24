@@ -59,8 +59,9 @@ public struct SkillGraph {
         parts(of: skill.stage).first { $0.skills.contains(skill) }?.number ?? 1
     }
 
-    public func isUnlocked(_ skill: Skill, states: [String: SkillState]) -> Bool {
-        skill.prerequisites.allSatisfy { Comprehension.isPassed(states[$0] ?? SkillState()) }
+    /// Unlocked when every prerequisite is passed or was skipped on purpose.
+    public func isUnlocked(_ skill: Skill, states: [String: SkillState], skipped: Set<String> = []) -> Bool {
+        skill.prerequisites.allSatisfy { skipped.contains($0) || Comprehension.isPassed(states[$0] ?? SkillState()) }
     }
 
     /// All prerequisites, direct and indirect.
