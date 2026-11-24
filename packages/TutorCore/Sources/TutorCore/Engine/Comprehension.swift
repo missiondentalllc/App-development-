@@ -51,19 +51,25 @@ public enum Comprehension {
         if correct { s.correct += 1 }
         s.averageSeconds = ((s.averageSeconds ?? clamped) * Double(s.attempts - 1) + clamped) / Double(s.attempts)
         s.lastPracticed = date
+        Tiers.update(&s, correct: correct)
         s = SpacedReview.schedule(s, correct: correct, fast: clamped <= pace * 1.5, at: date)
         return s
     }
 
     public static func level(_ s: SkillState) -> Level {
         if s.attempts == 0 && !s.provisional { return .new }
-        if s.comprehension >= sightThreshold && s.attempts >= minAttemptsForMastery { return .sight }
-        if s.comprehension >= masteryThreshold && (s.attempts >= minAttemptsForMastery || s.provisional) { return .mastered }
+        // Mastered and sight-level need the Challenge tier: the skill at full difficulty.
+        let top = Tiers.current(s) == 3
+        if top && s.comprehension >= sightThreshold && s.attempts >= minAttemptsForMastery { return .sight }
+        if top && s.comprehension >= masteryThreshold && (s.attempts >= minAttemptsForMastery || s.provisional) { return .mastered }
         if s.comprehension >= passThreshold { return .passing }
         return .learning
     }
 
     public static func isPassed(_ s: SkillState) -> Bool { s.comprehension >= passThreshold }
+
+    /// 100% mastered: sight-level (right, fast, at full difficulty).
+    public static func isFullyMastered(_ s: SkillState) -> Bool { level(s) == .sight }
 
     public enum Level: String, Codable, CaseIterable {
         case new, learning, passing, mastered, sight
@@ -77,5 +83,33 @@ public enum Comprehension {
             case .sight: return "Sight-level"
             }
         }
+    }
+}
+
+/// Every skill has three tiers: Starter, Core, Challenge (the skill at full difficulty).
+/// Two right in a row moves up a tier; two misses in a row moves down one.
+public enum Tiers {
+    public static let names = [1: "Starter", 2: "Core", 3: "Challenge"]
+
+    public static func current(_ s: SkillState) -> Int {
+        if let t = s.tier, (1...3).contains(t) { return t }
+        // Progress saved before tiers existed: place by score.
+        if s.provisional || s.comprehension >= Comprehension.masteryThreshold { return 3 }
+        if s.comprehension >= Comprehension.passThreshold { return 2 }
+        return 1
+    }
+
+    public static func update(_ s: inout SkillState, correct: Bool) {
+        var t = current(s)
+        if correct {
+            s.rightStreak = (s.rightStreak ?? 0) + 1
+            s.missStreak = 0
+            if (s.rightStreak ?? 0) >= 2 && t < 3 { t += 1; s.rightStreak = 0 }
+        } else {
+            s.missStreak = (s.missStreak ?? 0) + 1
+            s.rightStreak = 0
+            if (s.missStreak ?? 0) >= 2 && t > 1 { t -= 1; s.missStreak = 0 }
+        }
+        s.tier = t
     }
 }

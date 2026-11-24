@@ -60,6 +60,7 @@ struct StageDetailView: View {
     var body: some View {
         let profile = store.profile(profileId) ?? Profile(name: "?")
         let skills = curriculum.skills(in: stage.id)
+        let fullyMastered = skills.allSatisfy { Comprehension.isFullyMastered(profile.state($0.id, in: curriculum.id)) }
         List {
             Section {
                 NavigationLink("Practice this level") {
@@ -69,18 +70,35 @@ struct StageDetailView: View {
                 }
                 .font(.headline)
             }
-            Section("Skills") {
-                ForEach(skills) { skill in
-                    let state = profile.state(skill.id, in: curriculum.id)
-                    let level = Comprehension.level(state)
-                    NavigationLink {
-                        SkillDetailView(curriculum: curriculum, profileId: profileId, skill: skill)
-                    } label: {
-                        HStack {
-                            Circle().fill(level.color).frame(width: 10, height: 10)
-                            Text(skill.title)
-                            Spacer()
-                            Text(level.label).font(.caption).foregroundStyle(.secondary)
+            if let a = stage.approaches, !fullyMastered {
+                Section {
+                    DisclosureGroup("Three ways to teach this level") {
+                        ApproachesList(approaches: a, heading: "")
+                    }
+                }
+            }
+            ForEach(SkillGraph(curriculum).parts(of: stage.id), id: \.number) { part in
+                if !part.skills.isEmpty {
+                    Section("Part \(part.number) · \(part.name)") {
+                        ForEach(part.skills) { skill in
+                            let state = profile.state(skill.id, in: curriculum.id)
+                            let level = Comprehension.level(state)
+                            NavigationLink {
+                                SkillDetailView(curriculum: curriculum, profileId: profileId, skill: skill)
+                            } label: {
+                                HStack {
+                                    Circle().fill(level.color).frame(width: 10, height: 10)
+                                    Text(skill.title)
+                                    Spacer()
+                                    Text(level.label + (state.attempts > 0 ? " · " + (Tiers.names[Tiers.current(state)] ?? "") : ""))
+                                        .font(.caption).foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                        NavigationLink("Practice Part \(part.number)") {
+                            SessionScreen(curriculum: curriculum, profileId: profileId,
+                                          mode: .focus(skillIds: part.skills.map(\.id), reviewCount: 3),
+                                          title: "\(stage.title) · Part \(part.number)", goal: max(part.skills.count * 2, 12))
                         }
                     }
                 }
@@ -102,7 +120,9 @@ struct SkillDetailView: View {
         let state = profile.state(skill.id, in: curriculum.id)
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                LessonCard(skill: skill, curriculum: curriculum)
+                Text("\(curriculum.stage(skill.stage)?.title ?? "") · Part \(SkillGraph(curriculum).part(of: skill)): \(Part.names[SkillGraph(curriculum).part(of: skill)] ?? "")")
+                    .font(.caption).foregroundStyle(.secondary)
+                LessonCard(skill: skill, curriculum: curriculum, state: state)
                 HStack {
                     Circle().fill(Comprehension.level(state).color).frame(width: 12, height: 12)
                     Text(Comprehension.level(state).label)

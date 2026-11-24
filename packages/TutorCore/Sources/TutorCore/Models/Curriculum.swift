@@ -58,12 +58,38 @@ public struct Stage: Codable, Identifiable, Hashable {
     public let order: Int
     public let level: String?        // e.g. "Grade 1", "High school", "Graduate"
     public let description: String?
+    /// Three ways to teach this level (shown until every skill in it is fully mastered).
+    public var approaches: Approaches? = nil
+}
+
+/// Three teaching approaches, used in this order after each miss.
+public struct Approaches: Codable, Hashable {
+    /// The tutor shows it while the learner watches.
+    public let show: String
+    /// Tutor and learner do one together, taking turns.
+    public let together: String
+    /// The learner tries one alone; one hint only if stuck.
+    public let alone: String
+
+    public static let names = ["Show", "Do together", "Try alone"]
+    public static let blurbs = ["You show it while they watch.",
+                                "Do one together, taking turns.",
+                                "They try one alone; you give one hint only if stuck."]
+
+    public func text(_ index: Int) -> String { [show, together, alone][index % 3] }
+}
+
+/// The three parts of every level.
+public enum Part {
+    public static let names = [1: "Foundations", 2: "Building", 3: "Mastery"]
 }
 
 /// One teachable skill (a "topic" in the first-grade plan).
 public struct Skill: Codable, Identifiable, Hashable {
     public let id: String
     public let stage: String
+    /// Part 1 (Foundations), 2 (Building) or 3 (Mastery) of the level.
+    public var part: Int? = nil
     public let title: String
     public let summary: String
     public let prerequisites: [String]
@@ -87,6 +113,8 @@ public struct Lesson: Codable, Hashable {
     public let explanation: String
     public let example: String?
     public let tutorSteps: [String]?
+    /// Three ways to teach this skill (shown until the skill is fully mastered).
+    public var approaches: Approaches? = nil
 }
 
 public struct Practice: Codable, Hashable {
@@ -105,4 +133,6 @@ public struct Item: Codable, Hashable {
     public let answer: String?
     /// "auto" (default) or "tutor" — the tutor marks it right/wrong (reading aloud, writing).
     public let mode: String?
+    /// Difficulty: 1 Starter, 2 Core, 3 Challenge (the full skill). Nil fits any tier.
+    public var tier: Int? = nil
 }

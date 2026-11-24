@@ -45,6 +45,20 @@ public struct SkillGraph {
 
     public func skill(_ id: String) -> Skill? { index[id] }
 
+    /// The level's three parts. Uses each skill's `part`; otherwise splits the level into thirds.
+    public func parts(of stageId: String) -> [(number: Int, name: String, skills: [Skill])] {
+        let skills = ordered.filter { $0.stage == stageId }
+        func part(_ i: Int, _ s: Skill) -> Int {
+            s.part ?? min(3, i * 3 / max(skills.count, 1) + 1)
+        }
+        let numbered = skills.enumerated().map { (part($0.offset, $0.element), $0.element) }
+        return (1...3).map { n in (n, Part.names[n] ?? "", numbered.filter { $0.0 == n }.map { $0.1 }) }
+    }
+
+    public func part(of skill: Skill) -> Int {
+        parts(of: skill.stage).first { $0.skills.contains(skill) }?.number ?? 1
+    }
+
     public func isUnlocked(_ skill: Skill, states: [String: SkillState]) -> Bool {
         skill.prerequisites.allSatisfy { Comprehension.isPassed(states[$0] ?? SkillState()) }
     }

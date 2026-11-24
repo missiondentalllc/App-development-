@@ -9,6 +9,8 @@ public struct Question: Identifiable, Hashable {
     public let answer: String?
     /// True when the tutor marks the answer (reading aloud, handwriting, etc.).
     public let tutorJudged: Bool
+    /// Difficulty tier this question was made for (1 Starter, 2 Core, 3 Challenge).
+    public var tier: Int = 3
 
     public init(skillId: String, prompt: String, choices: [String]? = nil,
                 answer: String?, tutorJudged: Bool = false) {

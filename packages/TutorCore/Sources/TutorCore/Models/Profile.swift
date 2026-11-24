@@ -51,6 +51,10 @@ public struct SkillState: Codable, Hashable {
     public var reviewBox: Int = 0
     public var nextReview: Date?
     public var averageSeconds: Double?
+    /// Difficulty tier: 1 Starter, 2 Core, 3 Challenge. Nil for progress saved before tiers existed.
+    public var tier: Int?
+    public var rightStreak: Int?
+    public var missStreak: Int?
 
     public init() {}
 

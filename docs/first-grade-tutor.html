@@ -157,6 +157,15 @@ textarea.field { font-size: 0.8rem; font-family: ui-monospace, Menlo, monospace;
 .example { background: var(--paper); border-left: 3px solid var(--pencil); padding: 8px 12px; border-radius: 0 8px 8px 0; }
 .label { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .subj { color: var(--accent); }
+.approaches { display: flex; flex-direction: column; gap: 8px; }
+.approaches h4:empty { display: none; }
+.approaches ol { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 10px; }
+.approach-now { background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+.stage-approaches summary { cursor: pointer; min-height: 28px; }
+.stage-approaches[open] summary { margin-bottom: 10px; }
+.parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.part { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.part .small:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .terms { margin: 0; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 10px; background: var(--surface);
   display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; text-align: left; align-self: stretch; }
 .terms div { display: flex; gap: 8px; }
@@ -240,17 +249,23 @@ const Comprehension = {
     if (correct) s.correct += 1;
     s.averageSeconds = ((s.averageSeconds ?? clamped) * (s.attempts - 1) + clamped) / s.attempts;
     s.lastPracticed = now;
+    Tiers.update(s, correct);
     return SpacedReview.schedule(s, correct, clamped <= pace * 1.5, now);
   },
 
   level(s) {
     s = s || newSkillState();
     if (s.attempts === 0 && !s.provisional) return "new";
-    if (s.comprehension >= this.sightThreshold && s.attempts >= this.minAttemptsForMastery) return "sight";
-    if (s.comprehension >= this.masteryThreshold && (s.attempts >= this.minAttemptsForMastery || s.provisional)) return "mastered";
+    // Mastered and sight-level need the Challenge tier: the skill at full difficulty.
+    const top = Tiers.current(s) === 3;
+    if (top && s.comprehension >= this.sightThreshold && s.attempts >= this.minAttemptsForMastery) return "sight";
+    if (top && s.comprehension >= this.masteryThreshold && (s.attempts >= this.minAttemptsForMastery || s.provisional)) return "mastered";
     if (s.comprehension >= this.passThreshold) return "passing";
     return "learning";
   },
+
+  /** 100% mastered: sight-level (right, fast, at full difficulty). */
+  isFullyMastered(s) { return this.level(s) === "sight"; },
 
   isPassed(s) { return (s?.comprehension ?? 0) >= this.passThreshold; },
 
@@ -259,8 +274,44 @@ const Comprehension = {
 
 function newSkillState() {
   return { attempts: 0, correct: 0, comprehension: 0, provisional: false,
-           lastPracticed: null, reviewBox: 0, nextReview: null, averageSeconds: null };
+           lastPracticed: null, reviewBox: 0, nextReview: null, averageSeconds: null,
+           tier: 1, rightStreak: 0, missStreak: 0 };
 }
+
+// ---------- Difficulty tiers ----------
+// Every skill has three tiers: Starter, Core, Challenge (the skill at full difficulty).
+// Two right in a row moves up a tier; two misses in a row moves down one.
+const Tiers = {
+  names: { 1: "Starter", 2: "Core", 3: "Challenge" },
+  current(s) {
+    if (!s) return 1;
+    if (s.tier >= 1 && s.tier <= 3) return s.tier;
+    // Progress saved before tiers existed: place by score.
+    if (s.provisional) return 3;
+    if (s.comprehension >= Comprehension.masteryThreshold) return 3;
+    if (s.comprehension >= Comprehension.passThreshold) return 2;
+    return 1;
+  },
+  update(s, correct) {
+    let t = this.current(s);
+    if (correct) {
+      s.rightStreak = (s.rightStreak || 0) + 1; s.missStreak = 0;
+      if (s.rightStreak >= 2 && t < 3) { t += 1; s.rightStreak = 0; }
+    } else {
+      s.missStreak = (s.missStreak || 0) + 1; s.rightStreak = 0;
+      if (s.missStreak >= 2 && t > 1) { t -= 1; s.missStreak = 0; }
+    }
+    s.tier = t;
+  },
+};
+
+// ---------- Parts of a level and teaching approaches ----------
+const PartNames = { 1: "Foundations", 2: "Building", 3: "Mastery" };
+const Approaches = [
+  { key: "show", name: "Show", blurb: "You show it while they watch." },
+  { key: "together", name: "Do together", blurb: "Do one together, taking turns." },
+  { key: "alone", name: "Try alone", blurb: "They try one alone; you give one hint only if stuck." },
+];
 
 // ---------- Spaced review ----------
 const SpacedReview = {
@@ -332,6 +383,15 @@ class SkillGraph {
   skill(id) { return this.index[id]; }
   stage(id) { return this.curriculum.stages.find(s => s.id === id); }
   skillsIn(stageId) { return this.curriculum.skills.filter(s => s.stage === stageId); }
+  /** The level's three parts. Uses each skill's "part"; otherwise splits the level into thirds. */
+  partsOf(stageId) {
+    const skills = this.ordered.filter(s => s.stage === stageId);
+    const partOf = (s, i) => s.part || Math.min(3, Math.floor((i * 3) / Math.max(skills.length, 1)) + 1);
+    return [1, 2, 3].map(n => ({ n, name: PartNames[n], skills: skills.filter((s, i) => partOf(s, i) === n) }));
+  }
+  partOfSkill(skill) {
+    return this.partsOf(skill.stage).find(p => p.skills.includes(skill))?.n || 1;
+  }
   isUnlocked(skill, states) {
     return (skill.prerequisites || []).every(p => Comprehension.isPassed(states[p]));
   }
@@ -444,6 +504,7 @@ class Diagnostic {
         if (s.attempts !== 0) continue;
         s.comprehension = Comprehension.masteryThreshold;
         s.provisional = true;
+        s.tier = 3;
         out[skill.id] = s;
       }
     }
@@ -529,7 +590,33 @@ const G = {
   mod(a, n) { return ((a % n) + n) % n; },
 };
 
-function makeGenerated(key, params, skillId) {
+// Size settings each generator uses, with its defaults. Starter and Core shrink these;
+// Challenge uses the skill's own settings (the full skill).
+const GeneratorSizes = {
+  count: { max: 20 }, countBy: { max: 100 }, numberAfter: { max: 120 }, compare: { max: 100 },
+  placeValue: { digits: 2 }, tenMore: { max: 100 }, evenOdd: { max: 50 }, roundTen: { max: 100 },
+  add: { max: 10 }, add3: { max: 9 }, sub: { max: 10 }, missingAddend: { max: 10 }, doubles: { max: 10 },
+  factFamily: { max: 10 }, wordAdd: { max: 10 }, mul: { max: 10 }, div: { max: 10 }, fractionOf: { maxDen: 10 },
+  fractionAdd: { maxDen: 12 }, integerAdd: { max: 20 }, integerMul: { max: 12 }, exponent: { maxBase: 6 },
+  sqrt: { max: 15 }, linearEq: { max: 10 }, binomial: { max: 10 }, mod: { max: 13 },
+};
+
+function tierParams(key, params, tier) {
+  const out = { ...(params || {}) };
+  if (tier >= 3) return out;
+  const sizes = GeneratorSizes[key] || {};
+  for (const [name, fallback] of Object.entries(sizes)) {
+    const full = out[name] ?? fallback;
+    if (name === "digits") { out.digits = Math.max(2, full - (3 - tier)); continue; }
+    let floor = name === "max" ? 3 : 2;
+    if (key === "countBy") floor = Math.max(floor, (out.step || 1) * 4);
+    if (out.min != null) floor = Math.max(floor, out.min + 1);
+    out[name] = Math.min(full, Math.max(floor, Math.round(full * (tier === 1 ? 0.4 : 0.7))));
+  }
+  return out;
+}
+
+function makeGenerated(key, params, skillId, tier = 3) {
   const d = Dice;
   const p = (name, fb) => (params && params[name] != null ? params[name] : fb);
   const q = (prompt, answer) => ({ skillId, prompt, answer: String(answer) });
@@ -595,7 +682,8 @@ function makeGenerated(key, params, skillId) {
       return q(`Sam has ${a + b} ${thing}. Sam gives away ${b}. How many ${thing} are left?`, a);
     }
     case "money": {
-      const qu = d.int(0, 3), di = d.int(0, 4), ni = d.int(0, 3), pe = d.int(0, 4);
+      // Starter: dimes and pennies only. Core adds nickels. Challenge adds quarters.
+      const qu = tier >= 3 ? d.int(0, 3) : 0, di = d.int(0, 4), ni = tier >= 2 ? d.int(0, 3) : 0, pe = d.int(0, 4);
       const coins = [[qu, "quarter", "quarters"], [di, "dime", "dimes"], [ni, "nickel", "nickels"], [pe, "penny", "pennies"]];
       const parts = coins.filter(c => c[0] > 0).map(c => (c[0] === 1 ? `1 ${c[1]}` : `${c[0]} ${c[2]}`));
       if (!parts.length) return q("How many cents is 1 dime?", 10);
@@ -603,7 +691,7 @@ function makeGenerated(key, params, skillId) {
     }
     case "time": {
       const h = d.int(1, 12);
-      if (d.bool()) return q(`The short hand points to ${h}. The long hand points to 12. What time is it?`, `${h}:00`);
+      if (tier === 1 || d.bool()) return q(`The short hand points to ${h}. The long hand points to 12. What time is it?`, `${h}:00`);
       const nh = h === 12 ? 1 : h + 1;
       return q(`The short hand is between ${h} and ${nh}. The long hand points to 6. What time is it?`, `${h}:30`);
     }
@@ -654,7 +742,7 @@ function makeGenerated(key, params, skillId) {
 
     // Statistics and probability
     case "mean": {
-      const n = d.int(3, 5);
+      const n = tier === 1 ? 3 : d.int(3, 5);
       const values = Array.from({ length: n - 1 }, () => d.int(1, 20));
       const target = d.int(5, 15);
       values.push(target * n - values.reduce((a, b) => a + b, 0));
@@ -662,7 +750,7 @@ function makeGenerated(key, params, skillId) {
       return q(`What is the mean of ${d.shuffled(values).join(", ")}?`, target);
     }
     case "median": {
-      const values = Array.from({ length: 2 * d.int(1, 3) + 1 }, () => d.int(1, 50));
+      const values = Array.from({ length: tier === 1 ? 3 : 2 * d.int(1, 3) + 1 }, () => d.int(1, 50));
       return q(`What is the median of ${values.join(", ")}?`, [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)]);
     }
     case "probabilityDie": { const k = d.int(1, 5); return q(`A fair die is rolled. What is the probability of rolling a number greater than ${k}? (fraction)`, `${6 - k}/6`); }
@@ -713,13 +801,20 @@ function makeGenerated(key, params, skillId) {
 // ---------- Question factory ----------
 class QuestionFactory {
   constructor() { this.recent = {}; }
-  question(skill) {
+  question(skill, tier = 3) {
     if (skill.practice?.generator) {
-      const g = makeGenerated(skill.practice.generator, skill.practice.params || {}, skill.id);
-      if (g) return g;
+      const key = skill.practice.generator;
+      const g = makeGenerated(key, tierParams(key, skill.practice.params, tier), skill.id, tier);
+      if (g) return { ...g, tier };
     }
-    const items = skill.practice?.items || [];
-    if (!items.length) return null;
+    const all = skill.practice?.items || [];
+    if (!all.length) return null;
+    // Items for this tier; if none, the closest tier (easier first). Untagged items fit any tier.
+    let items = [];
+    for (const t of [tier, tier - 1, tier + 1, tier - 2, tier + 2]) {
+      items = all.filter(i => i.tier == null || i.tier === t);
+      if (items.length) break;
+    }
     const recent = this.recent[skill.id] || [];
     const fresh = items.filter(i => !recent.includes(i.prompt));
     const item = Dice.pick(fresh.length ? fresh : items);
@@ -732,6 +827,7 @@ class QuestionFactory {
       choices: item.choices ? Dice.shuffled(item.choices) : null,
       answer: item.answer ?? null,
       tutorJudged: item.mode === "tutor",
+      tier,
     };
   }
 }
@@ -808,6 +904,7 @@ function studySecondsOn(profile, day = new Date()) {
 
 // ---------- Practice session ----------
 // mode: {type:"adaptive"} | {type:"focus", skillIds, reviewCount} | {type:"diagnostic"}
+// The placement test asks Challenge questions; practice asks at the learner's tier.
 class PracticeSession {
   constructor(curriculum, graph, profile, mode, goal = 20) {
     this.curriculum = curriculum;
@@ -834,6 +931,8 @@ class PracticeSession {
     this.session = { id: uuid(), curriculumId: curriculum.id, startedAt: Date.now(), endedAt: null, activeSeconds: 0, attempts: [] };
     this.question = null;
     this.currentSkill = null;
+    this.missesBySkill = {};
+    this.approach = null;
     this.reason = "advance";
     this.feedback = null;
     this.lessonToShow = null;
@@ -861,7 +960,7 @@ class PracticeSession {
     if (!this.question || this.feedback || this.isPaused) return;
     this.record("(time up)", false, Comprehension.questionCapSeconds);
   }
-  next() { this.feedback = null; this.lessonToShow = null; this.advance(); }
+  next() { this.feedback = null; this.lessonToShow = null; this.approach = null; this.advance(); }
 
   pause() {
     if (this.isPaused || this.finished) return;
@@ -914,13 +1013,19 @@ class PracticeSession {
     if (isCorrect) this.correct += 1;
     const pace = skill.sightPaceSeconds ?? Comprehension.defaultSightPace;
     this.feedback = { correct: isCorrect, expected: q.tutorJudged ? null : q.answer, seconds: secs, sightPace: isCorrect && secs <= pace };
-    if (!isCorrect && !this.diagnostic) this.lessonToShow = skill;
+    if (!isCorrect && !this.diagnostic) {
+      this.lessonToShow = skill;
+      // Each miss on a skill brings the next teaching approach: Show, Do together, Try alone.
+      const n = (this.missesBySkill[skill.id] = (this.missesBySkill[skill.id] || 0) + 1);
+      this.approach = { index: (n - 1) % 3, ...Approaches[(n - 1) % 3] };
+    }
     this.persist();
   }
 
   advance() {
     const skill = this.nextSkill();
-    const q = skill ? this.factory.question(skill) : null;
+    const tier = !skill ? 1 : this.diagnostic ? 3 : Tiers.current(stateOf(this.profile, this.curriculum.id, skill.id));
+    const q = skill ? this.factory.question(skill, tier) : null;
     if (!skill || !q) { this.end(); return; }
     this.currentSkill = skill;
     this.question = q;
@@ -971,7 +1076,7 @@ class PracticeSession {
 
 if (typeof module !== "undefined") {
   module.exports = { Comprehension, SpacedReview, SkillGraph, SkillPicker, Diagnostic, AnswerChecker,
-    makeGenerated, QuestionFactory, shortFormsIn, PracticeSession, ProfileStore, hasPractice, newSkillState, ReasonLabel };
+    makeGenerated, tierParams, QuestionFactory, shortFormsIn, Tiers, PartNames, Approaches, PracticeSession, ProfileStore, hasPractice, newSkillState, ReasonLabel };
 }
 
 </script>
@@ -1067,7 +1172,33 @@ function bar(title, opts = {}) {
 function dot(level) { return `<span class="dot lv-${level}" aria-hidden="true"></span>`; }
 function levelChip(s) {
   const l = Comprehension.level(s);
-  return `<span class="chip lv-${l}">${dot(l)}${Comprehension.levelLabel[l]}${s.attempts > 0 || s.provisional ? ` · ${pct(s.comprehension)}` : ""}${s.provisional ? " (placement)" : ""}</span>`;
+  const tier = s.attempts > 0 ? ` · ${Tiers.names[Tiers.current(s)]} tier` : "";
+  return `<span class="chip lv-${l}">${dot(l)}${Comprehension.levelLabel[l]}${s.attempts > 0 || s.provisional ? ` · ${pct(s.comprehension)}` : ""}${tier}${s.provisional ? " (placement)" : ""}</span>`;
+}
+
+// The three teaching approaches, in order: Show, Do together, Try alone.
+function approachesList(a, heading) {
+  if (!a) return "";
+  return `<section class="approaches"><h4>${esc(heading)}</h4><ol>${Approaches.map(x => a[x.key] ? `<li><strong>${x.name}.</strong> <span class="muted small">${x.blurb}</span><br>${esc(a[x.key])}</li>` : "").join("")}</ol></section>`;
+}
+
+function stageFullyMastered(stageId) {
+  const st = states();
+  return App.graph.skillsIn(stageId).every(s => Comprehension.isFullyMastered(st[s.id]));
+}
+
+function stageApproaches(stage) {
+  if (!stage.approaches || stageFullyMastered(stage.id)) return "";
+  return `<details class="card pad stage-approaches"><summary><strong>Three ways to teach this level</strong></summary>
+    ${approachesList(stage.approaches, "")}</details>`;
+}
+
+function partProgress(stageId) {
+  const st = states();
+  return `<div class="parts">${App.graph.partsOf(stageId).map(p => {
+    const m = p.skills.filter(s => ["mastered", "sight"].includes(Comprehension.level(st[s.id]))).length;
+    return `<div class="part"><span class="small"><strong>Part ${p.n}</strong> ${p.name}</span>${meter(m, Math.max(p.skills.length, 1))}<span class="small muted num">${m}/${p.skills.length}</span></div>`;
+  }).join("")}</div>`;
 }
 function meter(value, total) {
   const w = total > 0 ? Math.min(100, Math.max(0, (value / total) * 100)) : 0;
@@ -1088,7 +1219,7 @@ function termsBox(texts) {
     `<div><dt>${esc(g.term)}</dt><dd>${esc(g.meaning)}</dd></div>`).join("")}</dl>`;
 }
 
-function lessonCard(skill, compact = false, extraTexts = []) {
+function lessonCard(skill, compact = false, extraTexts = [], approach = null) {
   const L = skill.lesson || {};
   let html = `<article class="lesson ${compact ? "compact" : ""}"><h3>${esc(skill.title)}</h3><p>${esc(L.explanation)}</p>`;
   if (L.example) html += `<p class="example"><span class="label">Example</span>${esc(L.example)}</p>`;
@@ -1096,8 +1227,18 @@ function lessonCard(skill, compact = false, extraTexts = []) {
     html += `<h4>Tutor steps</h4><ol>${L.tutorSteps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>`;
   }
   if (!compact && skill.reinforcement) html += `<p class="muted small">Keep it fresh: ${esc(skill.reinforcement)}</p>`;
+  const a = L.approaches;
+  const extra = [];
+  if (compact && approach && a?.[approach.key]) {
+    html += `<div class="approach-now"><span class="label">New way to teach it · ${approach.index + 1} of 3</span>
+      <p><strong>${approach.name}.</strong> ${esc(a[approach.key])}</p></div>`;
+    extra.push(a[approach.key]);
+  } else if (!compact && a && !Comprehension.isFullyMastered(stateOf(profile(), App.curriculum.id, skill.id))) {
+    html += approachesList(a, "Three ways to teach this");
+    extra.push(...Approaches.map(x => a[x.key]));
+  }
   const texts = compact ? [skill.title, L.explanation, L.example] : skillTexts(skill);
-  return html + termsBox([...texts, ...extraTexts]) + `</article>`;
+  return html + termsBox([...texts, ...extra, ...extraTexts]) + `</article>`;
 }
 
 function masteredCount() {
@@ -1177,7 +1318,7 @@ function viewHomeFG() {
   if (skill) {
     const s = stateOf(p, App.curriculum.id, skill.id);
     html += `<section class="today">
-      <p class="eyebrow">Day ${day} of ${total} · <span class="subj subj-${esc((skill.subject || "").replace(/\s+/g, "-").toLowerCase())}">${esc(skill.subject || "")}</span></p>
+      <p class="eyebrow">Day ${day} of ${total} · <span class="subj">${esc(skill.subject || "")}</span> · Part ${App.graph.partOfSkill(skill)}: ${PartNames[App.graph.partOfSkill(skill)]}</p>
       <h2 class="display">${esc(skill.title)}</h2>
       <p>${esc(skill.summary)}</p>
       ${levelChip(s)}
@@ -1185,6 +1326,10 @@ function viewHomeFG() {
     </section>`;
   } else {
     html += `<section class="today"><h2 class="display">All ${total} days complete!</h2></section>`;
+  }
+  if (skill) {
+    const stage = App.graph.stage(skill.stage);
+    html += `<section class="card pad stack-sm"><h3>This level: ${esc(stage.title)}</h3>${partProgress(stage.id)}</section>${stageApproaches(stage)}`;
   }
   html += `<section class="card pad stack-sm"><h3>Tutor controls</h3>
     <div class="stepper"><button class="btn" data-action="day" data-delta="-1" ${day <= 1 ? "disabled" : ""} aria-label="Previous day">−</button>
@@ -1287,7 +1432,7 @@ function viewStages() {
       html += `<button class="stage-row" data-action="stage" data-id="${esc(stage.id)}">
         <span class="stage-top"><strong>${esc(stage.title)}</strong><span class="num muted">${passed}/${skills.length}</span></span>
         ${stage.description ? `<span class="small muted">${esc(stage.description)}</span>` : ""}
-        ${meter(passed, Math.max(skills.length, 1))}</button>`;
+        ${partProgress(stage.id)}</button>`;
     }
     html += `</div></section>`;
   }
@@ -1296,22 +1441,30 @@ function viewStages() {
 
 function viewStage(cur) {
   const stage = App.graph.stage(cur.id), st = states();
-  const skills = App.graph.skillsIn(stage.id);
   let html = bar(stage.title) + `<main class="wrap stack">
     ${stage.description ? `<p class="muted">${esc(stage.description)}</p>` : ""}
     <button class="btn primary big" data-action="stage-practice" data-id="${esc(stage.id)}">Practice this level</button>
-    <div class="card list">`;
-  for (const s of skills) {
-    const l = Comprehension.level(st[s.id]);
-    html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${esc(s.title)}</span><span class="small muted">${Comprehension.levelLabel[l]}</span></button>`;
+    ${stageApproaches(stage)}`;
+  for (const part of App.graph.partsOf(stage.id)) {
+    if (!part.skills.length) continue;
+    const m = part.skills.filter(s => ["mastered", "sight"].includes(Comprehension.level(st[s.id]))).length;
+    html += `<section><h3 class="section-h"><span>Part ${part.n} · ${part.name}</span><span class="num small">${m}/${part.skills.length} mastered</span></h3><div class="card list">`;
+    for (const s of part.skills) {
+      const x = st[s.id], l = Comprehension.level(x);
+      const tier = x?.attempts ? ` · ${Tiers.names[Tiers.current(x)]}` : "";
+      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${esc(s.title)}</span><span class="small muted">${Comprehension.levelLabel[l]}${tier}</span></button>`;
+    }
+    html += `</div><button class="btn ghost small" data-action="stage-practice" data-id="${esc(stage.id)}" data-part="${part.n}">Practice Part ${part.n}</button></section>`;
   }
-  return html + `</div></main>`;
+  return html + `</main>`;
 }
 
 function viewSkill(cur) {
   const skill = App.graph.skill(cur.id), s = stateOf(profile(), App.curriculum.id, skill.id);
   const prereqs = (skill.prerequisites || []).map(id => App.graph.skill(id)).filter(Boolean);
-  let html = bar(skill.title) + `<main class="wrap stack">${lessonCard(skill)}
+  const stage = App.graph.stage(skill.stage), part = App.graph.partOfSkill(skill);
+  let html = bar(skill.title) + `<main class="wrap stack">
+    <p class="eyebrow">${esc(stage.title)} · Part ${part}: ${PartNames[part]}</p>${lessonCard(skill)}
     <div>${levelChip(s)}${s.attempts ? ` <span class="small muted">${s.attempts} answered</span>` : ""}</div>`;
   if (prereqs.length) {
     html += `<section class="card pad stack-sm"><h3>Builds on</h3>${prereqs.map(p => `<button class="link-row" data-action="skill" data-id="${esc(p.id)}">${dot(Comprehension.level(states()[p.id]))}<span class="grow">${esc(p.title)}</span><span class="muted">›</span></button>`).join("")}</section>`;
@@ -1365,7 +1518,7 @@ function viewSession(cur) {
   html += `<main class="wrap practice">`;
   if (!s.finished) {
     html += `<div class="practice-head"><div><strong>${esc(s.currentSkill?.title || "")}</strong>
-      <span class="small muted block">${ReasonLabel[s.reason]}</span></div>
+      <span class="small muted block">${ReasonLabel[s.reason]}${s.question?.tier && !s.diagnostic ? ` · ${Tiers.names[s.question.tier]} tier` : ""}</span></div>
       <span class="num count">${Math.min(s.answered + (s.feedback ? 0 : 1), Math.max(s.goal, 1))}/${s.goal}</span>
       <button class="btn small ghost" data-action="end">End</button></div>`;
   }
@@ -1412,7 +1565,7 @@ function feedbackView(s) {
     <h2 class="display">${fb.correct ? (fb.sightPace ? "Right, at sight pace!" : "Right!") : "Not quite"}</h2>
     ${!fb.correct && fb.expected ? `<p class="answer-reveal">Answer: <strong>${esc(fb.expected)}</strong></p>` : ""}
     <p class="muted num">${fb.seconds.toFixed(1)} seconds</p>
-    ${s.lessonToShow ? lessonCard(s.lessonToShow, true, [s.question?.prompt, fb.expected])
+    ${s.lessonToShow ? lessonCard(s.lessonToShow, true, [s.question?.prompt, fb.expected], s.approach)
                      : termsBox([s.question?.prompt, fb.expected])}
     <button class="btn primary big" data-action="next" id="next-btn">${s.lessonToShow ? "Got it, try another" : "Next"}</button>
   </section>`;
@@ -1499,8 +1652,11 @@ function onClick(e) {
     case "stage": return go("stage", { id });
     case "skill": return go("skill", { id });
     case "stage-practice": {
-      const ids = App.graph.skillsIn(id).map(x => x.id);
-      return startSession({ type: "focus", skillIds: ids, reviewCount: 3 }, Math.max(ids.length * 2, 12), App.graph.stage(id).title);
+      const part = Number(el.dataset.part) || 0;
+      const skills = part ? App.graph.partsOf(id)[part - 1].skills : App.graph.skillsIn(id);
+      const ids = skills.map(x => x.id);
+      const title = App.graph.stage(id).title + (part ? ` · Part ${part}` : "");
+      return startSession({ type: "focus", skillIds: ids, reviewCount: 3 }, Math.max(ids.length * 2, 12), title);
     }
     case "skill-practice": return startSession({ type: "focus", skillIds: [id], reviewCount: 2 }, 10, App.graph.skill(id).title);
 

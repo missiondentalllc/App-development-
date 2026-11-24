@@ -39,17 +39,23 @@ const Comprehension = {
     if (correct) s.correct += 1;
     s.averageSeconds = ((s.averageSeconds ?? clamped) * (s.attempts - 1) + clamped) / s.attempts;
     s.lastPracticed = now;
+    Tiers.update(s, correct);
     return SpacedReview.schedule(s, correct, clamped <= pace * 1.5, now);
   },
 
   level(s) {
     s = s || newSkillState();
     if (s.attempts === 0 && !s.provisional) return "new";
-    if (s.comprehension >= this.sightThreshold && s.attempts >= this.minAttemptsForMastery) return "sight";
-    if (s.comprehension >= this.masteryThreshold && (s.attempts >= this.minAttemptsForMastery || s.provisional)) return "mastered";
+    // Mastered and sight-level need the Challenge tier: the skill at full difficulty.
+    const top = Tiers.current(s) === 3;
+    if (top && s.comprehension >= this.sightThreshold && s.attempts >= this.minAttemptsForMastery) return "sight";
+    if (top && s.comprehension >= this.masteryThreshold && (s.attempts >= this.minAttemptsForMastery || s.provisional)) return "mastered";
     if (s.comprehension >= this.passThreshold) return "passing";
     return "learning";
   },
+
+  /** 100% mastered: sight-level (right, fast, at full difficulty). */
+  isFullyMastered(s) { return this.level(s) === "sight"; },
 
   isPassed(s) { return (s?.comprehension ?? 0) >= this.passThreshold; },
 
@@ -58,8 +64,44 @@ const Comprehension = {
 
 function newSkillState() {
   return { attempts: 0, correct: 0, comprehension: 0, provisional: false,
-           lastPracticed: null, reviewBox: 0, nextReview: null, averageSeconds: null };
+           lastPracticed: null, reviewBox: 0, nextReview: null, averageSeconds: null,
+           tier: 1, rightStreak: 0, missStreak: 0 };
 }
+
+// ---------- Difficulty tiers ----------
+// Every skill has three tiers: Starter, Core, Challenge (the skill at full difficulty).
+// Two right in a row moves up a tier; two misses in a row moves down one.
+const Tiers = {
+  names: { 1: "Starter", 2: "Core", 3: "Challenge" },
+  current(s) {
+    if (!s) return 1;
+    if (s.tier >= 1 && s.tier <= 3) return s.tier;
+    // Progress saved before tiers existed: place by score.
+    if (s.provisional) return 3;
+    if (s.comprehension >= Comprehension.masteryThreshold) return 3;
+    if (s.comprehension >= Comprehension.passThreshold) return 2;
+    return 1;
+  },
+  update(s, correct) {
+    let t = this.current(s);
+    if (correct) {
+      s.rightStreak = (s.rightStreak || 0) + 1; s.missStreak = 0;
+      if (s.rightStreak >= 2 && t < 3) { t += 1; s.rightStreak = 0; }
+    } else {
+      s.missStreak = (s.missStreak || 0) + 1; s.rightStreak = 0;
+      if (s.missStreak >= 2 && t > 1) { t -= 1; s.missStreak = 0; }
+    }
+    s.tier = t;
+  },
+};
+
+// ---------- Parts of a level and teaching approaches ----------
+const PartNames = { 1: "Foundations", 2: "Building", 3: "Mastery" };
+const Approaches = [
+  { key: "show", name: "Show", blurb: "You show it while they watch." },
+  { key: "together", name: "Do together", blurb: "Do one together, taking turns." },
+  { key: "alone", name: "Try alone", blurb: "They try one alone; you give one hint only if stuck." },
+];
 
 // ---------- Spaced review ----------
 const SpacedReview = {
@@ -131,6 +173,15 @@ class SkillGraph {
   skill(id) { return this.index[id]; }
   stage(id) { return this.curriculum.stages.find(s => s.id === id); }
   skillsIn(stageId) { return this.curriculum.skills.filter(s => s.stage === stageId); }
+  /** The level's three parts. Uses each skill's "part"; otherwise splits the level into thirds. */
+  partsOf(stageId) {
+    const skills = this.ordered.filter(s => s.stage === stageId);
+    const partOf = (s, i) => s.part || Math.min(3, Math.floor((i * 3) / Math.max(skills.length, 1)) + 1);
+    return [1, 2, 3].map(n => ({ n, name: PartNames[n], skills: skills.filter((s, i) => partOf(s, i) === n) }));
+  }
+  partOfSkill(skill) {
+    return this.partsOf(skill.stage).find(p => p.skills.includes(skill))?.n || 1;
+  }
   isUnlocked(skill, states) {
     return (skill.prerequisites || []).every(p => Comprehension.isPassed(states[p]));
   }
@@ -243,6 +294,7 @@ class Diagnostic {
         if (s.attempts !== 0) continue;
         s.comprehension = Comprehension.masteryThreshold;
         s.provisional = true;
+        s.tier = 3;
         out[skill.id] = s;
       }
     }
@@ -328,7 +380,33 @@ const G = {
   mod(a, n) { return ((a % n) + n) % n; },
 };
 
-function makeGenerated(key, params, skillId) {
+// Size settings each generator uses, with its defaults. Starter and Core shrink these;
+// Challenge uses the skill's own settings (the full skill).
+const GeneratorSizes = {
+  count: { max: 20 }, countBy: { max: 100 }, numberAfter: { max: 120 }, compare: { max: 100 },
+  placeValue: { digits: 2 }, tenMore: { max: 100 }, evenOdd: { max: 50 }, roundTen: { max: 100 },
+  add: { max: 10 }, add3: { max: 9 }, sub: { max: 10 }, missingAddend: { max: 10 }, doubles: { max: 10 },
+  factFamily: { max: 10 }, wordAdd: { max: 10 }, mul: { max: 10 }, div: { max: 10 }, fractionOf: { maxDen: 10 },
+  fractionAdd: { maxDen: 12 }, integerAdd: { max: 20 }, integerMul: { max: 12 }, exponent: { maxBase: 6 },
+  sqrt: { max: 15 }, linearEq: { max: 10 }, binomial: { max: 10 }, mod: { max: 13 },
+};
+
+function tierParams(key, params, tier) {
+  const out = { ...(params || {}) };
+  if (tier >= 3) return out;
+  const sizes = GeneratorSizes[key] || {};
+  for (const [name, fallback] of Object.entries(sizes)) {
+    const full = out[name] ?? fallback;
+    if (name === "digits") { out.digits = Math.max(2, full - (3 - tier)); continue; }
+    let floor = name === "max" ? 3 : 2;
+    if (key === "countBy") floor = Math.max(floor, (out.step || 1) * 4);
+    if (out.min != null) floor = Math.max(floor, out.min + 1);
+    out[name] = Math.min(full, Math.max(floor, Math.round(full * (tier === 1 ? 0.4 : 0.7))));
+  }
+  return out;
+}
+
+function makeGenerated(key, params, skillId, tier = 3) {
   const d = Dice;
   const p = (name, fb) => (params && params[name] != null ? params[name] : fb);
   const q = (prompt, answer) => ({ skillId, prompt, answer: String(answer) });
@@ -394,7 +472,8 @@ function makeGenerated(key, params, skillId) {
       return q(`Sam has ${a + b} ${thing}. Sam gives away ${b}. How many ${thing} are left?`, a);
     }
     case "money": {
-      const qu = d.int(0, 3), di = d.int(0, 4), ni = d.int(0, 3), pe = d.int(0, 4);
+      // Starter: dimes and pennies only. Core adds nickels. Challenge adds quarters.
+      const qu = tier >= 3 ? d.int(0, 3) : 0, di = d.int(0, 4), ni = tier >= 2 ? d.int(0, 3) : 0, pe = d.int(0, 4);
       const coins = [[qu, "quarter", "quarters"], [di, "dime", "dimes"], [ni, "nickel", "nickels"], [pe, "penny", "pennies"]];
       const parts = coins.filter(c => c[0] > 0).map(c => (c[0] === 1 ? `1 ${c[1]}` : `${c[0]} ${c[2]}`));
       if (!parts.length) return q("How many cents is 1 dime?", 10);
@@ -402,7 +481,7 @@ function makeGenerated(key, params, skillId) {
     }
     case "time": {
       const h = d.int(1, 12);
-      if (d.bool()) return q(`The short hand points to ${h}. The long hand points to 12. What time is it?`, `${h}:00`);
+      if (tier === 1 || d.bool()) return q(`The short hand points to ${h}. The long hand points to 12. What time is it?`, `${h}:00`);
       const nh = h === 12 ? 1 : h + 1;
       return q(`The short hand is between ${h} and ${nh}. The long hand points to 6. What time is it?`, `${h}:30`);
     }
@@ -453,7 +532,7 @@ function makeGenerated(key, params, skillId) {
 
     // Statistics and probability
     case "mean": {
-      const n = d.int(3, 5);
+      const n = tier === 1 ? 3 : d.int(3, 5);
       const values = Array.from({ length: n - 1 }, () => d.int(1, 20));
       const target = d.int(5, 15);
       values.push(target * n - values.reduce((a, b) => a + b, 0));
@@ -461,7 +540,7 @@ function makeGenerated(key, params, skillId) {
       return q(`What is the mean of ${d.shuffled(values).join(", ")}?`, target);
     }
     case "median": {
-      const values = Array.from({ length: 2 * d.int(1, 3) + 1 }, () => d.int(1, 50));
+      const values = Array.from({ length: tier === 1 ? 3 : 2 * d.int(1, 3) + 1 }, () => d.int(1, 50));
       return q(`What is the median of ${values.join(", ")}?`, [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)]);
     }
     case "probabilityDie": { const k = d.int(1, 5); return q(`A fair die is rolled. What is the probability of rolling a number greater than ${k}? (fraction)`, `${6 - k}/6`); }
@@ -512,13 +591,20 @@ function makeGenerated(key, params, skillId) {
 // ---------- Question factory ----------
 class QuestionFactory {
   constructor() { this.recent = {}; }
-  question(skill) {
+  question(skill, tier = 3) {
     if (skill.practice?.generator) {
-      const g = makeGenerated(skill.practice.generator, skill.practice.params || {}, skill.id);
-      if (g) return g;
+      const key = skill.practice.generator;
+      const g = makeGenerated(key, tierParams(key, skill.practice.params, tier), skill.id, tier);
+      if (g) return { ...g, tier };
     }
-    const items = skill.practice?.items || [];
-    if (!items.length) return null;
+    const all = skill.practice?.items || [];
+    if (!all.length) return null;
+    // Items for this tier; if none, the closest tier (easier first). Untagged items fit any tier.
+    let items = [];
+    for (const t of [tier, tier - 1, tier + 1, tier - 2, tier + 2]) {
+      items = all.filter(i => i.tier == null || i.tier === t);
+      if (items.length) break;
+    }
     const recent = this.recent[skill.id] || [];
     const fresh = items.filter(i => !recent.includes(i.prompt));
     const item = Dice.pick(fresh.length ? fresh : items);
@@ -531,6 +617,7 @@ class QuestionFactory {
       choices: item.choices ? Dice.shuffled(item.choices) : null,
       answer: item.answer ?? null,
       tutorJudged: item.mode === "tutor",
+      tier,
     };
   }
 }
@@ -607,6 +694,7 @@ function studySecondsOn(profile, day = new Date()) {
 
 // ---------- Practice session ----------
 // mode: {type:"adaptive"} | {type:"focus", skillIds, reviewCount} | {type:"diagnostic"}
+// The placement test asks Challenge questions; practice asks at the learner's tier.
 class PracticeSession {
   constructor(curriculum, graph, profile, mode, goal = 20) {
     this.curriculum = curriculum;
@@ -633,6 +721,8 @@ class PracticeSession {
     this.session = { id: uuid(), curriculumId: curriculum.id, startedAt: Date.now(), endedAt: null, activeSeconds: 0, attempts: [] };
     this.question = null;
     this.currentSkill = null;
+    this.missesBySkill = {};
+    this.approach = null;
     this.reason = "advance";
     this.feedback = null;
     this.lessonToShow = null;
@@ -660,7 +750,7 @@ class PracticeSession {
     if (!this.question || this.feedback || this.isPaused) return;
     this.record("(time up)", false, Comprehension.questionCapSeconds);
   }
-  next() { this.feedback = null; this.lessonToShow = null; this.advance(); }
+  next() { this.feedback = null; this.lessonToShow = null; this.approach = null; this.advance(); }
 
   pause() {
     if (this.isPaused || this.finished) return;
@@ -713,13 +803,19 @@ class PracticeSession {
     if (isCorrect) this.correct += 1;
     const pace = skill.sightPaceSeconds ?? Comprehension.defaultSightPace;
     this.feedback = { correct: isCorrect, expected: q.tutorJudged ? null : q.answer, seconds: secs, sightPace: isCorrect && secs <= pace };
-    if (!isCorrect && !this.diagnostic) this.lessonToShow = skill;
+    if (!isCorrect && !this.diagnostic) {
+      this.lessonToShow = skill;
+      // Each miss on a skill brings the next teaching approach: Show, Do together, Try alone.
+      const n = (this.missesBySkill[skill.id] = (this.missesBySkill[skill.id] || 0) + 1);
+      this.approach = { index: (n - 1) % 3, ...Approaches[(n - 1) % 3] };
+    }
     this.persist();
   }
 
   advance() {
     const skill = this.nextSkill();
-    const q = skill ? this.factory.question(skill) : null;
+    const tier = !skill ? 1 : this.diagnostic ? 3 : Tiers.current(stateOf(this.profile, this.curriculum.id, skill.id));
+    const q = skill ? this.factory.question(skill, tier) : null;
     if (!skill || !q) { this.end(); return; }
     this.currentSkill = skill;
     this.question = q;
@@ -770,5 +866,5 @@ class PracticeSession {
 
 if (typeof module !== "undefined") {
   module.exports = { Comprehension, SpacedReview, SkillGraph, SkillPicker, Diagnostic, AnswerChecker,
-    makeGenerated, QuestionFactory, shortFormsIn, PracticeSession, ProfileStore, hasPractice, newSkillState, ReasonLabel };
+    makeGenerated, tierParams, QuestionFactory, shortFormsIn, Tiers, PartNames, Approaches, PracticeSession, ProfileStore, hasPractice, newSkillState, ReasonLabel };
 }

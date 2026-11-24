@@ -89,7 +89,33 @@ function bar(title, opts = {}) {
 function dot(level) { return `<span class="dot lv-${level}" aria-hidden="true"></span>`; }
 function levelChip(s) {
   const l = Comprehension.level(s);
-  return `<span class="chip lv-${l}">${dot(l)}${Comprehension.levelLabel[l]}${s.attempts > 0 || s.provisional ? ` · ${pct(s.comprehension)}` : ""}${s.provisional ? " (placement)" : ""}</span>`;
+  const tier = s.attempts > 0 ? ` · ${Tiers.names[Tiers.current(s)]} tier` : "";
+  return `<span class="chip lv-${l}">${dot(l)}${Comprehension.levelLabel[l]}${s.attempts > 0 || s.provisional ? ` · ${pct(s.comprehension)}` : ""}${tier}${s.provisional ? " (placement)" : ""}</span>`;
+}
+
+// The three teaching approaches, in order: Show, Do together, Try alone.
+function approachesList(a, heading) {
+  if (!a) return "";
+  return `<section class="approaches"><h4>${esc(heading)}</h4><ol>${Approaches.map(x => a[x.key] ? `<li><strong>${x.name}.</strong> <span class="muted small">${x.blurb}</span><br>${esc(a[x.key])}</li>` : "").join("")}</ol></section>`;
+}
+
+function stageFullyMastered(stageId) {
+  const st = states();
+  return App.graph.skillsIn(stageId).every(s => Comprehension.isFullyMastered(st[s.id]));
+}
+
+function stageApproaches(stage) {
+  if (!stage.approaches || stageFullyMastered(stage.id)) return "";
+  return `<details class="card pad stage-approaches"><summary><strong>Three ways to teach this level</strong></summary>
+    ${approachesList(stage.approaches, "")}</details>`;
+}
+
+function partProgress(stageId) {
+  const st = states();
+  return `<div class="parts">${App.graph.partsOf(stageId).map(p => {
+    const m = p.skills.filter(s => ["mastered", "sight"].includes(Comprehension.level(st[s.id]))).length;
+    return `<div class="part"><span class="small"><strong>Part ${p.n}</strong> ${p.name}</span>${meter(m, Math.max(p.skills.length, 1))}<span class="small muted num">${m}/${p.skills.length}</span></div>`;
+  }).join("")}</div>`;
 }
 function meter(value, total) {
   const w = total > 0 ? Math.min(100, Math.max(0, (value / total) * 100)) : 0;
@@ -110,7 +136,7 @@ function termsBox(texts) {
     `<div><dt>${esc(g.term)}</dt><dd>${esc(g.meaning)}</dd></div>`).join("")}</dl>`;
 }
 
-function lessonCard(skill, compact = false, extraTexts = []) {
+function lessonCard(skill, compact = false, extraTexts = [], approach = null) {
   const L = skill.lesson || {};
   let html = `<article class="lesson ${compact ? "compact" : ""}"><h3>${esc(skill.title)}</h3><p>${esc(L.explanation)}</p>`;
   if (L.example) html += `<p class="example"><span class="label">Example</span>${esc(L.example)}</p>`;
@@ -118,8 +144,18 @@ function lessonCard(skill, compact = false, extraTexts = []) {
     html += `<h4>Tutor steps</h4><ol>${L.tutorSteps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>`;
   }
   if (!compact && skill.reinforcement) html += `<p class="muted small">Keep it fresh: ${esc(skill.reinforcement)}</p>`;
+  const a = L.approaches;
+  const extra = [];
+  if (compact && approach && a?.[approach.key]) {
+    html += `<div class="approach-now"><span class="label">New way to teach it · ${approach.index + 1} of 3</span>
+      <p><strong>${approach.name}.</strong> ${esc(a[approach.key])}</p></div>`;
+    extra.push(a[approach.key]);
+  } else if (!compact && a && !Comprehension.isFullyMastered(stateOf(profile(), App.curriculum.id, skill.id))) {
+    html += approachesList(a, "Three ways to teach this");
+    extra.push(...Approaches.map(x => a[x.key]));
+  }
   const texts = compact ? [skill.title, L.explanation, L.example] : skillTexts(skill);
-  return html + termsBox([...texts, ...extraTexts]) + `</article>`;
+  return html + termsBox([...texts, ...extra, ...extraTexts]) + `</article>`;
 }
 
 function masteredCount() {
@@ -199,7 +235,7 @@ function viewHomeFG() {
   if (skill) {
     const s = stateOf(p, App.curriculum.id, skill.id);
     html += `<section class="today">
-      <p class="eyebrow">Day ${day} of ${total} · <span class="subj subj-${esc((skill.subject || "").replace(/\s+/g, "-").toLowerCase())}">${esc(skill.subject || "")}</span></p>
+      <p class="eyebrow">Day ${day} of ${total} · <span class="subj">${esc(skill.subject || "")}</span> · Part ${App.graph.partOfSkill(skill)}: ${PartNames[App.graph.partOfSkill(skill)]}</p>
       <h2 class="display">${esc(skill.title)}</h2>
       <p>${esc(skill.summary)}</p>
       ${levelChip(s)}
@@ -207,6 +243,10 @@ function viewHomeFG() {
     </section>`;
   } else {
     html += `<section class="today"><h2 class="display">All ${total} days complete!</h2></section>`;
+  }
+  if (skill) {
+    const stage = App.graph.stage(skill.stage);
+    html += `<section class="card pad stack-sm"><h3>This level: ${esc(stage.title)}</h3>${partProgress(stage.id)}</section>${stageApproaches(stage)}`;
   }
   html += `<section class="card pad stack-sm"><h3>Tutor controls</h3>
     <div class="stepper"><button class="btn" data-action="day" data-delta="-1" ${day <= 1 ? "disabled" : ""} aria-label="Previous day">−</button>
@@ -309,7 +349,7 @@ function viewStages() {
       html += `<button class="stage-row" data-action="stage" data-id="${esc(stage.id)}">
         <span class="stage-top"><strong>${esc(stage.title)}</strong><span class="num muted">${passed}/${skills.length}</span></span>
         ${stage.description ? `<span class="small muted">${esc(stage.description)}</span>` : ""}
-        ${meter(passed, Math.max(skills.length, 1))}</button>`;
+        ${partProgress(stage.id)}</button>`;
     }
     html += `</div></section>`;
   }
@@ -318,22 +358,30 @@ function viewStages() {
 
 function viewStage(cur) {
   const stage = App.graph.stage(cur.id), st = states();
-  const skills = App.graph.skillsIn(stage.id);
   let html = bar(stage.title) + `<main class="wrap stack">
     ${stage.description ? `<p class="muted">${esc(stage.description)}</p>` : ""}
     <button class="btn primary big" data-action="stage-practice" data-id="${esc(stage.id)}">Practice this level</button>
-    <div class="card list">`;
-  for (const s of skills) {
-    const l = Comprehension.level(st[s.id]);
-    html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${esc(s.title)}</span><span class="small muted">${Comprehension.levelLabel[l]}</span></button>`;
+    ${stageApproaches(stage)}`;
+  for (const part of App.graph.partsOf(stage.id)) {
+    if (!part.skills.length) continue;
+    const m = part.skills.filter(s => ["mastered", "sight"].includes(Comprehension.level(st[s.id]))).length;
+    html += `<section><h3 class="section-h"><span>Part ${part.n} · ${part.name}</span><span class="num small">${m}/${part.skills.length} mastered</span></h3><div class="card list">`;
+    for (const s of part.skills) {
+      const x = st[s.id], l = Comprehension.level(x);
+      const tier = x?.attempts ? ` · ${Tiers.names[Tiers.current(x)]}` : "";
+      html += `<button class="skill-row" data-action="skill" data-id="${esc(s.id)}">${dot(l)}<span class="grow">${esc(s.title)}</span><span class="small muted">${Comprehension.levelLabel[l]}${tier}</span></button>`;
+    }
+    html += `</div><button class="btn ghost small" data-action="stage-practice" data-id="${esc(stage.id)}" data-part="${part.n}">Practice Part ${part.n}</button></section>`;
   }
-  return html + `</div></main>`;
+  return html + `</main>`;
 }
 
 function viewSkill(cur) {
   const skill = App.graph.skill(cur.id), s = stateOf(profile(), App.curriculum.id, skill.id);
   const prereqs = (skill.prerequisites || []).map(id => App.graph.skill(id)).filter(Boolean);
-  let html = bar(skill.title) + `<main class="wrap stack">${lessonCard(skill)}
+  const stage = App.graph.stage(skill.stage), part = App.graph.partOfSkill(skill);
+  let html = bar(skill.title) + `<main class="wrap stack">
+    <p class="eyebrow">${esc(stage.title)} · Part ${part}: ${PartNames[part]}</p>${lessonCard(skill)}
     <div>${levelChip(s)}${s.attempts ? ` <span class="small muted">${s.attempts} answered</span>` : ""}</div>`;
   if (prereqs.length) {
     html += `<section class="card pad stack-sm"><h3>Builds on</h3>${prereqs.map(p => `<button class="link-row" data-action="skill" data-id="${esc(p.id)}">${dot(Comprehension.level(states()[p.id]))}<span class="grow">${esc(p.title)}</span><span class="muted">›</span></button>`).join("")}</section>`;
@@ -387,7 +435,7 @@ function viewSession(cur) {
   html += `<main class="wrap practice">`;
   if (!s.finished) {
     html += `<div class="practice-head"><div><strong>${esc(s.currentSkill?.title || "")}</strong>
-      <span class="small muted block">${ReasonLabel[s.reason]}</span></div>
+      <span class="small muted block">${ReasonLabel[s.reason]}${s.question?.tier && !s.diagnostic ? ` · ${Tiers.names[s.question.tier]} tier` : ""}</span></div>
       <span class="num count">${Math.min(s.answered + (s.feedback ? 0 : 1), Math.max(s.goal, 1))}/${s.goal}</span>
       <button class="btn small ghost" data-action="end">End</button></div>`;
   }
@@ -434,7 +482,7 @@ function feedbackView(s) {
     <h2 class="display">${fb.correct ? (fb.sightPace ? "Right, at sight pace!" : "Right!") : "Not quite"}</h2>
     ${!fb.correct && fb.expected ? `<p class="answer-reveal">Answer: <strong>${esc(fb.expected)}</strong></p>` : ""}
     <p class="muted num">${fb.seconds.toFixed(1)} seconds</p>
-    ${s.lessonToShow ? lessonCard(s.lessonToShow, true, [s.question?.prompt, fb.expected])
+    ${s.lessonToShow ? lessonCard(s.lessonToShow, true, [s.question?.prompt, fb.expected], s.approach)
                      : termsBox([s.question?.prompt, fb.expected])}
     <button class="btn primary big" data-action="next" id="next-btn">${s.lessonToShow ? "Got it, try another" : "Next"}</button>
   </section>`;
@@ -521,8 +569,11 @@ function onClick(e) {
     case "stage": return go("stage", { id });
     case "skill": return go("skill", { id });
     case "stage-practice": {
-      const ids = App.graph.skillsIn(id).map(x => x.id);
-      return startSession({ type: "focus", skillIds: ids, reviewCount: 3 }, Math.max(ids.length * 2, 12), App.graph.stage(id).title);
+      const part = Number(el.dataset.part) || 0;
+      const skills = part ? App.graph.partsOf(id)[part - 1].skills : App.graph.skillsIn(id);
+      const ids = skills.map(x => x.id);
+      const title = App.graph.stage(id).title + (part ? ` · Part ${part}` : "");
+      return startSession({ type: "focus", skillIds: ids, reviewCount: 3 }, Math.max(ids.length * 2, 12), title);
     }
     case "skill-practice": return startSession({ type: "focus", skillIds: [id], reviewCount: 2 }, 10, App.graph.skill(id).title);
 

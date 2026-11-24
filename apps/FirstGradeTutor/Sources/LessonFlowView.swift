@@ -32,7 +32,8 @@ struct LessonFlowView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Text(skill.subject ?? "").font(.subheadline).foregroundStyle(.secondary)
-                LessonCard(skill: skill, curriculum: curriculum)
+                LessonCard(skill: skill, curriculum: curriculum,
+                           state: store.profile(profileId)?.state(skill.id, in: curriculum.id))
                 let earlier = skill.prerequisites.compactMap { curriculum.skill($0)?.title }
                 if !earlier.isEmpty {
                     Text("Builds on: " + earlier.joined(separator: ", "))

@@ -111,3 +111,27 @@ final class ShortFormTests: XCTestCase {
         XCTAssertEqual(c.shortForms(in: ["Divide 12 by 4", nil]).map(\.term), [])
     }
 }
+
+final class TierTests: XCTestCase {
+    func testTwoRightMovesUpAndTwoMissesMovesDown() {
+        var s = SkillState()
+        for correct in [true, true] { s = Comprehension.record(s, correct: correct, seconds: 2, sightPace: 5) }
+        XCTAssertEqual(s.tier, 2)
+        for correct in [true, true] { s = Comprehension.record(s, correct: correct, seconds: 2, sightPace: 5) }
+        XCTAssertEqual(s.tier, 3)
+        for correct in [false, false] { s = Comprehension.record(s, correct: correct, seconds: 2, sightPace: 5) }
+        XCTAssertEqual(s.tier, 2)
+    }
+
+    func testMasteryNeedsTheChallengeTier() {
+        var s = SkillState(); s.attempts = 10; s.comprehension = 0.97; s.tier = 2
+        XCTAssertEqual(Comprehension.level(s), .passing)
+        s.tier = 3
+        XCTAssertEqual(Comprehension.level(s), .sight)
+    }
+
+    func testStarterShrinksGeneratorSizes() {
+        XCTAssertEqual(QuestionGenerators.tierParams("add", ["max": 10], tier: 1)["max"], 4)
+        XCTAssertEqual(QuestionGenerators.tierParams("add", ["max": 10], tier: 3)["max"], 10)
+    }
+}

@@ -18,7 +18,7 @@ struct HomeView: View {
             Section {
                 if let skill = todaysSkill {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Day \(day) of \(totalDays) · \(skill.subject ?? "")")
+                        Text("Day \(day) of \(totalDays) · \(skill.subject ?? "") · Part \(SkillGraph(curriculum).part(of: skill)): \(Part.names[SkillGraph(curriculum).part(of: skill)] ?? "")")
                             .font(.subheadline).foregroundStyle(.secondary)
                         Text(skill.title).font(.title.bold())
                         Text(skill.summary)
@@ -34,6 +34,25 @@ struct HomeView: View {
                 }
             } header: {
                 Text("Today")
+            }
+
+            if let skill = todaysSkill, let stage = curriculum.stage(skill.stage) {
+                Section("This level: \(stage.title)") {
+                    ForEach(SkillGraph(curriculum).parts(of: stage.id), id: \.number) { part in
+                        let done = part.skills.filter {
+                            let l = Comprehension.level(profile.state($0.id, in: curriculum.id))
+                            return l == .mastered || l == .sight
+                        }.count
+                        LabeledContent("Part \(part.number) · \(part.name)", value: "\(done)/\(part.skills.count) mastered")
+                    }
+                    let skills = curriculum.skills(in: stage.id)
+                    if let a = stage.approaches,
+                       !skills.allSatisfy({ Comprehension.isFullyMastered(profile.state($0.id, in: curriculum.id)) }) {
+                        DisclosureGroup("Three ways to teach this level") {
+                            ApproachesList(approaches: a, heading: "")
+                        }
+                    }
+                }
             }
 
             Section("Tutor controls") {

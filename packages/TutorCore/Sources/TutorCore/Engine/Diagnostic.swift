@@ -55,6 +55,7 @@ public final class Diagnostic {
                 guard s.attempts == 0 else { continue }
                 s.comprehension = Comprehension.masteryThreshold
                 s.provisional = true
+                s.tier = 3
                 out[skill.id] = s
             }
         }

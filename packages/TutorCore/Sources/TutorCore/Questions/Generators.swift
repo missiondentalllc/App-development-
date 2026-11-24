@@ -19,7 +19,34 @@ public final class Dice {
 /// every generator named in the content exists.
 public enum QuestionGenerators {
 
-    public static func make(_ key: String, params: [String: Int] = [:], skillId: String, dice: Dice) -> Question? {
+    /// Size settings each generator uses, with defaults. Starter and Core shrink these;
+    /// Challenge uses the skill's own settings (the full skill).
+    static let sizes: [String: [String: Int]] = [
+        "count": ["max": 20], "countBy": ["max": 100], "numberAfter": ["max": 120], "compare": ["max": 100],
+        "placeValue": ["digits": 2], "tenMore": ["max": 100], "evenOdd": ["max": 50], "roundTen": ["max": 100],
+        "add": ["max": 10], "add3": ["max": 9], "sub": ["max": 10], "missingAddend": ["max": 10], "doubles": ["max": 10],
+        "factFamily": ["max": 10], "wordAdd": ["max": 10], "mul": ["max": 10], "div": ["max": 10],
+        "fractionOf": ["maxDen": 10], "fractionAdd": ["maxDen": 12], "integerAdd": ["max": 20], "integerMul": ["max": 12],
+        "exponent": ["maxBase": 6], "sqrt": ["max": 15], "linearEq": ["max": 10], "binomial": ["max": 10], "mod": ["max": 13],
+    ]
+
+    public static func tierParams(_ key: String, _ params: [String: Int], tier: Int) -> [String: Int] {
+        var out = params
+        guard tier < 3 else { return out }
+        for (name, fallback) in sizes[key] ?? [:] {
+            let full = out[name] ?? fallback
+            if name == "digits" { out[name] = max(2, full - (3 - tier)); continue }
+            var floor = name == "max" ? 3 : 2
+            if key == "countBy" { floor = max(floor, (out["step"] ?? 1) * 4) }
+            if let lo = out["min"] { floor = max(floor, lo + 1) }
+            let scaled = Int((Double(full) * (tier == 1 ? 0.4 : 0.7)).rounded())
+            out[name] = min(full, max(floor, scaled))
+        }
+        return out
+    }
+
+    public static func make(_ key: String, params: [String: Int] = [:], skillId: String, dice: Dice,
+                            tier: Int = 3) -> Question? {
         func p(_ name: String, _ fallback: Int) -> Int { params[name] ?? fallback }
         func q(_ prompt: String, _ answer: Int) -> Question {
             Question(skillId: skillId, prompt: prompt, answer: String(answer))
@@ -104,7 +131,9 @@ public enum QuestionGenerators {
             let big = a + b
             return q("Sam has \(big) \(thing). Sam gives away \(b). How many \(thing) are left?", a)
         case "money":
-            let quarters = dice.int(0, 3), dimes = dice.int(0, 4), nickels = dice.int(0, 3), pennies = dice.int(0, 4)
+            // Starter: dimes and pennies only. Core adds nickels. Challenge adds quarters.
+            let quarters = tier >= 3 ? dice.int(0, 3) : 0, dimes = dice.int(0, 4)
+            let nickels = tier >= 2 ? dice.int(0, 3) : 0, pennies = dice.int(0, 4)
             let coins: [(Int, String, String)] = [(quarters, "quarter", "quarters"), (dimes, "dime", "dimes"),
                                                   (nickels, "nickel", "nickels"), (pennies, "penny", "pennies")]
             let parts = coins.filter { $0.0 > 0 }.map { coin -> String in
@@ -115,7 +144,7 @@ public enum QuestionGenerators {
             return q("How many cents?\n" + parts.joined(separator: ", "), total)
         case "time":
             let h = dice.int(1, 12)
-            if dice.bool() {
+            if tier == 1 || dice.bool() {
                 return qs("The short hand points to \(h). The long hand points to 12. What time is it?", "\(h):00")
             }
             let nextHour = h == 12 ? 1 : h + 1
@@ -188,14 +217,14 @@ public enum QuestionGenerators {
 
         // MARK: Statistics and probability
         case "mean":
-            let n = dice.int(3, 5)
+            let n = tier == 1 ? 3 : dice.int(3, 5)
             var values = (0..<(n - 1)).map { _ in dice.int(1, 20) }
             let target = dice.int(5, 15)
             values.append(target * n - values.reduce(0, +))
             if values.last! < 0 { return q("Mean of 2, 4, 6?", 4) }
             return q("What is the mean of \(dice.shuffled(values).map(String.init).joined(separator: ", "))?", target)
         case "median":
-            let values = (0..<(2 * dice.int(1, 3) + 1)).map { _ in dice.int(1, 50) }
+            let values = (0..<(tier == 1 ? 3 : 2 * dice.int(1, 3) + 1)).map { _ in dice.int(1, 50) }
             return q("What is the median of \(values.map(String.init).joined(separator: ", "))?", values.sorted()[values.count / 2])
         case "probabilityDie":
             let k = dice.int(1, 5)

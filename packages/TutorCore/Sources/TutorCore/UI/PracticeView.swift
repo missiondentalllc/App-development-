@@ -37,7 +37,7 @@ public struct PracticeView: View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
                 Text(session.currentSkill?.title ?? session.curriculum.title).font(.headline)
-                Text(session.reason.label).font(.caption).foregroundStyle(.secondary)
+                Text(session.reason.label + tierLabel).font(.caption).foregroundStyle(.secondary)
             }
             Spacer()
             Text("\(min(session.answered + 1, max(session.goal, 1)))/\(session.goal)")
@@ -108,34 +108,18 @@ public struct PracticeView: View {
                         .multilineTextAlignment(.center)
                         #if os(iOS)
                         .keyboardType(.numbersAndPunctuation)
-                        /// "What the short forms mean": shown wherever an abbreviation appears.
-public struct ShortFormsBox: View {
-    public let entries: [GlossaryEntry]
-
-    public init(entries: [GlossaryEntry]) { self.entries = entries }
-
-    public var body: some View {
-        if !entries.isEmpty {
-            VStack(alignment: .leading, spacing: 6) {
-                Text("What the short forms mean").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
-                ForEach(entries, id: \.term) { entry in
-                    (Text(entry.term).bold() + Text("  " + entry.meaning).foregroundStyle(.secondary))
-                        .font(.callout)
-                }
-            }
-            .padding(10)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.secondary.opacity(0.4), style: StrokeStyle(lineWidth: 1, dash: [4])))
-        }
-    }
-}
-#endif
+                        #endif
                         .onSubmit(send)
                     Button("Check", action: send).buttonStyle(.borderedProminent).font(.title2)
                 }
                 .frame(maxWidth: 420)
             }
         }
+    }
+
+    private var tierLabel: String {
+        guard session.diagnostic == nil, let t = session.question?.tier, let name = Tiers.names[t] else { return "" }
+        return " · \(name) tier"
     }
 
     private func send() {
@@ -156,7 +140,8 @@ public struct ShortFormsBox: View {
             Text(String(format: "%.1f seconds", fb.seconds)).foregroundStyle(.secondary)
             if let lesson = session.lessonToShow {
                 LessonCard(skill: lesson, compact: true, curriculum: session.curriculum,
-                           extraTexts: [session.question?.prompt, fb.expected])
+                           extraTexts: [session.question?.prompt, fb.expected],
+                           approachIndex: session.approachIndex)
             } else {
                 ShortFormsBox(entries: session.curriculum.shortForms(in: [session.question?.prompt, fb.expected]))
             }
@@ -188,18 +173,33 @@ public struct LessonCard: View {
     /// When given, abbreviations in the lesson are explained under it.
     public var curriculum: Curriculum?
     public var extraTexts: [String?] = []
+    /// After a miss: which teaching approach to show (0 Show, 1 Do together, 2 Try alone).
+    public var approachIndex: Int?
+    /// The learner's progress; the three approaches show until the skill is fully mastered.
+    public var state: SkillState?
 
-    public init(skill: Skill, compact: Bool = false, curriculum: Curriculum? = nil, extraTexts: [String?] = []) {
+    public init(skill: Skill, compact: Bool = false, curriculum: Curriculum? = nil, extraTexts: [String?] = [],
+                approachIndex: Int? = nil, state: SkillState? = nil) {
         self.skill = skill
         self.compact = compact
         self.curriculum = curriculum
         self.extraTexts = extraTexts
+        self.approachIndex = approachIndex
+        self.state = state
+    }
+
+    private var showAllApproaches: Bool {
+        !compact && skill.lesson.approaches != nil && !(state.map(Comprehension.isFullyMastered) ?? false)
     }
 
     private var lessonTexts: [String?] {
         var texts: [String?] = [skill.title, skill.lesson.explanation, skill.lesson.example]
         if !compact {
             texts += [skill.summary, skill.reinforcement] + (skill.lesson.tutorSteps ?? []).map { Optional($0) }
+        }
+        if let a = skill.lesson.approaches {
+            if let i = approachIndex, compact { texts.append(a.text(i)) }
+            if showAllApproaches { texts += [a.show, a.together, a.alone] }
         }
         return texts + extraTexts
     }
@@ -220,6 +220,15 @@ public struct LessonCard: View {
             if !compact, let r = skill.reinforcement {
                 Text("Keep it fresh: \(r)").font(.callout).foregroundStyle(.secondary)
             }
+            if compact, let i = approachIndex, let a = skill.lesson.approaches {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("New way to teach it · \(i + 1) of 3").font(.caption).foregroundStyle(.secondary)
+                    (Text(Approaches.names[i % 3] + ". ").bold() + Text(a.text(i)))
+                }
+            }
+            if showAllApproaches, let a = skill.lesson.approaches {
+                ApproachesList(approaches: a, heading: "Three ways to teach this")
+            }
             if let curriculum {
                 ShortFormsBox(entries: curriculum.shortForms(in: lessonTexts))
             }
@@ -229,6 +238,30 @@ public struct LessonCard: View {
         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
     }
 }
+/// The three teaching approaches in order: Show, Do together, Try alone.
+public struct ApproachesList: View {
+    public let approaches: Approaches
+    public var heading: String
+
+    public init(approaches: Approaches, heading: String) {
+        self.approaches = approaches
+        self.heading = heading
+    }
+
+    public var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if !heading.isEmpty { Text(heading).font(.headline) }
+            ForEach(0..<3, id: \.self) { i in
+                VStack(alignment: .leading, spacing: 2) {
+                    (Text("\(i + 1). \(Approaches.names[i]). ").bold()
+                        + Text(Approaches.blurbs[i]).foregroundStyle(.secondary))
+                    Text(approaches.text(i))
+                }
+            }
+        }
+    }
+}
+
 /// "What the short forms mean": shown wherever an abbreviation appears.
 public struct ShortFormsBox: View {
     public let entries: [GlossaryEntry]

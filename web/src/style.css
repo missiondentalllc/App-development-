@@ -144,6 +144,15 @@ textarea.field { font-size: 0.8rem; font-family: ui-monospace, Menlo, monospace;
 .example { background: var(--paper); border-left: 3px solid var(--pencil); padding: 8px 12px; border-radius: 0 8px 8px 0; }
 .label { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .subj { color: var(--accent); }
+.approaches { display: flex; flex-direction: column; gap: 8px; }
+.approaches h4:empty { display: none; }
+.approaches ol { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 10px; }
+.approach-now { background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+.stage-approaches summary { cursor: pointer; min-height: 28px; }
+.stage-approaches[open] summary { margin-bottom: 10px; }
+.parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.part { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.part .small:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .terms { margin: 0; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 10px; background: var(--surface);
   display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; text-align: left; align-self: stretch; }
 .terms div { display: flex; gap: 8px; }

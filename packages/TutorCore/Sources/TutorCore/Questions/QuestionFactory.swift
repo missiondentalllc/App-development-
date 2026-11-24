@@ -8,12 +8,20 @@ public final class QuestionFactory {
 
     public init(dice: Dice = Dice()) { self.dice = dice }
 
-    public func question(for skill: Skill) -> Question? {
+    public func question(for skill: Skill, tier: Int = 3) -> Question? {
         if let key = skill.practice.generator,
-           let q = QuestionGenerators.make(key, params: skill.practice.params ?? [:], skillId: skill.id, dice: dice) {
+           var q = QuestionGenerators.make(key, params: QuestionGenerators.tierParams(key, skill.practice.params ?? [:], tier: tier),
+                                           skillId: skill.id, dice: dice, tier: tier) {
+            q.tier = tier
             return q
         }
-        guard let items = skill.practice.items, !items.isEmpty else { return nil }
+        guard let all = skill.practice.items, !all.isEmpty else { return nil }
+        // Items for this tier; if none, the closest tier (easier first). Untagged items fit any tier.
+        var items: [Item] = []
+        for t in [tier, tier - 1, tier + 1, tier - 2, tier + 2] {
+            items = all.filter { $0.tier == nil || $0.tier == t }
+            if !items.isEmpty { break }
+        }
         let recent = recentPrompts[skill.id] ?? []
         let fresh = items.filter { !recent.contains($0.prompt) }
         let item = dice.pick(fresh.isEmpty ? items : fresh)
@@ -22,10 +30,12 @@ public final class QuestionFactory {
         recentPrompts[skill.id] = updated
 
         let tutor = item.mode == "tutor"
-        return Question(skillId: skill.id,
-                        prompt: item.prompt,
-                        choices: item.choices.map { dice.shuffled($0) },
-                        answer: item.answer,
-                        tutorJudged: tutor)
+        var q = Question(skillId: skill.id,
+                         prompt: item.prompt,
+                         choices: item.choices.map { dice.shuffled($0) },
+                         answer: item.answer,
+                         tutorJudged: tutor)
+        q.tier = tier
+        return q
     }
 }

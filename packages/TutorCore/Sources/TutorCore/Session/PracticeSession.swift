@@ -29,6 +29,9 @@ public final class PracticeSession: ObservableObject {
     @Published public private(set) var feedback: Feedback?
     /// Set after a miss: show this skill's lesson before the next question.
     @Published public private(set) var lessonToShow: Skill?
+    /// Set after a miss: which teaching approach to show (0 Show, 1 Do together, 2 Try alone).
+    @Published public private(set) var approachIndex: Int?
+    private var missesBySkill: [String: Int] = [:]
     @Published public private(set) var isPaused = false
     @Published public private(set) var answered = 0
     @Published public private(set) var correct = 0
@@ -115,6 +118,7 @@ public final class PracticeSession: ObservableObject {
     public func next() {
         feedback = nil
         lessonToShow = nil
+        approachIndex = nil
         advance()
     }
 
@@ -177,12 +181,22 @@ public final class PracticeSession: ObservableObject {
         let pace = skill.sightPaceSeconds ?? Comprehension.defaultSightPace
         feedback = Feedback(correct: isCorrect, expected: q.tutorJudged ? nil : q.answer,
                             seconds: secs, sightPace: isCorrect && secs <= pace)
-        if !isCorrect, diagnostic == nil { lessonToShow = skill }
+        if !isCorrect, diagnostic == nil {
+            lessonToShow = skill
+            // Each miss on a skill brings the next teaching approach: Show, Do together, Try alone.
+            let misses = (missesBySkill[skill.id] ?? 0) + 1
+            missesBySkill[skill.id] = misses
+            approachIndex = (misses - 1) % 3
+        }
         persist()
     }
 
     private func advance() {
-        guard let skill = nextSkill(), let q = factory.question(for: skill) else {
+        // The placement test asks Challenge questions; practice asks at the learner's tier.
+        let tierFor: (Skill) -> Int = { [self] s in
+            diagnostic != nil ? 3 : Tiers.current(profile.state(s.id, in: curriculum.id))
+        }
+        guard let skill = nextSkill(), let q = factory.question(for: skill, tier: tierFor(skill)) else {
             end()
             return
         }
